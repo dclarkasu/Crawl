@@ -1,0 +1,50 @@
+// JPA
+apply plugin: 'java'
+apply plugin: 'eclipse-wtp'
+
+// Creates project as dependency if someone wanted to import
+group = 'com.crawl'
+version = '0.0.1-SNAPSHOT'
+
+ext {
+  hibernateVersion = "5.2.1.Final"
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+eclipse {
+  classpath {
+    downloadSources = true
+  }
+}
+
+sourceSets {
+  main {
+    java.srcDirs 'src'
+    resources.srcDirs 'src/resources'
+  }
+test {
+    java {
+      srcDir 'test'
+    }
+    resources {
+      srcDir 'src'
+    }
+  }
+ }
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  	compile "mysql:mysql-connector-java:5.1.39"
+  	compile "org.hibernate:hibernate-core:$hibernateVersion"
+  	compile "org.hibernate:hibernate-c3p0:$hibernateVersion"
+  	compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.8.5'
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.5'
+	
+	testCompile 'junit:junit:4.12'
+  	testCompile 'org.hamcrest:hamcrest-junit:2.0.0.0'
+}
