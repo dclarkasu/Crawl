@@ -11,12 +11,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import entities.Contact;
+import entities.Group;
 
-public class ContactTest {
+public class GroupTest {
 	private EntityManagerFactory emf = null;
 	private EntityManager em = null;
-	Contact contact;
+	Group group;
 
 	@Before
 	public void setUp() {
@@ -36,10 +36,19 @@ public class ContactTest {
 	}
 
 	@Test
-	public void contact_Connected_To_DB() {
-		contact = em.find(Contact.class, 1);
-		assertEquals(contact.getPhoneNumber(), "555-555-5555");
-		assertEquals(contact.getEmail(), "bill@gmail.com");
-	
+	public void group_Connected_To_DB() {
+		group = em.find(Group.class, 1);
+		assertEquals(group.getName(), "pub day");
+		assertEquals(group.getAdmin().getFirstName(), "david");
+		assertEquals(group.getId(), 1);
 	}
+
+	@Test
+	public void test_Group_To_User() {
+		Group group = em.find(Group.class, 1);
+		assertEquals(group.getUsers().get(0).getFirstName(), "bill");
+		assertNotNull(group.getUsers());
+		assertEquals(group.getAdmin().getGroups().get(0).getUsers().get(0).getContact().getPhoneNumber(), "555-555-5555");
+	}
+
 }
