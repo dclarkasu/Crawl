@@ -38,34 +38,24 @@ public class UserTest {
 	@Test
 	public void user_Connected_To_DB() {
 		user = em.find(User.class, 1);
-		assertEquals(user.getFirstName(),"" );
+		assertEquals(user.getFirstName(),"bill");
+		assertEquals(user.getLastName(), "james");
+		assertEquals(user.getId(), 1);
 	}
 
-//	@Test
-//	public void test_Language_mapping() {
-//		Film film = em.find(Film.class, 1);
-//		assertEquals(film.getLang().getName(), "Japanese");
-//	}
-//
-//	@Test
-//	public void test_Many_To_Many_Get_Actors() {
-//		Film film = em.find(Film.class, 1);
-//		assertNotNull(film.getActors());
-//		assertEquals(film.getActors().size(), 10);
-//	}
-//
-//	@Test
-//	public void test_Many_To_Many_With_Category() {
-//		Film f = em.find(Film.class, 1);
-//		assertNotNull(f.getActors());
-//		assertEquals(f.getActors().size(), 10);
-//		assertEquals(f.getActors().get(0).getFilms().get(0).getActors().get(0).getLastName(), "Guiness");
-//	}
-//
-//	@Test
-//	public void test_Many_To_Many_With_Store() {
-//		Film f = em.find(Film.class, 1);
-//		assertNotNull(f.getStores());
-//		assertEquals(f.getStores().size(), 2270);
-//	}
+	@Test
+	public void test_User_To_Contact() {
+		User user = em.find(User.class, 1);
+		assertEquals(user.getGroups().get(0).getName(), "pub day");
+		assertNotNull(user.getGroups());
+		assertEquals(user.getGroups().get(0).getUsers().get(0).getFirstName(), "bill");
+	}
+
+	@Test
+	public void test_One_To_One_With_Contact() {
+		User user = em.find(User.class, 1);
+		assertEquals(user.getContact().getPhoneNumber(), "555-555-5555");
+		assertEquals(user.getContact().getEmail(), "bill@gmail.com");
+	}
+
 }
