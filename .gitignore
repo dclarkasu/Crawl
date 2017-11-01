@@ -6,3 +6,6 @@ bin
 .gradle
 Servers
 .recommenders
+.settings
+/.metadata/
+/.recommenders/
