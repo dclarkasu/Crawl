@@ -15,7 +15,7 @@ public class Address {
 	private int id;
 	@Column(name = "long")
 	private double longitude;
-	@Column(name = "long")
+	@Column(name = "lat")
 	private double latitude;
 	private String street;
 	private String street2;
