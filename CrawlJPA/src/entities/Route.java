@@ -23,8 +23,8 @@ public class Route {
 	@JsonBackReference(value="routeToVenue")
 	@ManyToMany(cascade= {CascadeType.PERSIST,CascadeType.REMOVE})
 	@JoinTable(name="route_venue",
-	joinColumns = @JoinColumn(name="actor_id"),
-	inverseJoinColumns = @JoinColumn(name="film_id"))
+	joinColumns = @JoinColumn(name="route_id"),
+	inverseJoinColumns = @JoinColumn(name="venue_id"))
 	private List<Venue> venues;
 
 	public String getName() {
