@@ -77,9 +77,9 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `group`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `group` ;
+DROP TABLE IF EXISTS `crawl_group` ;
 
-CREATE TABLE IF NOT EXISTS `group` (
+CREATE TABLE IF NOT EXISTS `crawl_group` (
   `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `admin_id` INT(10) UNSIGNED NULL DEFAULT NULL,
@@ -202,8 +202,6 @@ CREATE TABLE IF NOT EXISTS `route_venue` (
   `route_id` INT(10) UNSIGNED NOT NULL,
   `venue_id` INT(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`route_id`, `venue_id`),
-  UNIQUE INDEX `route_id_UNIQUE` (`route_id` ASC),
-  UNIQUE INDEX `venue_id_UNIQUE` (`venue_id` ASC),
   CONSTRAINT `fk_route_venue_rout`
     FOREIGN KEY (`route_id`)
     REFERENCES `route` (`id`)
@@ -227,11 +225,9 @@ CREATE TABLE IF NOT EXISTS `user_group` (
   `user_id` INT(10) UNSIGNED NOT NULL,
   `group_id` INT(10) UNSIGNED NOT NULL,
   PRIMARY KEY (`user_id`, `group_id`),
-  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC),
-  UNIQUE INDEX `group_id_UNIQUE` (`group_id` ASC),
   CONSTRAINT `fk_user_group_group`
     FOREIGN KEY (`group_id`)
-    REFERENCES `group` (`id`)
+    REFERENCES `crawl_group` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_user_group_user`
@@ -263,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `post` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_post_group`
     FOREIGN KEY (`group_id`)
-    REFERENCES `group` (`id`)
+    REFERENCES `crawl_group` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
