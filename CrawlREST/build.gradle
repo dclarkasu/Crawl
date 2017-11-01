@@ -1,0 +1,49 @@
+// MVC
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'eclipse-wtp'
+
+project.webAppDirName = 'WebContent'
+
+group = 'com.crawlREST'
+version = '0.0.1-SNAPSHOT'
+
+ext {
+  springVersion = "4.3.2.RELEASE"
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+eclipse {
+  classpath {
+    downloadSources = true
+  }
+}
+
+sourceSets {
+  main {
+    java.srcDirs 'src'
+    resources.srcDirs 'src/resources'
+  }
+ }
+
+repositories {
+     mavenCentral()
+}
+
+dependencies {
+
+	compile project(':CrawlJPA')
+    compile group: 'org.springframework', name: 'spring-webmvc', version:"$springVersion"
+    compile group: 'org.springframework', name: 'spring-orm', version:"$springVersion"
+    compile "org.springframework:spring-test:$springVersion"
+    compile "org.springframework:spring-tx:$springVersion"
+    compile group: 'javax.servlet', name: 'javax.servlet-api', version:'3.1.0'
+    compile group: 'javax.servlet', name: 'jstl', version:'1.2'
+    compile group: 'org.hibernate', name: 'hibernate-validator', version:'5.2.4.Final'
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.hamcrest:hamcrest-junit:2.0.0.0'
+}

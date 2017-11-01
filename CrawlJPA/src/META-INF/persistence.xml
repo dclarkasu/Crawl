@@ -6,6 +6,14 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <class>entities.User</class>
+        <class>entities.Address</class>
+        <class>entities.Contact</class>
+        <class>entities.Event</class>
+        <class>entities.Group</class>
+        <class>entities.Login</class>
+        <class>entities.Route</class>
+        <class>entities.Venue</class>
+        <class>entities.Post</class>
 
         <properties>
         <!-- Link to DB and User permissions: requires change -->
