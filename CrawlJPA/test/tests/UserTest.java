@@ -35,12 +35,12 @@ public class UserTest {
 		assertEquals(true, true);
 	}
 
-//	@Test
-//	public void films_have_ratings() {
-//		user = em.find(User.class, 1);
-//		assertEquals(Rating.PG, film.getRating());
-//	}
-//
+	@Test
+	public void user_Connected_To_DB() {
+		user = em.find(User.class, 1);
+		assertEquals(user.getFirstName(),"" );
+	}
+
 //	@Test
 //	public void test_Language_mapping() {
 //		Film film = em.find(Film.class, 1);
