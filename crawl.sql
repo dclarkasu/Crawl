@@ -268,7 +268,7 @@ CREATE TABLE IF NOT EXISTS `post` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-DROP USER IF EXISTS `crawluser`@`localhost`;
+DROP USER 'crawluser'@'localhost';
 CREATE USER 'crawluser'@'localhost' IDENTIFIED BY 'crawl';GRANT SELECT, INSERT, TRIGGER ON TABLE * TO 'crawluser'@'localhost';
 GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE * TO 'crawluser'@'localhost';
 
