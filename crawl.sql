@@ -264,6 +264,30 @@ CREATE TABLE IF NOT EXISTS `post` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+INSERT INTO contact (phone_number, email) VALUES ('555-555-5555', 'bill@gmail.com');
+INSERT INTO contact (phone_number, email) VALUES ('555-555-5556', 'lisa@gmail.com');
+INSERT INTO contact (phone_number, email) VALUES ('555-555-5557', 'david@gmail.com');
+INSERT INTO contact (phone_number, email) VALUES ('555-555-5558', 'pam@gmail.com');
+
+INSERT INTO user (first_name,last_name,contact_id) VALUES ('bill','james',1);
+INSERT INTO user (first_name,last_name,contact_id) VALUES ('lisa','burns',2);
+INSERT INTO user (first_name,last_name,contact_id) VALUES ('david','brown',3);
+INSERT INTO user (first_name,last_name,contact_id) VALUES ('pam','grey',4);
+
+INSERT INTO crawl_group (name, admin_id) VALUES ('pub day',3);
+
+INSERT INTO user_group (user_id, group_id) VALUES (1,1);
+INSERT INTO user_group (user_id, group_id) VALUES (2,1);
+INSERT INTO user_group (user_id, group_id) VALUES (3,1);
+INSERT INTO user_group (user_id, group_id) VALUES (4,1);
+
+INSERT INTO login (user_name,password,user_id) VALUES ('cage','pass1',1);
+INSERT INTO login (user_name,password,user_id) VALUES ('funngirl','pass2',2);
+INSERT INTO login (user_name,password,user_id) VALUES ('dudeman','pass3',3);
+INSERT INTO login (user_name,password,user_id) VALUES ('red','pass4',4);
+
+INSERT INTO post (group_id,user_id,message) VALUES (1,3,'lets go dude');
+
 DROP USER 'crawluser'@'localhost';
 CREATE USER 'crawluser'@'localhost' IDENTIFIED BY 'crawl';GRANT SELECT, INSERT, TRIGGER ON TABLE * TO 'crawluser'@'localhost';
 GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE * TO 'crawluser'@'localhost';
