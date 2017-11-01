@@ -28,6 +28,7 @@ public class VenueTest {
 	    em.close();
 	    emf.close();
 	  }
+	 
 	 @Test
 	  public void test_venue_mappings() {
 	    Venue venue = em.find(Venue.class, 1);
