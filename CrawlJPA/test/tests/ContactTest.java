@@ -1,7 +1,6 @@
 package tests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -40,6 +39,6 @@ public class ContactTest {
 		contact = em.find(Contact.class, 1);
 		assertEquals(contact.getPhoneNumber(), "555-555-5555");
 		assertEquals(contact.getEmail(), "bill@gmail.com");
-	
+
 	}
 }
