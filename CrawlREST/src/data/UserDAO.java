@@ -3,6 +3,7 @@ package data;
 import java.util.List;
 import java.util.Set;
 
+import entities.Contact;
 import entities.Login;
 import entities.Post;
 import entities.User;
@@ -20,11 +21,12 @@ public interface UserDAO {
 	public User updateUser(int id, String crawlJson);
 	
 	//Post Crud
-	public List<Post> findPostByUser(int id);
-	public Set<Post> findPostByGroup(int gid, int pid);
+	public Set<Post> findPostByUser(int id);
+	public Set<Post> findPostByGroup(int gid);
 	public Post createPost(int id, String crawlJson);
 	public Post updatePost(int pid, String crawlJson);
 	public Boolean deletePost(int pid);
+	User addContactToUser(Contact contact, int id);
 	
 
 }

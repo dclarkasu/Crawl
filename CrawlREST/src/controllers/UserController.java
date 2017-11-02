@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import data.ContactDAO;
 import data.UserDAO;
+import entities.Contact;
 import entities.Group;
 import entities.Post;
 import entities.User;
@@ -25,8 +26,8 @@ public class UserController {
 
 	 @Autowired
 	  private UserDAO userDao;
-//	 @Autowired
-//	 private ContactDAO contactDao;
+	 @Autowired
+	 private ContactDAO contactDao;
 	 
 	 
 	 
@@ -52,6 +53,19 @@ public class UserController {
 			return userDao.updateUser(id, crawlJson);
 		}
 	
+	@RequestMapping(path="/user/{id}/contacts", method=RequestMethod.POST)
+		public User addContactToUser(HttpServletRequest req, HttpServletResponse res,@PathVariable int id, @RequestBody String crawlJson) {
+			Contact contact = contactDao.createContact(id, crawlJson);
+			if(contact != null) {
+				User user = userDao.addContactToUser(contact, id);
+				if(user != null) {
+					return user;
+				}
+			}
+			res.setStatus(422);
+			return null;
+	}
+	
 	 //posts
 	@RequestMapping(path="/user/{id}/post", method=RequestMethod.POST)
     		public Post createPost(HttpServletRequest req, HttpServletResponse res,@PathVariable int id,@RequestBody String crawlJson) {
@@ -60,10 +74,16 @@ public class UserController {
 		}
 	
 	@RequestMapping(path="/user/{id}/post", method=RequestMethod.GET)
-		public List<Post>findPostByUser(HttpServletRequest req, HttpServletResponse res,@PathVariable int id) {
+		public Set<Post>findPostByUser(HttpServletRequest req, HttpServletResponse res,@PathVariable int id) {
 			System.out.println("**************************");
 			return userDao.findPostByUser(id);
 		}
+	
+	@RequestMapping(path="/user/{id}/post", method=RequestMethod.GET)
+		public Set<Post>findPostByGroup(HttpServletRequest req, HttpServletResponse res,@PathVariable int gid) {
+			System.out.println("**************************");
+			return userDao.findPostByGroup(gid);
+	}
 	
 	
 	

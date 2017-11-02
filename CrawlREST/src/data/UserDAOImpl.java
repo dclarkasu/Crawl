@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import entities.Contact;
 import entities.Group;
 import entities.Login;
 import entities.Post;
@@ -75,21 +76,35 @@ public class UserDAOImpl implements UserDAO {
 		 return u;
 	}
 
-	
+	@Override
+	public User addContactToUser(Contact contact, int id) {
+		User user = em.find(User.class, id);
+		if(user != null) {
+			user.setContact(contact);
+			return user;
+		}
+		return null;
+	}
 
 	//Posts
 	@Override
-	public List<Post>findPostByUser(int id) {
-		String query = "SELECT p FROM Post p where u.id = :id"; //JPQL
-		return em.createQuery(query, Post.class)
+	public Set<Post>findPostByUser(int id) {
+		String query = "SELECT p FROM Post p where p.user.id = :id"; //JPQL
+		List<Post> p = em.createQuery(query, Post.class)
 				.setParameter("id", id)
 				.getResultList();
+		return new HashSet<Post>(p);
+		
 	}
 
 	@Override
-	public Set<Post> findPostByGroup(int gid, int pid) {
-		// TODO Auto-generated method stub
-		return null;
+	public Set<Post> findPostByGroup(int gid) {
+		String query = "SELECT p FROM Post p where p.group.id = :id"; //JPQL
+		List<Post> p = em.createQuery(query, Post.class)
+				.setParameter("id", gid)
+				.getResultList();
+		return new HashSet<Post>(p);
+		
 	}
 
 	@Override
