@@ -26,6 +26,12 @@ public class GroupDAOImpl implements GroupDAO {
 	//Group Methods*****************************
 	
 	@Override
+    public Group findGroupById(int gid) {
+        Group g = em.find(Group.class, gid);
+        return g;
+    }
+	
+	@Override
 	public Group createGroup(String groupJSON) {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
@@ -42,8 +48,19 @@ public class GroupDAOImpl implements GroupDAO {
 
 	@Override
 	public Group updateGroup(int gid, String groupJSON) {
-		// TODO Auto-generated method stub
-		return null;
+		ObjectMapper mapper = new ObjectMapper();
+		Group mappedGroup = null;
+		try {
+			mappedGroup = mapper.readValue(groupJSON, Group.class);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		Group g = em.find(Group.class, gid);
+		g.setName(mappedGroup.getName());
+		g.setAdmin(mappedGroup.getAdmin());
+		g.setUsers(mappedGroup.getUsers());
+		return g;
 	}
 
 	@Override

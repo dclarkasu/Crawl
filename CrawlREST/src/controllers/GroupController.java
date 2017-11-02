@@ -1,8 +1,8 @@
 package controllers;
 
-import java.util.HashSet;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +26,12 @@ public class GroupController {
 		return "pong";
 	}
 	
+	@RequestMapping(path="/groups/{gid}", method=RequestMethod.GET)
+    public Group showGroup(HttpServletRequest req, HttpServletResponse res,@PathVariable int gid) {
+        res.setStatus(202);
+        return groupDAO.findGroupById(gid);
+    }
+	
 	@RequestMapping(path="/groups", method=RequestMethod.POST)
 	public Group createGroup(@RequestBody String groupJSON, HttpServletResponse res) {
 		Group newGroup = groupDAO.createGroup(groupJSON);
@@ -47,6 +53,18 @@ public class GroupController {
 		} else {
 			res.setStatus(200);
 			return groupSet;
+		}
+	}
+	
+	@RequestMapping(path="/groups/{gid}", method=RequestMethod.PUT)
+	public Group updateGroup(@PathVariable int gid, @RequestBody String groupJSON, HttpServletResponse res) {
+		Group updateGroup = groupDAO.updateGroup(gid, groupJSON);
+		if(updateGroup == null) {
+			res.setStatus(400);
+			return null;
+		} else {
+			res.setStatus(200);
+			return updateGroup;
 		}
 	}
 	
