@@ -1,6 +1,7 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,10 +11,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import entities.Venue;
+import entities.Event;
 
-public class VenueTest {
-	
+public class EventTest {
 	
 	private EntityManagerFactory emf = null;
 	private EntityManager em = null;
@@ -31,15 +31,15 @@ public class VenueTest {
 	  }
 	 
 	 @Test
-	 public void test_generic_venue() {
-		 Venue v = em.find(Venue.class, 1);
-		 assertNotNull(v);
+	 public void test_generic_event() {
+		 Event e = em.find(Event.class, 1);
+		 assertNotNull(e);
 	 }
 	 
 	 @Test
-	  public void test_venue_mappings() {
-	    Venue venue = em.find(Venue.class, 1);
-	    assertEquals(1, venue.getId());
+	  public void test_event_mappings() {
+	    Event event = em.find(Event.class, 1);
+	    assertEquals(1, event.getId());
 	  }
 
 }
