@@ -80,8 +80,19 @@ public class RouteDAOImpl implements RouteDAO {
 	}
 
 	@Override
-	public Route editVenueOrder(int uid, int rid) {
-		// TODO Auto-generated method stub
+	public Route editVenueOrder(int uid, int rid, int vid, int change) {
+		change = 1-change;
+		Route r = em.find(Route.class, rid);
+		List<Venue> venues = r.getVenues();
+		for (Venue venue : venues) {
+			if(venue.getId()==vid) {
+				int index = venues.indexOf(venue);
+				Venue vTemp = venue;
+				if(index>0 &&)
+				venues[index]=
+			}
+		}
+		r.setVenues(venues);
 		return null;
 	}
 
@@ -97,5 +108,4 @@ public class RouteDAOImpl implements RouteDAO {
 		r.setVenues(venues);
 		return r;
 	}
-
 }
