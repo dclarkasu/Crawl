@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import entities.Event;
 import entities.Group;
+import entities.Route;
 import entities.User;
 
 @Transactional
@@ -88,14 +89,39 @@ public class GroupDAOImpl implements GroupDAO {
 
 	@Override
 	public Group addUserToGroup(int uid, int gid) {
-		// TODO Auto-generated method stub
-		return null;
+		Group g = null;
+		User u = null;
+		try {
+			g = em.find(Group.class, gid);
+			u = em.find(User.class, uid);
+			g.getUsers().add(u);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return g;
 	}
 
 	@Override
 	public Group removeUserFromGroup(int uid, int gid) {
-		// TODO Auto-generated method stub
-		return null;
+		Group g = null;
+		User u = null;
+		try {
+			g = em.find(Group.class, gid);
+			u = em.find(User.class, uid);
+			List<User> users = g.getUsers();
+			
+			for (User user : users) {
+				if (user.getId() == uid) {
+					em.remove(user);
+				}
+			}
+		return g;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return g;
 	}
 	
 	
@@ -103,7 +129,18 @@ public class GroupDAOImpl implements GroupDAO {
 	
 	@Override
 	public Event createEvent(int gid, String eventJSON) {
-		// TODO Auto-generated method stub
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			Event mappedEvent = mapper.readValue(eventJSON, Event.class);
+			mappedEvent.setGroup(em.find(Group.class, gid));
+//			mappedEvent.setRoute(em.find(Route.class, mappedEvent.getRoute().getId()));
+			em.persist(mappedEvent);
+			em.flush();
+			return mappedEvent;
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -121,12 +158,14 @@ public class GroupDAOImpl implements GroupDAO {
 
 	@Override
 	public Set<Event> findEventByGroupId(int gid) {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "SELECT e FROM Event e WHERE e.group.id = :gid";
+		List <Event> events = em.createQuery(query, Event.class).setParameter("gid", gid)
+				.getResultList();
+		return new HashSet<>(events);
 	}
 
 	@Override
-	public Set<Event> findEventsByGroupIdAndUserId(int gid, int uid) {
+	public Set<Event> findEventsByUserId(int uid) {
 		// TODO Auto-generated method stub
 		return null;
 	}
