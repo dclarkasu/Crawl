@@ -267,6 +267,11 @@ INSERT INTO contact (phone_number, email) VALUES ('555-555-5556', 'lisa@gmail.co
 INSERT INTO contact (phone_number, email) VALUES ('555-555-5557', 'david@gmail.com');
 INSERT INTO contact (phone_number, email) VALUES ('555-555-5558', 'pam@gmail.com');
 
+INSERT INTO contact (phone_number, email) VALUES ('555-555-5559', 'sputnik@gmail.com');
+INSERT INTO contact (phone_number, email) VALUES ('555-555-5510', 'true@gmail.com');
+INSERT INTO contact (phone_number, email) VALUES ('555-555-5511', 'skylark@gmail.com');
+INSERT INTO contact (phone_number, email) VALUES ('555-555-5512', 'mcman@gmail.com');
+
 INSERT INTO user (first_name,last_name,contact_id) VALUES ('bill','james',1);
 INSERT INTO user (first_name,last_name,contact_id) VALUES ('lisa','burns',2);
 INSERT INTO user (first_name,last_name,contact_id) VALUES ('david','brown',3);
