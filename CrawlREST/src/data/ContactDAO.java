@@ -8,7 +8,7 @@ public interface ContactDAO {
 
 	  public Contact createContact(int uid, String todoJson);
 
-	  public Contact updateContact(int uid, int cid, String todoJson);
+	  public Contact updateContact(int uid, int sid, String todoJson);
 
 	  public Boolean deleteContact(int uid, int cid);
 	  

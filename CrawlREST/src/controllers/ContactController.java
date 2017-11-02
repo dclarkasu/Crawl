@@ -11,15 +11,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import data.ContactDAO;
 import entities.Contact;
 
+@RestController
 public class ContactController {
 	@Autowired
 	private ContactDAO contactDao;
 	
-	
+	@RequestMapping(path="/contact/ping", method=RequestMethod.GET)
+	public String ping() {
+		return "pong";
+	}
 
 
 
@@ -58,13 +63,13 @@ public class ContactController {
 		return contactDao.deleteContact(uid, sid);
 	}
 
-	@RequestMapping(path="/{uid}/contactUser/{sid}", method=RequestMethod.DELETE)
+	@RequestMapping(path="/{uid}/contactUser/{sid}", method=RequestMethod.GET)
 	public Contact findContactByUser(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid, @PathVariable int sid) {
 		res.setStatus(202);
 		return contactDao.findContactByUser(uid, sid);
 	}
 
-	@RequestMapping(path="/{uid}/contactVenue/{sid}", method=RequestMethod.DELETE)
+	@RequestMapping(path="/{uid}/contactVenue/{sid}", method=RequestMethod.GET)
 	public Contact findContactByVenue(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid, @PathVariable int sid) {
 		res.setStatus(202);
 		return contactDao.findContactByVenue(uid, sid);

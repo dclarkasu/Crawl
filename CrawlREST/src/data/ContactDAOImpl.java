@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import entities.Contact;
 import entities.User;
+import entities.Venue;
 
 @Transactional
 @Repository
@@ -50,9 +51,8 @@ public class ContactDAOImpl implements ContactDAO {
             Contact mappedContact = mapper.readValue(todoJson, Contact.class);
        
 
-            String q = "SELECT c FROM Contact c WHERE c.user.id = :uid AND c.id = :sid";
+            String q = "SELECT c FROM Contact c WHERE c.id = :sid";
             Contact contact = em.createQuery(q, Contact.class)
-                    .setParameter("uid", uid)
                     .setParameter("sid", sid)
                     .getResultList()
                     .get(0);
@@ -68,10 +68,10 @@ public class ContactDAOImpl implements ContactDAO {
 	}
 
 	@Override
-	public Boolean deleteContact(int uid, int tid) {
+	public Boolean deleteContact(int uid, int sid) {
 		try {
-			String q = "SELECT c FROM Contact c WHERE c.user.id =:uid AND t.id = :tid";
-			Contact contact = em.createQuery(q, Contact.class).setParameter("uid", uid).setParameter("tid", tid).getResultList()
+			String q = "SELECT c FROM Contact c WHERE c.id =:sid";
+			Contact contact = em.createQuery(q, Contact.class).setParameter("sid", sid).getResultList()
 					.get(0);
 			em.remove(contact);
 			return true;
@@ -85,18 +85,19 @@ public class ContactDAOImpl implements ContactDAO {
 
 	@Override
 	public Contact findContactByUser(int uid, int sid) {
-		String q = "SELECT c FROM Contact c WHERE c.user.id =:uid";
-		Contact contact = em.createQuery(q, Contact.class).setParameter("sid", sid).getResultList()
-				.get(0);
-		return null;
+
+		String q = "SELECT u FROM User u WHERE u.id =:sid";
+		Contact contact = em.createQuery(q, User.class).setParameter("sid", sid).getResultList()
+				.get(0).getContact();
+		return contact;
 	}
 
 	@Override
 	public Contact findContactByVenue(int uid, int sid) {
-		String q = "SELECT c FROM Contact c WHERE c.venue.id =:uid";
-		Contact contact = em.createQuery(q, Contact.class).setParameter("sid", sid).getResultList()
-				.get(0);
-		return null;
+		String q = "SELECT v FROM Venue v WHERE v.id =:sid";
+		Contact contact = em.createQuery(q, Venue.class).setParameter("sid", sid).getResultList()
+				.get(0).getContact();
+		return contact;
 	}
 
 }
