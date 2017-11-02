@@ -11,26 +11,22 @@ import org.junit.Before;
 import org.junit.Test;
 
 import entities.Contact;
-import entities.Login;
 
 public class ContactTest {
-
-	EntityManagerFactory emf = null;
-	EntityManager em = null;
-	Contact c;
+	private EntityManagerFactory emf = null;
+	private EntityManager em = null;
+	Contact contact;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		emf = Persistence.createEntityManagerFactory("CrawlPU");
 		em = emf.createEntityManager();
-		c = em.find(Contact.class, 1);
 	}
 
 	@After
-	public void tearDown() throws Exception {
+	public void tearDown() {
 		em.close();
 		emf.close();
-		c = null;
 	}
 
 	@Test
@@ -39,8 +35,10 @@ public class ContactTest {
 	}
 
 	@Test
-	public void test_Login_Username_mapped() {
-		assertEquals("cage", c.getPhoneNumber());
-	}
+	public void contact_Connected_To_DB() {
+		contact = em.find(Contact.class, 1);
+		assertEquals(contact.getPhoneNumber(), "555-555-5555");
+		assertEquals(contact.getEmail(), "bill@gmail.com");
 
+	}
 }

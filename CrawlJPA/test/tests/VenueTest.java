@@ -31,7 +31,8 @@ public class VenueTest {
 	 
 	 @Test
 	  public void test_venue_mappings() {
-	    Venue venue = em.find(Venue.class, 1);
+	    Venue venue = em.find(Venue.class, 2);
+	    System.out.println(venue);
 	    assertEquals("test", venue.getName());
 	    
 	    

@@ -68,7 +68,7 @@ public class Group {
 
 	@Override
 	public String toString() {
-		return "Group [id=" + id + ", name=" + name + ", admin=" + admin + "]";
+		return "Group [id=" + id + ", name=" + name + ", admin=" + admin.getFirstName() + "]";
 	}
 	
 	

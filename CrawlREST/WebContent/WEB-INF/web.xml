@@ -6,13 +6,13 @@
   </welcome-file-list>
   
   <servlet>
-    <servlet-name>Crawl</servlet-name>
+    <servlet-name>crawl</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet
     </servlet-class>
 </servlet>
 
 <servlet-mapping>
-    <servlet-name>Crawl</servlet-name>
+    <servlet-name>crawl</servlet-name>
     <url-pattern>/rest/*</url-pattern>
 </servlet-mapping>
   
