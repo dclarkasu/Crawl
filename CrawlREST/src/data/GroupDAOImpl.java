@@ -132,7 +132,11 @@ public class GroupDAOImpl implements GroupDAO {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			Event mappedEvent = mapper.readValue(eventJSON, Event.class);
-			mappedEvent.setGroup(em.find(Group.class, gid));
+			Event tempEvent = new Event();
+			tempEvent.setDate(mappedEvent.getDate());
+			tempEvent.setName(mappedEvent.getName());
+			tempEvent.setRoute(mappedEvent.getRoute());
+			tempEvent.setGroup(em.find(Group.class, gid));
 //			mappedEvent.setRoute(em.find(Route.class, mappedEvent.getRoute().getId()));
 			em.persist(mappedEvent);
 			em.flush();
