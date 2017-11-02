@@ -30,10 +30,10 @@ public class ContactDAOImpl implements ContactDAO {
 	}
 
 	@Override
-	public Contact createContact(int uid, String todoJson) {
+	public Contact createContact(int uid, String contJson) {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			Contact mappedContact = mapper.readValue(todoJson, Contact.class);
+			Contact mappedContact = mapper.readValue(contJson, Contact.class);
 			
 			em.persist(mappedContact);
 			em.flush();
@@ -45,10 +45,10 @@ public class ContactDAOImpl implements ContactDAO {
 	}
 
 	@Override
-	public Contact updateContact(int uid, int sid, String todoJson) {
+	public Contact updateContact(int uid, int sid, String contJson) {
 		ObjectMapper mapper = new ObjectMapper();
         try {
-            Contact mappedContact = mapper.readValue(todoJson, Contact.class);
+            Contact mappedContact = mapper.readValue(contJson, Contact.class);
        
 
             String q = "SELECT c FROM Contact c WHERE c.id = :sid";

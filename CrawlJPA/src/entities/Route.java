@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
@@ -19,6 +21,11 @@ public class Route {
 	private int id;
 	
 	private String name;
+	
+	@JsonIgnore
+
+	@OneToMany(mappedBy="route", fetch=FetchType.EAGER)
+	private List<RouteVenue> routeVenues;
 	
 	@JsonIgnore
 	@ManyToMany(cascade= {CascadeType.PERSIST,CascadeType.REMOVE})

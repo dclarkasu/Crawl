@@ -14,6 +14,7 @@
         <class>entities.Route</class>
         <class>entities.Venue</class>
         <class>entities.Post</class>
+        <class>entities.RouteVenue</class>
 
         <properties>
         <!-- Link to DB and User permissions: requires change -->
