@@ -171,8 +171,9 @@ CREATE TABLE IF NOT EXISTS `venue` (
   `description` VARCHAR(500) NULL DEFAULT NULL,
   `hours` VARCHAR(45) NULL DEFAULT NULL,
   `rating_id` INT(10) UNSIGNED NULL DEFAULT NULL,
-  `address_id` INT(10) UNSIGNED NOT NULL UNIQUE,
+  `address_id` INT(10) UNSIGNED NULL DEFAULT NULL UNIQUE,
   `contact_id` INT(10) UNSIGNED NULL DEFAULT NULL UNIQUE,
+  `is_active` TINYINT(1) UNSIGNED DEFAULT 1,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
   INDEX `fk_venue_contact_idx` (`contact_id` ASC),
@@ -197,9 +198,11 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `route_venue` ;
 
 CREATE TABLE IF NOT EXISTS `route_venue` (
+  `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `route_id` INT(10) UNSIGNED NOT NULL,
   `venue_id` INT(10) UNSIGNED NOT NULL,
-  PRIMARY KEY (`route_id`, `venue_id`),
+  `spot` INT(10) UNSIGNED,
+  PRIMARY KEY (`id`, `venue_id`),
   CONSTRAINT `fk_route_venue_rout`
     FOREIGN KEY (`route_id`)
     REFERENCES `route` (`id`)
