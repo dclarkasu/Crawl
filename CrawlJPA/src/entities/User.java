@@ -12,7 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
@@ -30,7 +30,8 @@ public class User {
 	@JoinColumn(name="contact_id")
 	private Contact contact;
 	
-	@JsonManagedReference(value="userToGroup")
+	@JsonIgnore
+//	@JsonManagedReference(value="userToGroup")
 	@ManyToMany(mappedBy="users", fetch=FetchType.EAGER)
 	private List<Group> groups;
 

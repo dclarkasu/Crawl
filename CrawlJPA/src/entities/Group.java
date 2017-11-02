@@ -12,7 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="crawl_group")
@@ -25,12 +25,14 @@ public class Group {
 	private String name;
 	
 	//one to one with User for admin user
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name="admin_id")
 	private User admin;
 	
 	//many to many with user via virtual assoc. table
-	@JsonBackReference(value="userToGroup")
+//	@JsonBackReference(value="userToGroup")
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name="user_group",
 	joinColumns=@JoinColumn(name="group_id"),
