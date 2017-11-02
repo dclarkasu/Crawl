@@ -51,18 +51,25 @@ public class GroupDAOImpl implements GroupDAO {
 		ObjectMapper mapper = new ObjectMapper();
 		Group mappedGroup = null;
 		try {
+		
 			mappedGroup = mapper.readValue(groupJSON, Group.class);
+		
+			Group g = em.find(Group.class, gid);
+			g.setName(mappedGroup.getName());
+			g.setAdmin(mappedGroup.getAdmin());
+	
+			return g;
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		return null;
 		
-		Group g = em.find(Group.class, gid);
-		g.setName(mappedGroup.getName());
-		g.setAdmin(mappedGroup.getAdmin());
-		g.setUsers(mappedGroup.getUsers());
-		return g;
+		
 	}
 
+	
+	
+	
 	@Override
 	public Set<Group> findGroupByUserId(int uid) {
 		String query = "SELECT u FROM User u WHERE u.id = :uid";
