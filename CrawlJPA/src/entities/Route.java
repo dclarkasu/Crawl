@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,6 +20,11 @@ public class Route {
 	private int id;
 	
 	private String name;
+	
+	@JsonIgnore
+
+	@ManyToMany(mappedBy="routes", fetch=FetchType.EAGER)
+	private List<RouteVenue> routeVenues;
 	
 	@JsonIgnore
 	@ManyToMany(cascade= {CascadeType.PERSIST,CascadeType.REMOVE})
