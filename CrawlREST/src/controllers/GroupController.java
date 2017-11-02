@@ -28,13 +28,13 @@ public class GroupController {
 	
 	@RequestMapping(path="/groups/{gid}", method=RequestMethod.GET)
     public Group showGroup(HttpServletRequest req, HttpServletResponse res,@PathVariable int gid) {
-        res.setStatus(202);
+        res.setStatus(302);
         return groupDAO.findGroupById(gid);
     }
 	
-	@RequestMapping(path="/groups", method=RequestMethod.POST)
-	public Group createGroup(@RequestBody String groupJSON, HttpServletResponse res) {
-		Group newGroup = groupDAO.createGroup(groupJSON);
+	@RequestMapping(path="/{uid}/groups", method=RequestMethod.POST)
+	public Group createGroup(@RequestBody String groupJSON, @PathVariable int uid, HttpServletResponse res) {
+		Group newGroup = groupDAO.createGroup(uid, groupJSON);
 		if (newGroup == null) {
 			res.setStatus(400);
 			return null;
@@ -48,10 +48,10 @@ public class GroupController {
 	public Set<Group> findGroupByUserId(@PathVariable int uid, HttpServletResponse res) {
 		Set<Group> groupSet = groupDAO.findGroupByUserId(uid);
 		if (groupSet == null) {
-			res.setStatus(400);
+			res.setStatus(404);
 			return null;
 		} else {
-			res.setStatus(200);
+			res.setStatus(302);
 			return groupSet;
 		}
 	}
@@ -60,12 +60,23 @@ public class GroupController {
 	public Group updateGroup(@PathVariable int gid, @RequestBody String groupJSON, HttpServletResponse res) {
 		Group updateGroup = groupDAO.updateGroup(gid, groupJSON);
 		if(updateGroup == null) {
-			res.setStatus(400);
+			res.setStatus(304);
 			return null;
 		} else {
-			res.setStatus(200);
+			res.setStatus(202);
 			return updateGroup;
 		}
 	}
 	
+	@RequestMapping(path="/groups/{gid}", method=RequestMethod.DELETE)
+	public Boolean deleteGroup(@PathVariable int gid, HttpServletResponse res) {
+		Boolean bool = groupDAO.deleteGroup(gid);
+		if (bool == true) {
+			res.setStatus(202);
+			return true;
+		} else {
+			res.setStatus(304);
+			return false;
+		}
+	}
 }

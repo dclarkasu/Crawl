@@ -32,10 +32,12 @@ public class GroupDAOImpl implements GroupDAO {
     }
 	
 	@Override
-	public Group createGroup(String groupJSON) {
+	public Group createGroup(int uid, String groupJSON) {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			Group mappedGroup = mapper.readValue(groupJSON, Group.class);
+			//Sets admin to the current user...cray cray
+			mappedGroup.setAdmin(em.find(User.class, uid));
 			em.persist(mappedGroup);
 			em.flush();
 			return mappedGroup;
@@ -56,18 +58,13 @@ public class GroupDAOImpl implements GroupDAO {
 		
 			Group g = em.find(Group.class, gid);
 			g.setName(mappedGroup.getName());
-			g.setAdmin(mappedGroup.getAdmin());
 	
 			return g;
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return null;
-		
-		
 	}
-
-	
 	
 	
 	@Override
@@ -76,13 +73,17 @@ public class GroupDAOImpl implements GroupDAO {
 		List <User> users = em.createQuery(query, User.class).setParameter("uid", uid)
 				.getResultList();
 		return new HashSet<>(users.get(0).getGroups());
-		
 	}
 
 	@Override
 	public Boolean deleteGroup(int gid) {
-		// TODO Auto-generated method stub
-		return null;
+		Group group = em.find(Group.class, gid);
+		if(group != null) {
+			em.remove(group);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
