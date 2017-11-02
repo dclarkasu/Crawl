@@ -8,6 +8,7 @@ import entities.Group;
 public interface GroupDAO {
 	
 	//Group Specific Methods
+	public Group findGroupById(int gid);
 	public Group createGroup(String groupJSON);
 	public Group updateGroup(int gid, String groupJSON);
 	public Set<Group> findGroupByUserId(int uid);
