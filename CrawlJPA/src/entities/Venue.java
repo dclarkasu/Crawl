@@ -10,10 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Venue {
@@ -26,7 +24,7 @@ public class Venue {
 	private String description;
 	private String hours;
 
-	@ManyToMany(mappedBy="venues", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="venue", fetch=FetchType.EAGER)
 	private List<RouteVenue> routeVenues;
 	
 	@Column(name="is_active")

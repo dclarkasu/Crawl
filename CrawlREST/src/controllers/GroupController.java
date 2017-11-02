@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import data.GroupDAO;
+import entities.Event;
 import entities.Group;
 //brian thomas was here
 @RestController
@@ -77,6 +78,44 @@ public class GroupController {
 		} else {
 			res.setStatus(304);
 			return false;
+		}
+	}
+	
+	@RequestMapping(path="/users/{uid}/groups/{gid}", method=RequestMethod.PUT)
+	public Group addUserToGroup(@PathVariable int uid,@PathVariable int gid, HttpServletResponse res) {
+		Group updatedGroup = groupDAO.addUserToGroup(uid, gid);
+		if (updatedGroup == null) {
+			res.setStatus(406);
+			return null;
+		} else {
+			res.setStatus(201);
+			return updatedGroup;
+		}
+	}
+	
+	//Event Methods******************************************************
+	
+	@RequestMapping(path="/{uid}/groups/{gid}/events", method=RequestMethod.POST)
+	public Event createEvent(@PathVariable int gid, @RequestBody String eventJSON, HttpServletResponse res) {
+		Event event = groupDAO.createEvent(gid, eventJSON);
+		if (event == null) {
+			res.setStatus(400);
+			return null;
+		} else {
+			res.setStatus(201);
+			return event;
+		}
+	}
+	
+	@RequestMapping(path="/{uid}/groups/{gid}/events", method=RequestMethod.GET)
+	public Set<Event> findEventByGroupId(@PathVariable int gid, HttpServletResponse res) {
+		Set<Event> events = groupDAO.findEventByGroupId(gid);
+		if (events == null) {
+			res.setStatus(404);
+			return null;
+		} else {
+			res.setStatus(302);
+			return events;
 		}
 	}
 }

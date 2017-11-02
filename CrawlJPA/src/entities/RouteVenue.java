@@ -65,7 +65,7 @@ public class RouteVenue {
 
 	@Override
 	public String toString() {
-		return "Route_Venue [id=" + id + ", routeId=" + route + ", venueId=" + venue + ", spot=" + spot + "]";
+		return "Route_Venue [id=" + id + "]";
 	}
 	
 	
