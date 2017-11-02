@@ -26,6 +26,9 @@ public class Venue {
 	private String description;
 	private String hours;
 
+	@ManyToMany(mappedBy="venues", fetch=FetchType.EAGER)
+	private List<RouteVenue> routeVenues;
+	
 	@Column(name="is_active")
 	private boolean isActive;
 
@@ -51,9 +54,7 @@ public class Venue {
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 	public String getName() {
 		return name;
 	}
@@ -89,6 +90,14 @@ public class Venue {
 	}
 	public void setRoutes(List<Route> routes) {
 		this.routes = routes;
+	}
+	
+	
+	public List<RouteVenue> getRouteVenues() {
+		return routeVenues;
+	}
+	public void setRouteVenues(List<RouteVenue> routeVenues) {
+		this.routeVenues = routeVenues;
 	}
 	@Override
 	public String toString() {
