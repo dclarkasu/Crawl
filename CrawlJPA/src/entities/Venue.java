@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -30,15 +31,16 @@ public class Venue {
 	@JoinColumn(name="contact_id")
 	private Contact contact;
 	@JsonManagedReference(value="routeToVenue") 
-	@ManyToMany(mappedBy="venues", fetch=FetchType.EAGER)
+	@ManyToMany(mappedBy="venues")
 	private List<Route> routes;
 	
 	
 	
 	
 	//gets and sets
-	public int getId() {
-		return id;
+	
+	public Address getAddress() {
+		return address;
 	}
 	public String getName() {
 		return name;
@@ -58,8 +60,8 @@ public class Venue {
 	public void setHours(String hours) {
 		this.hours = hours;
 	}
-	public Address getAddress() {
-		return address;
+	public int getId() {
+		return id;
 	}
 	public void setAddress(Address address) {
 		this.address = address;
@@ -79,7 +81,7 @@ public class Venue {
 	@Override
 	public String toString() {
 		return "Venue [id=" + id + ", name=" + name + ", description=" + description + ", hours=" + hours + ", address="
-				+ address + ", contact=" + contact + "]";
+				+ address + ", contact=" +"]";
 	}
 	
 	

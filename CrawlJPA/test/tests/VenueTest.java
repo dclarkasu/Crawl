@@ -14,6 +14,7 @@ import entities.Venue;
 
 public class VenueTest {
 	
+	
 	private EntityManagerFactory emf = null;
 	private EntityManager em = null;
 	
@@ -30,12 +31,16 @@ public class VenueTest {
 	  }
 	 
 	 @Test
+	 public void test_generic_venue() {
+		 Venue v = em.find(Venue.class, 1);
+		 assertNotNull(v);
+	 }
+	 
+	 @Test
 	  public void test_venue_mappings() {
-	    Venue venue = em.find(Venue.class, 2);
-	    System.out.println(venue);
-	    assertEquals("test", venue.getName());
-	    
-	    
+	    Venue venue;
+	    venue = em.find(Venue.class, 1);
+	    assertEquals(1, venue.getId());
 	  }
 
 }
