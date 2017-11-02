@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `address` ;
 
 CREATE TABLE IF NOT EXISTS `address` (
   `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `long` DECIMAL(10,4) NULL DEFAULT NULL,
+  `longitude` DECIMAL(10,4) NULL DEFAULT NULL,
   `lat` DECIMAL(10,4) NULL DEFAULT NULL,
   `street` VARCHAR(255) NULL DEFAULT NULL,
   `street2` VARCHAR(255) NULL DEFAULT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `first_name` VARCHAR(45) NOT NULL,
   `last_name` VARCHAR(45) NOT NULL,
-  `contact_id` INT(10) UNSIGNED NULL DEFAULT NULL,
+  `contact_id` INT(10) UNSIGNED NULL DEFAULT NULL UNIQUE,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
   INDEX `fk_user_contact_idx` (`contact_id` ASC),
@@ -122,8 +122,6 @@ CREATE TABLE IF NOT EXISTS `event` (
   `date` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
-  INDEX `fk_event_route_idx` (`route_id` ASC),
-  INDEX `fk_event_group_idx` (`group_id` ASC),
   CONSTRAINT `fk_event_group`
     FOREIGN KEY (`group_id`)
     REFERENCES `group` (`id`)
@@ -173,8 +171,8 @@ CREATE TABLE IF NOT EXISTS `venue` (
   `description` VARCHAR(500) NULL DEFAULT NULL,
   `hours` VARCHAR(45) NULL DEFAULT NULL,
   `rating_id` INT(10) UNSIGNED NULL DEFAULT NULL,
-  `address_id` INT(10) UNSIGNED NOT NULL,
-  `contact_id` INT(10) UNSIGNED NULL DEFAULT NULL,
+  `address_id` INT(10) UNSIGNED NOT NULL UNIQUE,
+  `contact_id` INT(10) UNSIGNED NULL DEFAULT NULL UNIQUE,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
   INDEX `fk_venue_contact_idx` (`contact_id` ASC),
@@ -287,6 +285,25 @@ INSERT INTO login (user_name,password,user_id) VALUES ('dudeman','pass3',3);
 INSERT INTO login (user_name,password,user_id) VALUES ('red','pass4',4);
 
 INSERT INTO post (group_id,user_id,message) VALUES (1,3,'lets go dude');
+
+INSERT INTO address (longitude,lat,street,street2,city,state)
+VALUES  (100.10,80.34,'123 way road','','Denver','CO'),
+        (90.11,90.34,'323 red road','','Denver','CO'),
+        (80.12,100.34,'523 back road','','Denver','CO'),
+        (70.13,110.34,'623 road road','','Denver','CO');
+
+INSERT INTO venue (name,description,hours,address_id,contact_id)
+VALUES ('sputnik','fun place here','11:00AM-2:00PM',1,5),
+      ('true brew','fun place here','11:00AM-3:00PM',2,6),
+      ('skylark','fun place here','10:00AM-12:00PM',3,7),
+      ('mcman bar & grill','fun place here','11:00AM-1:00PM',4,8);
+
+INSERT INTO route (name) VALUES ('party route'),('fun route');
+
+INSERT INTO route_venue (route_id,venue_id) VALUES (1,1),(1,2),(1,3),(2,2),(2,3),(2,4);
+
+INSERT INTO event (name,route_id,group_id,date)
+VALUES ('pams birthday',1,1,now()),('friday night',2,1,now());
 
 DROP USER 'crawluser'@'localhost';
 CREATE USER 'crawluser'@'localhost' IDENTIFIED BY 'crawl';GRANT SELECT, INSERT, TRIGGER ON TABLE * TO 'crawluser'@'localhost';
