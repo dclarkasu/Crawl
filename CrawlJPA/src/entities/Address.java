@@ -13,7 +13,6 @@ public class Address {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name = "long")
 	private double longitude;
 	@Column(name = "lat")
 	private double latitude;
