@@ -5,13 +5,17 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import entities.Contact;
 import entities.Group;
 import entities.Route;
 import entities.Venue;
 
+@Transactional
+@Repository
 public class RouteDAOImpl implements RouteDAO {
 
 	@PersistenceContext
@@ -79,22 +83,22 @@ public class RouteDAOImpl implements RouteDAO {
 		return r;
 	}
 
-	@Override
-	public Route editVenueOrder(int uid, int rid, int vid, int change) {
-		change = 1-change;
-		Route r = em.find(Route.class, rid);
-		List<Venue> venues = r.getVenues();
-		for (Venue venue : venues) {
-			if(venue.getId()==vid) {
-				int index = venues.indexOf(venue);
-				Venue vTemp = venue;
-				if(index>0 &&)
-				venues[index]=
-			}
-		}
-		r.setVenues(venues);
-		return null;
-	}
+//	@Override
+//	public Route editVenueOrder(int uid, int rid, int vid, int change) {
+//		change = 1-change;
+//		Route r = em.find(Route.class, rid);
+//		List<Venue> venues = r.getVenues();
+//		for (Venue venue : venues) {
+//			if(venue.getId()==vid) {
+//				int index = venues.indexOf(venue);
+//				Venue vTemp = venue;
+//				if(index>0 &&)
+//				venues[index]=
+//			}
+//		}
+//		r.setVenues(venues);
+//		return null;
+//	}
 
 	@Override
 	public Route removeVenueFromRoute(int uid, int rid, int vid) {

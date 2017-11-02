@@ -16,7 +16,7 @@ public interface RouteDAO {
 	  
 	  public Route removeVenueFromRoute(int uid, int rid, int vid);
 	  
-	  public Route editVenueOrder(int uid, int rid);
+//	  public Route editVenueOrder(int uid, int rid);
 
 	
 }
