@@ -79,9 +79,11 @@ public class UserDAOImpl implements UserDAO {
 
 	//Posts
 	@Override
-	public Set<Post> findPostByUser(int id, int pid) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Post>findPostByUser(int id) {
+		String query = "SELECT p FROM Post p where u.id = :id"; //JPQL
+		return em.createQuery(query, Post.class)
+				.setParameter("id", id)
+				.getResultList();
 	}
 
 	@Override
