@@ -1,5 +1,6 @@
 package data;
 
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -83,22 +84,6 @@ public class RouteDAOImpl implements RouteDAO {
 		return r;
 	}
 
-//	@Override
-//	public Route editVenueOrder(int uid, int rid, int vid, int change) {
-//		change = 1-change;
-//		Route r = em.find(Route.class, rid);
-//		List<Venue> venues = r.getVenues();
-//		for (Venue venue : venues) {
-//			if(venue.getId()==vid) {
-//				int index = venues.indexOf(venue);
-//				Venue vTemp = venue;
-//				if(index>0 &&)
-//				venues[index]=
-//			}
-//		}
-//		r.setVenues(venues);
-//		return null;
-//	}
 
 	@Override
 	public Route removeVenueFromRoute(int uid, int rid, int vid) {
@@ -113,3 +98,4 @@ public class RouteDAOImpl implements RouteDAO {
 		return r;
 	}
 }
+
