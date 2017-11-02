@@ -12,9 +12,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Venue {
-	
+
 	//entities
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,24 +25,25 @@ public class Venue {
 	private String name;
 	private String description;
 	private String hours;
-	
+
 	@Column(name="is_active")
 	private boolean isActive;
-	
+
 	@OneToOne
 	@JoinColumn(name="address_id")
 	private Address address;
-	
+
 	@OneToOne
 	@JoinColumn(name="contact_id")
 	private Contact contact;
 	
 	@ManyToMany(mappedBy="venues", fetch=FetchType.EAGER)
 	private List<Route> routes;
-	
+
 	//gets and sets
-	public int getId() {
-		return id;
+
+	public Address getAddress() {
+		return address;
 	}
 	public boolean isActive() {
 		return isActive;
@@ -68,8 +72,8 @@ public class Venue {
 	public void setHours(String hours) {
 		this.hours = hours;
 	}
-	public Address getAddress() {
-		return address;
+	public int getId() {
+		return id;
 	}
 	public void setAddress(Address address) {
 		this.address = address;
@@ -89,11 +93,11 @@ public class Venue {
 	@Override
 	public String toString() {
 		return "Venue [id=" + id + ", name=" + name + ", description=" + description + ", hours=" + hours + ", address="
-				+ address + ", contact=" + contact + "]";
+				+ address + ", contact=" +"]";
 	}
-	
-	
-	
-	
+
+
+
+
 
 }
