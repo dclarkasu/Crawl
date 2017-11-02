@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,7 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Route {
 	@Id
@@ -20,7 +21,12 @@ public class Route {
 	
 	private String name;
 	
-	@JsonBackReference(value="routeToVenue")
+	@JsonIgnore
+
+	@ManyToMany(mappedBy="routes", fetch=FetchType.EAGER)
+	private List<RouteVenue> routeVenues;
+	
+	@JsonIgnore
 	@ManyToMany(cascade= {CascadeType.PERSIST,CascadeType.REMOVE})
 	@JoinTable(name="route_venue",
 	joinColumns = @JoinColumn(name="route_id"),

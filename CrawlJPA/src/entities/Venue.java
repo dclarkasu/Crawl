@@ -2,6 +2,7 @@ package entities;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Venue {
-	
+
 	//entities
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,24 +25,36 @@ public class Venue {
 	private String name;
 	private String description;
 	private String hours;
+
+	@ManyToMany(mappedBy="venues", fetch=FetchType.EAGER)
+	private List<RouteVenue> routeVenues;
+	
+	@Column(name="is_active")
+	private boolean isActive;
+
 	@OneToOne
 	@JoinColumn(name="address_id")
 	private Address address;
+
 	@OneToOne
 	@JoinColumn(name="contact_id")
 	private Contact contact;
-	@JsonManagedReference(value="routeToVenue") 
-	@ManyToMany(mappedBy="venues")
+	
+	@ManyToMany(mappedBy="venues", fetch=FetchType.EAGER)
 	private List<Route> routes;
-	
-	
-	
-	
+
 	//gets and sets
-	
+
 	public Address getAddress() {
 		return address;
 	}
+	public boolean isActive() {
+		return isActive;
+	}
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -78,14 +91,22 @@ public class Venue {
 	public void setRoutes(List<Route> routes) {
 		this.routes = routes;
 	}
+	
+	
+	public List<RouteVenue> getRouteVenues() {
+		return routeVenues;
+	}
+	public void setRouteVenues(List<RouteVenue> routeVenues) {
+		this.routeVenues = routeVenues;
+	}
 	@Override
 	public String toString() {
 		return "Venue [id=" + id + ", name=" + name + ", description=" + description + ", hours=" + hours + ", address="
 				+ address + ", contact=" +"]";
 	}
-	
-	
-	
-	
+
+
+
+
 
 }

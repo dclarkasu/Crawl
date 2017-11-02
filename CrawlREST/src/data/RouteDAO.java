@@ -4,7 +4,7 @@ import entities.Route;
 
 public interface RouteDAO {
 
-	  public Route showRoute(int uid, int cid);
+	  public Route showRoute(int uid, int sid);
 
 	  public Route createRoute(int uid, String todoJson);
 
@@ -12,9 +12,11 @@ public interface RouteDAO {
 
 	  public Boolean deleteRoute(int uid, int cid);
 	  
-	  public Route addVenueToRoute(int uid, int sid);
+	  public Route addVenueToRoute(int uid, int rid, int vid);
 	  
 	  public Route removeVenueFromRoute(int uid, int rid, int vid);
 	  
 	  public Route editVenueOrder(int uid, int rid);
+
+	
 }
