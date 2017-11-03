@@ -1,5 +1,7 @@
 package data;
 
+import java.util.List;
+
 import entities.Route;
 
 public interface RouteDAO {
@@ -16,7 +18,9 @@ public interface RouteDAO {
 	  
 	  public Route removeVenueFromRoute(int uid, int rid, int vid);
 
-	  public void editVenueOrder(int uid, int rid, int vid, int change); 
+	  public void editVenueOrder(int uid, int rid, int vid, int change);
+
+	  public List<Route> index(int uid); 
 
 	
 }
