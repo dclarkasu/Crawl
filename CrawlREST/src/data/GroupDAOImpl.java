@@ -152,7 +152,23 @@ public class GroupDAOImpl implements GroupDAO {
 
 	@Override
 	public Event updateEvent(int gid, int eid, String eventJSON) {
-		// TODO Auto-generated method stub
+		ObjectMapper mapper = new ObjectMapper();
+		Event mappedEvent = null;
+		try {
+			Group group = em.find(Group.class, gid);
+			mappedEvent = mapper.readValue(eventJSON, Event.class);
+		
+			Event newEvent = em.find(Event.class, eid);
+			newEvent.setName(mappedEvent.getName());
+			newEvent.setDate(mappedEvent.getDate());
+			//Update group and route?? **********************************
+			newEvent.setGroup(group);
+			newEvent.setRoute(mappedEvent.getRoute());
+	
+			return newEvent;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
