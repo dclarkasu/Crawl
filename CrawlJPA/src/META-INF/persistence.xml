@@ -14,6 +14,7 @@
         <class>entities.Route</class>
         <class>entities.Venue</class>
         <class>entities.Post</class>
+        <class>entities.RouteVenue</class>
 
         <properties>
         <!-- Link to DB and User permissions: requires change -->
@@ -24,8 +25,8 @@
 
             <property name="hibernate.connection.zeroDateTimeBehavior" value="convertToNull"></property>
 
-            <property name="hibernate.show_sql" value="false" />
-            <property name="hibernate.format_sql" value="false" />
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.format_sql" value="true" />
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 

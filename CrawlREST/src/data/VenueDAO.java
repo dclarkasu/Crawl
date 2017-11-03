@@ -3,6 +3,7 @@ package data;
 import java.util.Set;
 
 import entities.Address;
+import entities.Contact;
 import entities.Venue;
 
 public interface VenueDAO {
@@ -17,4 +18,5 @@ public interface VenueDAO {
 	public Address createAddress(String json);
 	public Address updateAddress(String json, int id);
 	public Venue updateAddressOfVenue(Address address, int id);
+	public Venue addContactToVenue(Contact contact, int id);
 }

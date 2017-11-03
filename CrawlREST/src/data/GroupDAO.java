@@ -22,6 +22,6 @@ public interface GroupDAO {
 	public Event updateEvent(int gid, int eid, String eventJSON);
 	public Boolean deleteEvent(int gid, int eid);
 	public Set<Event> findEventByGroupId(int gid);
-	public Set<Event> findEventsByGroupIdAndUserId(int gid, int uid);
+	public Set<Event> findEventsByUserId(int uid);
 	
 }

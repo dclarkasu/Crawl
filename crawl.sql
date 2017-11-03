@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
   CONSTRAINT `fk_event_group`
     FOREIGN KEY (`group_id`)
-    REFERENCES `group` (`id`)
+    REFERENCES `crawl_group` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_event_route`
@@ -176,8 +176,6 @@ CREATE TABLE IF NOT EXISTS `venue` (
   `is_active` TINYINT(1) UNSIGNED DEFAULT 1,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
-  INDEX `fk_venue_contact_idx` (`contact_id` ASC),
-  INDEX `fk_venue_address_idx` (`address_id` ASC),
   CONSTRAINT `fk_venue_address`
     FOREIGN KEY (`address_id`)
     REFERENCES `address` (`id`)

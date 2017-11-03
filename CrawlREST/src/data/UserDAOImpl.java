@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import entities.Contact;
 import entities.Group;
 import entities.Login;
 import entities.Post;
@@ -30,20 +31,32 @@ public class UserDAOImpl implements UserDAO {
 //	private PasswordEncoder encoder;
 
 	//Login (User)
-	@Override
-	public Login loginUser(String crawlJson) {
+	@Override //does not work yet
+	public Login loginUser(int id, String crawlJson) {
 		// show user
 		return null;
 	}
 
-	@Override
-	public Login registerUser(String crawlJson) {
-		// create user
+	@Override //does not work yet
+	public Login registerUser(int id, String crawlJson) {
+//		ObjectMapper mapper = new ObjectMapper();
+//		
+//		try {
+//			  User mappedUser = mapper.readValue(crawlJson, User.class);
+//			  User u = em.find(User.class, id); //mapping the foreign key and associates them together
+//			  mappedUser.set(u);
+//			  em.persist(mappedTodo);
+//			  em.flush();
+//			  
+//			  return mappedTodo;
+//			} catch (Exception e) {
+//			  e.printStackTrace();
+//			}
 		return null;
 	}
 
 	//User
-	@Override
+	@Override //works
 	public Set<User> indexUserByGroup(int gid) {
 		String query = "SELECT g FROM Group g where g.id = :id"; //JPQL
 		List<Group> groups = em.createQuery(query, Group.class)
@@ -71,44 +84,59 @@ public class UserDAOImpl implements UserDAO {
 		  User u = em.find(User.class, id);
 		  u.setFirstName(mappedUser.getFirstName());
 		  u.setLastName(mappedUser.getLastName());
-		  //going to need contact
 		 return u;
 	}
 
-	
-
-	//Posts
-	@Override
-	public Set<Post> findPostByUser(int id, int pid) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Set<Post> findPostByGroup(int gid, int pid) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Post createPost(int id, String crawlJson) {
-		ObjectMapper mapper = new ObjectMapper();
-		
-		try {
-		  Post mappedPost = mapper.readValue(crawlJson, Post.class);
-		  User u = em.find(User.class, id); //mapping the foreign key and associates them together
-		  mappedPost.setUser(u);
-		  em.persist(mappedPost);
-		  em.flush();
-		  
-		  return mappedPost;
-		} catch (Exception e) {
-		  e.printStackTrace();
+	@Override //cant test yet
+	public User addContactToUser(Contact contact, int id) {
+		User user = em.find(User.class, id);
+		if(user != null) {
+			user.setContact(contact);
+			return user;
 		}
 		return null;
 	}
 
-	@Override
+	//Posts
+	@Override //works
+	public Set<Post>findPostByUser(int id) {
+		String query = "SELECT p FROM Post p where p.user.id = :id"; //JPQL
+		List<Post> p = em.createQuery(query, Post.class)
+				.setParameter("id", id)
+				.getResultList();
+		return new HashSet<Post>(p);
+		
+	}
+
+	@Override //works
+	public Set<Post> findPostByGroup(int gid) {
+		String query = "SELECT p FROM Post p where p.group.id = :id"; //JPQL
+		List<Post> p = em.createQuery(query, Post.class)
+				.setParameter("id", gid)
+				.getResultList();
+		return new HashSet<Post>(p);
+		
+	}
+
+	@Override//method not working
+	public Post createPost(int id, String crawlJson) {
+//		ObjectMapper mapper = new ObjectMapper();
+//		
+//		try {
+//		  Post mappedPost = mapper.readValue(crawlJson, Post.class);
+//		  User u = em.find(User.class, id); //mapping the foreign key and associates them together
+//		  mappedPost.setUser(u);
+//		  em.persist(mappedPost);
+//		  em.flush();
+//		  
+//		  return mappedPost;
+//		} catch (Exception e) {
+//		  e.printStackTrace();
+//		}
+		return null;
+	}
+
+	@Override//no method yet
 	public Post updatePost(int pid, String crawlJson) {
 		ObjectMapper mapper = new ObjectMapper();
 		  Post mappedPost = null;
@@ -123,7 +151,7 @@ public class UserDAOImpl implements UserDAO {
 		 return p;	
 		 }
 
-	@Override
+	@Override//no method yet
 	public Boolean deletePost(int pid) {
 		Post p = em.find(Post.class, pid);
 		try{

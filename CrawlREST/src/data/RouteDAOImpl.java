@@ -1,9 +1,13 @@
 package data;
 
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -12,6 +16,8 @@ import entities.Route;
 import entities.RouteVenue;
 import entities.Venue;
 
+@Transactional
+@Repository
 public class RouteDAOImpl implements RouteDAO {
 
 	@PersistenceContext
@@ -79,6 +85,7 @@ public class RouteDAOImpl implements RouteDAO {
 		return r;
 	}
 
+<<<<<<< HEAD
 	@Override
 	public void editVenueOrder(int uid, int rid, int vid, int change) {
 		change = 1-change;
@@ -100,6 +107,8 @@ public class RouteDAOImpl implements RouteDAO {
 			e.printStackTrace();
 		}
 	}
+=======
+>>>>>>> e053e20d3dc35aa962e8e2dd1a37c5724b3c6a3e
 
 	@Override
 	public Route removeVenueFromRoute(int uid, int rid, int vid) {
@@ -114,3 +123,4 @@ public class RouteDAOImpl implements RouteDAO {
 		return r;
 	}
 }
+
