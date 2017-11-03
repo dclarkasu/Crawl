@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="appModule">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!--Angular dependency  -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-cookies.min.js"></script>
+<!-- authModule dependency -->
+<script src="app/authModule/auth.module.js"></script>
+<script src="app/authModule/auth.service.js"></script>
+<script src="app/authModule/login.component.js"></script>
+<script src="app/authModule/register.component.js"></script>
+<script src="app/authModule/logout.component.js"></script>
+<!--App Module-->
+<script src="app/appModule/app.module.js"></script>
+<!-- App services  -->
+<!-- App components  -->
+<script src="app/appModule/home/home.component.js"></script>
+<script src="app/appModule/navigation/navBar.component.js"></script>
 </head>
 <body>
 	<h1>Loaded</h1>
+	<nav-bar></nav-bar>
+	<ng-view></ng-view>
 </body>
 </html>

@@ -59,8 +59,8 @@ DROP TABLE IF EXISTS `user` ;
 
 CREATE TABLE IF NOT EXISTS `user` (
   `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `first_name` VARCHAR(45) NOT NULL,
-  `last_name` VARCHAR(45) NOT NULL,
+  `first_name` VARCHAR(45) NULL,
+  `last_name` VARCHAR(45) NULL,
   `contact_id` INT(10) UNSIGNED NULL DEFAULT NULL UNIQUE,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
@@ -306,7 +306,7 @@ VALUES ('sputnik','fun place here','11:00AM-2:00PM',1,5),
 
 INSERT INTO route (name) VALUES ('party route'),('fun route');
 
-INSERT INTO route_venue (route_id,venue_id) VALUES (1,1),(1,2),(1,3),(2,2),(2,3),(2,4);
+INSERT INTO route_venue (route_id,venue_id,spot) VALUES (1,1,1),(1,2,2),(1,3,3),(2,2,1),(2,3,2),(2,4,3);
 
 INSERT INTO event (name,route_id,group_id,date)
 VALUES ('pams birthday',1,1,now()),('friday night',2,1,now());
