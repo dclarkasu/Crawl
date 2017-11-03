@@ -38,7 +38,7 @@ public class UserDAOImpl implements UserDAO {
 	public Login loginUser(String crawlJson) {
 //		ObjectMapper mapper = new ObjectMapper();
 //		try {
-//		String query = "SELECT u FROM User u WHERE u.email = :email";
+//		String query = "SELECT l FROM Login l WHERE l. = :email";
 //		  List<User> users = em.createQuery(query, User.class)
 //		                        .setParameter("email", u.getEmail())
 //		                        .getResultList();

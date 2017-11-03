@@ -34,8 +34,8 @@ public class UserController {
 	
 	 //user auth
 	 @RequestMapping(path = "/register", method = RequestMethod.POST)
-	  public Login registerUser(HttpSession session, @RequestBody User user, HttpServletResponse res) {
-		   Login log = userDao.registerUser("");
+	  public Login registerUser(HttpSession session, @RequestBody String crawlJson, HttpServletResponse res) {
+		   Login log = userDao.registerUser(crawlJson);
 		   if(log != null) {
 			   session.setAttribute("login", log); 
 			   res.setStatus(201);
