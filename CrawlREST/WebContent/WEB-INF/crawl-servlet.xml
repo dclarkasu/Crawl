@@ -28,7 +28,7 @@
 
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/user/*/todo/**" />
+			<mvc:mapping path="/users/*/todo/**" />
 			<bean id="DataSecurityInterceptor" class="security.DataSecurityInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
