@@ -81,6 +81,15 @@ public class RouteDAOImpl implements RouteDAO {
 	public Route addVenueToRoute(int uid, int rid, int vid) {
 		Route r = em.find(Route.class, rid);
 		Venue v = em.find(Venue.class, vid);
+		try {
+			String q = "SELECT r FROM Route r WHERE r.id =:sid";
+			RouteVenue rv = em.createQuery(q, Route.class).setParameter("sid", sid).getResultList().get(0);
+			em.remove(route);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		r.getVenues().add(v);
 		return r;
 	}
