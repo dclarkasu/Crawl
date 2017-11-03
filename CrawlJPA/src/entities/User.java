@@ -32,7 +32,7 @@ public class User {
 	
 	@JsonIgnore
 //	@JsonManagedReference(value="userToGroup")
-	@ManyToMany(mappedBy="users", fetch=FetchType.EAGER)
+	@ManyToMany(mappedBy="users")
 	private List<Group> groups;
 
 

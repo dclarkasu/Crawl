@@ -54,7 +54,7 @@ public class GroupTest {
 	@Test
 	public void test_Group_To_Event() {
 		Group group = em.find(Group.class, 1);
-		assertEquals(group.getEvents().get(0).getName(), "");
+		assertEquals(group.getEvents().get(0).getName(), "pams birthday");
 	}
 
 }

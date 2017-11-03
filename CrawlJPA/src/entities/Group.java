@@ -43,7 +43,7 @@ public class Group {
 	private List<User> users;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="group", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="group")
 	private List<Event> events;
 
 	//Gets and Sets
