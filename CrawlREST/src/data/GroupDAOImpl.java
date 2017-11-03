@@ -193,11 +193,11 @@ public class GroupDAOImpl implements GroupDAO {
 		return new HashSet<>(events);
 	}
 
-//	@Override
-//	public Set<Event> findEventsByUserId(int uid) {
+	@Override
+	public Set<Event> findEventsByUserId(int uid) {
 //		String query = "SELECT e FROM Event e JOIN FETCH Group g WHERE g.users.id = :uid";
-//		return null;
+		return null;
 ////		select g.events from group g JOIN 
-//	}
+	}
 
 }
