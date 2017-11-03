@@ -195,8 +195,9 @@ public class GroupDAOImpl implements GroupDAO {
 
 	@Override
 	public Set<Event> findEventsByUserId(int uid) {
-		// TODO Auto-generated method stub
+		String query = "SELECT e FROM Event e JOIN FETCH Group g WHERE g.users.id = :uid";
 		return null;
+//		select g.events from group g JOIN 
 	}
 
 }
