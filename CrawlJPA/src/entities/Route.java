@@ -28,7 +28,7 @@ public class Route {
 	private List<RouteVenue> routeVenues;
 	
 	@JsonIgnore
-	@ManyToMany(cascade= {CascadeType.PERSIST,CascadeType.REMOVE})
+	@ManyToMany(cascade= {CascadeType.ALL})
 	@JoinTable(name="route_venue",
 	joinColumns = @JoinColumn(name="route_id"),
 	inverseJoinColumns = @JoinColumn(name="venue_id"))
