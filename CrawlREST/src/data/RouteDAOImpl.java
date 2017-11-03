@@ -1,6 +1,5 @@
 package data;
 
-
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -22,6 +21,13 @@ public class RouteDAOImpl implements RouteDAO {
 
 	@PersistenceContext
 	private EntityManager em;
+
+	@Override
+	public List<Route> index(int uid) {
+		String q = "SELECT r FROM Route r";
+		return em.createQuery(q, Route.class).getResultList();
+
+	}
 
 	@Override
 	public Route showRoute(int uid, int rid) {
@@ -77,40 +83,45 @@ public class RouteDAOImpl implements RouteDAO {
 		return null;
 	}
 
-//	@Override
-//	public Route addVenueToRoute(int uid, int rid, int vid) {
-//		Route r = em.find(Route.class, rid);
-//		Venue v = em.find(Venue.class, vid);
-//		try {
-//			String q = "SELECT r FROM Route r WHERE r.id =:sid";
-//			RouteVenue rv = em.createQuery(q, Route.class).setParameter("sid", sid).getResultList().get(0);
-//			em.remove(route);
-//			return true;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		
-//		r.getVenues().add(v);
-//		return r;
-//	}
+	@Override
+	public Route addVenueToRoute(int uid, int rid, int vid) {
+		Route r = em.find(Route.class, rid);
+		Venue v = em.find(Venue.class, vid);
+
+		r.getVenues().add(v);
+		try {
+
+			String q = "SELECT max(r.spot) FROM RouteVenue r WHERE r.routeId =:rid";
+			int sp = em.createQuery(q, RouteVenue.class).setParameter("rid", rid).getResultList().get(0).getSpot();
+			q = "SELECT r FROM RouteVenue r WHERE r.routeId = :rid AND r.venueId = :vid";
+			RouteVenue rv = em.createQuery(q, RouteVenue.class).setParameter("rid", rid).setParameter("vid", vid)
+					.getResultList().get(0);
+			rv.setSpot(sp);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return r;
+	}
 
 	@Override
 	public void editVenueOrder(int uid, int rid, int vid, int change) {
-		change = 1-change;
-		
+		change = 1 - change;
+
 		try {
-			String q = "SELECT r FROM RouteVenue r WHERE r.routeId =:rid AND r.venueId = :vid";
-			RouteVenue rv = em.createQuery(q, RouteVenue.class).setParameter("rid", rid).setParameter("vid", vid).getResultList().get(0);
+			String q = "SELECT r FROM RouteVenue r WHERE r.route =:r AND r.venue = :v";
+			RouteVenue rv = em.createQuery(q, RouteVenue.class).setParameter("r", em.find(Route.class, rid)).setParameter("v", em.find(Venue.class, vid))
+					.getResultList().get(0);
 			q = "SELECT r FROM RouteVenue r WHERE r.routeId =:rid";
-			int rvn = em.createQuery(q, RouteVenue.class).setParameter("rid", rid).getResultList().size()-1;
+			int rvn = em.createQuery(q, RouteVenue.class).setParameter("rid", rid).getResultList().size() - 1;
 			int rvs = rv.getSpot();
-			boolean test = (change>0? (rvs<rvn? true : false):(rvs>0? true : false));
-			if(test) {
-			int rvts = rvs + change;
-			q = "SELECT r FROM RouteVenue r WHERE r.spot =:rvts AND r.venueId = :vid";
-			RouteVenue rvt = em.createQuery(q, RouteVenue.class).setParameter("rvts", rvts).getResultList().get(0);
-			rv.setSpot(rvts);
-			rvt.setSpot(rvs);}
+			boolean test = (change > 0 ? (rvs < rvn ? true : false) : (rvs > 0 ? true : false));
+			if (test) {
+				int rvts = rvs + change;
+				q = "SELECT r FROM RouteVenue r WHERE r.spot =:rvts AND r.venueId = :vid";
+				RouteVenue rvt = em.createQuery(q, RouteVenue.class).setParameter("rvts", rvts).getResultList().get(0);
+				rv.setSpot(rvts);
+				rvt.setSpot(rvs);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -118,15 +129,27 @@ public class RouteDAOImpl implements RouteDAO {
 
 	@Override
 	public Route removeVenueFromRoute(int uid, int rid, int vid) {
+		String q = "SELECT r FROM RouteVenue r WHERE r.route =:r AND r.venue = :v";
 		Route r = em.find(Route.class, rid);
+		int s = em.createQuery(q, RouteVenue.class).setParameter("r", r).setParameter("v", em.find(Venue.class, vid)).getResultList()
+				.get(0).getSpot();
+		q = "SELECT r FROM RouteVenue r WHERE r.route =:r AND r.spot > :s";
+		List<RouteVenue> rvs = em.createQuery(q, RouteVenue.class).setParameter("r", r).setParameter("s", s)
+				.getResultList();
+		
 		List<Venue> venues = r.getVenues();
 		for (Venue venue : venues) {
-			if(venue.getId()==vid) {
+			if (venue.getId() == vid) {
 				venues.remove(venues.indexOf(venue));
 			}
+
 		}
+		for (RouteVenue rv : rvs) {
+			int sp = rv.getSpot() - 1;
+			rv.setSpot(sp);
+		}
+
 		r.setVenues(venues);
 		return r;
 	}
 }
-
