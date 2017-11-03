@@ -85,7 +85,6 @@ public class RouteDAOImpl implements RouteDAO {
 		return r;
 	}
 
-<<<<<<< HEAD
 	@Override
 	public void editVenueOrder(int uid, int rid, int vid, int change) {
 		change = 1-change;
@@ -107,8 +106,6 @@ public class RouteDAOImpl implements RouteDAO {
 			e.printStackTrace();
 		}
 	}
-=======
->>>>>>> e053e20d3dc35aa962e8e2dd1a37c5724b3c6a3e
 
 	@Override
 	public Route removeVenueFromRoute(int uid, int rid, int vid) {
