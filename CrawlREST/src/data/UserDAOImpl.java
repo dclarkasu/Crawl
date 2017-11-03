@@ -36,9 +36,28 @@ public class UserDAOImpl implements UserDAO {
 	//Login (User)
 	@Override //does not work yet
 	public Login loginUser(String crawlJson) {
-		// show user
-		return null;
+//		ObjectMapper mapper = new ObjectMapper();
+//		try {
+//		String query = "SELECT u FROM User u WHERE u.email = :email";
+//		  List<User> users = em.createQuery(query, User.class)
+//		                        .setParameter("email", u.getEmail())
+//		                        .getResultList();
+//		  if (users.size() > 0) {
+//		   boolean passwordsDoMatch = encoder.matches(u.getPassword(), users.get(0).getPassword());
+//		  
+//		  if(passwordsDoMatch) {
+//			  return users.get(0);
+//		  }
+//		  } catch (Exception e) {
+//			  e.printStackTrace();
+//			}
+//		return null;
+//		}
+	return null;
 	}
+		  
+		
+		
 
 	@Override //does not work yet
 	public Login registerUser(String crawlJson) {
@@ -48,8 +67,9 @@ public class UserDAOImpl implements UserDAO {
 		em.flush();
 		try {
 			  Login mappedLogin = mapper.readValue(crawlJson, Login.class);
-			  User u = em.find(User.class, id); //mapping the foreign key and associates them together
 			  mappedLogin.setUser(user);
+			  String password = encoder.encode(mappedLogin.getPassword());
+			  mappedLogin.setPassword(password);
 			  em.persist(mappedLogin);
 			  em.flush();
 			  
@@ -61,6 +81,11 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	//User
+	@Override
+	public User findUser(int id) {
+		return em.find(User.class, id);
+	}
+	
 	@Override //works
 	public Set<User> indexUserByGroup(int gid) {
 		String query = "SELECT g FROM Group g where g.id = :id"; //JPQL
@@ -70,13 +95,6 @@ public class UserDAOImpl implements UserDAO {
 		return new HashSet<User>(groups.get(0).getUsers());
 	}
 	
-	@Override
-	public User findUser(int id) {
-		return em.find(User.class, id);
-			
-	}
-
-
 	@Override
 	public User updateUser(int id, String crawlJson) {
 		ObjectMapper mapper = new ObjectMapper();
@@ -123,7 +141,7 @@ public class UserDAOImpl implements UserDAO {
 		
 	}
 
-	@Override//method not working
+	@Override//not tested
 	public Post createPost(int id, String crawlJson) {
 //		ObjectMapper mapper = new ObjectMapper();
 //		
@@ -141,7 +159,7 @@ public class UserDAOImpl implements UserDAO {
 		return null;
 	}
 
-	@Override//no method yet
+	@Override//not tested
 	public Post updatePost(int pid, String crawlJson) {
 		ObjectMapper mapper = new ObjectMapper();
 		  Post mappedPost = null;
@@ -156,7 +174,7 @@ public class UserDAOImpl implements UserDAO {
 		 return p;	
 		 }
 
-	@Override//no method yet
+	@Override//not tested
 	public Boolean deletePost(int pid) {
 		Post p = em.find(Post.class, pid);
 		try{

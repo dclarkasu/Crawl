@@ -19,6 +19,7 @@ import data.ContactDAO;
 import data.UserDAO;
 import entities.Contact;
 import entities.Group;
+import entities.Login;
 import entities.Post;
 import entities.User;
 
@@ -26,24 +27,19 @@ import entities.User;
 public class UserController {
 
 	 @Autowired
-	  private UserDAO userDao;
+	 private UserDAO userDao;
 	 @Autowired
 	 private ContactDAO contactDao;
 	 
-	 
-	 
-	 @RequestMapping(path = "ping", method = RequestMethod.GET)
-	    public String ping() {
-	        return "pong";
-	    }
+	
 	 //user auth
 	 @RequestMapping(path = "/register", method = RequestMethod.POST)
-	  public User register(HttpSession session, @RequestBody User user, HttpServletResponse res) {
-		   User u = authDAO.register(user);
-		   if(u != null) {
-			   session.setAttribute("user", u); 
+	  public Login registerUser(HttpSession session, @RequestBody User user, HttpServletResponse res) {
+		   Login log = userDao.registerUser("");
+		   if(log != null) {
+			   session.setAttribute("login", log); 
 			   res.setStatus(201);
-			   return u;
+			   return log;
 		   }
 		   res.setStatus(422);
 		   	return null;
@@ -61,25 +57,23 @@ public class UserController {
 //			return null;
 //	  }
 //	  
-//	  @RequestMapping(path = "/logout", method = RequestMethod.POST)
-//	  public Boolean logout(HttpSession session, HttpServletResponse response) {
-//		  session.removeAttribute("user");
-//		   if(session.getAttribute("user") == null) {
-//		    return true;
-//		   }
-//		  return false;
-//		   
-//	  }
-//	  
-//	  @RequestMapping(path = "/unauthorized")
-//	  public String unauth(HttpServletResponse response) {
-//	    response.setStatus(401);
-//	    return "unauthorized";
-//	  }
+	  @RequestMapping(path = "/logout", method = RequestMethod.POST)
+	  public Boolean logout(HttpSession session, HttpServletResponse response) {
+		  session.removeAttribute("login");
+		   if(session.getAttribute("login") == null) {
+		    return true;
+		   }
+		  return false;
+		   
+	  }
+	  
+	  @RequestMapping(path = "/unauthorized")
+	  public String unauth(HttpServletResponse response) {
+	    response.setStatus(401);
+	    return "unauthorized";
+	  }
 	 
 	 //user
-	 
-	 //logout user
 	 
 	 //works
 	 @RequestMapping(path="/user/{id}", method= RequestMethod.GET)
@@ -119,6 +113,18 @@ public class UserController {
 			res.setStatus(201);
 			return userDao.createPost(id, crawlJson);
 		}
+	//not working
+	@RequestMapping(path="/user/{id}/post/{pid}", method=RequestMethod.PUT)
+    public Post updatePost(HttpServletRequest req, HttpServletResponse res,@PathVariable int id,@PathVariable int pid,@RequestBody String crawlJson) {
+		return userDao.updatePost(pid, crawlJson);
+    	
+    }
+	//not working
+    @RequestMapping(path="/user/{id}/post/{pid}", method=RequestMethod.DELETE)
+    public Boolean destroy(HttpServletRequest req, HttpServletResponse res,@PathVariable  int id,@PathVariable  int pid) {
+		return userDao.deletePost(pid);
+    	
+    }
 	
 	//works
 	@RequestMapping(path="/user/{id}/post", method=RequestMethod.GET)
@@ -134,6 +140,9 @@ public class UserController {
 			return userDao.findPostByGroup(gid);
 	}
 	
-	
+//	@RequestMapping(path = "ping", method = RequestMethod.GET)
+//    public String ping() {
+//        return "pong";
+//    }
 	
 }
