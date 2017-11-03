@@ -4,7 +4,7 @@ angular.module('appModule').component('group', {
 		//Variables
 		var vm = this;
 
-		vm.group = {};
+		vm.group = null;
 
 		vm.groupList = [];
 		//Behaviors
