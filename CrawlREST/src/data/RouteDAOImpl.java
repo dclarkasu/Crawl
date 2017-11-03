@@ -7,9 +7,9 @@ import javax.persistence.PersistenceContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import entities.Contact;
 import entities.Group;
 import entities.Route;
+import entities.RouteVenue;
 import entities.Venue;
 
 public class RouteDAOImpl implements RouteDAO {
@@ -80,20 +80,25 @@ public class RouteDAOImpl implements RouteDAO {
 	}
 
 	@Override
-	public Route editVenueOrder(int uid, int rid, int vid, int change) {
+	public void editVenueOrder(int uid, int rid, int vid, int change) {
 		change = 1-change;
-		Route r = em.find(Route.class, rid);
-		List<Venue> venues = r.getVenues();
-		for (Venue venue : venues) {
-			if(venue.getId()==vid) {
-				int index = venues.indexOf(venue);
-				Venue vTemp = venue;
-				if(index>0 &&)
-				venues[index]=
-			}
+		
+		try {
+			String q = "SELECT r FROM RouteVenue r WHERE r.routeId =:rid AND r.venueId = :vid";
+			RouteVenue rv = em.createQuery(q, RouteVenue.class).setParameter("rid", rid).setParameter("vid", vid).getResultList().get(0);
+			q = "SELECT r FROM RouteVenue r WHERE r.routeId =:rid";
+			int rvn = em.createQuery(q, RouteVenue.class).setParameter("rid", rid).getResultList().size()-1;
+			int rvs = rv.getSpot();
+			boolean test = (change>0? (rvs<rvn? true : false):(rvs>0? true : false));
+			if(test) {
+			int rvts = rvs + change;
+			q = "SELECT r FROM RouteVenue r WHERE r.spot =:rvts AND r.venueId = :vid";
+			RouteVenue rvt = em.createQuery(q, RouteVenue.class).setParameter("rvts", rvts).getResultList().get(0);
+			rv.setSpot(rvts);
+			rvt.setSpot(rvs);}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		r.setVenues(venues);
-		return null;
 	}
 
 	@Override
