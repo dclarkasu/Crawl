@@ -143,15 +143,15 @@ public class GroupController {
 		}
 	}
 	
-//	@RequestMapping(path="/{uid}/events", method=RequestMethod.GET)
-//	public Set<Event> findEventByUserId(@PathVariable int uid, HttpServletResponse res) {
-//		Set<Event> events = groupDAO.findEventsByUserId(uid);
-//		if (events == null) {
-//			res.setStatus(404);
-//			return null;
-//		} else {
-//			res.setStatus(302);
-//			return events;
-//		}
-//	}
+	@RequestMapping(path="/{uid}/events", method=RequestMethod.GET)
+	public Set<Event> findEventByUserId(@PathVariable int uid, HttpServletResponse res) {
+		Set<Event> events = groupDAO.findEventsByUserId(uid);
+		if (events == null) {
+			res.setStatus(404);
+			return null;
+		} else {
+			res.setStatus(302);
+			return events;
+		}
+	}
 }
