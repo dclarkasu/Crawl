@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.RollbackException;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +15,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import entities.Event;
 import entities.Group;
-import entities.Route;
 import entities.User;
 
 @Transactional
@@ -132,16 +132,18 @@ public class GroupDAOImpl implements GroupDAO {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			Event mappedEvent = mapper.readValue(eventJSON, Event.class);
-			Event tempEvent = new Event();
-			tempEvent.setDate(mappedEvent.getDate());
-			tempEvent.setName(mappedEvent.getName());
-			tempEvent.setRoute(mappedEvent.getRoute());
-			tempEvent.setGroup(em.find(Group.class, gid));
-//			mappedEvent.setRoute(em.find(Route.class, mappedEvent.getRoute().getId()));
+			Group group = em.find(Group.class, gid);
+			System.out.println("***********************************************");
+			System.out.println(group);
+			System.out.println(mappedEvent);
+			mappedEvent.setGroup(group);
 			em.persist(mappedEvent);
 			em.flush();
 			return mappedEvent;
 			
+		} catch(RollbackException r) {
+			r.printStackTrace();
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

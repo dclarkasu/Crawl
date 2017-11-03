@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import entities.Address;
+import entities.Contact;
 import entities.Venue;
 
 @Transactional
@@ -153,6 +154,16 @@ public class VenueDAOImpl implements VenueDAO {
 		if(venue != null) {
 			venue.setAddress(address);
 			return null;
+		}
+		return null;
+	}
+
+	@Override
+	public Venue addContactToVenue(Contact contact, int id) {
+		Venue venue = em.find(Venue.class, id);
+		if(venue != null) {
+			venue.setContact(contact);
+			return venue;
 		}
 		return null;
 	}
