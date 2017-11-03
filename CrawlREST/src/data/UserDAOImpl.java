@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,8 @@ import entities.Login;
 import entities.Post;
 import entities.User;
 
+
+
 @Transactional
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -27,35 +30,62 @@ public class UserDAOImpl implements UserDAO {
 	@PersistenceContext
 	private EntityManager em;
 	 
-//	@Autowired
-//	private PasswordEncoder encoder;
+	@Autowired
+	private PasswordEncoder encoder;
 
 	//Login (User)
 	@Override //does not work yet
-	public Login loginUser(int id, String crawlJson) {
-		// show user
-		return null;
-	}
-
-	@Override //does not work yet
-	public Login registerUser(int id, String crawlJson) {
+	public Login loginUser(String crawlJson) {
 //		ObjectMapper mapper = new ObjectMapper();
-//		
 //		try {
-//			  User mappedUser = mapper.readValue(crawlJson, User.class);
-//			  User u = em.find(User.class, id); //mapping the foreign key and associates them together
-//			  mappedUser.set(u);
-//			  em.persist(mappedTodo);
-//			  em.flush();
-//			  
-//			  return mappedTodo;
-//			} catch (Exception e) {
+//		String query = "SELECT u FROM User u WHERE u.email = :email";
+//		  List<User> users = em.createQuery(query, User.class)
+//		                        .setParameter("email", u.getEmail())
+//		                        .getResultList();
+//		  if (users.size() > 0) {
+//		   boolean passwordsDoMatch = encoder.matches(u.getPassword(), users.get(0).getPassword());
+//		  
+//		  if(passwordsDoMatch) {
+//			  return users.get(0);
+//		  }
+//		  } catch (Exception e) {
 //			  e.printStackTrace();
 //			}
+//		return null;
+//		}
+	return null;
+	}
+		  
+		
+		
+
+	@Override //does not work yet
+	public Login registerUser(String crawlJson) {
+		ObjectMapper mapper = new ObjectMapper();
+		User user = new User();
+		em.persist(user);
+		em.flush();
+		try {
+			  Login mappedLogin = mapper.readValue(crawlJson, Login.class);
+			  mappedLogin.setUser(user);
+			  String password = encoder.encode(mappedLogin.getPassword());
+			  mappedLogin.setPassword(password);
+			  em.persist(mappedLogin);
+			  em.flush();
+			  
+			  return mappedLogin;
+			} catch (Exception e) {
+			  e.printStackTrace();
+			}
 		return null;
 	}
 
 	//User
+	@Override
+	public User findUser(int id) {
+		return em.find(User.class, id);
+	}
+	
 	@Override //works
 	public Set<User> indexUserByGroup(int gid) {
 		String query = "SELECT g FROM Group g where g.id = :id"; //JPQL
@@ -65,13 +95,6 @@ public class UserDAOImpl implements UserDAO {
 		return new HashSet<User>(groups.get(0).getUsers());
 	}
 	
-	@Override
-	public User findUser(int id) {
-		return em.find(User.class, id);
-			
-	}
-
-
 	@Override
 	public User updateUser(int id, String crawlJson) {
 		ObjectMapper mapper = new ObjectMapper();
@@ -118,7 +141,7 @@ public class UserDAOImpl implements UserDAO {
 		
 	}
 
-	@Override//method not working
+	@Override//not tested
 	public Post createPost(int id, String crawlJson) {
 //		ObjectMapper mapper = new ObjectMapper();
 //		
@@ -136,7 +159,7 @@ public class UserDAOImpl implements UserDAO {
 		return null;
 	}
 
-	@Override//no method yet
+	@Override//not tested
 	public Post updatePost(int pid, String crawlJson) {
 		ObjectMapper mapper = new ObjectMapper();
 		  Post mappedPost = null;
@@ -151,7 +174,7 @@ public class UserDAOImpl implements UserDAO {
 		 return p;	
 		 }
 
-	@Override//no method yet
+	@Override//not tested
 	public Boolean deletePost(int pid) {
 		Post p = em.find(Post.class, pid);
 		try{

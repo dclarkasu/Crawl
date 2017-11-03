@@ -10,8 +10,8 @@ import entities.User;
 public interface UserDAO {
 	
 	//Auth
-	public Login loginUser(int id, String crawlJson);
-	public Login registerUser(int id, String crawlJson);
+	public Login loginUser(String crawlJson);
+	public Login registerUser(String crawlJson);
 	//Register is create
 	
 	//User Crud

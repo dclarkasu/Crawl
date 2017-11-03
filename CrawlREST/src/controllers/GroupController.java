@@ -119,5 +119,39 @@ public class GroupController {
 		}
 	}
 	
-
+	@RequestMapping(path="/{uid}/groups/{gid}/events/{eid}", method=RequestMethod.PUT)
+	public Event updateEvent(@PathVariable int gid,@PathVariable int eid,@RequestBody String eventJSON, HttpServletResponse res) {
+		Event updatedEvent = groupDAO.updateEvent(gid, eid, eventJSON);
+		if(updatedEvent == null) {
+			res.setStatus(400);
+			return null;
+		} else {
+			res.setStatus(202);
+			return updatedEvent;
+		}
+	}
+	
+	@RequestMapping(path="/{uid}/groups/{gid}/events/{eid}", method=RequestMethod.DELETE)
+	public Boolean deleteEvent(@PathVariable int gid, @PathVariable int eid, HttpServletResponse res) {
+		Boolean bool = groupDAO.deleteEvent(gid, eid);
+		if (bool == true) {
+			res.setStatus(202);
+			return true;
+		} else {
+			res.setStatus(400);
+			return false;
+		}
+	}
+	
+	@RequestMapping(path="/{uid}/events", method=RequestMethod.GET)
+	public Set<Event> findEventByUserId(@PathVariable int uid, HttpServletResponse res) {
+		Set<Event> events = groupDAO.findEventsByUserId(uid);
+		if (events == null) {
+			res.setStatus(404);
+			return null;
+		} else {
+			res.setStatus(302);
+			return events;
+		}
+	}
 }
