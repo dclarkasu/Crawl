@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,8 +26,11 @@ public class RouteController {
 		return "pong";
 	}
 
-
-
+	@RequestMapping(path="/{uid}/routes", method=RequestMethod.GET)
+	public List<Route> show(HttpServletRequest req, HttpServletResponse res,@PathVariable int uid) {
+		res.setStatus(202);
+		return routeDao.index(uid);
+	}
 
 
 
