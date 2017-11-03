@@ -31,14 +31,11 @@ public class UserDAOImpl implements UserDAO {
 	private PasswordEncoder encoder;
 
 	// Login (User)
-	@Override //does not work yet
+	@Override //works
 	public Login loginUser(String crawlJson) {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			System.out.println(crawlJson);
 			Login mappedLogin = mapper.readValue(crawlJson, Login.class);
-			System.out.println(mappedLogin.getUsername());
-			System.out.println(mappedLogin.getPassword());
 			String query = "SELECT l FROM Login l WHERE l.username = :username";
 			List<Login> users = em.createQuery(query, Login.class)
 			          .setParameter("username", mappedLogin.getUsername())
@@ -60,7 +57,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 
-	@Override // does not work yet
+	@Override // works
 	public Login registerUser(String crawlJson) {
 		ObjectMapper mapper = new ObjectMapper();
 		User user = new User();
@@ -94,7 +91,7 @@ public class UserDAOImpl implements UserDAO {
 		return new HashSet<User>(groups.get(0).getUsers());
 	}
 
-	@Override
+	@Override //works
 	public User updateUser(int id, String crawlJson) {
 		ObjectMapper mapper = new ObjectMapper();
 		User mappedUser = null;
@@ -109,7 +106,7 @@ public class UserDAOImpl implements UserDAO {
 		return u;
 	}
 
-	@Override // cant test yet
+	@Override //works
 	public User addContactToUser(Contact contact, int id) {
 		User user = em.find(User.class, id);
 		if (user != null) {
@@ -136,22 +133,23 @@ public class UserDAOImpl implements UserDAO {
 
 	}
 
-	@Override // not tested
-	public Post createPost(int id, String crawlJson) {
-		// ObjectMapper mapper = new ObjectMapper();
-		//
-		// try {
-		// Post mappedPost = mapper.readValue(crawlJson, Post.class);
-		// User u = em.find(User.class, id); //mapping the foreign key and associates
-		// them together
-		// mappedPost.setUser(u);
-		// em.persist(mappedPost);
-		// em.flush();
-		//
-		// return mappedPost;
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
+	@Override // works
+	public Post createPost(int id, int gid, String crawlJson) {
+		 ObjectMapper mapper = new ObjectMapper();
+		
+		 try {
+		 Post mappedPost = mapper.readValue(crawlJson, Post.class);
+		 User u = em.find(User.class, id); //mapping the foreign key and associates
+		 Group g = em.find(Group.class, gid); 
+		 mappedPost.setUser(u);
+		 mappedPost.setGroup(g);
+		 em.persist(mappedPost);
+		 em.flush();
+		
+		 return mappedPost;
+		 } catch (Exception e) {
+		 e.printStackTrace();
+		 }
 		return null;
 	}
 

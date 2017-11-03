@@ -23,15 +23,15 @@ public class GroupDAOImpl implements GroupDAO {
 
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	//Group Methods*****************************
-	
+
 	@Override
     public Group findGroupById(int gid) {
         Group g = em.find(Group.class, gid);
         return g;
     }
-	
+
 	@Override
 	public Group createGroup(int uid, String groupJSON) {
 		ObjectMapper mapper = new ObjectMapper();
@@ -42,7 +42,7 @@ public class GroupDAOImpl implements GroupDAO {
 			em.persist(mappedGroup);
 			em.flush();
 			return mappedGroup;
-			
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -54,20 +54,20 @@ public class GroupDAOImpl implements GroupDAO {
 		ObjectMapper mapper = new ObjectMapper();
 		Group mappedGroup = null;
 		try {
-		
+
 			mappedGroup = mapper.readValue(groupJSON, Group.class);
-		
+
 			Group g = em.find(Group.class, gid);
 			g.setName(mappedGroup.getName());
-	
+
 			return g;
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
-	
+
+
 	@Override
 	public Set<Group> findGroupByUserId(int uid) {
 		String query = "SELECT u FROM User u WHERE u.id = :uid";
@@ -95,7 +95,7 @@ public class GroupDAOImpl implements GroupDAO {
 			g = em.find(Group.class, gid);
 			u = em.find(User.class, uid);
 			g.getUsers().add(u);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -110,23 +110,23 @@ public class GroupDAOImpl implements GroupDAO {
 			g = em.find(Group.class, gid);
 			u = em.find(User.class, uid);
 			List<User> users = g.getUsers();
-			
+
 			for (User user : users) {
 				if (user.getId() == uid) {
 					em.remove(user);
 				}
 			}
 		return g;
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return g;
 	}
-	
-	
+
+
 	//Event Methods*****************************
-	
+
 	@Override
 	public Event createEvent(int gid, String eventJSON) {
 		System.out.println("gid: " + gid);
@@ -141,7 +141,7 @@ public class GroupDAOImpl implements GroupDAO {
 			em.persist(mappedEvent);
 			em.flush();
 			return mappedEvent;
-			
+
 		} catch(RollbackException r) {
 			r.printStackTrace();
 
@@ -157,16 +157,16 @@ public class GroupDAOImpl implements GroupDAO {
 		Event mappedEvent = null;
 		try {
 			mappedEvent = mapper.readValue(eventJSON, Event.class);
-		
+
 			Event newEvent = em.find(Event.class, eid);
 			if (newEvent.getGroup().getId() != gid) {
 				return null;
 			}
 			newEvent.setName(mappedEvent.getName());
 			newEvent.setDate(mappedEvent.getDate());
-			
+
 			//Update group and route?? **********************************
-	
+
 			return newEvent;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -196,13 +196,13 @@ public class GroupDAOImpl implements GroupDAO {
 	@Override
 	public Set<Event> findEventsByUserId(int uid) {
 		String query = "SELECT e FROM Event e JOIN e.group g JOIN g.users u JOIN u.groups WHERE u.id = :id";
-		
+
 		List<Event> eventList = em.createQuery(query, Event.class)
 				.setParameter("id", uid)
 				.getResultList();
 		System.out.println(eventList);
-//		return null;
 		return new HashSet<>(eventList);
+
 	}
 
 }

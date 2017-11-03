@@ -22,7 +22,7 @@ public interface UserDAO {
 	//Post Crud
 	public Set<Post> findPostByUser(int id);
 	public Set<Post> findPostByGroup(int gid);
-	public Post createPost(int id, String crawlJson);
+	public Post createPost(int id, int gid, String crawlJson);
 	public Post updatePost(int pid, String crawlJson);
 	public Boolean deletePost(int pid);
 	User addContactToUser(Contact contact, int id);
