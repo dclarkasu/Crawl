@@ -42,7 +42,7 @@ angular.module('authModule')
     		console.log(user);
     		return $http({
 		      method : 'POST',
-		      url : 'rest/auth/register/',
+		      url : 'rest/auth/register',
 		    	  headers : {
 			          'Content-Type' : 'application/json'
 			        },
@@ -57,11 +57,7 @@ angular.module('authModule')
     service.logout = function() {
     		return $http({
 		      method : 'POST',
-		      url : 'api/auth/logout/',
-		    	  headers : {
-			          'Content-Type' : 'application/json'
-			        },
-			  data : null
+		      url : 'rest/auth/logout',
 		    })
 		    .then(function(res){
 		    		removeToken();
