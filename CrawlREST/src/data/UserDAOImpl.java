@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,8 @@ import entities.Login;
 import entities.Post;
 import entities.User;
 
+
+
 @Transactional
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -27,31 +30,33 @@ public class UserDAOImpl implements UserDAO {
 	@PersistenceContext
 	private EntityManager em;
 	 
-//	@Autowired
-//	private PasswordEncoder encoder;
+	@Autowired
+	private PasswordEncoder encoder;
 
 	//Login (User)
 	@Override //does not work yet
-	public Login loginUser(int id, String crawlJson) {
+	public Login loginUser(String crawlJson) {
 		// show user
 		return null;
 	}
 
 	@Override //does not work yet
-	public Login registerUser(int id, String crawlJson) {
-//		ObjectMapper mapper = new ObjectMapper();
-//		
-//		try {
-//			  User mappedUser = mapper.readValue(crawlJson, User.class);
-//			  User u = em.find(User.class, id); //mapping the foreign key and associates them together
-//			  mappedUser.set(u);
-//			  em.persist(mappedTodo);
-//			  em.flush();
-//			  
-//			  return mappedTodo;
-//			} catch (Exception e) {
-//			  e.printStackTrace();
-//			}
+	public Login registerUser(String crawlJson) {
+		ObjectMapper mapper = new ObjectMapper();
+		User user = new User();
+		em.persist(user);
+		em.flush();
+		try {
+			  Login mappedLogin = mapper.readValue(crawlJson, Login.class);
+			  User u = em.find(User.class, id); //mapping the foreign key and associates them together
+			  mappedLogin.setUser(user);
+			  em.persist(mappedLogin);
+			  em.flush();
+			  
+			  return mappedLogin;
+			} catch (Exception e) {
+			  e.printStackTrace();
+			}
 		return null;
 	}
 
