@@ -52,10 +52,4 @@ public class Login {
 		return id;
 	}
 
-	@Override
-	public String toString() {
-		return "Login [id=" + id + ", username=" + username + ", password=" + password + ", user=" + user.getFirstName() + "]";
-	}
-	
-	
 }

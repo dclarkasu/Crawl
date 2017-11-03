@@ -1,7 +1,5 @@
 package controllers;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import data.ContactDAO;
 import data.UserDAO;
 import entities.Contact;
-import entities.Group;
 import entities.Login;
 import entities.Post;
 import entities.User;
@@ -33,7 +30,7 @@ public class UserController {
 	 
 	
 	 //user auth
-	 @RequestMapping(path = "/register", method = RequestMethod.POST)
+	 @RequestMapping(path = "auth/register", method = RequestMethod.POST)
 	  public Login registerUser(HttpSession session, @RequestBody String crawlJson, HttpServletResponse res) {
 		   Login log = userDao.registerUser(crawlJson);
 		   if(log != null) {
@@ -46,18 +43,19 @@ public class UserController {
 	    
 	  }
 	  
-//	  @RequestMapping(path = "/login", method = RequestMethod.POST)
-//	  public User login(HttpSession session, @RequestBody User user, HttpServletResponse res) {
-//		  User u = authDAO.login(user);
-//			if(u != null) {
-//				  session.setAttribute("user", u);
-//				  return u;
-//			}
-//			res.setStatus(401);
-//			return null;
-//	  }
-//	  
-	  @RequestMapping(path = "/logout", method = RequestMethod.POST)
+	  @RequestMapping(path = "auth/login", method = RequestMethod.POST)
+	  public Login login(HttpSession session, @RequestBody String crawlJson, HttpServletResponse res) {
+		  Login login = userDao.loginUser(crawlJson);
+		  System.out.println(login);
+			if(login != null) {
+				  session.setAttribute("user", login);
+				  return login;
+			}
+			res.setStatus(401);
+			return null;
+	  }
+	  
+	  @RequestMapping(path = "auth/logout", method = RequestMethod.POST)
 	  public Boolean logout(HttpSession session, HttpServletResponse response) {
 		  session.removeAttribute("login");
 		   if(session.getAttribute("login") == null) {
@@ -67,7 +65,7 @@ public class UserController {
 		   
 	  }
 	  
-	  @RequestMapping(path = "/unauthorized")
+	  @RequestMapping(path = "auth/unauthorized")
 	  public String unauth(HttpServletResponse response) {
 	    response.setStatus(401);
 	    return "unauthorized";
@@ -88,10 +86,10 @@ public class UserController {
 		}
 	//works
 	@RequestMapping(path="/user/{id}", method=RequestMethod.PUT)
-    		public User update(HttpServletRequest req, HttpServletResponse res,@PathVariable int id, @RequestBody String crawlJson) {
+    		public User updateUser(HttpServletRequest req, HttpServletResponse res,@PathVariable int id, @RequestBody String crawlJson) {
 			return userDao.updateUser(id, crawlJson);
 		}
-	//cant test until I can create user
+	//works
 	@RequestMapping(path="/user/{id}/contacts", method=RequestMethod.POST)
 		public User addContactToUser(HttpServletRequest req, HttpServletResponse res,@PathVariable int id, @RequestBody String crawlJson) {
 			Contact contact = contactDao.createContact(id, crawlJson);
@@ -108,18 +106,18 @@ public class UserController {
 	 //posts
 	
 	//not working
-	@RequestMapping(path="/user/{id}/post", method=RequestMethod.POST)
-    		public Post createPost(HttpServletRequest req, HttpServletResponse res,@PathVariable int id,@RequestBody String crawlJson) {
+	@RequestMapping(path="/user/{id}/group/{gid}/post", method=RequestMethod.POST)
+    		public Post createPost(HttpServletRequest req, HttpServletResponse res,@PathVariable int id, @PathVariable int gid,@RequestBody String crawlJson) {
 			res.setStatus(201);
-			return userDao.createPost(id, crawlJson);
+			return userDao.createPost(id, gid, crawlJson);
 		}
-	//not working
+	//work
 	@RequestMapping(path="/user/{id}/post/{pid}", method=RequestMethod.PUT)
     public Post updatePost(HttpServletRequest req, HttpServletResponse res,@PathVariable int id,@PathVariable int pid,@RequestBody String crawlJson) {
 		return userDao.updatePost(pid, crawlJson);
     	
     }
-	//not working
+	//work
     @RequestMapping(path="/user/{id}/post/{pid}", method=RequestMethod.DELETE)
     public Boolean destroy(HttpServletRequest req, HttpServletResponse res,@PathVariable  int id,@PathVariable  int pid) {
 		return userDao.deletePost(pid);

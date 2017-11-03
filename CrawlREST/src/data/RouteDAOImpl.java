@@ -88,18 +88,14 @@ public class RouteDAOImpl implements RouteDAO {
 		Route r = em.find(Route.class, rid);
 		Venue v = em.find(Venue.class, vid);
 
-		r.getVenues().add(v);
-		try {
+		RouteVenue rv = new RouteVenue();
+		rv.setRoute(r);
+		rv.setVenue(v);
 
-			String q = "SELECT max(r.spot) FROM RouteVenue r WHERE r.routeId =:rid";
-			int sp = em.createQuery(q, RouteVenue.class).setParameter("rid", rid).getResultList().get(0).getSpot();
-			q = "SELECT r FROM RouteVenue r WHERE r.routeId = :rid AND r.venueId = :vid";
-			RouteVenue rv = em.createQuery(q, RouteVenue.class).setParameter("rid", rid).setParameter("vid", vid)
-					.getResultList().get(0);
-			rv.setSpot(sp);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		String q = "SELECT r FROM RouteVenue r WHERE r.route.id =:rid";
+		int sp = em.createQuery(q, RouteVenue.class).setParameter("rid", rid).getResultList().size();
+		rv.setSpot(sp + 1);
+		em.persist(rv);
 		return r;
 	}
 
@@ -109,8 +105,8 @@ public class RouteDAOImpl implements RouteDAO {
 
 		try {
 			String q = "SELECT r FROM RouteVenue r WHERE r.route =:r AND r.venue = :v";
-			RouteVenue rv = em.createQuery(q, RouteVenue.class).setParameter("r", em.find(Route.class, rid)).setParameter("v", em.find(Venue.class, vid))
-					.getResultList().get(0);
+			RouteVenue rv = em.createQuery(q, RouteVenue.class).setParameter("r", em.find(Route.class, rid))
+					.setParameter("v", em.find(Venue.class, vid)).getResultList().get(0);
 			q = "SELECT r FROM RouteVenue r WHERE r.routeId =:rid";
 			int rvn = em.createQuery(q, RouteVenue.class).setParameter("rid", rid).getResultList().size() - 1;
 			int rvs = rv.getSpot();
@@ -131,25 +127,23 @@ public class RouteDAOImpl implements RouteDAO {
 	public Route removeVenueFromRoute(int uid, int rid, int vid) {
 		String q = "SELECT r FROM RouteVenue r WHERE r.route =:r AND r.venue = :v";
 		Route r = em.find(Route.class, rid);
-		int s = em.createQuery(q, RouteVenue.class).setParameter("r", r).setParameter("v", em.find(Venue.class, vid)).getResultList()
-				.get(0).getSpot();
-		q = "SELECT r FROM RouteVenue r WHERE r.route =:r AND r.spot > :s";
-		List<RouteVenue> rvs = em.createQuery(q, RouteVenue.class).setParameter("r", r).setParameter("s", s)
-				.getResultList();
-		
-		List<Venue> venues = r.getVenues();
-		for (Venue venue : venues) {
-			if (venue.getId() == vid) {
-				venues.remove(venues.indexOf(venue));
-			}
+		RouteVenue routeVen = em.createQuery(q, RouteVenue.class).setParameter("r", r)
+				.setParameter("v", em.find(Venue.class, vid)).getResultList().get(0);
+		int s = routeVen.getSpot();
 
-		}
+		em.remove(routeVen);
+
+		String w = "SELECT r FROM RouteVenue r WHERE r.route.id = :rid AND r.spot >:s";
+		List<RouteVenue> rvs = em.createQuery(w, RouteVenue.class).setParameter("rid", r.getId()).setParameter("s", s)
+				.getResultList();
+
 		for (RouteVenue rv : rvs) {
+			System.out.println("in for loop");
+			System.out.println(rv);
 			int sp = rv.getSpot() - 1;
 			rv.setSpot(sp);
 		}
 
-		r.setVenues(venues);
 		return r;
 	}
 }
