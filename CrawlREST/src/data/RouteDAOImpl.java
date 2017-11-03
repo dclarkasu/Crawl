@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import entities.Group;
 import entities.Route;
+import entities.RouteVenue;
 import entities.Venue;
 
 @Transactional
@@ -84,6 +85,27 @@ public class RouteDAOImpl implements RouteDAO {
 		return r;
 	}
 
+	@Override
+	public void editVenueOrder(int uid, int rid, int vid, int change) {
+		change = 1-change;
+		
+		try {
+			String q = "SELECT r FROM RouteVenue r WHERE r.routeId =:rid AND r.venueId = :vid";
+			RouteVenue rv = em.createQuery(q, RouteVenue.class).setParameter("rid", rid).setParameter("vid", vid).getResultList().get(0);
+			q = "SELECT r FROM RouteVenue r WHERE r.routeId =:rid";
+			int rvn = em.createQuery(q, RouteVenue.class).setParameter("rid", rid).getResultList().size()-1;
+			int rvs = rv.getSpot();
+			boolean test = (change>0? (rvs<rvn? true : false):(rvs>0? true : false));
+			if(test) {
+			int rvts = rvs + change;
+			q = "SELECT r FROM RouteVenue r WHERE r.spot =:rvts AND r.venueId = :vid";
+			RouteVenue rvt = em.createQuery(q, RouteVenue.class).setParameter("rvts", rvts).getResultList().get(0);
+			rv.setSpot(rvts);
+			rvt.setSpot(rvs);}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public Route removeVenueFromRoute(int uid, int rid, int vid) {

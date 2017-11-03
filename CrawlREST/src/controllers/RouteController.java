@@ -60,7 +60,17 @@ public class RouteController {
 		res.setStatus(202);
 		return routeDao.deleteRoute(uid, sid);
 	}
-
 	
+	@RequestMapping(path="/{uid}/routes/{rid}/addvenues/{vid}", method=RequestMethod.PUT)
+	public Route addVenueToRoute(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid, @PathVariable int rid, @PathVariable int vid) {
+		res.setStatus(202);
+		return routeDao.addVenueToRoute(uid, rid, vid);
+	}
+
+	@RequestMapping(path="/{uid}/routes/{rid}/removevenues/{vid}", method=RequestMethod.PUT)
+	public Route removeVenueFromRoute(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid, @PathVariable int rid, @PathVariable int vid) {
+		res.setStatus(202);
+		return routeDao.removeVenueFromRoute(uid, rid, vid);
+	}
 	
 }

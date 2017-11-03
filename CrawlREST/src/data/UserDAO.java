@@ -1,6 +1,5 @@
 package data;
 
-import java.util.List;
 import java.util.Set;
 
 import entities.Contact;
@@ -11,8 +10,8 @@ import entities.User;
 public interface UserDAO {
 	
 	//Auth
-	public Login loginUser(String crawlJson);
-	public Login registerUser(String crawlJson);
+	public Login loginUser(int id, String crawlJson);
+	public Login registerUser(int id, String crawlJson);
 	//Register is create
 	
 	//User Crud
