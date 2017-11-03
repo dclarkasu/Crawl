@@ -74,23 +74,23 @@ public class UserController {
 	 //user
 	 
 	 //works
-	 @RequestMapping(path="/user/{id}", method= RequestMethod.GET)
+	 @RequestMapping(path="users/{id}", method= RequestMethod.GET)
 	    public User findUser(HttpServletRequest req, HttpServletResponse res, @PathVariable int id){
 			return userDao.findUser(id);
 	    	
 	    }
 	 //works
-	@RequestMapping(path="/group/{gid}", method= RequestMethod.GET)
+	@RequestMapping(path="users/{id}/group/{gid}", method= RequestMethod.GET)
     		public Set<User> indexUserByGroup(HttpServletRequest req, HttpServletResponse res, @PathVariable int gid){
 			return userDao.indexUserByGroup(gid);
 		}
 	//works
-	@RequestMapping(path="/user/{id}", method=RequestMethod.PUT)
+	@RequestMapping(path="users/{id}", method=RequestMethod.PUT)
     		public User updateUser(HttpServletRequest req, HttpServletResponse res,@PathVariable int id, @RequestBody String crawlJson) {
 			return userDao.updateUser(id, crawlJson);
 		}
 	//works
-	@RequestMapping(path="/user/{id}/contacts", method=RequestMethod.POST)
+	@RequestMapping(path="users/{id}/contacts", method=RequestMethod.POST)
 		public User addContactToUser(HttpServletRequest req, HttpServletResponse res,@PathVariable int id, @RequestBody String crawlJson) {
 			Contact contact = contactDao.createContact(id, crawlJson);
 			if(contact != null) {
@@ -106,41 +106,41 @@ public class UserController {
 	 //posts
 	
 	//not working
-	@RequestMapping(path="/user/{id}/group/{gid}/post", method=RequestMethod.POST)
+	@RequestMapping(path="users/{id}/group/{gid}/post", method=RequestMethod.POST)
     		public Post createPost(HttpServletRequest req, HttpServletResponse res,@PathVariable int id, @PathVariable int gid,@RequestBody String crawlJson) {
 			res.setStatus(201);
 			return userDao.createPost(id, gid, crawlJson);
 		}
 	//work
-	@RequestMapping(path="/user/{id}/post/{pid}", method=RequestMethod.PUT)
+	@RequestMapping(path="users/{id}/post/{pid}", method=RequestMethod.PUT)
     public Post updatePost(HttpServletRequest req, HttpServletResponse res,@PathVariable int id,@PathVariable int pid,@RequestBody String crawlJson) {
 		return userDao.updatePost(pid, crawlJson);
     	
     }
 	//work
-    @RequestMapping(path="/user/{id}/post/{pid}", method=RequestMethod.DELETE)
+    @RequestMapping(path="users/{id}/post/{pid}", method=RequestMethod.DELETE)
     public Boolean destroy(HttpServletRequest req, HttpServletResponse res,@PathVariable  int id,@PathVariable  int pid) {
 		return userDao.deletePost(pid);
     	
     }
 	
 	//works
-	@RequestMapping(path="/user/{id}/post", method=RequestMethod.GET)
+	@RequestMapping(path="users/{id}/post", method=RequestMethod.GET)
 		public Set<Post>findPostByUser(HttpServletRequest req, HttpServletResponse res,@PathVariable int id) {
 			System.out.println("**************************");
 			return userDao.findPostByUser(id);
 		}
 	
 	//works
-	@RequestMapping(path="/user/{id}/post/group/{gid}", method=RequestMethod.GET)
+	@RequestMapping(path="users/{id}/post/group/{gid}", method=RequestMethod.GET)
 		public Set<Post>findPostByGroup(HttpServletRequest req, HttpServletResponse res,@PathVariable int gid) {
 			System.out.println("**************************");
 			return userDao.findPostByGroup(gid);
 	}
 	
-//	@RequestMapping(path = "ping", method = RequestMethod.GET)
-//    public String ping() {
-//        return "pong";
-//    }
+	@RequestMapping(path = "ping", method = RequestMethod.GET)
+    public String ping() {
+        return "pong";
+    }
 	
 }

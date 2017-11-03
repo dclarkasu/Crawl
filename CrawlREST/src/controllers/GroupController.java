@@ -22,18 +22,18 @@ public class GroupController {
 	@Autowired
 	private GroupDAO groupDAO;
 	
-	@RequestMapping(path="/groups/ping", method=RequestMethod.GET)
+	@RequestMapping(path="users/{id}/groups/ping", method=RequestMethod.GET)
 	public String ping() {
 		return "pong";
 	}
 	
-	@RequestMapping(path="/groups/{gid}", method=RequestMethod.GET)
+	@RequestMapping(path="users/{id}/groups/{gid}", method=RequestMethod.GET)
     public Group showGroup(HttpServletRequest req, HttpServletResponse res,@PathVariable int gid) {
         res.setStatus(302);
         return groupDAO.findGroupById(gid);
     }
 	
-	@RequestMapping(path="/{uid}/groups", method=RequestMethod.POST)
+	@RequestMapping(path="users/{uid}/groups", method=RequestMethod.POST)
 	public Group createGroup(@RequestBody String groupJSON, @PathVariable int uid, HttpServletResponse res) {
 		Group newGroup = groupDAO.createGroup(uid, groupJSON);
 		if (newGroup == null) {
@@ -57,7 +57,7 @@ public class GroupController {
 		}
 	}
 	
-	@RequestMapping(path="/groups/{gid}", method=RequestMethod.PUT)
+	@RequestMapping(path="users/{id}/groups/{gid}", method=RequestMethod.PUT)
 	public Group updateGroup(@PathVariable int gid, @RequestBody String groupJSON, HttpServletResponse res) {
 		Group updateGroup = groupDAO.updateGroup(gid, groupJSON);
 		if(updateGroup == null) {
@@ -69,7 +69,7 @@ public class GroupController {
 		}
 	}
 	
-	@RequestMapping(path="/groups/{gid}", method=RequestMethod.DELETE)
+	@RequestMapping(path="users/{id}/groups/{gid}", method=RequestMethod.DELETE)
 	public Boolean deleteGroup(@PathVariable int gid, HttpServletResponse res) {
 		Boolean bool = groupDAO.deleteGroup(gid);
 		if (bool == true) {
@@ -81,7 +81,7 @@ public class GroupController {
 		}
 	}
 	
-	@RequestMapping(path="/users/{uid}/groups/{gid}", method=RequestMethod.PUT)
+	@RequestMapping(path="users/{uid}/groups/{gid}", method=RequestMethod.PUT)
 	public Group addUserToGroup(@PathVariable int uid,@PathVariable int gid, HttpServletResponse res) {
 		Group updatedGroup = groupDAO.addUserToGroup(uid, gid);
 		if (updatedGroup == null) {
@@ -95,7 +95,7 @@ public class GroupController {
 	
 	//Event Methods******************************************************
 	
-	@RequestMapping(path="/{uid}/groups/{gid}/events", method=RequestMethod.POST)
+	@RequestMapping(path="users/{uid}/groups/{gid}/events", method=RequestMethod.POST)
 	public Event createEvent(@PathVariable int gid, @RequestBody String eventJSON, HttpServletResponse res) {
 		Event event = groupDAO.createEvent(gid, eventJSON);
 		if (event == null) {
@@ -107,7 +107,7 @@ public class GroupController {
 		}
 	}
 	
-	@RequestMapping(path="/{uid}/groups/{gid}/events", method=RequestMethod.GET)
+	@RequestMapping(path="users/{uid}/groups/{gid}/events", method=RequestMethod.GET)
 	public Set<Event> findEventByGroupId(@PathVariable int gid, HttpServletResponse res) {
 		Set<Event> events = groupDAO.findEventByGroupId(gid);
 		if (events == null) {
@@ -119,7 +119,7 @@ public class GroupController {
 		}
 	}
 	
-	@RequestMapping(path="/{uid}/groups/{gid}/events/{eid}", method=RequestMethod.PUT)
+	@RequestMapping(path="users/{uid}/groups/{gid}/events/{eid}", method=RequestMethod.PUT)
 	public Event updateEvent(@PathVariable int gid,@PathVariable int eid,@RequestBody String eventJSON, HttpServletResponse res) {
 		Event updatedEvent = groupDAO.updateEvent(gid, eid, eventJSON);
 		if(updatedEvent == null) {
@@ -131,7 +131,7 @@ public class GroupController {
 		}
 	}
 	
-	@RequestMapping(path="/{uid}/groups/{gid}/events/{eid}", method=RequestMethod.DELETE)
+	@RequestMapping(path="users/{uid}/groups/{gid}/events/{eid}", method=RequestMethod.DELETE)
 	public Boolean deleteEvent(@PathVariable int gid, @PathVariable int eid, HttpServletResponse res) {
 		Boolean bool = groupDAO.deleteEvent(gid, eid);
 		if (bool == true) {
@@ -143,7 +143,7 @@ public class GroupController {
 		}
 	}
 	
-	@RequestMapping(path="/{uid}/events", method=RequestMethod.GET)
+	@RequestMapping(path="users/{uid}/events", method=RequestMethod.GET)
 	public Set<Event> findEventByUserId(@PathVariable int uid, HttpServletResponse res) {
 		Set<Event> events = groupDAO.findEventsByUserId(uid);
 		if (events == null) {

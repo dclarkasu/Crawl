@@ -20,12 +20,12 @@ public class RouteController {
 	@Autowired
 	private RouteDAO routeDao;
 	
-	@RequestMapping(path="/routes/ping", method=RequestMethod.GET)
+	@RequestMapping(path="routes/ping", method=RequestMethod.GET)
 	public String ping() {
 		return "pong";
 	}
 
-	@RequestMapping(path="/{uid}/routes", method=RequestMethod.GET)
+	@RequestMapping(path="users/{uid}/routes", method=RequestMethod.GET)
 	public List<Route> show(HttpServletRequest req, HttpServletResponse res,@PathVariable int uid) {
 		res.setStatus(202);
 		return routeDao.index(uid);
@@ -34,7 +34,7 @@ public class RouteController {
 
 
 
-	@RequestMapping(path="/{uid}/routes/{sid}", method=RequestMethod.GET)
+	@RequestMapping(path="users/{uid}/routes/{sid}", method=RequestMethod.GET)
 	public Route show(HttpServletRequest req, HttpServletResponse res,@PathVariable int uid,@PathVariable int sid) {
 		res.setStatus(202);
 		return routeDao.showRoute(uid, sid);
@@ -42,7 +42,7 @@ public class RouteController {
 
 
 	
-	@RequestMapping(path="/{uid}/routes", method=RequestMethod.POST)
+	@RequestMapping(path="users/{uid}/routes", method=RequestMethod.POST)
 	public Route create(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid, @RequestBody String routeJson) {
 		res.setStatus(201);
 		
@@ -51,7 +51,7 @@ public class RouteController {
 
 
 
-	@RequestMapping(path="/{uid}/routes/{sid}", method=RequestMethod.PUT)
+	@RequestMapping(path="users/{uid}/routes/{sid}", method=RequestMethod.PUT)
 	public Route updateRoute(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid, @PathVariable int sid, @RequestBody String routeJson) {
 		res.setStatus(202);
 		return routeDao.updateRoute(uid, sid, routeJson);
@@ -59,19 +59,19 @@ public class RouteController {
 
 
 	
-	@RequestMapping(path="/{uid}/routes/{sid}", method=RequestMethod.DELETE)
+	@RequestMapping(path="users/{uid}/routes/{sid}", method=RequestMethod.DELETE)
 	public Boolean destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid, @PathVariable int sid) {
 		res.setStatus(202);
 		return routeDao.deleteRoute(uid, sid);
 	}
 	
-	@RequestMapping(path="/{uid}/routes/{rid}/addvenues/{vid}", method=RequestMethod.PUT)
+	@RequestMapping(path="users/{uid}/routes/{rid}/addvenues/{vid}", method=RequestMethod.PUT)
 	public Route addVenueToRoute(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid, @PathVariable int rid, @PathVariable int vid) {
 		res.setStatus(202);
 		return routeDao.addVenueToRoute(uid, rid, vid);
 	}
 
-	@RequestMapping(path="/{uid}/routes/{rid}/removevenues/{vid}", method=RequestMethod.PUT)
+	@RequestMapping(path="users/{uid}/routes/{rid}/removevenues/{vid}", method=RequestMethod.PUT)
 	public Route removeVenueFromRoute(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid, @PathVariable int rid, @PathVariable int vid) {
 		res.setStatus(202);
 		return routeDao.removeVenueFromRoute(uid, rid, vid);

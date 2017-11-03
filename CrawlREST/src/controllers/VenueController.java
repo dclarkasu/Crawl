@@ -26,22 +26,22 @@ public class VenueController {
 	@Autowired
 	private ContactDAO contactDao;
 	
-	@RequestMapping(path="{uid}/venues", method=RequestMethod.GET)
+	@RequestMapping(path="users/{uid}/venues", method=RequestMethod.GET)
 	public Set<Venue> indexVenue(){
 		return dao.indexVenue();
 	}
 	
-	@RequestMapping(path="{uid}/venues/search/{city}", method=RequestMethod.GET)
+	@RequestMapping(path="users/{uid}/venues/search/{city}", method=RequestMethod.GET)
 	public Set<Venue> indexVenue(@PathVariable String city){
 		return dao.findVenueBycity(city);
 	}
 	
-	@RequestMapping(path="{uid}/venues/{id}", method=RequestMethod.GET)
+	@RequestMapping(path="users/{uid}/venues/{id}", method=RequestMethod.GET)
 	public Venue findVenue(@PathVariable int id) {
 		return dao.findVenue(id);
 	}
 	
-	@RequestMapping(path="{uid}/venues", method=RequestMethod.POST)
+	@RequestMapping(path="users/{uid}/venues", method=RequestMethod.POST)
 	public Venue createVenue(@RequestBody String json, HttpServletResponse res) {
 		Venue venue = dao.createVenue(json);
 		if(venue != null) {
@@ -52,7 +52,7 @@ public class VenueController {
 		return null;
 	}
 	
-	@RequestMapping(path="{uid}/venues/{id}", method=RequestMethod.PUT)
+	@RequestMapping(path="users/{uid}/venues/{id}", method=RequestMethod.PUT)
 	public Venue updateVenue(@RequestBody String json, 
 			@PathVariable int id,
 			HttpServletResponse res) {
@@ -63,17 +63,17 @@ public class VenueController {
 		return null;
 	}
 	
-	@RequestMapping(path="{uid}/venues/{id}/deactivate", method=RequestMethod.PUT)
+	@RequestMapping(path="users/{uid}/venues/{id}/deactivate", method=RequestMethod.PUT)
 	public Venue makeVenueInactive(@PathVariable int id) {
 		return dao.inactiveVenue(id);
 	}
 	
-	@RequestMapping(path="{uid}/venues/{id}/activate", method=RequestMethod.PUT)
+	@RequestMapping(path="users/{uid}/venues/{id}/activate", method=RequestMethod.PUT)
 	public Venue makeVenueActive(@PathVariable int id) {
 		return dao.activateVenue(id);
 	}
 	
-	@RequestMapping(path="{uid}/venues/address", method=RequestMethod.POST)
+	@RequestMapping(path="users/{uid}/venues/address", method=RequestMethod.POST)
 	public Address createdAddress(@RequestBody String json, HttpServletResponse res) {
 		Address address = dao.createAddress(json);
 		if(address != null) {
@@ -84,7 +84,7 @@ public class VenueController {
 		return null;
 	}
 	
-	@RequestMapping(path="{uid}/venues/address/{id}", method=RequestMethod.PUT)
+	@RequestMapping(path="users/{uid}/venues/address/{id}", method=RequestMethod.PUT)
 	public Address updateAddress(@RequestBody String json, 
 			@PathVariable int id, 
 			HttpServletResponse res) {
@@ -96,7 +96,7 @@ public class VenueController {
 		return null;
 	}
 	
-	@RequestMapping(path="{uid}/venues/{id}/address", method=RequestMethod.POST)
+	@RequestMapping(path="users/{uid}/venues/{id}/address", method=RequestMethod.POST)
 	public Venue addAddressToVenue(@RequestBody String json, 
 			@PathVariable int id,
 			HttpServletResponse res) {
@@ -112,7 +112,7 @@ public class VenueController {
 		return null;
 	}
 	
-	@RequestMapping(path="{uid}/venues/{id}/contacts", method=RequestMethod.POST)
+	@RequestMapping(path="users/{uid}/venues/{id}/contacts", method=RequestMethod.POST)
 	public Venue addContactToVenue(@RequestBody String json, 
 			@PathVariable int id,
 			@PathVariable int uid,

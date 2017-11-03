@@ -18,18 +18,12 @@ public class ContactController {
 	@Autowired
 	private ContactDAO contactDao;
 	
-	@RequestMapping(path="/contact/ping", method=RequestMethod.GET)
+	@RequestMapping(path="users/{id}/contact/ping", method=RequestMethod.GET)
 	public String ping() {
 		return "pong";
 	}
 
-
-
-
-
-
-
-	@RequestMapping(path="/{uid}/contact/{sid}", method=RequestMethod.GET)
+	@RequestMapping(path="users/{uid}/contact/{sid}", method=RequestMethod.GET)
 	public Contact show(HttpServletRequest req, HttpServletResponse res,@PathVariable int uid,@PathVariable int sid) {
 		res.setStatus(202);
 		return contactDao.showContact(uid, sid);
@@ -37,7 +31,7 @@ public class ContactController {
 
 
 	
-	@RequestMapping(path="/{uid}/contact", method=RequestMethod.POST)
+	@RequestMapping(path="users/{uid}/contact", method=RequestMethod.POST)
 	public Contact create(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid, @RequestBody String todoJson) {
 		res.setStatus(201);
 		System.out.println("sup");
@@ -46,7 +40,7 @@ public class ContactController {
 
 
 
-	@RequestMapping(path="/{uid}/contact/{sid}", method=RequestMethod.PUT)
+	@RequestMapping(path="users/{uid}/contact/{sid}", method=RequestMethod.PUT)
 	public Contact updateContact(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid, @PathVariable int sid, @RequestBody String todoJson) {
 		res.setStatus(202);
 		return contactDao.updateContact(uid, sid, todoJson);
@@ -54,19 +48,19 @@ public class ContactController {
 
 
 	
-	@RequestMapping(path="/{uid}/contact/{sid}", method=RequestMethod.DELETE)
+	@RequestMapping(path="users/{uid}/contact/{sid}", method=RequestMethod.DELETE)
 	public Boolean destroy(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid, @PathVariable int sid) {
 		res.setStatus(202);
 		return contactDao.deleteContact(uid, sid);
 	}
 
-	@RequestMapping(path="/{uid}/contactUser/{sid}", method=RequestMethod.GET)
+	@RequestMapping(path="users/{uid}/contactUser/{sid}", method=RequestMethod.GET)
 	public Contact findContactByUser(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid, @PathVariable int sid) {
 		res.setStatus(202);
 		return contactDao.findContactByUser(uid, sid);
 	}
 
-	@RequestMapping(path="/{uid}/contactVenue/{sid}", method=RequestMethod.GET)
+	@RequestMapping(path="users/{uid}/contactVenue/{sid}", method=RequestMethod.GET)
 	public Contact findContactByVenue(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid, @PathVariable int sid) {
 		res.setStatus(202);
 		return contactDao.findContactByVenue(uid, sid);
