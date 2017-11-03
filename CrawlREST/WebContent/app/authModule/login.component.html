@@ -1,6 +1,6 @@
 Login <br>
 <form class="form-group">
-	Name: <input type="email" ng-model="user.email"><br>
+	Name: <input type="text" ng-model="user.username"><br>
 	Password: <input type="password" ng-model="user.password"><br>
-	<input type="submit" ng-click="vm.login(user)" value="Log in">
+	<button class="btn" ng-click="vm.login(user)">Log in</button>
 </form>
