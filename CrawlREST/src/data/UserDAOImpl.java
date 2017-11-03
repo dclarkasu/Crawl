@@ -1,6 +1,5 @@
 package data;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -36,20 +35,25 @@ public class UserDAOImpl implements UserDAO {
 	public Login loginUser(String crawlJson) {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			Login mapped = mapper.readValue(crawlJson, Login.class);
+			System.out.println(crawlJson);
+			Login mappedLogin = mapper.readValue(crawlJson, Login.class);
+			System.out.println(mappedLogin.getUsername());
+			System.out.println(mappedLogin.getPassword());
 			String query = "SELECT l FROM Login l WHERE l.username = :username";
 			List<Login> users = em.createQuery(query, Login.class)
-			          .setParameter("username", mapped.getUsername())
+			          .setParameter("username", mappedLogin.getUsername())
 			          .getResultList();
 			if (users.size() > 0) {
-			   boolean passwordsDoMatch = encoder.matches(users.get(0).getPassword(),mapped.getPassword());
+				System.out.println("correct size");
+			   boolean passwordsDoMatch = encoder.matches(mappedLogin.getPassword(), users.get(0).getPassword());
 			   if(passwordsDoMatch) {
 				   return users.get(0);
 			   }
 			}
 			  
 		}catch (Exception e) {
-				  e.printStackTrace();
+			System.out.println("execption");
+			e.printStackTrace();
 		}
 		   
 	return null;

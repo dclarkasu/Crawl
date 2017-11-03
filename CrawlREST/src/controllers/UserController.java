@@ -1,7 +1,5 @@
 package controllers;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import data.ContactDAO;
 import data.UserDAO;
 import entities.Contact;
-import entities.Group;
 import entities.Login;
 import entities.Post;
 import entities.User;
@@ -49,6 +46,7 @@ public class UserController {
 	  @RequestMapping(path = "/login", method = RequestMethod.POST)
 	  public Login login(HttpSession session, @RequestBody String crawlJson, HttpServletResponse res) {
 		  Login login = userDao.loginUser(crawlJson);
+		  System.out.println(login);
 			if(login != null) {
 				  session.setAttribute("user", login);
 				  return login;
