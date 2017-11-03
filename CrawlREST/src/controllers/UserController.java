@@ -46,17 +46,17 @@ public class UserController {
 	    
 	  }
 	  
-//	  @RequestMapping(path = "/login", method = RequestMethod.POST)
-//	  public User login(HttpSession session, @RequestBody User user, HttpServletResponse res) {
-//		  User u = authDAO.login(user);
-//			if(u != null) {
-//				  session.setAttribute("user", u);
-//				  return u;
-//			}
-//			res.setStatus(401);
-//			return null;
-//	  }
-//	  
+	  @RequestMapping(path = "/login", method = RequestMethod.POST)
+	  public Login login(HttpSession session, @RequestBody String crawlJson, HttpServletResponse res) {
+		  Login login = userDao.loginUser(crawlJson);
+			if(login != null) {
+				  session.setAttribute("user", login);
+				  return login;
+			}
+			res.setStatus(401);
+			return null;
+	  }
+	  
 	  @RequestMapping(path = "/logout", method = RequestMethod.POST)
 	  public Boolean logout(HttpSession session, HttpServletResponse response) {
 		  session.removeAttribute("login");
