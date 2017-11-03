@@ -1,14 +1,17 @@
 package entities;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -38,6 +41,10 @@ public class Group {
 	joinColumns=@JoinColumn(name="group_id"),
 	inverseJoinColumns=@JoinColumn(name="user_id"))
 	private List<User> users;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="group", fetch=FetchType.EAGER)
+	private List<Event> events;
 
 	//Gets and Sets
 	public String getName() {
@@ -66,6 +73,14 @@ public class Group {
 
 	public int getId() {
 		return id;
+	}
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
 	}
 
 	@Override
