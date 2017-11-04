@@ -1,21 +1,18 @@
+
 angular.module('appModule', ['ngRoute','ngCookies','authModule'])
 .config(function($routeProvider){
 	$routeProvider
 	.when('/',{
-		template: '<home></home>'
+		template :'<home></home>'
 	})
 	.when('/about',{
-		template: '<about></about>'
+		template :'<about></about>'
 	})
-	.when('/login', {
-		template : `
-		<login></login>
-	`
+	.when('/login',{
+		template :'<login></login>'
 	})
-	.when('/register', {
-		template : `
-		<register></register>
-	`
+	.when('/resister',{
+		template : '<register></register>'
 	})
 	.when('/venue',{
 		template : `
@@ -26,5 +23,8 @@ angular.module('appModule', ['ngRoute','ngCookies','authModule'])
 		template : `
 		<group></group>
 	`
+	})
+	.when('/group',{
+		template : '<group></group>'
 	})
 });
