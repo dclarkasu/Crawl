@@ -105,21 +105,21 @@ public class UserController {
 	
 	 //posts
 	
-	//not working
+	//works
 	@RequestMapping(path="users/{id}/group/{gid}/post", method=RequestMethod.POST)
     		public Post createPost(HttpServletRequest req, HttpServletResponse res,@PathVariable int id, @PathVariable int gid,@RequestBody String crawlJson) {
 			res.setStatus(201);
 			return userDao.createPost(id, gid, crawlJson);
 		}
-	//work
+	//works
 	@RequestMapping(path="users/{id}/post/{pid}", method=RequestMethod.PUT)
     public Post updatePost(HttpServletRequest req, HttpServletResponse res,@PathVariable int id,@PathVariable int pid,@RequestBody String crawlJson) {
 		return userDao.updatePost(pid, crawlJson);
     	
     }
-	//work
+	//works
     @RequestMapping(path="users/{id}/post/{pid}", method=RequestMethod.DELETE)
-    public Boolean destroy(HttpServletRequest req, HttpServletResponse res,@PathVariable  int id,@PathVariable  int pid) {
+    public Boolean destroyPost(HttpServletRequest req, HttpServletResponse res,@PathVariable  int id,@PathVariable  int pid) {
 		return userDao.deletePost(pid);
     	
     }
