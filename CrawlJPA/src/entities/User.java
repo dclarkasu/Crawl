@@ -20,6 +20,8 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
+	private String imgUrl;
+	
 	@Column(name="first_name")
 	private String firstName;
 	
@@ -35,7 +37,8 @@ public class User {
 	@ManyToMany(mappedBy="users")
 	private List<Group> groups;
 
-
+	
+	
 	//Gets and Sets
 	public String getFirstName() {
 		return firstName;
@@ -43,6 +46,15 @@ public class User {
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
+	}
+	
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 
 	public String getLastName() {
