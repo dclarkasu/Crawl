@@ -17,4 +17,9 @@ angular.module('appModule', ['ngRoute','ngCookies','authModule'])
 		<register></register>
 	`
 	})
+	.when('/venue',{
+		template : `
+	    <venue></venue>
+	    `
+	})
 });
