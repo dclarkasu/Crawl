@@ -31,12 +31,12 @@ public class UserController {
 	
 	 //user auth
 	 @RequestMapping(path = "auth/register", method = RequestMethod.POST)
-	  public Login registerUser(HttpSession session, @RequestBody String crawlJson, HttpServletResponse res) {
+	  public User registerUser(HttpSession session, @RequestBody String crawlJson, HttpServletResponse res) {
 		   Login log = userDao.registerUser(crawlJson);
 		   if(log != null) {
-			   session.setAttribute("login", log); 
+			   session.setAttribute("user", log.getUser()); 
 			   res.setStatus(201);
-			   return log;
+			   return log.getUser();
 		   }
 		   res.setStatus(422);
 		   	return null;
@@ -44,12 +44,12 @@ public class UserController {
 	  }
 	  
 	  @RequestMapping(path = "auth/login", method = RequestMethod.POST)
-	  public Login login(HttpSession session, @RequestBody String crawlJson, HttpServletResponse res) {
+	  public User login(HttpSession session, @RequestBody String crawlJson, HttpServletResponse res) {
 		  Login login = userDao.loginUser(crawlJson);
 		  System.out.println(login);
 			if(login != null) {
-				  session.setAttribute("user", login);
-				  return login;
+				  session.setAttribute("user", login.getUser());
+				  return login.getUser();
 			}
 			res.setStatus(401);
 			return null;
@@ -57,8 +57,10 @@ public class UserController {
 	  
 	  @RequestMapping(path = "auth/logout", method = RequestMethod.POST)
 	  public Boolean logout(HttpSession session, HttpServletResponse response) {
-		  session.removeAttribute("login");
-		   if(session.getAttribute("login") == null) {
+		  System.out.println(session.getAttribute("user"));
+		  session.removeAttribute("user");
+		  System.out.println(session.getAttribute("user"));
+		   if(session.getAttribute("user") == null) {
 		    return true;
 		   }
 		  return false;
@@ -67,6 +69,7 @@ public class UserController {
 	  
 	  @RequestMapping(path = "auth/unauthorized")
 	  public String unauth(HttpServletResponse response) {
+		  System.out.println("unauthorized");
 	    response.setStatus(401);
 	    return "unauthorized";
 	  }
