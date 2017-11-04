@@ -16,7 +16,13 @@ angular.module('appModule').factory('groupService', function($http, authService)
 		})
 	};
 
-
+	service.indexMembers = function() {
+		console.log('in member service');
+		return $http ({
+			method : 'GET',
+			url : 'rest/users/1/group/1'
+		})
+	};
 
 	return service;
 });

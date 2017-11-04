@@ -1,8 +1,16 @@
 <div class="container">
 
-<button class="btn" ng-click="vm.loadGroup()">Load Group</button>
+<!-- <button class="btn" ng-click="vm.loadGroup()">Load Group</button> -->
 
-  <div ng-show="vm.group">  
-    <h1>Name: {{vm.group.name}}</h1>
+  <div ng-show="vm.group">
+    <h1>Group Name: {{vm.group.name}}</h1>
   </div>
+
+  <div ng-show="vm.members && vm.group">
+    <h2>Members: </h2>
+    <ul ng-repeat="member in vm.members">
+      <li>{{member.firstName}} {{member.lastName}}</li>
+    </ul>
+  </div>
+
 </div>
