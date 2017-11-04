@@ -25,4 +25,7 @@ angular.module('appModule', ['ngRoute','ngCookies','authModule'])
 	.when('/venue/:vid', {
 		template: '<venue></venue>'
 	})
+	.when('/group', {
+		template: '<group></group>'
+	})
 });

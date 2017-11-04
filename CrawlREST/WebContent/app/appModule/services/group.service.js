@@ -24,5 +24,16 @@ angular.module('appModule').factory('groupService', function($http, authService)
 		})
 	};
 
+	service.updateGroup = function(group) {
+		return $http ({
+			method : 'PUT',
+			url : 'rest/users/1/groups/1',
+			headers : {
+		        'Content-Type' : 'application/json'
+		      },
+		      data : group
+		})
+	}
+
 	return service;
 });

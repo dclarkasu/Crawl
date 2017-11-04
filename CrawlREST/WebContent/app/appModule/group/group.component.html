@@ -4,6 +4,7 @@
 
   <div ng-show="vm.group">
     <h1>Group Name: {{vm.group.name}}</h1>
+    <button class="btn" ng-hide="vm.editGroup" ng-click="vm.setEditGroup()">Edit Group</button>
   </div>
 
   <div ng-show="vm.members && vm.group">
@@ -11,6 +12,13 @@
     <ul ng-repeat="member in vm.members">
       <li>{{member.firstName}} {{member.lastName}}</li>
     </ul>
+  </div>
+
+  <div ng-show="vm.editGroup">
+    <form class="form-group">
+      <input type="text" placeholder="Group Name" ng-model="editGroup.name"/>
+      <button class="btn" ng-click="vm.updateGroup(editGroup); editGroup = {}">Edit</button>
+    </form>
   </div>
 
 </div>
