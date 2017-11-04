@@ -17,12 +17,14 @@ angular.module('appModule').component('group', {
 		};
 
 		vm.loadGroup = function() {
-			groupService.showGroup()
-			.then(function(res){
+			var promise = groupService.showGroup();
+			console.log(promise);
+			promise.then(function(res){
 				console.log(res);
 				vm.group = res.data;
-			})
+			});
 		}
+		
 
 		vm.loadGroup();
 		console.log('vm.group: ' + vm.group);

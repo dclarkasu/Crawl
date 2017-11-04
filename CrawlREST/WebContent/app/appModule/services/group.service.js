@@ -9,6 +9,7 @@ angular.module('appModule').factory('groupService', function($http, authService)
 	};
 
 	service.showGroup = function() {
+		console.log("in showGroup")
 		return $http ({
 			method : 'GET',
 			url : 'rest/users/1/groups/1'
