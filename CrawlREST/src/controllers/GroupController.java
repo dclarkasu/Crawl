@@ -29,7 +29,7 @@ public class GroupController {
 	
 	@RequestMapping(path="users/{id}/groups/{gid}", method=RequestMethod.GET)
     public Group showGroup(HttpServletRequest req, HttpServletResponse res,@PathVariable int gid) {
-        res.setStatus(302);
+        res.setStatus(200);
         Group g = groupDAO.findGroupById(gid);
         System.out.println(g);
         return g;
@@ -54,7 +54,7 @@ public class GroupController {
 			res.setStatus(404);
 			return null;
 		} else {
-			res.setStatus(302);
+			res.setStatus(200);
 			return groupSet;
 		}
 	}
@@ -63,7 +63,7 @@ public class GroupController {
 	public Group updateGroup(@PathVariable int gid, @RequestBody String groupJSON, HttpServletResponse res) {
 		Group updateGroup = groupDAO.updateGroup(gid, groupJSON);
 		if(updateGroup == null) {
-			res.setStatus(304);
+			res.setStatus(417);
 			return null;
 		} else {
 			res.setStatus(202);
@@ -78,7 +78,7 @@ public class GroupController {
 			res.setStatus(202);
 			return true;
 		} else {
-			res.setStatus(304);
+			res.setStatus(417);
 			return false;
 		}
 	}
@@ -116,7 +116,7 @@ public class GroupController {
 			res.setStatus(404);
 			return null;
 		} else {
-			res.setStatus(302);
+			res.setStatus(200);
 			return events;
 		}
 	}
@@ -152,7 +152,7 @@ public class GroupController {
 			res.setStatus(404);
 			return null;
 		} else {
-			res.setStatus(302);
+			res.setStatus(200);
 			return events;
 		}
 	}
