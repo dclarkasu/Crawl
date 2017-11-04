@@ -16,18 +16,24 @@ angular.module('appModule').component('group', {
 			})
 		};
 
+		vm.printOut = function() {
+			console.log("HELP!!!");
+		}
+
 		vm.loadGroup = function() {
 			var promise = groupService.showGroup();
-			console.log(promise);
 			promise.then(function(res){
 				console.log(res);
+				console.log('in promise');
 				vm.group = res.data;
+			}).catch(function(err){
+				console.log(err);
 			});
+//			promise.then(vm.printOut());
 		}
-		
-
 		vm.loadGroup();
 		console.log('vm.group: ' + vm.group);
 	},
+
 	controllerAs: 'vm'
 });
