@@ -30,7 +30,9 @@ public class GroupController {
 	@RequestMapping(path="users/{id}/groups/{gid}", method=RequestMethod.GET)
     public Group showGroup(HttpServletRequest req, HttpServletResponse res,@PathVariable int gid) {
         res.setStatus(302);
-        return groupDAO.findGroupById(gid);
+        Group g = groupDAO.findGroupById(gid);
+        System.out.println(g);
+        return g;
     }
 	
 	@RequestMapping(path="users/{uid}/groups", method=RequestMethod.POST)
