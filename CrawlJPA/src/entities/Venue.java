@@ -23,6 +23,7 @@ public class Venue {
 	private String name;
 	private String description;
 	private String hours;
+	private String imgUrl;
 
 	@OneToMany(mappedBy="venue", fetch=FetchType.EAGER)
 	private List<RouteVenue> routeVenues;

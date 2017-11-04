@@ -1,30 +1,28 @@
-
 angular.module('appModule', ['ngRoute','ngCookies','authModule'])
 .config(function($routeProvider){
 	$routeProvider
 	.when('/',{
-		template :'<home></home>'
+		template: '<home></home>'
 	})
 	.when('/about',{
-		template :'<about></about>'
+		template: '<about></about>'
 	})
-	.when('/login',{
-		template :'<login></login>'
-	})
-	.when('/resister',{
-		template : '<register></register>'
-	})
-	.when('/venue',{
+	.when('/login', {
 		template : `
-	    <venue></venue>
-	    `
-	})
-	.when('/group', {
-		template : `
-		<group></group>
+		<login></login>
 	`
 	})
-	.when('/group',{
-		template : '<group></group>'
+	.when('/register', {
+		template : `
+		<register></register>
+	`
+	})
+	.when('/user', {
+		template : `
+			<user></user>
+			`
+	})
+	.when('/venue/:vid', {
+		template: '<venue></venue>'
 	})
 });
