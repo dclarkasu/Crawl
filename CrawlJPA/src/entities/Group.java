@@ -2,6 +2,7 @@ package entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,7 +28,7 @@ public class Group {
 	
 	//one to one with User for admin user
 	@JsonIgnore
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="admin_id")
 	private User admin;
 	
@@ -80,6 +81,8 @@ public class Group {
 	public void setEvents(List<Event> events) {
 		this.events = events;
 	}
+	
+	
 
 	@Override
 	public String toString() {

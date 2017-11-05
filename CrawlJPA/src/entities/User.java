@@ -2,6 +2,7 @@
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,7 +33,7 @@ public class User {
 	
 	@JsonIgnore
 //	@JsonManagedReference(value="userToGroup")
-	@ManyToMany(mappedBy="users")
+	@ManyToMany(mappedBy="users", cascade = CascadeType.PERSIST)
 	private List<Group> groups;
 
 
@@ -71,6 +72,10 @@ public class User {
 	
 	public void setGroups(List<Group> groups) {
 		this.groups = groups;
+	}
+	
+	public void addGroup(Group group) {
+		this.groups.add(group);
 	}
 
 	@Override

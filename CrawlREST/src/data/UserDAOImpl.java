@@ -81,7 +81,9 @@ public class UserDAOImpl implements UserDAO {
 	// User
 	@Override
 	public User findUser(int id) {
-		return em.find(User.class, id);
+		User u = em.find(User.class, id);
+		System.out.println(u.getGroups().size());
+		return u;
 	}
 
 	@Override // works
