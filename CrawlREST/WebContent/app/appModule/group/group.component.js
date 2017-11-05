@@ -6,6 +6,8 @@ angular.module('appModule').component('group', {
 
 		vm.group = null;
 
+		vm.members = [];
+
 		vm.groupList = [];
 		//Behaviors
 		vm.groupsByUser = function() {
@@ -16,10 +18,6 @@ angular.module('appModule').component('group', {
 			})
 		};
 
-		vm.printOut = function() {
-			console.log("HELP!!!");
-		}
-
 		vm.loadGroup = function() {
 			var promise = groupService.showGroup();
 			promise.then(function(res){
@@ -29,11 +27,38 @@ angular.module('appModule').component('group', {
 			}).catch(function(err){
 				console.log(err);
 			});
-//			promise.then(vm.printOut());
 		}
+
 		vm.loadGroup();
 		console.log('vm.group: ' + vm.group);
-	},
 
+		vm.loadMembers = function() {
+			console.log('in load members');
+			groupService.indexMembers()
+			.then(function(res) {
+				vm.members = res.data;
+				console.log(vm.members);
+			})
+		};
+
+		vm.loadMembers();
+		console.log('members: ' + vm.members);
+
+		vm.setEditGroup = function() {
+			vm.editGroup = angular.copy(vm.group);
+		};
+
+		vm.updateGroup = function(group) {
+			groupService.updateGroup(group)
+			.then(function(res) {
+				vm.loadGroup();
+				vm.editGroup = null;
+			})
+			.catch(function(err) {
+				console.log(err);
+			})
+		};
+
+	},
 	controllerAs: 'vm'
 });

@@ -59,7 +59,7 @@ public class GroupController {
 		}
 	}
 	
-	@RequestMapping(path="users/{id}/groups/{gid}", method=RequestMethod.PUT)
+	@RequestMapping(path="users/{id}/group/{gid}", method=RequestMethod.PUT)
 	public Group updateGroup(@PathVariable int gid, @RequestBody String groupJSON, HttpServletResponse res) {
 		Group updateGroup = groupDAO.updateGroup(gid, groupJSON);
 		if(updateGroup == null) {
