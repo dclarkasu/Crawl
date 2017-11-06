@@ -38,7 +38,7 @@ public class Venue {
 	@JoinColumn(name="address_id")
 	private Address address;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="contact_id")
 	private Contact contact;
 	
@@ -113,15 +113,5 @@ public class Venue {
 		return "Venue [id=" + id + ", name=" + name + ", description=" + description + ", hours=" + hours + ", address="
 				+ address + ", contact=" +"]";
 	}
-	public String getImgUrl() {
-		return imgUrl;
-	}
-	public void setImgUrl(String imgUrl) {
-		this.imgUrl = imgUrl;
-	}
-
-
-
-
 
 }
