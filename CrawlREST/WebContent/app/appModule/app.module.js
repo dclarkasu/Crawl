@@ -17,6 +17,11 @@ angular.module('appModule', ['ngRoute','ngCookies','authModule'])
 		<register></register>
 	`
 	})
+	.when('/route', {
+		template : `
+		<route></route>
+	`
+	})
 	.when('/user', {
 		template : `
 			<user></user>

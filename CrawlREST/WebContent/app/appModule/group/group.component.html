@@ -6,6 +6,7 @@
     <h3>Group</h3>
     <h1>{{vm.group.name}}</h1>
     <button class="btn" ng-hide="vm.editGroup" ng-click="vm.setEditGroup()">Edit Group</button>
+    <button class="btn" ng-hide="vm.newEvent" ng-click="vm.setNewEvent()">Create Event</button>
   </div>
 
   <div ng-show="vm.members && vm.group">
@@ -15,6 +16,19 @@
     </ul>
   </div>
 
+  <table class="table" ng-show="vm.events">
+		<thead class="thead-dark">
+			<th>Event</th>
+			<th>Delete</th>
+		</thead>
+		<tbody>
+			<tr ng-repeat="event in vm.events | orderBy:'id'">
+        <td><a class="badge badge-light" href="#/event">{{event.name}}</a></td>
+				<td><button class="btn" id="deleteEventBtn" ng-click="vm.deleteEvent(todo.id)">X</button></td>
+			</tr>
+		</tbody>
+	</table>
+
   <div ng-show="vm.editGroup">
     <form class="form-group">
       <input type="text" placeholder="Group Name" ng-model="editGroup.name"/>
@@ -22,4 +36,10 @@
     </form>
   </div>
 
+  <div ng-show="vm.newEvent">
+    <form class="form-group">
+      <input type="text" placeholder="Event Name" ng-model="newEvent.name"/>
+      <button class="btn" ng-click="vm.addEvent(newEvent); newEvent = {}">Add</button>
+    </form>
+  </div>
 </div>
