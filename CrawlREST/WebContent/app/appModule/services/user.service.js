@@ -144,21 +144,7 @@ angular.module('appModule')
 	    })  
 	  }
   };
-	 //updateGroupWithUser
-	  service.updateGroupWithUser = function(group){
-		  var id = 1
-		  if(id){
-		  return $http({
-		      method : 'PUT',
-		      url : `${BASE_URL}/users/${id}/group/` + group.id, 
-		      headers : {
-		        'Content-Type' : 'application/json'
-		      },
-		      data : group
-		    })
-		  }
-	  };
-	  
+	 	  
 	  //update contact
 	  service.updateUserWithContact = function(contact){
 		  var id = 1

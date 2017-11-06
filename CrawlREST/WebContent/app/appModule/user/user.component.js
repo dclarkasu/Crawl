@@ -55,13 +55,6 @@ angular.module('appModule').component('user', {
 			
 		};
 			
-		//update group with user
-		vm.updateGroupWithUser = function(user) {
-			var res = userService.updateUser(user);
-
-			res.then(function(res) {
-			})
-		}
 
 		// reloads user by group
 		vm.findGroupByUserId = function() {
@@ -74,24 +67,14 @@ angular.module('appModule').component('user', {
 		vm.findGroupByUserId();
 
 		// create new group
-		vm.createGroup = function() {
-			newGroup.admin = 1;
+		vm.createGroup = function(newGroup) {
 			var res = userService.createGroup(newGroup);
 
 			res.then(function(res) {
-				updateGroupWithUser();
-//				vm.findGroupByUserId();
+			vm.groups = res.data;
 			})
 		}
 		
-		// update group with user
-		vm.updateGroupWithUser = function() {
-			var res = userService.updateGroupWithUser(user);
-
-			res.then(function(res) {
-				
-			})
-		}
 
 	},
 
