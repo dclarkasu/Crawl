@@ -19,7 +19,7 @@
       <form class="form-group">
         <select ng-model="selected" ng-options="user.firstName for user in vm.users">
         </select>
-        <button class="btn btn-success" ng-click="vm.addMember(); user = {}">Add</button>
+        <button class="btn btn-success" ng-click="vm.addMember(selected); user = {}">Add</button>
       </form>
     </div>
   </div>

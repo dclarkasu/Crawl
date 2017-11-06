@@ -75,6 +75,17 @@ public class UserController {
 	  }
 	 
 	 //user
+	  @RequestMapping(path="users", method=RequestMethod.GET)
+	  public Set<User> indexUsers(HttpServletResponse res) {
+		  Set<User> users = userDao.indexUsers();
+		  if (users == null) {
+			  res.setStatus(400);
+			  return null;
+		  } else {
+			  res.setStatus(200);
+			  return users;
+		  }
+	  }
 	 
 	 //works
 	 @RequestMapping(path="users/{id}", method= RequestMethod.GET)
