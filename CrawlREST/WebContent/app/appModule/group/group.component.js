@@ -109,7 +109,7 @@ angular.module('appModule').component('group', {
 		}
 
 		vm.loadAllUsers = function() {
-			groupService.indexUsers();
+			groupService.indexUsers()
 			.then(function(res){
 				vm.users = res.data;
 			}).catch(function(err){
