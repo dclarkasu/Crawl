@@ -23,6 +23,17 @@ angular.module('appModule').factory('groupService', function($http, authService)
 			url : 'rest/users/1/group/1'
 		})
 	};
+	
+	service.createGroup = function(group) {
+		return $http({
+			method : 'POST',
+			url : 'rest/users/1/groups',
+			headers : {
+				'ContentType' : 'application/json'
+			},
+			data : group
+		})
+	};
 
 	service.updateGroup = function(group) {
 		return $http ({
@@ -33,7 +44,7 @@ angular.module('appModule').factory('groupService', function($http, authService)
 		      },
 		      data : group
 		})
-	}
+	};
 
 	return service;
 });

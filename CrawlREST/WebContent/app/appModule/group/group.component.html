@@ -6,6 +6,7 @@
     <h3>Group</h3>
     <h1>{{vm.group.name}}</h1>
     <button class="btn" ng-hide="vm.editGroup" ng-click="vm.setEditGroup()">Edit Group</button>
+    <button class="btn" ng-hide="vm.newGroup" ng-click="vm.setNewGroup()">Create Group</button>
   </div>
 
   <div ng-show="vm.members && vm.group">
@@ -22,4 +23,10 @@
     </form>
   </div>
 
+  <div ng-show="vm.newGroup">
+    <form class="form-group">
+      <input type="text" placeholder="Group Name" ng-model="newGroup.name"/>
+      <button class="btn" ng-click="vm.addGroup(newGroup); newGroup = {}">Add</button>
+    </form>
+  </div>
 </div>

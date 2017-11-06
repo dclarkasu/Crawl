@@ -59,6 +59,22 @@ angular.module('appModule').component('group', {
 			})
 		};
 
+		vm.setNewGroup = function() {
+			vm.newGroup = {};
+		};
+
+		vm.addGroup = function(group) {
+			console.log(group);
+			groupService.createGroup(group)
+			.then(function(res) {
+				vm.loadGroup();
+				vm.newGroup = null;
+			})
+			.catch(function(err) {
+				console.log(err);
+			})
+		};
+
 	},
 	controllerAs: 'vm'
 });
