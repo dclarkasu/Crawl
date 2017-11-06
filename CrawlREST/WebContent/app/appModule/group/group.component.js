@@ -10,9 +10,7 @@ angular.module('appModule').component('group', {
 
 		vm.events = [];
 
-		vm.users = [{
-			"firstName" : "Dan",
-		}];
+		vm.users = [];
 
 		vm.groupList = [];
 		//Behaviors
@@ -108,12 +106,27 @@ angular.module('appModule').component('group', {
 			vm.newEvent = null;
 		}
 
+		vm.loadAllUsers = function() {
+			groupService.indexUsers()
+			.then(function(res){
+				vm.users = res.data;
+			}).catch(function(err){
+				console.log(err);
+			});
+		}
+
+		vm.loadAllUsers();
+
 		vm.setNewMember = function() {
 			vm.newMember = {};
 		};
 
-		vm.addMember = function() {
-			//
+		vm.addMember = function(user) {
+			console.log(user);
+			groupService.addUserToGroup(user.id)
+			.then(function(res){
+
+			})
 		}
 
 	},

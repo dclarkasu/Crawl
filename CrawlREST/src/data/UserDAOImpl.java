@@ -33,6 +33,13 @@ public class UserDAOImpl implements UserDAO {
 	@Autowired
 	private PasswordEncoder encoder;
 
+	@Override
+	public Set<User> indexUsers() {
+		String query = "SELECT u FROM User u";
+		return new HashSet<User>(em.createQuery(query, User.class).getResultList());
+	}
+
+
 	// Login (User)
 	@Override //works
 	public Login loginUser(String crawlJson) {
