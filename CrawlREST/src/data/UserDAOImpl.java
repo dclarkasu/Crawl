@@ -106,10 +106,10 @@ public class UserDAOImpl implements UserDAO {
 			e.printStackTrace();
 		}
 		User u = em.find(User.class, id);
-		Contact c = (mappedUser.getContact());
+		
+		Contact c = contactDao.updateContact(id, mappedUser.getContact().getId(), mappedUser.getContact());
 		u.setFirstName(mappedUser.getFirstName());
 		u.setLastName(mappedUser.getLastName());
-		u.setContact(mappedUser.getContact());
 		return u;
 	}
 
