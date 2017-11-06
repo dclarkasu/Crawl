@@ -1,3 +1,7 @@
 .navbar {
   list-style-type: none;
 }
+
+#deleteEventBtn {
+  background-color: red;
+}

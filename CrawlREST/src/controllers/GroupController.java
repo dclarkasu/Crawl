@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import data.GroupDAO;
 import entities.Event;
 import entities.Group;
-//brian thomas was here
+
 @RestController
 public class GroupController {
 	

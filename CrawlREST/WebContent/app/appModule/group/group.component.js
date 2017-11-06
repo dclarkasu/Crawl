@@ -8,6 +8,12 @@ angular.module('appModule').component('group', {
 
 		vm.members = [];
 
+		vm.events = [];
+
+		vm.users = [{
+			"firstName" : "Dan",
+		}];
+
 		vm.groupList = [];
 		//Behaviors
 		vm.groupsByUser = function() {
@@ -58,6 +64,57 @@ angular.module('appModule').component('group', {
 				console.log(err);
 			})
 		};
+
+		vm.setNewEvent = function() {
+			vm.newEvent = {};
+		};
+
+		vm.addEvent = function(newEvent) {
+			console.log(newEvent);
+			groupService.createEvent(newEvent)
+			.then(function(res) {
+				vm.loadEvents();
+				vm.loadGroup();
+				vm.newEvent = null;
+			})
+			.catch(function(err) {
+				console.log(err);
+			})
+		};
+
+		vm.loadEvents = function() {
+			groupService.indexEvents()
+			.then(function(res) {
+				console.log(res);
+				vm.events = res.data;
+			})
+			.catch(function(err) {
+				console.log(err);
+			})
+		};
+
+		vm.loadEvents();
+		console.log(vm.events);
+
+		vm.deleteEvent = function(id) {
+			groupService.deleteEvent(id)
+			.then(function(res){
+				vm.loadEvents();
+				vm.loadGroup();
+			})
+		}
+
+		vm.cancel = function() {
+			vm.newEvent = null;
+		}
+
+		vm.setNewMember = function() {
+			vm.newMember = {};
+		};
+
+		vm.addMember = function() {
+			//
+		}
 
 	},
 	controllerAs: 'vm'

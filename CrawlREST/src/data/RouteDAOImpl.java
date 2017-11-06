@@ -146,4 +146,11 @@ public class RouteDAOImpl implements RouteDAO {
 
 		return r;
 	}
+
+	@Override
+	public List<Venue> showVenuesByRoute(int uid, int sid) {
+		String q = "SELECT V from Venue WHERE v.routeVenue.route.id = :rid";
+		List <Venue> venues = em.createQuery(q, Venue.class).setParameter("rid", sid).getResultList();
+		return venues;
+	}
 }
