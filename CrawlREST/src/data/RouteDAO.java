@@ -3,6 +3,7 @@ package data;
 import java.util.List;
 
 import entities.Route;
+import entities.Venue;
 
 public interface RouteDAO {
 
@@ -22,5 +23,6 @@ public interface RouteDAO {
 
 	  public List<Route> index(int uid); 
 
+	  public List<Venue> showVenuesByRoute(int uid, int sid); 
 	
 }

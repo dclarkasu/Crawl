@@ -1,0 +1,25 @@
+<div class="container">
+
+<!-- <button class="btn" ng-click="vm.loadGroup()">Load Group</button> -->
+
+  <div ng-show="vm.route">
+    <h3>Route</h3>
+    <h1>{{vm.route.name}}</h1>
+    <button class="btn" ng-hide="vm.editRoute" ng-click="vm.setEditRoute()">Edit Route</button>
+  </div>
+
+  <div ng-show="vm.route && vm.group">
+    <h2>Route: </h2>
+    <ul ng-repeat="venue in vm.venues">
+      <li>{{venue.Name}}</li>
+    </ul>
+  </div>
+
+  <div ng-show="vm.editRoute">
+    <form class="form-route">
+      <input type="text" placeholder="Route Name" ng-model="editRoute.name"/>
+      <button class="btn" ng-click="vm.updateRoute(editRoute); editRoute = {}">Edit</button>
+    </form>
+  </div>
+
+</div>
