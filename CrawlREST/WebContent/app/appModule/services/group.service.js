@@ -60,5 +60,12 @@ angular.module('appModule').factory('groupService', function($http, authService)
 		})
 	}
 
+	service.indexUsers = function() {
+		return $http({
+			method : 'GET',
+			url : ''
+		})
+	};
+
 	return service;
 });
