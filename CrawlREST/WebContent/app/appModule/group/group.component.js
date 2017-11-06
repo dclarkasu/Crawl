@@ -104,6 +104,9 @@ angular.module('appModule').component('group', {
 
 		vm.cancel = function() {
 			vm.newEvent = null;
+			vm.editGroup = null;
+			vm.newMember = null;
+			vm.memberToRemove = null;
 		}
 
 		vm.loadAllUsers = function() {
@@ -121,11 +124,29 @@ angular.module('appModule').component('group', {
 			vm.newMember = {};
 		};
 
-		vm.addMember = function(user) {
+		vm.addMember = function(gid, user) {
 			console.log(user);
-			groupService.addUserToGroup(user.id)
+			groupService.addUserToGroup(gid, user.id)
 			.then(function(res){
+				vm.loadGroup();
+				vm.loadAllUsers();
+				vm.loadMembers();
+				vm.newMember = null;
+			})
+		}
 
+		vm.setRemoveMember = function() {
+			vm.memberToRemove = {};
+		};
+
+		vm.removeMember = function(gid, user) {
+			console.log(user);
+			groupService.removeUserFromGroup(gid, user.id)
+			.then(function(res){
+				vm.loadGroup();
+				vm.loadAllUsers();
+				vm.loadMembers();
+				vm.memberToRemove = null;
 			})
 		}
 

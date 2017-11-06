@@ -30,6 +30,7 @@ angular.module('appModule')
 			vm.copyHours = null;
 		}
 		vm.createVenue = function(){
+			vm.copy.hours = createHoursString(vm.copyHours);
 			console.log(vm.copy);
 			venueService.createVenue(vm.copy)
 			.then(function(res){
@@ -45,10 +46,12 @@ angular.module('appModule')
 		vm.showUpdate = function(){
 			vm.update = angular.copy(vm.venue);
 			vm.updateAddress = vm.update.address;
+			vm.updateHours = parseHour(vm.update.hours);
 			console.log(vm.update);
 			console.log(vm.updateAddress);
 		};
 		vm.updateVenue = function(){
+			vm.update.hours = createHoursString(vm.updateHours);
 			console.log(vm.update);
 			vm.update.address = null;
 			venueService.updateVenue(vm.update, $routeParams.vid)
@@ -73,11 +76,27 @@ angular.module('appModule')
 				console.log(err)
 			})
 		};
+		vm.updateVenueContact = function(){
+			console.log(vm.update);
+			venueService.updateContact(vm.update.contact, vm.update.contact.id)
+			.then(function(res){
+				vm.update = null;
+				vm.updateAddress = null;
+				loadVenue();
+			})
+			.catch(function(err){
+				console.log(err);
+			});
+		}
 		vm.cancelUpdate = function(){
 			vm.update = null;
 			vm.updateAddress = null;
 		}
 		
+		function createHoursString(hourObj){
+			return hourObj.openHour +':'+ hourObj.openMin + hourObj.openAP 
+			+'-'+ hourObj.closeHour +':'+ hourObj.closeMin + hourObj.closeAP;
+		}
 		function parseHour(hour){
 			hourObj = {};
 			var hoursSection = hour.split('-');
@@ -95,6 +114,7 @@ angular.module('appModule')
 			venueService.showVenue($routeParams.vid)
 			.then(function(res){
 				vm.venue = res.data;
+				console.log(vm.venue);
 			})
 			.catch(function(err){
 				console.log(err);

@@ -95,5 +95,15 @@ angular.module('appModule')
 			data: contact
 		});
 	}
+	service.updateContact = function(contact, id){
+		return $http({
+			method: 'PUT',
+			url: 'rest/users/' + userId + '/contact/' + id,
+			headr: {
+				'Content-Type' : 'application/json'
+			},
+			data: contact
+		});
+	}
 	return service;
 });

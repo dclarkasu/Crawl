@@ -5,29 +5,63 @@ angular.module('appModule').component('route', {
 		var vm = this;
 
 		vm.route = null;
+		vm.routeVenues = null;
 
-		//Behaviors
-		vm.groupsByUser = function() {
-			groupService.indexUserGroups()
-			.then(function(res){
-				console.log(res.data);
-				vm.groupList = res.data;
-			})
-		};
 
 		vm.loadRoute = function() {
 			var promise = routeService.showRoute();
+			
 			promise.then(function(res){
 				console.log(res);
 				console.log('in promise');
+				
 				vm.route = res.data;
+			
 			}).catch(function(err){
 				console.log(err);
 			});
 		}
+	
+		vm.removeVenue = function(rid,vid) {
+			routeService.removeVenue(rid,vid)
+			.then(function(res){
+				vm.loadRoute();
+				vm.loadRouteVenues();
+			})
+		}
+		
+		
+		vm.venueUp = function(rid,vid) {
+			routeService.moveVenueUp(rid,vid)
+			.then(function(res){
+				vm.loadRoute();
+				vm.loadRouteVenues();
+			})
+		}
+		vm.venueDown = function(rid,vid) {
+			routeService.moveVenueDown(rid,vid)
+			.then(function(res){
+				vm.loadRoute();
+				vm.loadRouteVenues();
+			})
+		}
+		
+	
+		vm.loadRouteVenues = function() {
+			console.log('in load venues');
+			routeService.indexRouteVenues()
+			.then(function(res) {
+				vm.routeVenues = res.data;
+				console.log(vm.routeVenues);
+			})
+		};
 
+		
+		
 		vm.loadRoute();
 		console.log('vm.route: ' + vm.route);
+		vm.loadRouteVenues();
+		console.log('vm.routeVenues: ' + vm.routeVenues);
 
 		vm.loadMembers = function() {
 			console.log('in load members');

@@ -5,12 +5,19 @@
   <div ng-show="vm.group">
     <h3>Group</h3>
     <h1>{{vm.group.name}}</h1>
-    <button class="btn" ng-hide="vm.editGroup" ng-click="vm.setEditGroup()">Edit Group</button>
+    <button class="btn" ng-hide="vm.editGroup" ng-click="vm.setEditGroup()">Change Group Name</button>
+    <div ng-show="vm.editGroup">
+      <form class="form-group">
+        <input type="text" placeholder="Group Name" ng-model="editGroup.name"/>
+        <button class="btn" ng-click="vm.updateGroup(editGroup); editGroup = {}">Edit</button>
+        <button class="btn btn-danger" ng-click="vm.cancel(); editGroup = {}">Cancel</button>
+      </form>
+    </div>
   </div>
 
   <div ng-show="vm.members && vm.group">
     <h2>Members: </h2>
-    <ul ng-repeat="member in vm.members">
+    <ul ng-repeat="member in vm.members |orderBy:'id'">
       <li>{{member.firstName}} {{member.lastName}}</li>
     </ul>
 
@@ -19,7 +26,19 @@
       <form class="form-group">
         <select ng-model="selected" ng-options="user.firstName for user in vm.users">
         </select>
-        <button class="btn btn-success" ng-click="vm.addMember(selected); user = {}">Add</button>
+        <button class="btn btn-success" ng-click="vm.addMember(vm.group.id, selected); user = {}">Add</button>
+        <button class="btn btn-danger" ng-click="vm.cancel()">Cancel</button>
+      </form>
+    </div>
+  </div>
+
+    <button class="btn" ng-click="vm.setRemoveMember()">Remove Member</button>
+    <div ng-show="vm.memberToRemove">
+      <form class="form-group">
+        <select ng-model="removeSelection" ng-options="member.firstName for member in vm.members">
+        </select>
+        <button class="btn btn-danger" ng-click="vm.removeMember(vm.group.id, removeSelection); member = {}">Remove</button>
+        <button class="btn btn-danger" ng-click="vm.cancel()">Cancel</button>
       </form>
     </div>
   </div>
@@ -39,14 +58,6 @@
 			</tr>
 		</tbody>
 	</table>
-
-  <div ng-show="vm.editGroup">
-    <form class="form-group">
-      <input type="text" placeholder="Group Name" ng-model="editGroup.name"/>
-      <button class="btn" ng-click="vm.updateGroup(editGroup); editGroup = {}">Edit</button>
-    </form>
-  </div>
-
 
 
   <div ng-show="vm.newEvent">
