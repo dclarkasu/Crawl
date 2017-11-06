@@ -117,6 +117,7 @@ public class UserDAOImpl implements UserDAO {
 		Contact c = contactDao.updateContact(id, mappedUser.getContact().getId(), mappedUser.getContact());
 		u.setFirstName(mappedUser.getFirstName());
 		u.setLastName(mappedUser.getLastName());
+		u.setImgUrl(mappedUser.getImgUrl());
 		return u;
 	}
 
