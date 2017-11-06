@@ -16,12 +16,18 @@
     </ul>
   </div>
 
-  <div ng-show="vm.events">
-    <h2>Events: </h2>
-    <ul ng-repeat="event in vm.events">
-      <li>{{event.name}}</li>
-    </ul>
-  </div>
+  <table class="table" ng-show="vm.events">
+		<thead class="thead-dark">
+			<th>Event</th>
+			<th>Delete</th>
+		</thead>
+		<tbody>
+			<tr ng-repeat="event in vm.events | orderBy:'id'">
+        <td><a class="badge badge-light" href="#/event">{{event.name}}</a></td>
+				<td><button class="btn" id="deleteEventBtn" ng-click="vm.deleteEvent(todo.id)">X</button></td>
+			</tr>
+		</tbody>
+	</table>
 
   <div ng-show="vm.editGroup">
     <form class="form-group">
