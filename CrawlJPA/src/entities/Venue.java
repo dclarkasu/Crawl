@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Venue {
 
@@ -24,7 +26,7 @@ public class Venue {
 	private String description;
 	private String hours;
 	private String imgUrl;
-
+	@JsonIgnore
 	@OneToMany(mappedBy="venue", fetch=FetchType.EAGER)
 	private List<RouteVenue> routeVenues;
 	
