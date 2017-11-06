@@ -53,8 +53,6 @@ angular.module('appModule').factory('groupService', function($http, authService)
 		})
 	};
 
-<<<<<<< HEAD
-=======
 	service.deleteEvent = function(id) {
 		return $http({
 			method: 'DELETE',
@@ -87,6 +85,5 @@ angular.module('appModule').factory('groupService', function($http, authService)
 		})
 	};
 
->>>>>>> 2aaf8b54e11f4c6a06eadb4c282b6ba5ebc4b091
 	return service;
 });

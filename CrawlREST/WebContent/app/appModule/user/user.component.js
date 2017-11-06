@@ -2,17 +2,13 @@ angular.module('appModule').component('user', {
 	templateUrl : 'app/appModule/user/user.component.html',
 	controller : function(userService,$routeParams) {
 
-		//, $filter, $location, $routeParams, $scope
-		// $location.path('/about');
 
 		// Variables
 		var vm = this;
 
 		vm.selected = null;
-
 		vm.editUser = null;
 		
-
 		vm.groups = [];
 
 		
@@ -72,6 +68,7 @@ angular.module('appModule').component('user', {
 
 			res.then(function(res) {
 			vm.groups = res.data;
+			vm.findGroupByUserId();
 			})
 		}
 		
