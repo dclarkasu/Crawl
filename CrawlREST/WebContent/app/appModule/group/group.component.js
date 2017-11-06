@@ -10,6 +10,10 @@ angular.module('appModule').component('group', {
 
 		vm.events = [];
 
+		vm.users = [{
+			"firstName" : "Dan",
+		}];
+
 		vm.groupList = [];
 		//Behaviors
 		vm.groupsByUser = function() {
@@ -91,6 +95,26 @@ angular.module('appModule').component('group', {
 
 		vm.loadEvents();
 		console.log(vm.events);
+
+		vm.deleteEvent = function(id) {
+			groupService.deleteEvent(id)
+			.then(function(res){
+				vm.loadEvents();
+				vm.loadGroup();
+			})
+		}
+
+		vm.cancel = function() {
+			vm.newEvent = null;
+		}
+
+		vm.setNewMember = function() {
+			vm.newMember = {};
+		};
+
+		vm.addMember = function() {
+			//
+		}
 
 	},
 	controllerAs: 'vm'
