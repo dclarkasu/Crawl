@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS `address` (
   `street2` VARCHAR(255) NULL DEFAULT NULL,
   `city` VARCHAR(45) NULL DEFAULT NULL,
   `state` VARCHAR(2) NULL DEFAULT NULL,
+  `zip` VARCHAR(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC))
 ENGINE = InnoDB
@@ -294,11 +295,11 @@ INSERT INTO login (user_name,password,user_id) VALUES ('red','pass4',4);
 
 INSERT INTO post (group_id,user_id,message) VALUES (1,3,'lets go dude');
 
-INSERT INTO address (longitude,lat,street,street2,city,state)
-VALUES  (100.10,80.34,'123 way road','','Denver','CO'),
-        (90.11,90.34,'323 red road','','Denver','CO'),
-        (80.12,100.34,'523 back road','','Denver','CO'),
-        (70.13,110.34,'623 road road','','Denver','CO');
+INSERT INTO address (longitude,lat,street,street2,city,state,zip)
+VALUES  (100.10,80.34,'123 way road','','Denver','CO','80910'),
+        (90.11,90.34,'323 red road','','Denver','CO','80909'),
+        (80.12,100.34,'523 back road','','Denver','CO','80110'),
+        (70.13,110.34,'623 road road','','Denver','CO','80909');
 
 INSERT INTO venue (name,description,hours,address_id,contact_id)
 VALUES ('sputnik','fun place here','11:00AM-2:00PM',1,5),

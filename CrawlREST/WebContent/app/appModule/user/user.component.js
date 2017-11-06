@@ -9,13 +9,16 @@ angular.module('appModule').component('user', {
 		var vm = this;
 
 		vm.selected = null;
-//
-//		vm.editUser = null;
+
+		vm.editUser = null;
+		
 
 		vm.groups = [];
 
 		
 		// Behaviors
+		
+		//show user
 		var id = parseInt($routeParams)
 			userService.showUser(id)
 			.then(function(res) {
@@ -24,7 +27,34 @@ angular.module('appModule').component('user', {
 					$location.path('_404');
 				}
 			})
+			
+		//update user
+		vm.updateUser = function() {
+			console.log(vm.editUser);
+		var res = userService.updateUser(vm.editUser);
 		
+		res.then(function(res) {
+			
+			vm.selected = res.data;
+			vm.editUser = null;
+		
+			
+		})
+		
+	}
+		
+	
+		
+		//Copy info over to edit form
+		vm.setEditUser = function(user) {
+			vm.editUser = angular.copy(vm.selected);
+			
+		};
+		vm.setEditContact = function(contact) {
+			vm.editContact = angular.copy(vm.selected);
+			
+		};
+			
 
 		// reloads user by group
 		vm.findGroupByUserId = function() {
@@ -38,16 +68,13 @@ angular.module('appModule').component('user', {
 
 		// create new group
 		vm.createGroup = function(newGroup) {
-			newGroup.admin = 1;
 			var res = userService.createGroup(newGroup);
 
 			res.then(function(res) {
-				console.log("then function of create Group")
-				console.log(res.data);
-//				vm.findGroupByUserId();
+			vm.groups = res.data;
 			})
 		}
-
+		
 
 	},
 

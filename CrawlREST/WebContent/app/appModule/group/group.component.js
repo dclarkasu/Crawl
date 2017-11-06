@@ -10,9 +10,7 @@ angular.module('appModule').component('group', {
 
 		vm.events = [];
 
-		vm.users = [{
-			"firstName" : "Dan",
-		}];
+		vm.users = [];
 
 		vm.groupList = [];
 		//Behaviors
@@ -106,14 +104,50 @@ angular.module('appModule').component('group', {
 
 		vm.cancel = function() {
 			vm.newEvent = null;
+			vm.editGroup = null;
+			vm.newMember = null;
+			vm.memberToRemove = null;
 		}
+
+		vm.loadAllUsers = function() {
+			groupService.indexUsers()
+			.then(function(res){
+				vm.users = res.data;
+			}).catch(function(err){
+				console.log(err);
+			});
+		}
+
+		vm.loadAllUsers();
 
 		vm.setNewMember = function() {
 			vm.newMember = {};
 		};
 
-		vm.addMember = function() {
-			//
+		vm.addMember = function(gid, user) {
+			console.log(user);
+			groupService.addUserToGroup(gid, user.id)
+			.then(function(res){
+				vm.loadGroup();
+				vm.loadAllUsers();
+				vm.loadMembers();
+				vm.newMember = null;
+			})
+		}
+
+		vm.setRemoveMember = function() {
+			vm.memberToRemove = {};
+		};
+
+		vm.removeMember = function(gid, user) {
+			console.log(user);
+			groupService.removeUserFromGroup(gid, user.id)
+			.then(function(res){
+				vm.loadGroup();
+				vm.loadAllUsers();
+				vm.loadMembers();
+				vm.memberToRemove = null;
+			})
 		}
 
 	},

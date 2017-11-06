@@ -2,6 +2,8 @@ package data;
 
 import java.util.Set;
 
+import javax.servlet.http.HttpSession;
+
 import entities.Event;
 import entities.Group;
 
@@ -14,7 +16,7 @@ public interface GroupDAO {
 	public Set<Group> findGroupByUserId(int uid);
 	public Boolean deleteGroup(int gid);
 	public Group addUserToGroup(int uid, int gid);
-	public Group removeUserFromGroup(int uid, int gid);
+	public Boolean removeUserFromGroup(int uid, int gid);
 //	public Group findGroupByEventId(int eid);
 	
 	//Event Specific Methods

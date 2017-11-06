@@ -2,9 +2,9 @@ package entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,22 +26,29 @@ public class Venue {
 	private String description;
 	private String hours;
 	private String imgUrl;
+<<<<<<< HEAD
 	@JsonIgnore
 	@OneToMany(mappedBy="venue", fetch=FetchType.EAGER)
+=======
+
+	@JsonIgnore
+	@OneToMany(mappedBy="venue")
+>>>>>>> 2aaf8b54e11f4c6a06eadb4c282b6ba5ebc4b091
 	private List<RouteVenue> routeVenues;
 	
 	@Column(name="is_active")
 	private boolean isActive;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="address_id")
 	private Address address;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="contact_id")
 	private Contact contact;
 	
-	@ManyToMany(mappedBy="venues", fetch=FetchType.EAGER)
+	@JsonIgnore
+	@ManyToMany(mappedBy="venues")
 	private List<Route> routes;
 
 	//gets and sets
@@ -111,9 +118,5 @@ public class Venue {
 		return "Venue [id=" + id + ", name=" + name + ", description=" + description + ", hours=" + hours + ", address="
 				+ address + ", contact=" +"]";
 	}
-
-
-
-
 
 }

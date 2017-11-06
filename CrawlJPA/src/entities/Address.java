@@ -20,6 +20,7 @@ public class Address {
 	private String street2;
 	private String city;
 	private String state;
+	private String zip;
 	
 	
 	//gets and sets
@@ -62,11 +63,11 @@ public class Address {
 	public void setState(String state) {
 		this.state = state;
 	}
-	@Override
-	public String toString() {
-		return "Address id=" + id ;
+	public String getZip() {
+		return zip;
 	}
-	
-	
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
 	
 }

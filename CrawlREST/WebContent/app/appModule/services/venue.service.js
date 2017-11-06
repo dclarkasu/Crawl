@@ -65,9 +65,10 @@ angular.module('appModule')
 		});
 	}
 	service.updateAddress = function(address, id){
+		console.log(id);
 		return $http({
-			method: 'POST',
-			url: 'rest/users/' + userId + '/venues/address' + id,
+			method: 'PUT',
+			url: 'rest/users/' + userId + '/venues/address/' + id,
 			header: {
 				'Content-Type' : 'application/json'
 			},
@@ -89,6 +90,16 @@ angular.module('appModule')
 			method: 'POST',
 			url: 'rest/users/' + userId + '/venues/' + id + 'contacts',
 			header: {
+				'Content-Type' : 'application/json'
+			},
+			data: contact
+		});
+	}
+	service.updateContact = function(contact, id){
+		return $http({
+			method: 'PUT',
+			url: 'rest/users/' + userId + '/contact/' + id,
+			headr: {
 				'Content-Type' : 'application/json'
 			},
 			data: contact

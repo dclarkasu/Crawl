@@ -88,6 +88,7 @@ public class VenueController {
 	public Address updateAddress(@RequestBody String json, 
 			@PathVariable int id, 
 			HttpServletResponse res) {
+		System.out.println(json);
 		Address address = dao.updateAddress(json, id);
 		if(address != null) {
 			return address;

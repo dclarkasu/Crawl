@@ -1,5 +1,6 @@
 package data;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -38,9 +39,14 @@ public class GroupDAOImpl implements GroupDAO {
 		try {
 			Group mappedGroup = mapper.readValue(groupJSON, Group.class);
 			//Sets admin to the current user...cray cray
-			mappedGroup.setAdmin(em.find(User.class, uid));
+			User admin = em.find(User.class, uid);
+			mappedGroup.setAdmin(admin);
 			em.persist(mappedGroup);
 			em.flush();
+			if (mappedGroup.getUsers() == null) {
+				mappedGroup.setUsers(new ArrayList<User>());
+			}
+			mappedGroup.getUsers().add(admin);
 			return mappedGroup;
 
 		} catch(Exception e) {
@@ -103,26 +109,41 @@ public class GroupDAOImpl implements GroupDAO {
 	}
 
 	@Override
-	public Group removeUserFromGroup(int uid, int gid) {
-		Group g = null;
-		User u = null;
-		try {
-			g = em.find(Group.class, gid);
-			u = em.find(User.class, uid);
-			List<User> users = g.getUsers();
-
-			for (User user : users) {
-				if (user.getId() == uid) {
-					em.remove(user);
-				}
-			}
-		return g;
-
-		} catch (Exception e) {
-			e.printStackTrace();
+	public Boolean removeUserFromGroup(int uid, int gid) {
+		
+		String query = "DELETE FROM user_group ug WHERE ug.user.id = :uid AND ug.group.id = :gid";
+		int result = em.createQuery(query).executeUpdate();
+		if (result < 1) {
+			return false;
 		}
-		return g;
+		return true;
 	}
+		//		Group g = null;
+//		User u = null;
+//		try {
+//			g = em.find(Group.class, gid);
+//			u = em.find(User.class, uid);
+//			List<User> users = g.getUsers();
+//			
+//			//Setting to an outside cariable avoids concurrent modification exception
+//			//Cannot modify an arraylist while iterating through it
+//			User x = null;
+//			for (User user : users) {
+//				if (user.getId() == uid) {
+//					x = user;
+//				}
+//			}
+//			//Removal done post loop
+//			users.remove(x);
+//			//Set the new user list for that group
+//			g.setUsers(users);
+//		return g;
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return g;
+//	}
 
 
 	//Event Methods*****************************

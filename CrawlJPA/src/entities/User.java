@@ -29,7 +29,7 @@ public class User {
 	@Column(name="last_name")
 	private String lastName;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="contact_id")
 	private Contact contact;
 	
@@ -86,9 +86,9 @@ public class User {
 		this.groups = groups;
 	}
 	
-	public void addGroup(Group group) {
-		this.groups.add(group);
-	}
+//	public void addGroup(Group group) {
+//		this.groups.add(group);
+//	}
 
 	@Override
 	public String toString() {

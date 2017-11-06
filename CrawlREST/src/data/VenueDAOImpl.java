@@ -71,6 +71,7 @@ public class VenueDAOImpl implements VenueDAO {
 				venueManaged.setName(venueInput.getName());
 				venueManaged.setDescription(venueInput.getDescription());
 				venueManaged.setHours(venueInput.getHours());
+				venueManaged.setImgUrl(venueInput.getImgUrl());
 				return venueManaged;
 			}
 		} catch (JsonParseException e) {

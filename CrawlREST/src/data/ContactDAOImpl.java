@@ -30,14 +30,22 @@ public class ContactDAOImpl implements ContactDAO {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			Contact mappedContact = mapper.readValue(contJson, Contact.class);
-			
-			em.persist(mappedContact);
-			em.flush();
-			return mappedContact;
+			return this.persistContact(mappedContact);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	@Override
+	public Contact createContact(int uid, Contact contact) {
+		return persistContact(contact);
+	}
+	
+	private Contact persistContact(Contact contact) {
+		em.persist(contact);
+		em.flush();
+		return contact;
 	}
 
 	@Override
@@ -45,22 +53,30 @@ public class ContactDAOImpl implements ContactDAO {
 		ObjectMapper mapper = new ObjectMapper();
         try {
             Contact mappedContact = mapper.readValue(contJson, Contact.class);
-       
-
-            String q = "SELECT c FROM Contact c WHERE c.id = :sid";
-            Contact contact = em.createQuery(q, Contact.class)
-                    .setParameter("sid", sid)
-                    .getResultList()
-                    .get(0);
-            contact.setPhoneNumber(mappedContact.getPhoneNumber());
-            contact.setEmail(mappedContact.getEmail());
            
-            return contact;
+            return this.updateContactDatabase(sid, mappedContact);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+	}
+	
+	@Override
+	public Contact updateContact(int uid, int sid, Contact contact) {
+		return updateContactDatabase(sid, contact);
+	}
+	
+	private Contact updateContactDatabase(int sid, Contact mappedContact) {
+		String q = "SELECT c FROM Contact c WHERE c.id = :sid";
+        Contact contact = em.createQuery(q, Contact.class)
+                .setParameter("sid", sid)
+                .getResultList()
+                .get(0);
+        contact.setPhoneNumber(mappedContact.getPhoneNumber());
+        contact.setEmail(mappedContact.getEmail());
+       
+        return contact;
 	}
 
 	@Override
