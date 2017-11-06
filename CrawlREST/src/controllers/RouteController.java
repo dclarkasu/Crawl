@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import data.RouteDAO;
 import entities.Route;
+import entities.RouteVenue;
 import entities.Venue;
 
 @RestController
@@ -40,6 +41,12 @@ public class RouteController {
 		res.setStatus(202);
 		return routeDao.showRoute(uid, sid);
 	}
+	
+	@RequestMapping(path="users/{uid}/routes/{sid}/routeVenues", method=RequestMethod.GET)
+	public List<RouteVenue> showRouteVenuesByRoute(HttpServletRequest req, HttpServletResponse res,@PathVariable int uid,@PathVariable int sid) {
+		res.setStatus(202);
+		return routeDao.showRouteVenuesByRoute(uid, sid);
+	}
 
 	@RequestMapping(path="users/{uid}/routes/{sid}/venues", method=RequestMethod.GET)
 	public List<Venue> showVenuesByRoute(HttpServletRequest req, HttpServletResponse res,@PathVariable int uid,@PathVariable int sid) {
@@ -53,7 +60,13 @@ public class RouteController {
 		
 		return routeDao.createRoute(uid,routeJson);
 	}
+	
 
+	@RequestMapping(path="users/{uid}/routes/{rid}/venues/{vid}/change/{change}", method=RequestMethod.PUT)
+	public Boolean editVenueOrder(HttpServletRequest req, HttpServletResponse res,@PathVariable int uid,@PathVariable int rid, @PathVariable int vid, @PathVariable int change) {
+		res.setStatus(202);
+		return routeDao.editVenueOrder(uid, rid, vid, change);
+	}
 
 
 	@RequestMapping(path="users/{uid}/routes/{sid}", method=RequestMethod.PUT)
@@ -70,13 +83,13 @@ public class RouteController {
 		return routeDao.deleteRoute(uid, sid);
 	}
 	
-	@RequestMapping(path="users/{uid}/routes/{rid}/addvenues/{vid}", method=RequestMethod.PUT)
+	@RequestMapping(path="users/{uid}/routes/{rid}/addVenues/{vid}", method=RequestMethod.PUT)
 	public Route addVenueToRoute(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid, @PathVariable int rid, @PathVariable int vid) {
 		res.setStatus(202);
 		return routeDao.addVenueToRoute(uid, rid, vid);
 	}
 
-	@RequestMapping(path="users/{uid}/routes/{rid}/removevenues/{vid}", method=RequestMethod.PUT)
+	@RequestMapping(path="users/{uid}/routes/{rid}/removeVenues/{vid}", method=RequestMethod.PUT)
 	public Route removeVenueFromRoute(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid, @PathVariable int rid, @PathVariable int vid) {
 		res.setStatus(202);
 		return routeDao.removeVenueFromRoute(uid, rid, vid);

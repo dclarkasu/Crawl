@@ -20,12 +20,12 @@ public class RouteVenue {
 	private int id;
 	
 	
-	@JsonIgnore
+	
 	@ManyToOne
 	@JoinColumn(name="route_id")
 	private  Route route;
 	
-	@JsonIgnore
+	
 	@ManyToOne
 	@JoinColumn(name="venue_id")
 	private  Venue venue;
@@ -65,7 +65,7 @@ public class RouteVenue {
 
 	@Override
 	public String toString() {
-		return "Route_Venue [id=" + id + "]";
+		return "Route_Venue [id=" + id + ": "+ venue.getName() +" ]";
 	}
 	
 	

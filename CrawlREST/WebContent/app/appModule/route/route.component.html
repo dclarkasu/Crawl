@@ -8,12 +8,28 @@
     <button class="btn" ng-hide="vm.editRoute" ng-click="vm.setEditRoute()">Edit Route</button>
   </div>
 
-  <div ng-show="vm.route && vm.group">
-    <h2>Route: </h2>
-    <ul ng-repeat="venue in vm.venues">
-      <li>{{venue.Name}}</li>
-    </ul>
-  </div>
+  <table class="table" ng-show="vm.route">
+		<thead class="thead-dark">
+			<th>MOVE</th>
+			<th>ORDER</th>
+			
+			<th>Venue</th>
+			<th>Delete</th>
+      <th></th>
+      <th></th>
+			<th><button class="btn" ng-hide="vm.newVenue" ng-click="vm.setNewVenue()">Create Venue</button></th>
+		</thead>
+		<tbody>
+			<tr ng-repeat="v in vm.routeVenues | orderBy:'spot'">
+			<td><button class="btn" id="moveVenueDown" ng-click="vm.venueDown(vm.route.id, v.venue.id)">&#9650</button><button class="btn" id="moveVenueUp" ng-click="vm.venueUp(v.route.id,v.venue.id)">&#9661</button></td>
+			 <td>{{v.spot}}</td>
+        <td><a class="badge badge-light" href="#/venue">{{v.venue.name}}</a></td>
+				<td><button class="btn" id="removeVenueBtn" ng-click="vm.removeVenue(vm.route.id, v.venue.id)">X</button></td>
+			</tr>
+		</tbody>
+	</table>
+
+ 
 
   <div ng-show="vm.editRoute">
     <form class="form-route">
