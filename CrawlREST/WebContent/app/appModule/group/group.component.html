@@ -6,11 +6,17 @@
     <h3>Group</h3>
     <h1>{{vm.group.name}}</h1>
     <button class="btn" ng-hide="vm.editGroup" ng-click="vm.setEditGroup()">Edit Group</button>
+    <div ng-show="vm.editGroup">
+      <form class="form-group">
+        <input type="text" placeholder="Group Name" ng-model="editGroup.name"/>
+        <button class="btn" ng-click="vm.updateGroup(editGroup); editGroup = {}">Edit</button>
+      </form>
+    </div>
   </div>
 
   <div ng-show="vm.members && vm.group">
     <h2>Members: </h2>
-    <ul ng-repeat="member in vm.members">
+    <ul ng-repeat="member in vm.members |orderBy:'id'">
       <li>{{member.firstName}} {{member.lastName}}</li>
     </ul>
 
@@ -19,7 +25,7 @@
       <form class="form-group">
         <select ng-model="selected" ng-options="user.firstName for user in vm.users">
         </select>
-        <button class="btn btn-success" ng-click="vm.addMember(selected); user = {}">Add</button>
+        <button class="btn btn-success" ng-click="vm.addMember(vm.group.id, selected); user = {}">Add</button>
       </form>
     </div>
   </div>
@@ -40,12 +46,7 @@
 		</tbody>
 	</table>
 
-  <div ng-show="vm.editGroup">
-    <form class="form-group">
-      <input type="text" placeholder="Group Name" ng-model="editGroup.name"/>
-      <button class="btn" ng-click="vm.updateGroup(editGroup); editGroup = {}">Edit</button>
-    </form>
-  </div>
+
 
 
 

@@ -121,11 +121,13 @@ angular.module('appModule').component('group', {
 			vm.newMember = {};
 		};
 
-		vm.addMember = function(user) {
+		vm.addMember = function(gid, user) {
 			console.log(user);
-			groupService.addUserToGroup(user.id)
+			groupService.addUserToGroup(gid, user.id)
 			.then(function(res){
-
+				vm.loadGroup();
+				vm.loadAllUsers();
+				vm.loadMembers();
 			})
 		}
 
