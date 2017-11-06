@@ -26,14 +26,9 @@ public class Venue {
 	private String description;
 	private String hours;
 	private String imgUrl;
-<<<<<<< HEAD
-	@JsonIgnore
-	@OneToMany(mappedBy="venue", fetch=FetchType.EAGER)
-=======
 
 	@JsonIgnore
 	@OneToMany(mappedBy="venue")
->>>>>>> 2aaf8b54e11f4c6a06eadb4c282b6ba5ebc4b091
 	private List<RouteVenue> routeVenues;
 	
 	@Column(name="is_active")
