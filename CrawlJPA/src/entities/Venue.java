@@ -2,9 +2,9 @@ package entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Venue {
@@ -25,21 +27,23 @@ public class Venue {
 	private String hours;
 	private String imgUrl;
 
-	@OneToMany(mappedBy="venue", fetch=FetchType.EAGER)
+	@JsonIgnore
+	@OneToMany(mappedBy="venue")
 	private List<RouteVenue> routeVenues;
 	
 	@Column(name="is_active")
 	private boolean isActive;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="address_id")
 	private Address address;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="contact_id")
 	private Contact contact;
 	
-	@ManyToMany(mappedBy="venues", fetch=FetchType.EAGER)
+	@JsonIgnore
+	@ManyToMany(mappedBy="venues")
 	private List<Route> routes;
 
 	//gets and sets
@@ -109,9 +113,5 @@ public class Venue {
 		return "Venue [id=" + id + ", name=" + name + ", description=" + description + ", hours=" + hours + ", address="
 				+ address + ", contact=" +"]";
 	}
-
-
-
-
 
 }

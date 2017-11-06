@@ -1,7 +1,20 @@
+<div ng-show="vm.selected">
+<h1 >User Profile</h1>
 <div>First Name: {{vm.selected.firstName}}</div>
 <div>Last Name: {{vm.selected.lastName}}</div>
 <div>Phone: {{vm.selected.contact.phoneNumber}}</div>
 <div>Email: {{vm.selected.contact.email}}</div><br>
+<button ng-click="vm.setEditUser();vm.setEditContact()">Edit</button><br>
+</div>
+
+<h3>Update Profile</h3>
+<form >
+  <label>First Name: </label><input type="text" ng-model="vm.editUser.firstName"/><br />
+  <label>Last Name: </label><input type="text" ng-model="vm.editUser.lastName"/><br />
+  <label>Phone: </label><input type="text" ng-model="vm.editUser.contact.phoneNumber"/><br />
+  <label>Email: </label><input type="email" ng-model="vm.editUser.contact.email"/><br />
+  <input type="submit" value="Cancel" ng-click="vm.editUser = null" />
+  <input type="submit" value="Save" ng-click="vm.updateUser(vm.editUser)"/>
 
 <div>Groups:</div>
 <div ng-repeat = "items in vm.groups">
@@ -10,5 +23,5 @@
 
 <form>
 <input type="text" placeholder="Name" ng-model="newGroup.name"/><br />
-<input type ="submit" value="Add Group" ng-click="vm.createGroup(newGroup); newGroup = {}"/>
+<input type ="submit" value="Add Group" ng-click="vm.createGroup(newGroup); newGroup = {};"/>
 </form>
