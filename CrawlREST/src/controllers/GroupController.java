@@ -95,6 +95,18 @@ public class GroupController {
 		}
 	}
 	
+	@RequestMapping(path="users/{uid}/group/{gid}", method=RequestMethod.DELETE)
+	public Boolean removeUserFromGroup(@PathVariable int uid,@PathVariable int gid, HttpServletResponse res) {
+		Boolean result = groupDAO.removeUserFromGroup(uid, gid);
+		if (result == false) {
+			res.setStatus(406);
+			return false;
+		} else {
+			res.setStatus(201);
+			return result;
+		}
+	}
+	
 	//Event Methods******************************************************
 	
 	@RequestMapping(path="users/{uid}/groups/{gid}/events", method=RequestMethod.POST)
