@@ -69,7 +69,7 @@ angular.module('appModule')
 	      headers : {
 	        'Content-Type' : 'application/json'
 	      },
-	      data : group
+	      data : gid
 	    })  
 	  }
   };
@@ -83,7 +83,7 @@ angular.module('appModule')
 	      headers : {
 	        'Content-Type' : 'application/json'
 	      },
-	      data : post
+	      data : pid
 	    })
 	  }
   };
@@ -127,6 +127,21 @@ angular.module('appModule')
 			  method : 'GET',
 			  url : `${BASE_URL}/users/${id}/groups`
 		  })
+	  }
+  };
+  
+  //Post createGroup
+  service.createGroup = function(newGroup) { 
+	  var id = 1;
+	  if(id){
+	  return $http({
+	      method : 'POST',
+	      url : `${BASE_URL}/users/${id}/groups`,
+	      headers : {
+	        'Content-Type' : 'application/json'
+	      },
+	      data : newGroup
+	    })  
 	  }
   };
   
