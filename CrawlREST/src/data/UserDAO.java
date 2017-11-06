@@ -15,6 +15,7 @@ public interface UserDAO {
 	//Register is create
 	
 	//User Crud
+	public Set<User> indexUsers();
 	public User findUser(int id);
 	public Set<User> indexUserByGroup(int gid);
 	public User updateUser(int id, String crawlJson);

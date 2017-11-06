@@ -26,9 +26,19 @@ public class UserDAOImpl implements UserDAO {
 
 	@PersistenceContext
 	private EntityManager em;
+	
+	@Autowired
+	private ContactDAO contactDao;
 
 	@Autowired
 	private PasswordEncoder encoder;
+
+	@Override
+	public Set<User> indexUsers() {
+		String query = "SELECT u FROM User u";
+		return new HashSet<User>(em.createQuery(query, User.class).getResultList());
+	}
+
 
 	// Login (User)
 	@Override //works
@@ -103,10 +113,14 @@ public class UserDAOImpl implements UserDAO {
 			e.printStackTrace();
 		}
 		User u = em.find(User.class, id);
+		
+		Contact c = contactDao.updateContact(id, mappedUser.getContact().getId(), mappedUser.getContact());
 		u.setFirstName(mappedUser.getFirstName());
 		u.setLastName(mappedUser.getLastName());
+		u.setImgUrl(mappedUser.getImgUrl());
 		return u;
 	}
+
 
 	@Override //works
 	public User addContactToUser(Contact contact, int id) {

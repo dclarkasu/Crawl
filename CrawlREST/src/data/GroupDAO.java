@@ -2,6 +2,8 @@ package data;
 
 import java.util.Set;
 
+import javax.servlet.http.HttpSession;
+
 import entities.Event;
 import entities.Group;
 

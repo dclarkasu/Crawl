@@ -1,5 +1,6 @@
 package data;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -38,9 +39,14 @@ public class GroupDAOImpl implements GroupDAO {
 		try {
 			Group mappedGroup = mapper.readValue(groupJSON, Group.class);
 			//Sets admin to the current user...cray cray
-			mappedGroup.setAdmin(em.find(User.class, uid));
+			User admin = em.find(User.class, uid);
+			mappedGroup.setAdmin(admin);
 			em.persist(mappedGroup);
 			em.flush();
+			if (mappedGroup.getUsers() == null) {
+				mappedGroup.setUsers(new ArrayList<User>());
+			}
+			mappedGroup.getUsers().add(admin);
 			return mappedGroup;
 
 		} catch(Exception e) {

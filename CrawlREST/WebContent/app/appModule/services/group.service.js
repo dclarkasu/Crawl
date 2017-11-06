@@ -60,5 +60,23 @@ angular.module('appModule').factory('groupService', function($http, authService)
 		})
 	}
 
+	service.indexUsers = function() {
+		return $http({
+			method : 'GET',
+			url : 'rest/users'
+		})
+	};
+
+	service.addUserToGroup = function(gid, uid) {
+		return $http({
+			method : 'PUT',
+			url : 'rest/users/'+uid +'/groups/'+gid,
+			headers : {
+				'Content-Type' : 'application/json'
+			},
+			data : null
+		})
+	}
+
 	return service;
 });
