@@ -29,7 +29,7 @@ angular.module('appModule')
   };
   
   //updateUser
-  service.updateUser = function(users){
+  service.updateUser = function(user){
 	  var id = 1
 	  if(id){
 	  return $http({
@@ -38,7 +38,7 @@ angular.module('appModule')
 	      headers : {
 	        'Content-Type' : 'application/json'
 	      },
-	      data : users
+	      data : user
 	    })
 	  }
   };
@@ -144,7 +144,37 @@ angular.module('appModule')
 	    })  
 	  }
   };
-  
+	 //updateGroupWithUser
+	  service.updateGroupWithUser = function(group){
+		  var id = 1
+		  if(id){
+		  return $http({
+		      method : 'PUT',
+		      url : `${BASE_URL}/users/${id}/group/` + group.id, 
+		      headers : {
+		        'Content-Type' : 'application/json'
+		      },
+		      data : group
+		    })
+		  }
+	  };
+	  
+	  //update contact
+	  service.updateUserWithContact = function(contact){
+		  var id = 1
+		  if(id){
+		  return $http({
+		      method : 'PUT',
+		      url : `${BASE_URL}/users/${id}/contact/` + contact.id, 
+		      headers : {
+		        'Content-Type' : 'application/json'
+		      },
+		      data : contact
+		    })
+		  } // terminates if
+	  }; // terminates updateUserWithContact
+
 
   return service;
+  
 })

@@ -9,13 +9,16 @@ angular.module('appModule').component('user', {
 		var vm = this;
 
 		vm.selected = null;
-//
-//		vm.editUser = null;
+
+		vm.editUser = null;
+		
 
 		vm.groups = [];
 
 		
 		// Behaviors
+		
+		//show user
 		var id = parseInt($routeParams)
 			userService.showUser(id)
 			.then(function(res) {
@@ -24,7 +27,41 @@ angular.module('appModule').component('user', {
 					$location.path('_404');
 				}
 			})
+			
+		//update user
+		vm.updateUser = function() {
+			console.log(vm.editUser);
+		var res = userService.updateUser(vm.editUser);
 		
+		res.then(function(res) {
+			
+			vm.selected = res.data;
+			vm.editUser = null;
+		
+			
+		})
+		
+	}
+		
+	
+		
+		//Copy info over to edit form
+		vm.setEditUser = function(user) {
+			vm.editUser = angular.copy(vm.selected);
+			
+		};
+		vm.setEditContact = function(contact) {
+			vm.editContact = angular.copy(vm.selected);
+			
+		};
+			
+		//update group with user
+		vm.updateGroupWithUser = function(user) {
+			var res = userService.updateUser(user);
+
+			res.then(function(res) {
+			})
+		}
 
 		// reloads user by group
 		vm.findGroupByUserId = function() {
@@ -37,17 +74,24 @@ angular.module('appModule').component('user', {
 		vm.findGroupByUserId();
 
 		// create new group
-		vm.createGroup = function(newGroup) {
+		vm.createGroup = function() {
 			newGroup.admin = 1;
 			var res = userService.createGroup(newGroup);
 
 			res.then(function(res) {
-				console.log("then function of create Group")
-				console.log(res.data);
+				updateGroupWithUser();
 //				vm.findGroupByUserId();
 			})
 		}
+		
+		// update group with user
+		vm.updateGroupWithUser = function() {
+			var res = userService.updateGroupWithUser(user);
 
+			res.then(function(res) {
+				
+			})
+		}
 
 	},
 
