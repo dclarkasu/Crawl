@@ -92,6 +92,12 @@ public class Venue {
 	}
 	
 	
+	public String getImgUrl() {
+		return imgUrl;
+	}
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
 	public List<RouteVenue> getRouteVenues() {
 		return routeVenues;
 	}

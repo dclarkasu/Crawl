@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import data.RouteDAO;
 import entities.Route;
+import entities.Venue;
 
 @RestController
 public class RouteController {
@@ -40,7 +41,11 @@ public class RouteController {
 		return routeDao.showRoute(uid, sid);
 	}
 
-
+	@RequestMapping(path="users/{uid}/routes/{sid}/venues", method=RequestMethod.GET)
+	public List<Venue> showVenuesByRoute(HttpServletRequest req, HttpServletResponse res,@PathVariable int uid,@PathVariable int sid) {
+		res.setStatus(202);
+		return routeDao.showVenuesByRoute(uid, sid);
+	}
 	
 	@RequestMapping(path="users/{uid}/routes", method=RequestMethod.POST)
 	public Route create(HttpServletRequest req, HttpServletResponse res, @PathVariable int uid, @RequestBody String routeJson) {
