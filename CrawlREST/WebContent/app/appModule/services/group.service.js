@@ -23,15 +23,15 @@ angular.module('appModule').factory('groupService', function($http, authService)
 			url : 'rest/users/1/group/1'
 		})
 	};
-	
-	service.createGroup = function(group) {
+
+	service.createEvent = function(newEvent) {
 		return $http({
 			method : 'POST',
-			url : 'rest/users/1/groups',
+			url : 'rest/users/1/groups/1/events',
 			headers : {
 				'ContentType' : 'application/json'
 			},
-			data : group
+			data : newEvent
 		})
 	};
 
@@ -43,6 +43,13 @@ angular.module('appModule').factory('groupService', function($http, authService)
 		        'Content-Type' : 'application/json'
 		      },
 		      data : group
+		})
+	};
+
+	service.indexEvents = function() {
+		return $http({
+			method : 'GET',
+			url : 'rest/users/1/groups/1/events'
 		})
 	};
 

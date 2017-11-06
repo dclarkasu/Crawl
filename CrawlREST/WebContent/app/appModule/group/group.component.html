@@ -6,13 +6,20 @@
     <h3>Group</h3>
     <h1>{{vm.group.name}}</h1>
     <button class="btn" ng-hide="vm.editGroup" ng-click="vm.setEditGroup()">Edit Group</button>
-    <button class="btn" ng-hide="vm.newGroup" ng-click="vm.setNewGroup()">Create Group</button>
+    <button class="btn" ng-hide="vm.newEvent" ng-click="vm.setNewEvent()">Create Event</button>
   </div>
 
   <div ng-show="vm.members && vm.group">
     <h2>Members: </h2>
     <ul ng-repeat="member in vm.members">
       <li>{{member.firstName}} {{member.lastName}}</li>
+    </ul>
+  </div>
+
+  <div ng-show="vm.events">
+    <h2>Events: </h2>
+    <ul ng-repeat="event in vm.events">
+      <li>{{event.name}}</li>
     </ul>
   </div>
 
@@ -23,10 +30,10 @@
     </form>
   </div>
 
-  <div ng-show="vm.newGroup">
+  <div ng-show="vm.newEvent">
     <form class="form-group">
-      <input type="text" placeholder="Group Name" ng-model="newGroup.name"/>
-      <button class="btn" ng-click="vm.addGroup(newGroup); newGroup = {}">Add</button>
+      <input type="text" placeholder="Event Name" ng-model="newEvent.name"/>
+      <button class="btn" ng-click="vm.addEvent(newEvent); newEvent = {}">Add</button>
     </form>
   </div>
 </div>

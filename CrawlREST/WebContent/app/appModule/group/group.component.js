@@ -8,6 +8,8 @@ angular.module('appModule').component('group', {
 
 		vm.members = [];
 
+		vm.events = [];
+
 		vm.groupList = [];
 		//Behaviors
 		vm.groupsByUser = function() {
@@ -59,21 +61,36 @@ angular.module('appModule').component('group', {
 			})
 		};
 
-		vm.setNewGroup = function() {
-			vm.newGroup = {};
+		vm.setNewEvent = function() {
+			vm.newEvent = {};
 		};
 
-		vm.addGroup = function(group) {
-			console.log(group);
-			groupService.createGroup(group)
+		vm.addEvent = function(newEvent) {
+			console.log(newEvent);
+			groupService.createEvent(newEvent)
 			.then(function(res) {
+				vm.loadEvents();
 				vm.loadGroup();
-				vm.newGroup = null;
+				vm.newEvent = null;
 			})
 			.catch(function(err) {
 				console.log(err);
 			})
 		};
+
+		vm.loadEvents = function() {
+			groupService.indexEvents()
+			.then(function(res) {
+				console.log(res);
+				vm.events = res.data;
+			})
+			.catch(function(err) {
+				console.log(err);
+			})
+		};
+
+		vm.loadEvents();
+		console.log(vm.events);
 
 	},
 	controllerAs: 'vm'
