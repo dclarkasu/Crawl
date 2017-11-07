@@ -24,7 +24,6 @@ public class Event {
 	@JoinColumn(name="route_id")
 	private Route route;
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="group_id")
 	private Group group;

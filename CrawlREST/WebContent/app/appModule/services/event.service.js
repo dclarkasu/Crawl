@@ -16,6 +16,14 @@ angular.module('appModule').factory('eventService', function($http, authService)
 		})
 	};
 
+	// service.showGroup = function(eid) {
+	// 	console.log("in showEvent")
+	// 	return $http ({
+	// 		method : 'GET',
+	// 		url : 'rest/users/1/groups/1/events/'+eid
+	// 	})
+	// };
+
 //	service.indexMembers = function() {
 //		console.log('in member service');
 //		return $http ({
