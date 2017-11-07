@@ -71,6 +71,10 @@ public class UserDAOImpl implements UserDAO {
 	public Login registerUser(String crawlJson) {
 		ObjectMapper mapper = new ObjectMapper();
 		User user = new User();
+		Contact contact = new Contact();
+		em.persist(contact);
+		em.flush();
+		user.setContact(contact);
 		em.persist(user);
 		em.flush();
 		try {
