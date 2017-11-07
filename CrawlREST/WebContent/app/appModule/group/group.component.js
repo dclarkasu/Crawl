@@ -76,7 +76,7 @@ angular.module('appModule').component('group', {
 
 		vm.addEvent = function(newEvent) {
 			console.log(newEvent);
-			groupService.createEvent(newEvent)
+			groupService.createEvent(newEvent, $routeParams.gid)
 			.then(function(res) {
 				vm.loadEvents();
 				vm.loadGroup();
@@ -127,7 +127,7 @@ angular.module('appModule').component('group', {
 		
 		
 		vm.deleteEvent = function(id) {
-			groupService.deleteEvent(id)
+			groupService.deleteEvent($routeParams.gid, id )
 			.then(function(res){
 				vm.loadEvents();
 				vm.loadGroup();

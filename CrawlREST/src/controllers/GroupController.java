@@ -83,9 +83,9 @@ public class GroupController {
 		}
 	}
 	
-	@RequestMapping(path="users/{uid}/groups/{gid}", method=RequestMethod.PUT)
-	public Group addUserToGroup(@PathVariable int uid,@PathVariable int gid, HttpServletResponse res) {
-		Group updatedGroup = groupDAO.addUserToGroup(uid, gid);
+	@RequestMapping(path="users/{uid}/groups/{gid}/add/{mid}", method=RequestMethod.PUT)
+	public Group addUserToGroup(@PathVariable int mid,@PathVariable int gid, HttpServletResponse res) {
+		Group updatedGroup = groupDAO.addUserToGroup(mid, gid);
 		if (updatedGroup == null) {
 			res.setStatus(406);
 			return null;
