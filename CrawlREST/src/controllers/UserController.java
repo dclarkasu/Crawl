@@ -123,6 +123,7 @@ public class UserController {
 	@RequestMapping(path="users/{id}/group/{gid}/post", method=RequestMethod.POST)
     		public Post createPost(HttpServletRequest req, HttpServletResponse res,@PathVariable int id, @PathVariable int gid,@RequestBody String crawlJson) {
 			res.setStatus(201);
+			System.out.println("tovihngobvhnrovnrvornvorgnv");
 			return userDao.createPost(id, gid, crawlJson);
 		}
 	//works
@@ -141,14 +142,12 @@ public class UserController {
 	//works
 	@RequestMapping(path="users/{id}/post", method=RequestMethod.GET)
 		public Set<Post>findPostByUser(HttpServletRequest req, HttpServletResponse res,@PathVariable int id) {
-			System.out.println("**************************");
 			return userDao.findPostByUser(id);
 		}
 	
 	//works
 	@RequestMapping(path="users/{id}/post/group/{gid}", method=RequestMethod.GET)
 		public Set<Post>findPostByGroup(HttpServletRequest req, HttpServletResponse res,@PathVariable int gid) {
-			System.out.println("**************************");
 			return userDao.findPostByGroup(gid);
 	}
 	

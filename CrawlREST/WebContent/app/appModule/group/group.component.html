@@ -78,9 +78,12 @@
 			<th><button class="btn" ng-hide="vm.newVenue" ng-click="vm.setNewVenue()">Create Venue</button></th>
 		</thead>
 		<tbody>
-			<tr ng-repeat="p in vm.messageBoard | orderBy:'id'">
+		
+		
+			<tr><td></td><td><form><input type="text" placeholder="New Message" ng-model="vm.newPost.message"><input type="submit" value="Post" ng-click="vm.addPost(vm.group.id, vm.newPost); newPost = {};"> </form>
+			<tr ng-repeat="p in vm.messageBoard | orderBy:'-id'">
 			
-			 <td>{{p}}</td>
+			 <td>{{p.user.firstName}} {{p.user.lastName}}</td>
         <td>{{p.message}}</td>
 				
 			</tr>

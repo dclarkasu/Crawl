@@ -3,6 +3,8 @@ angular.module('appModule').component('group', {
 	controller : function(groupService, $routeParams) {
 		//Variables
 		var vm = this;
+//		vm.userId = $cookies.get("userId")
+				
 
 		vm.group = null;
 
@@ -15,6 +17,8 @@ angular.module('appModule').component('group', {
 		vm.groupList = [];
 
 		vm.messageBoard = [];
+		
+		vm.newPost = null;
 		
 		//Behaviors
 		vm.groupsByUser = function() {
@@ -99,14 +103,20 @@ angular.module('appModule').component('group', {
 			.then(function(res) {
 				console.log(res);
 				vm.messageBoard = res.data;
-				console.log("*****");
 				console.log(vm.messageBoard);
-				console.log("*****");
 			})
 			.catch(function(err) {
 				console.log(err);
 			})
 		};
+		
+		vm.addPost = function(gid, newPost) {
+			console.log("1A");
+			groupService.createPost(1, gid, newPost)
+			.then(function(res){
+				vm.loadMessages();
+			})
+		}
 
 		vm.loadEvents();
 		console.log(vm.events);

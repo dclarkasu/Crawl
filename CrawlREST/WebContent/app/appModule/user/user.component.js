@@ -12,6 +12,7 @@ angular.module('appModule').component('user', {
 		vm.groups = [];
 
 		
+		
 		// Behaviors
 		
 		//show user
