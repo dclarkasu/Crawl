@@ -5,10 +5,11 @@
 		<li class="nav-item"><a class="nav-link active" href="#/route">Route</a></li>
 		<li class="nav-item"><a class="nav-link active" href="#/register">Register</a></li>
 		<li class="nav-item"><a class="nav-link active" href="#/group">Group</a></li>
-		<li class="nav-item"><button class="btn">
+		<li class="nav-itme" ng-show="vm.isLoggedIn()"><a class="nav-link active" href="{{'#/user/' + vm.userId}}">Profile</a>
+		<li class="nav-item" ng-hide="vm.isLoggedIn()"><button class="btn">
 				<a class="nav-link active" href="#/login">Login</a>
 			</button></li>
-		<li class="nav-item active"><logout></logout></li>
+		<li class="nav-item active" ng-show="vm.isLoggedIn()"><logout></logout></li>
 	</ul>
 </div>
 

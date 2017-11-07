@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import entities.Login;
 import entities.User;
 
 public class DataSecurityInterceptor implements HandlerInterceptor {
@@ -15,10 +16,10 @@ public class DataSecurityInterceptor implements HandlerInterceptor {
 			throws Exception {
 		System.out.println(request.getRequestURI());
 		System.out.println(request.getRequestURI().split("/")[4]);
-		System.out.println(request.getSession().getAttribute("user"));
-		if (request.getSession().getAttribute("user") != null) {
-			int userId = Integer.parseInt(request.getRequestURI().split("/")[4]);
-			if (userId == ((User)request.getSession().getAttribute("user")).getId()) {
+		System.out.println(request.getSession().getAttribute("login"));
+		if (request.getSession().getAttribute("login") != null) {
+			int userId = Integer.parseInt(request.getRequestURI().split("/")[4]);// grabbing user id from request
+			if (userId == ((Login)request.getSession().getAttribute("login")).getUser().getId()) {
 				return true;
 			}
 		}

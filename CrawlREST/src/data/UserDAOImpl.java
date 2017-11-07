@@ -47,14 +47,14 @@ public class UserDAOImpl implements UserDAO {
 		try {
 			Login mappedLogin = mapper.readValue(crawlJson, Login.class);
 			String query = "SELECT l FROM Login l WHERE l.username = :username";
-			List<Login> users = em.createQuery(query, Login.class)
+			List<Login> login = em.createQuery(query, Login.class)
 			          .setParameter("username", mappedLogin.getUsername())
 			          .getResultList();
-			if (users.size() > 0) {
+			if (login.size() > 0) {
 				System.out.println("correct size");
-			   boolean passwordsDoMatch = encoder.matches(mappedLogin.getPassword(), users.get(0).getPassword());
+			   boolean passwordsDoMatch = encoder.matches(mappedLogin.getPassword(), login.get(0).getPassword());
 			   if(passwordsDoMatch) {
-				   return users.get(0);
+				   return login.get(0);
 			   }
 			}
 			  

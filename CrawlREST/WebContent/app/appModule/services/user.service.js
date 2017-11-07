@@ -1,14 +1,14 @@
 angular.module('appModule')
-.factory('userService', function($http, authService) {
+.factory('userService', function($http, authService, $cookies, $path) {
   var service = {};
 
   var BASE_URL = 'http://localhost:8080/CrawlREST/rest';
- 
+  
 
   //user
   //findUser
   service.showUser = function() {
-	  var id = 1
+	  var id = $cookies.get('userId');
 	  if(id){
 		  return $http({
 			  method : 'GET',
@@ -19,7 +19,7 @@ angular.module('appModule')
   };
   //indexUserByGroup
   service.indexUserByGroup = function() {
-	  var id = 1
+	  var id = $cookies.get('userId');
 	  if(id){
 		  return $http({
 			  method : 'GET',
@@ -30,7 +30,7 @@ angular.module('appModule')
   
   //updateUser
   service.updateUser = function(user){
-	  var id = 1
+	  var id = $cookies.get('userId');
 	  if(id){
 	  return $http({
 	      method : 'PUT',
@@ -45,7 +45,7 @@ angular.module('appModule')
   
   //addContactToUser
   service.createContact = function(contacts) { 
-	  var id = 1
+	  var id = $cookies.get('userId');
 	  if(id){
 	  return $http({
 	      method : 'POST',
@@ -61,7 +61,7 @@ angular.module('appModule')
   //posts
   //createPost
   service.createPost = function(gid) { 
-	  var id = 1;
+	  var id = $cookies.get('userId');
 	  if(id){
 	  return $http({
 	      method : 'POST',
@@ -75,7 +75,7 @@ angular.module('appModule')
   };
   //updatePost
   service.updatePost = function(pid){
-	  var id = 1
+	  var id = $cookies.get('userId');
 	  if(id){
 	  return $http({
 	      method : 'PUT',
@@ -89,7 +89,7 @@ angular.module('appModule')
   };
   //destroyPost
   service.destroyPost = function(pid){
-	  var id = 1
+	  var id = $cookies.get('userId');
 	  if(uid){
 	  return $http({
 	      method : 'DELETE',
@@ -100,7 +100,7 @@ angular.module('appModule')
   };
   //findPostByUser
   service.findPostByUser = function() {
-	  var id = 1
+	  var id = $cookies.get('userId');
 	  if(id){
 		  return $http({
 			  method : 'GET',
@@ -110,7 +110,7 @@ angular.module('appModule')
   };
   //findPostByGroup
   service.findPostByGroup = function() {
-	  var id = 1
+	  var id = $cookies.get('userId');
 	  if(id){
 		  return $http({
 			  method : 'GET',
@@ -121,7 +121,7 @@ angular.module('appModule')
   
   //Group findGroupByUserId
   service.findGroupByUserId = function() {
-	  var id = 1
+	  var id = $cookies.get('userId');
 	  if(id){
 		  return $http({
 			  method : 'GET',
@@ -132,7 +132,7 @@ angular.module('appModule')
   
   //Post createGroup
   service.createGroup = function(newGroup) { 
-	  var id = 1;
+	  var id = $cookies.get('userId');
 	  if(id){
 	  return $http({
 	      method : 'POST',
@@ -147,7 +147,7 @@ angular.module('appModule')
 	 	  
 	  //update contact
 	  service.updateUserWithContact = function(contact){
-		  var id = 1
+		  var id = $cookies.get('userId');
 		  if(id){
 		  return $http({
 		      method : 'PUT',
@@ -160,7 +160,11 @@ angular.module('appModule')
 		  } // terminates if
 	  }; // terminates updateUserWithContact
 
-
+	  function checkLogged(){
+		  if(!$cookies.get('userId')){
+			  $location.path('/unauthorized');
+		  }
+	  }
   return service;
   
 })

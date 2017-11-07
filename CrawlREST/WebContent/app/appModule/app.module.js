@@ -27,7 +27,7 @@ angular.module('appModule', ['ngRoute','ngCookies','authModule'])
 			<user></user>
 			`
 	})
-	.when('/user/uid', {
+	.when('/user/:uid', {
 		template : `
 			<user></user>
 			`
@@ -41,4 +41,10 @@ angular.module('appModule', ['ngRoute','ngCookies','authModule'])
 	.when('/event/:eid', {
 		template: '<event></event>'
 	})
+	.when('/unauthorized',{
+		template: '<unauthorized></unauthorized>'
+	})
+	.otherwise({
+		template : '<notfound></notfound>'
+	});
 });
