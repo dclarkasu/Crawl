@@ -173,6 +173,8 @@ angular.module('appModule').component('group', {
 
 		vm.removeMember = function(gid, user) {
 			console.log(user);
+			console.log(gid);
+			
 			groupService.removeUserFromGroup(gid, user.id)
 			.then(function(res){
 				vm.loadGroup();

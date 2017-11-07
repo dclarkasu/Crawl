@@ -127,6 +127,7 @@ public class GroupDAOImpl implements GroupDAO {
 				}
 			}
 			//Removal done post loop
+			System.out.println(x);
 			users.remove(x);
 			//Set the new user list for that group
 			g.setUsers(users);
