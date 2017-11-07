@@ -24,6 +24,11 @@ public class User {
 	
 	private String imgUrl;
 	
+	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
+	private List<User> friends;
+	
+	
+
 	@Column(name="first_name")
 	private String firstName;
 	
@@ -87,6 +92,14 @@ public class User {
 	
 	public void setGroups(List<Group> groups) {
 		this.groups = groups;
+	}
+	
+	public List<User> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(List<User> friends) {
+		this.friends = friends;
 	}
 	
 //	public void addGroup(Group group) {
