@@ -121,6 +121,13 @@ public class GroupController {
 		}
 	}
 	
+	@RequestMapping(path="users/{id}/groups/{gid}/events/{eid}", method=RequestMethod.GET)
+    public Event showEvent(HttpServletResponse res,@PathVariable int gid, @PathVariable int eid) {
+        res.setStatus(200);
+        Event event = groupDAO.findEventById(eid);
+        return event;
+    }
+	
 	@RequestMapping(path="users/{uid}/groups/{gid}/events", method=RequestMethod.GET)
 	public Set<Event> findEventByGroupId(@PathVariable int gid, HttpServletResponse res) {
 		Set<Event> events = groupDAO.findEventByGroupId(gid);

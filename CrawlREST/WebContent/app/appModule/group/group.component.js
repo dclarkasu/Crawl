@@ -1,6 +1,6 @@
 angular.module('appModule').component('group', {
 	templateUrl : "app/appModule/group/group.component.html",
-	controller : function(groupService) {
+	controller : function(groupService, $routeParams) {
 		//Variables
 		var vm = this;
 
@@ -13,6 +13,7 @@ angular.module('appModule').component('group', {
 		vm.users = [];
 
 		vm.groupList = [];
+
 		//Behaviors
 		vm.groupsByUser = function() {
 			groupService.indexUserGroups()

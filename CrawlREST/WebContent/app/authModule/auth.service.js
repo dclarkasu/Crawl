@@ -1,22 +1,26 @@
 angular.module('authModule')
   .factory('authService', function($http, $cookies) {
     var service = {};
-
-    var saveToken = function(user) {
-    		$cookies.put('userId', user.id);
-    		$cookies.put('email', user.email);
+    
+    function saveUserCookie(user){
+	    	$cookies.put('userId', user.id);
+	    	$cookies.put('firstName', user.firstName);
+	    	$cookies.put('lastName', user.lastName);
+    		
     }
-
-    service.getToken = function() {
-      return {
-    	  	userId: $cookies.get('userId'),
-    	  	email: $cookies.get('email')
-      }
+    function getUserCookie(){
+    		return {
+    			id: $cookies.get('userId'),
+    			firsName: $cookies.get('firstName'),
+    			lastName: $cookies.get('lastName')
+    		}
     }
+   
 
-    var removeToken = function() {
+    function removeUserCookie() {
     		$cookies.remove('userId');
-    		$cookies.remove('email');
+    		$cookies.remove('firstName');
+    		$cookies.remove('lastName');
     }
 
     service.login = function(user) {

@@ -2,7 +2,7 @@ angular.module('appModule')
 .component('venue',{
 	templateUrl: 'app/appModule/venue/venue.component.html',
 	controller: function(venueService, $routeParams, $location){
-		
+//		AIzaSyBEw2cCO_zGlAgAWJhO8uMTiqe95wBLlEE google map api key
 		var vm = this;
 		vm.venue = null;
 		vm.copy = null;
