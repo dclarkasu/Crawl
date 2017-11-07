@@ -67,4 +67,23 @@
       <button class="btn btn-danger" ng-click="vm.cancel(); newEvent = {}">Cancel</button>
     </form>
   </div>
+  
+  <table class="table" ng-show="vm.messageBoard">
+		<thead class="thead-dark">
+			<th>USER</th>
+			<th>MESSAGE</th>
+		
+      <th></th>
+      <th></th>
+			<th><button class="btn" ng-hide="vm.newVenue" ng-click="vm.setNewVenue()">Create Venue</button></th>
+		</thead>
+		<tbody>
+			<tr ng-repeat="message in vm.messageBoard | orderBy:'id'">
+			
+			 <td>{{p.user}}</td>
+        <td>{{p.message}}</td>
+				
+			</tr>
+		</tbody>
+	</table>
 </div>

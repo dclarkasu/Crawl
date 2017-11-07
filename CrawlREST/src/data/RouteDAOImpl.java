@@ -171,4 +171,14 @@ public class RouteDAOImpl implements RouteDAO {
 		System.out.println(rVenues);
 		return rVenues;
 	}
+
+	@Override
+	public List<Venue> showAllVenuesExcept(int uid, int rid) {
+		Route r = em.find(Route.class, rid);
+
+		String q = "SELECT v FROM Venue v WHERE v.id NOT IN (SELECT v2.id FROM Venue v2 JOIN v2.routes r WHERE r.id = :rid)";
+
+		List <Venue> venues = em.createQuery(q, Venue.class).setParameter("rid", rid).getResultList();
+		return venues;
+	}
 }

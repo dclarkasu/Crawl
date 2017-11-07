@@ -17,7 +17,8 @@ angular.module('appModule').component('route', {
 				console.log('in promise');
 				
 				vm.route = res.data;
-			
+				vm.route.id
+				vm.loadAllVenuesExcept(vm.route.id);
 			}).catch(function(err){
 				console.log(err);
 			});
@@ -62,11 +63,12 @@ angular.module('appModule').component('route', {
 		};
 		
 	
-		vm.loadAllVenues = function (){
+		vm.loadAllVenuesExcept = function (rid){
 			console.log('in Load All Venues');
-			routeService.indexAllVenues().then(function(res){
+			console.log(rid);
+			routeService.indexAllVenues(1, rid).then(function(res){
 				vm.allVenues = res.data;
-				console.log(vm.allVenues);
+				console.log(vm.indexAllVenues);
 			})
 		};
 		
@@ -75,6 +77,8 @@ angular.module('appModule').component('route', {
 		console.log('vm.route: ' + vm.route);
 		vm.loadRouteVenues();
 		console.log('vm.routeVenues: ' + vm.routeVenues);
+		vm.loadAllVenuesExcept();
+		console.log('vm.allothers: ' + vm.AllVenues);
 
 		vm.loadMembers = function() {
 			console.log('in load members');
@@ -99,7 +103,7 @@ angular.module('appModule').component('route', {
 		vm.resetPage = function() {
 			vm.loadRoute();
 			vm.loadRouteVenues();
-			vm.loadAllVenues();
+			vm.loadAllVenuesExcept(vm.route.id);
 		}
 
 	},
