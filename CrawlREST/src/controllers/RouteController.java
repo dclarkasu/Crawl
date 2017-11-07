@@ -33,7 +33,11 @@ public class RouteController {
 		return routeDao.index(uid);
 	}
 
-
+	@RequestMapping(path="users/{uid}/venuesExcept/{rid}", method=RequestMethod.GET)
+	public List<Venue> index(HttpServletRequest req, HttpServletResponse res,@PathVariable int uid,@PathVariable int rid) {
+		res.setStatus(202);
+		return routeDao.showAllVenuesExcept(uid, rid);
+	}
 
 
 	@RequestMapping(path="users/{uid}/routes/{sid}", method=RequestMethod.GET)

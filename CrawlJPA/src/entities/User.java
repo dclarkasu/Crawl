@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -38,7 +39,9 @@ public class User {
 	@ManyToMany(mappedBy="users", cascade = CascadeType.PERSIST)
 	private List<Group> groups;
 
-	
+	@JsonIgnore
+	@OneToMany(mappedBy="user")
+	private List<Post> posts;
 	
 	//Gets and Sets
 	public String getFirstName() {
@@ -93,6 +96,14 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", contact=" + contact + "]";
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 	
 }

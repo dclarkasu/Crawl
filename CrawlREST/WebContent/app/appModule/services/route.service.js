@@ -24,11 +24,11 @@ angular.module('appModule').factory('routeService', function($http, authService)
 		})
 	};
 	
-	service.addVenue = function(rid, venue) {
+	service.addVenue = function(rid, vid) {
 		console.log("adding Venue from route")
 		return $http ({
 			method : 'PUT',
-			url : 'rest/users/1/routes/'+rid +'/addVenues/'+vid
+			url : 'rest/users/1/routes/'+ rid +'/addVenues/' + vid
 		})
 	};
 	
@@ -40,11 +40,11 @@ angular.module('appModule').factory('routeService', function($http, authService)
 		})
 	};
 	
-	service.indexAllVenues = function (rid,vid) {
+	service.indexAllVenues = function (uid, rid) {
 		console.log("indexing Venues")
 		return $http ({
-			method : 'PUT',
-			url : 'rest/users/1/routes/'+rid+'/venues/'+vid
+			method : 'GET',
+			url : 'rest/users/1/venuesExcept/' + rid
 		})
 	};
 	
