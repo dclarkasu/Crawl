@@ -288,10 +288,10 @@ INSERT INTO user_group (user_id, group_id) VALUES (2,1);
 INSERT INTO user_group (user_id, group_id) VALUES (3,1);
 INSERT INTO user_group (user_id, group_id) VALUES (4,1);
 
-INSERT INTO login (user_name,password,user_id) VALUES ('cage','pass1',1);
-INSERT INTO login (user_name,password,user_id) VALUES ('funngirl','pass2',2);
-INSERT INTO login (user_name,password,user_id) VALUES ('dudeman','pass3',3);
-INSERT INTO login (user_name,password,user_id) VALUES ('red','pass4',4);
+INSERT INTO login (user_name,password,user_id) VALUES ('cage','$2a$10$Gs0mtbWIXqywHV8U43yrz.K4djTx1TLID1HS2iiGZgreM45Ysm1Ie',1);
+INSERT INTO login (user_name,password,user_id) VALUES ('funngirl','$2a$10$Gs0mtbWIXqywHV8U43yrz.K4djTx1TLID1HS2iiGZgreM45Ysm1Ie',2);
+INSERT INTO login (user_name,password,user_id) VALUES ('dudeman','$2a$10$Gs0mtbWIXqywHV8U43yrz.K4djTx1TLID1HS2iiGZgreM45Ysm1Ie',3);
+INSERT INTO login (user_name,password,user_id) VALUES ('red','$2a$10$Gs0mtbWIXqywHV8U43yrz.K4djTx1TLID1HS2iiGZgreM45Ysm1Ie',4);
 
 INSERT INTO post (group_id,user_id,message) VALUES (1,3,'lets go dude');
 
