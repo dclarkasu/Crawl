@@ -53,7 +53,7 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat="event in vm.events | orderBy:'id'">
-        <td><a class="badge badge-light" href="#/event">{{event.name}}</a></td>
+        <td><a class="badge badge-light" href="{{'#/event/'+event.id}}">{{event.name}}</a></td>
 				<td><button class="btn" id="deleteEventBtn" ng-click="vm.deleteEvent(event.id)">X</button></td>
 			</tr>
 		</tbody>

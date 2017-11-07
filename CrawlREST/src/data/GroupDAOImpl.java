@@ -173,6 +173,11 @@ public class GroupDAOImpl implements GroupDAO {
 	}
 
 	@Override
+	public Event findEventById(int eid) {
+		return em.find(Event.class, eid);
+	}
+
+	@Override
 	public Event updateEvent(int gid, int eid, String eventJSON) {
 		ObjectMapper mapper = new ObjectMapper();
 		Event mappedEvent = null;

@@ -21,6 +21,7 @@ public interface GroupDAO {
 	
 	//Event Specific Methods
 	public Event createEvent(int gid, String eventJSON);
+	public Event findEventById(int eid);
 	public Event updateEvent(int gid, int eid, String eventJSON);
 	public Boolean deleteEvent(int gid, int eid);
 	public Set<Event> findEventByGroupId(int gid);
