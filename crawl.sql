@@ -34,9 +34,34 @@ CREATE TABLE IF NOT EXISTS `address` (
   `zip` VARCHAR(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC))
-ENGINE = InnoDB
+ENGINE = InnoDB,
 DEFAULT CHARACTER SET = utf8;
 
+-- -----------------------------------------------------
+-- Table `freind` ---------
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `freind` ;
+
+CREATE TABLE IF NOT EXISTS `freind` (
+  `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` INT UNSIGNED NOT NULL,
+  `friend_id` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_user_friend`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_user_freind`
+    FOREIGN KEY (`friend_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC)
+)
+ENGINE = InnoDB,
+DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------
 -- Table `contact`
