@@ -1,6 +1,7 @@
-angular.module('appModule').factory('eventService', function($http, authService){
+angular.module('appModule').factory('eventService', function($http, authService, $routeParams){
 	var service = {};
 
+	var id = $cookies.get("userId");
 //	service.indexUserGroups = function() {
 //		return $http ({
 //			method : 'GET',
@@ -54,44 +55,13 @@ angular.module('appModule').factory('eventService', function($http, authService)
 		})
 	};
 
-//	service.indexEvents = function() {
-//		return $http({
-//			method : 'GET',
-//			url : 'rest/users/1/groups/1/events'
-//		})
-//	};
-//
-//	service.deleteEvent = function(id) {
-//		return $http({
-//			method: 'DELETE',
-//			url : 'rest/users/1/groups/1/events/'+id
-//		})
-//	}
-//
 //	service.indexUsers = function() {
 //		return $http({
 //			method : 'GET',
 //			url : 'rest/users'
 //		})
 //	};
-//
-//	service.addUserToGroup = function(gid, uid) {
-//		return $http({
-//			method : 'PUT',
-//			url : 'rest/users/'+uid +'/groups/'+gid,
-//			headers : {
-//				'Content-Type' : 'application/json'
-//			},
-//			data : null
-//		})
-//	};
-//
-//	service.removeUserFromGroup = function(gid, uid) {
-//		return $http({
-//			method : 'DELETE',
-//			url: 'rest/users/'+uid+'/group/'+gid,
-//		})
-//	};
+
 
 	return service;
 });

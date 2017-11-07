@@ -83,9 +83,9 @@ public class GroupController {
 		}
 	}
 	
-	@RequestMapping(path="users/{uid}/groups/{gid}", method=RequestMethod.PUT)
-	public Group addUserToGroup(@PathVariable int uid,@PathVariable int gid, HttpServletResponse res) {
-		Group updatedGroup = groupDAO.addUserToGroup(uid, gid);
+	@RequestMapping(path="users/{uid}/groups/{gid}/add/{mid}", method=RequestMethod.PUT)
+	public Group addUserToGroup(@PathVariable int mid,@PathVariable int gid, HttpServletResponse res) {
+		Group updatedGroup = groupDAO.addUserToGroup(mid, gid);
 		if (updatedGroup == null) {
 			res.setStatus(406);
 			return null;
@@ -95,9 +95,9 @@ public class GroupController {
 		}
 	}
 	
-	@RequestMapping(path="users/{uid}/group/{gid}", method=RequestMethod.DELETE)
-	public Group removeUserFromGroup(@PathVariable int uid,@PathVariable int gid, HttpServletResponse res) {
-		Group result = groupDAO.removeUserFromGroup(uid, gid);
+	@RequestMapping(path="users/{uid}/group/{gid}/remove/{mid}", method=RequestMethod.DELETE)
+	public Group removeUserFromGroup(@PathVariable int mid,@PathVariable int gid, HttpServletResponse res) {
+		Group result = groupDAO.removeUserFromGroup(mid, gid);
 		if (result == null) {
 			res.setStatus(406);
 			return null;

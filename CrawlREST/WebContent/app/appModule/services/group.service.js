@@ -33,11 +33,11 @@ angular.module('appModule').factory('groupService', function($http, authService,
 			url : `rest/users/${id}/post/group/` + gid
 		})
 	};
-
+//Needs a post id!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	service.createPost = function(newPost) {
 		return $http({
 			method : 'POST',
-			url : 'rest/users/1/posts/1/events',
+			url : `rest/users/${id}/posts/1/events`,
 			headers : {
 				'ContentType' : 'application/json'
 			},
@@ -95,14 +95,14 @@ angular.module('appModule').factory('groupService', function($http, authService,
 	service.indexUsers = function() {
 		return $http({
 			method : 'GET',
-			url : 'rest/users'
+			url : `rest/usersList`
 		})
 	};
 
-	service.addUserToGroup = function(gid) {
+	service.addUserToGroup = function(gid, mid) {
 		return $http({
 			method : 'PUT',
-			url : `rest/users/${id}/groups/${gid}`,
+			url : `rest/users/${id}/groups/${gid}/add/${mid}`,
 			headers : {
 				'Content-Type' : 'application/json'
 			},
@@ -110,10 +110,10 @@ angular.module('appModule').factory('groupService', function($http, authService,
 		})
 	};
 
-	service.removeUserFromGroup = function(gid) {
+	service.removeUserFromGroup = function(gid, mid) {
 		return $http({
 			method : 'DELETE',
-			url: `rest/users/${id}/group/${gid}`,
+			url: `rest/users/${id}/group/${gid}/remove/${mid}`,
 		})
 	};
 
