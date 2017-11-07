@@ -174,7 +174,10 @@ public class GroupDAOImpl implements GroupDAO {
 
 	@Override
 	public Event findEventById(int eid) {
-		return em.find(Event.class, eid);
+		Event event = em.find(Event.class, eid);
+		System.out.println("***************************************************");
+		System.out.println(event);
+		return event;
 	}
 
 	@Override
