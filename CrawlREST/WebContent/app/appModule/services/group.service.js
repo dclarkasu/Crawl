@@ -110,10 +110,10 @@ angular.module('appModule').factory('groupService', function($http, authService,
 		})
 	};
 
-	service.removeUserFromGroup = function(gid) {
+	service.removeUserFromGroup = function(gid, mid) {
 		return $http({
 			method : 'DELETE',
-			url: `rest/users/${id}/group/${gid}`,
+			url: `rest/users/${id}/group/${gid}/remove/${mid}`,
 		})
 	};
 
