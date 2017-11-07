@@ -41,9 +41,9 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `freind` ---------
 -- -----------------------------------------------------
 
-DROP TABLE IF EXISTS `freind` ;
+DROP TABLE IF EXISTS `friend` ;
 
-CREATE TABLE IF NOT EXISTS `freind` (
+CREATE TABLE IF NOT EXISTS `friend` (
   `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` INT UNSIGNED NOT NULL,
   `friend_id` INT UNSIGNED NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `freind` (
     REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_freind`
+  CONSTRAINT `fk_user_friend`
     FOREIGN KEY (`friend_id`)
     REFERENCES `user` (`id`)
     ON DELETE NO ACTION
