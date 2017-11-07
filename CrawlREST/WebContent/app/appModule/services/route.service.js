@@ -24,7 +24,7 @@ angular.module('appModule').factory('routeService', function($http, authService)
 		})
 	};
 	
-	service.addVenue = function(rid,vid) {
+	service.addVenue = function(rid, venue) {
 		console.log("adding Venue from route")
 		return $http ({
 			method : 'PUT',
@@ -37,6 +37,14 @@ angular.module('appModule').factory('routeService', function($http, authService)
 		return $http ({
 			method : 'PUT',
 			url : 'rest/users/1/routes/'+rid +'/venues/'+vid+'/change/0'
+		})
+	};
+	
+	service.indexAllVenues = function (rid,vid) {
+		console.log("indexing Venues")
+		return $http ({
+			method : 'PUT',
+			url : 'rest/users/1/routes/'+rid+'/venues/'+vid
 		})
 	};
 	

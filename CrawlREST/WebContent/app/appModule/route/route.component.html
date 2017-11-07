@@ -7,6 +7,13 @@
     <h1>{{vm.route.name}}</h1>
     <button class="btn" ng-hide="vm.editRoute" ng-click="vm.setEditRoute()">Edit Route</button>
   </div>
+  
+  <form class="form-group">
+        <select ng-model="selected" ng-options="venue.name for venue in vm.allVenues">
+        </select>
+        <button class="btn btn-success" ng-click="vm.addVenue(vm.route.id, selected)">Add Venue to Route</button>
+
+      </form>
 
   <table class="table" ng-show="vm.route">
 		<thead class="thead-dark">

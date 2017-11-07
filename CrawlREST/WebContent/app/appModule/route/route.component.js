@@ -6,6 +6,7 @@ angular.module('appModule').component('route', {
 
 		vm.route = null;
 		vm.routeVenues = null;
+		vm.allVenues = null;
 
 
 		vm.loadRoute = function() {
@@ -22,11 +23,17 @@ angular.module('appModule').component('route', {
 			});
 		}
 	
+		vm.addVenue = function(rid, venue) {
+			routeService.addVenue(rid, venue.id)
+			.then(function(res){
+				vm.resetPage();
+			})
+		}
+		
 		vm.removeVenue = function(rid,vid) {
 			routeService.removeVenue(rid,vid)
 			.then(function(res){
-				vm.loadRoute();
-				vm.loadRouteVenues();
+				vm.resetPage();
 			})
 		}
 		
@@ -34,15 +41,13 @@ angular.module('appModule').component('route', {
 		vm.venueUp = function(rid,vid) {
 			routeService.moveVenueUp(rid,vid)
 			.then(function(res){
-				vm.loadRoute();
-				vm.loadRouteVenues();
+				vm.resetPage();
 			})
 		}
 		vm.venueDown = function(rid,vid) {
 			routeService.moveVenueDown(rid,vid)
 			.then(function(res){
-				vm.loadRoute();
-				vm.loadRouteVenues();
+				vm.resetPage();
 			})
 		}
 		
@@ -55,7 +60,15 @@ angular.module('appModule').component('route', {
 				console.log(vm.routeVenues);
 			})
 		};
-
+		
+	
+		vm.loadAllVenues = function (){
+			console.log('in Load All Venues');
+			routeService.indexAllVenues().then(function(res){
+				vm.allVenues = res.data;
+				console.log(vm.allVenues);
+			})
+		};
 		
 		
 		vm.loadRoute();
@@ -82,7 +95,14 @@ angular.module('appModule').component('route', {
 				console.log(err);
 			})
 		};
+		
+		vm.resetPage = function() {
+			vm.loadRoute();
+			vm.loadRouteVenues();
+			vm.loadAllVenues();
+		}
 
 	},
 	controllerAs: 'vm'
 });
+
