@@ -282,11 +282,15 @@ INSERT INTO user (first_name,last_name,contact_id) VALUES ('david','brown',3);
 INSERT INTO user (first_name,last_name,contact_id) VALUES ('pam','grey',4);
 
 INSERT INTO crawl_group (name, admin_id) VALUES ('pub day',3);
+INSERT INTO crawl_group (name, admin_id) VALUES ('skywalker', 1);
 
-INSERT INTO user_group (user_id, group_id) VALUES (1,1);
 INSERT INTO user_group (user_id, group_id) VALUES (2,1);
 INSERT INTO user_group (user_id, group_id) VALUES (3,1);
 INSERT INTO user_group (user_id, group_id) VALUES (4,1);
+
+INSERT INTO user_group (user_id, group_id) VALUES (1,2);
+INSERT INTO user_group (user_id, group_id) VALUES (2,2);
+INSERT INTO user_group (user_id, group_id) VALUES (3,2);
 
 INSERT INTO login (user_name,password,user_id) VALUES ('cage','$2a$10$Gs0mtbWIXqywHV8U43yrz.K4djTx1TLID1HS2iiGZgreM45Ysm1Ie',1);
 INSERT INTO login (user_name,password,user_id) VALUES ('funngirl','$2a$10$Gs0mtbWIXqywHV8U43yrz.K4djTx1TLID1HS2iiGZgreM45Ysm1Ie',2);
