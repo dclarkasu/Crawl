@@ -1,6 +1,7 @@
-angular.module('appModule').factory('eventService', function($http, authService){
+angular.module('appModule').factory('eventService', function($http, authService, $routeParams){
 	var service = {};
 
+	var id = $cookies.get("userId");
 //	service.indexUserGroups = function() {
 //		return $http ({
 //			method : 'GET',
