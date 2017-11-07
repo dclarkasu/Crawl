@@ -72,7 +72,7 @@ public class UserController {
 	  }
 	 
 	 //user
-	  @RequestMapping(path="users", method=RequestMethod.GET)
+	  @RequestMapping(path="usersList", method=RequestMethod.GET)
 	  public Set<User> indexUsers(HttpServletResponse res) {
 		  Set<User> users = userDao.indexUsers();
 		  if (users == null) {

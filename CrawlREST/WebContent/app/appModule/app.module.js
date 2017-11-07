@@ -35,10 +35,10 @@ angular.module('appModule', ['ngRoute','ngCookies','authModule'])
 	.when('/venue/:vid', {
 		template: '<venue></venue>'
 	})
-	.when('/groups/:gid', {
+	.when('/group', {
 		template: '<group></group>'
 	})
-	.when('/group', {
+	.when('/group/:gid', {
 		template: '<group></group>'
 	})
 	.when('/event/:eid', {

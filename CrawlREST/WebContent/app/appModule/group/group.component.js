@@ -45,7 +45,7 @@ angular.module('appModule').component('group', {
 
 		vm.loadMembers = function() {
 			console.log('in load members');
-			groupService.indexMembers()
+			groupService.indexMembers($routeParams.gid)
 			.then(function(res) {
 				vm.members = res.data;
 				console.log(vm.members);
@@ -88,7 +88,7 @@ angular.module('appModule').component('group', {
 		};
 
 		vm.loadEvents = function() {
-			groupService.indexEvents()
+			groupService.indexEvents($routeParams.gid)
 			.then(function(res) {
 				console.log(res);
 				vm.events = res.data;
@@ -99,7 +99,7 @@ angular.module('appModule').component('group', {
 		};
 		
 		vm.loadMessages = function() {
-			groupService.indexGroupMessages()
+			groupService.indexGroupMessages($routeParams.gid)
 			.then(function(res) {
 				console.log(res);
 				vm.messageBoard = res.data;
