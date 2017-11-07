@@ -14,6 +14,8 @@ angular.module('appModule').component('group', {
 
 		vm.groupList = [];
 
+		vm.messageBoard = [];
+		
 		//Behaviors
 		vm.groupsByUser = function() {
 			groupService.indexUserGroups()
@@ -91,10 +93,29 @@ angular.module('appModule').component('group', {
 				console.log(err);
 			})
 		};
+		
+		vm.loadMessages = function() {
+			groupService.indexGroupMessages()
+			.then(function(res) {
+				console.log(res);
+				vm.messageBoard = res.data;
+				console.log("*****");
+				console.log(vm.messageBoard);
+				console.log("*****");
+			})
+			.catch(function(err) {
+				console.log(err);
+			})
+		};
 
 		vm.loadEvents();
 		console.log(vm.events);
 
+		vm.loadMessages();
+		console.log("vm.message board: ");
+	
+		
+		
 		vm.deleteEvent = function(id) {
 			groupService.deleteEvent(id)
 			.then(function(res){
