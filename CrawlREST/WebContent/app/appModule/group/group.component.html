@@ -78,9 +78,9 @@
 			<th><button class="btn" ng-hide="vm.newVenue" ng-click="vm.setNewVenue()">Create Venue</button></th>
 		</thead>
 		<tbody>
-			<tr ng-repeat="message in vm.messageBoard | orderBy:'id'">
+			<tr ng-repeat="p in vm.messageBoard | orderBy:'id'">
 			
-			 <td>{{p.user}}</td>
+			 <td>{{p}}</td>
         <td>{{p.message}}</td>
 				
 			</tr>

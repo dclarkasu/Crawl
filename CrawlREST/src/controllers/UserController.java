@@ -31,12 +31,12 @@ public class UserController {
 	
 	 //user auth
 	 @RequestMapping(path = "auth/register", method = RequestMethod.POST)
-	  public User registerUser(HttpSession session, @RequestBody String crawlJson, HttpServletResponse res) {
-		   Login log = userDao.registerUser(crawlJson);
-		   if(log != null) {
-			   session.setAttribute("user", log.getUser()); 
+	  public Login registerUser(HttpSession session, @RequestBody String crawlJson, HttpServletResponse res) {
+		   Login login = userDao.registerUser(crawlJson);
+		   if(login != null) {
+			   session.setAttribute("login", login); 
 			   res.setStatus(201);
-			   return log.getUser();
+			   return login;
 		   }
 		   res.setStatus(422);
 		   	return null;
@@ -44,12 +44,11 @@ public class UserController {
 	  }
 	  
 	  @RequestMapping(path = "auth/login", method = RequestMethod.POST)
-	  public User login(HttpSession session, @RequestBody String crawlJson, HttpServletResponse res) {
+	  public Login login(HttpSession session, @RequestBody String crawlJson, HttpServletResponse res) {
 		  Login login = userDao.loginUser(crawlJson);
-		  System.out.println(login);
 			if(login != null) {
-				  session.setAttribute("user", login.getUser());
-				  return login.getUser();
+				  session.setAttribute("login", login);
+				  return login;
 			}
 			res.setStatus(401);
 			return null;
@@ -57,10 +56,8 @@ public class UserController {
 	  
 	  @RequestMapping(path = "auth/logout", method = RequestMethod.POST)
 	  public Boolean logout(HttpSession session, HttpServletResponse response) {
-		  System.out.println(session.getAttribute("user"));
-		  session.removeAttribute("user");
-		  System.out.println(session.getAttribute("user"));
-		   if(session.getAttribute("user") == null) {
+		  session.removeAttribute("login");
+		   if(session.getAttribute("login") == null) {
 		    return true;
 		   }
 		  return false;
