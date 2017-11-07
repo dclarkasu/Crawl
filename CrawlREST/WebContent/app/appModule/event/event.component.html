@@ -4,12 +4,14 @@
     <h3>Event</h3>
     <h1>{{vm.event.name}}</h1>
 		{{vm.event.group.name}}
-    <button class="btn" ng-hide="vm.editGroup" ng-click="vm.setEditGroup()">Change Group Name</button>
-    <div ng-show="vm.editGroup">
+    <button class="btn" ng-hide="vm.editEvent" ng-click="vm.setEditEvent()">Edit Event</button>
+    <div ng-show="vm.editEvent">
       <form class="form-group">
-        <input type="text" placeholder="Group Name" ng-model="editGroup.name"/>
-        <button class="btn" ng-click="vm.updateGroup(editGroup); editGroup = {}">Edit</button>
-        <button class="btn btn-danger" ng-click="vm.cancel(); editGroup = {}">Cancel</button>
+        <input type="text" placeholder="Event Name" ng-model="editGroup.name"/>
+				<!-- Edit Date?? -->
+        <!-- <input type="text" placeholder="Event Name" ng-model="editGroup.name"/> -->
+        <button class="btn" ng-click="vm.updateEvent(editEvent); editEvent = {}">Edit</button>
+        <button class="btn btn-danger" ng-click="vm.cancel(); editEvent = {}">Cancel</button>
       </form>
     </div>
   </div>

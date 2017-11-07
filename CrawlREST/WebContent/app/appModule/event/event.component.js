@@ -37,6 +37,21 @@ angular.module('appModule').component('event', {
     // vm.loadGroup():
     // console.log(vm.group);
 
+    vm.setEditEvent = function() {
+			vm.editEvent = angular.copy(vm.event);
+		};
+
+		vm.updateEvent = function(event) {
+			groupService.updateEvent(event.id, event)
+			.then(function(res) {
+				vm.loadEvent();
+				vm.editEvent = null;
+			})
+			.catch(function(err) {
+				console.log(err);
+			})
+		};
+
   },
 controllerAs: 'vm'
 });
