@@ -95,6 +95,18 @@ public class GroupController {
 		}
 	}
 	
+	@RequestMapping(path="users/{uid}/group/{gid}", method=RequestMethod.DELETE)
+	public Group removeUserFromGroup(@PathVariable int uid,@PathVariable int gid, HttpServletResponse res) {
+		Group result = groupDAO.removeUserFromGroup(uid, gid);
+		if (result == null) {
+			res.setStatus(406);
+			return null;
+		} else {
+			res.setStatus(201);
+			return result;
+		}
+	}
+	
 	//Event Methods******************************************************
 	
 	@RequestMapping(path="users/{uid}/groups/{gid}/events", method=RequestMethod.POST)
@@ -108,6 +120,13 @@ public class GroupController {
 			return event;
 		}
 	}
+	
+	@RequestMapping(path="users/{id}/groups/{gid}/events/{eid}", method=RequestMethod.GET)
+    public Event showEvent(HttpServletResponse res,@PathVariable int gid, @PathVariable int eid) {
+        res.setStatus(200);
+        Event event = groupDAO.findEventById(eid);
+        return event;
+    }
 	
 	@RequestMapping(path="users/{uid}/groups/{gid}/events", method=RequestMethod.GET)
 	public Set<Event> findEventByGroupId(@PathVariable int gid, HttpServletResponse res) {

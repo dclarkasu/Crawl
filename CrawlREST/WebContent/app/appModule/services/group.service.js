@@ -76,7 +76,14 @@ angular.module('appModule').factory('groupService', function($http, authService)
 			},
 			data : null
 		})
-	}
+	};
+
+	service.removeUserFromGroup = function(gid, uid) {
+		return $http({
+			method : 'DELETE',
+			url: 'rest/users/'+uid+'/group/'+gid,
+		})
+	};
 
 	return service;
 });

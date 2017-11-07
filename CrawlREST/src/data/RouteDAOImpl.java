@@ -1,5 +1,6 @@
 package data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -100,27 +101,32 @@ public class RouteDAOImpl implements RouteDAO {
 	}
 
 	@Override
-	public void editVenueOrder(int uid, int rid, int vid, int change) {
+	public Boolean editVenueOrder(int uid, int rid, int vid, int change) {
 		change = 1 - change;
-
+		boolean bool = false;
+		Route r = em.find(Route.class, rid);
+		Venue v = em.find(Venue.class, vid);
+		
 		try {
 			String q = "SELECT r FROM RouteVenue r WHERE r.route =:r AND r.venue = :v";
-			RouteVenue rv = em.createQuery(q, RouteVenue.class).setParameter("r", em.find(Route.class, rid))
+			RouteVenue rv = em.createQuery(q, RouteVenue.class).setParameter("r", r)
 					.setParameter("v", em.find(Venue.class, vid)).getResultList().get(0);
-			q = "SELECT r FROM RouteVenue r WHERE r.routeId =:rid";
-			int rvn = em.createQuery(q, RouteVenue.class).setParameter("rid", rid).getResultList().size() - 1;
+			q = "SELECT r FROM RouteVenue r WHERE r.route =:r";
+			int rvn = em.createQuery(q, RouteVenue.class).setParameter("r", r).getResultList().size();
 			int rvs = rv.getSpot();
-			boolean test = (change > 0 ? (rvs < rvn ? true : false) : (rvs > 0 ? true : false));
+			boolean test = (change > 0 ? (rvs < rvn ? true : false) : (rvs > 1 ? true : false));
 			if (test) {
 				int rvts = rvs + change;
-				q = "SELECT r FROM RouteVenue r WHERE r.spot =:rvts AND r.venueId = :vid";
-				RouteVenue rvt = em.createQuery(q, RouteVenue.class).setParameter("rvts", rvts).getResultList().get(0);
+				q = "SELECT r FROM RouteVenue r WHERE r.spot =:rvts AND r.route = :r";
+				RouteVenue rvt = em.createQuery(q, RouteVenue.class).setParameter("rvts", rvts).setParameter("r", r).getResultList().get(0);
 				rv.setSpot(rvts);
 				rvt.setSpot(rvs);
+				bool = true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return bool;
 	}
 
 	@Override
@@ -149,8 +155,20 @@ public class RouteDAOImpl implements RouteDAO {
 
 	@Override
 	public List<Venue> showVenuesByRoute(int uid, int sid) {
-		String q = "SELECT V from Venue WHERE v.routeVenue.route.id = :rid";
-		List <Venue> venues = em.createQuery(q, Venue.class).setParameter("rid", sid).getResultList();
+		String q = "SELECT v from RouteVenue v where v.route.id = :rid";
+		List <RouteVenue> rVenues = em.createQuery(q, RouteVenue.class).setParameter("rid", sid).getResultList();
+		List<Venue> venues = new ArrayList<Venue>();
+		for (RouteVenue routeVenue : rVenues) {
+			venues.add(routeVenue.getVenue());
+		}
 		return venues;
+	}
+	
+	@Override
+	public List<RouteVenue> showRouteVenuesByRoute(int uid, int sid){
+		String q = "SELECT v from RouteVenue v where v.route.id = :rid";
+		List <RouteVenue> rVenues = em.createQuery(q, RouteVenue.class).setParameter("rid", sid).getResultList();
+		System.out.println(rVenues);
+		return rVenues;
 	}
 }

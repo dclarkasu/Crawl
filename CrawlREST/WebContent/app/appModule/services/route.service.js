@@ -15,12 +15,52 @@ angular.module('appModule').factory('routeService', function($http, authService)
 			url : 'rest/users/1/routes/1'
 		})
 	};
+	
+	service.removeVenue = function(rid,vid) {
+		console.log("removing Venue from route")
+		return $http ({
+			method : 'PUT',
+			url : 'rest/users/1/routes/'+rid +'/removeVenues/'+vid
+		})
+	};
+	
+	service.addVenue = function(rid, venue) {
+		console.log("adding Venue from route")
+		return $http ({
+			method : 'PUT',
+			url : 'rest/users/1/routes/'+rid +'/addVenues/'+vid
+		})
+	};
+	
+	service.moveVenueUp = function(rid,vid) {
+		console.log("moving Venue Up")
+		return $http ({
+			method : 'PUT',
+			url : 'rest/users/1/routes/'+rid +'/venues/'+vid+'/change/0'
+		})
+	};
+	
+	service.indexAllVenues = function (rid,vid) {
+		console.log("indexing Venues")
+		return $http ({
+			method : 'PUT',
+			url : 'rest/users/1/routes/'+rid+'/venues/'+vid
+		})
+	};
+	
+	service.moveVenueDown = function(rid,vid) {
+		console.log("moving Venue down")
+		return $http ({
+			method : 'PUT',
+			url : 'rest/users/1/routes/'+rid +'/venues/'+vid+'/change/2'
+		})
+	};
 
-	service.indexVenues = function() {
+	service.indexRouteVenues = function() {
 		console.log('in route service');
 		return $http ({
 			method : 'GET',
-			url : 'rest/users/1/routes/1/venues'
+			url : 'rest/users/1/routes/1/routeVenues'
 		})
 	};
 

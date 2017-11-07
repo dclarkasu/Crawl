@@ -27,10 +27,18 @@ angular.module('appModule', ['ngRoute','ngCookies','authModule'])
 			<user></user>
 			`
 	})
+	.when('/user/uid', {
+		template : `
+			<user></user>
+			`
+	})
 	.when('/venue/:vid', {
 		template: '<venue></venue>'
 	})
 	.when('/group', {
 		template: '<group></group>'
+	})
+	.when('/event/:eid', {
+		template: '<event></event>'
 	})
 });

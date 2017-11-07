@@ -27,6 +27,7 @@ public class Venue {
 	private String hours;
 	private String imgUrl;
 
+	
 	@JsonIgnore
 	@OneToMany(mappedBy="venue")
 	private List<RouteVenue> routeVenues;

@@ -23,7 +23,6 @@ public class Route {
 	private String name;
 	
 	@JsonIgnore
-
 	@OneToMany(mappedBy="route", fetch=FetchType.EAGER)
 	private List<RouteVenue> routeVenues;
 	
