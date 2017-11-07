@@ -1,6 +1,6 @@
 angular.module('appModule').component('user', {
 	templateUrl : 'app/appModule/user/user.component.html',
-	controller : function(userService,$routeParams) {
+	controller : function(userService,$routeParams, $location) {
 
 
 		// Variables
@@ -8,50 +8,52 @@ angular.module('appModule').component('user', {
 
 		vm.selected = null;
 		vm.editUser = null;
-		
+
 		vm.groups = [];
 
-		
-		
+		loadUser();
 		// Behaviors
-		
+
 		//show user
-		var id = parseInt($routeParams)
-			userService.showUser(id)
+		function loadUser(){
+			userService.showUser($routeParams.uid)
 			.then(function(res) {
+				vm.findGroupByUserId();
 				vm.selected = res.data;
-				if (!res.data) {
-					$location.path('_404');
-				}
 			})
-			
+			.catch(function(err){
+				console.log(err);
+				$location.path('_404');
+			})
+		}
+
 		//update user
 		vm.updateUser = function() {
 			console.log(vm.editUser);
 		var res = userService.updateUser(vm.editUser);
-		
+
 		res.then(function(res) {
-			
+
 			vm.selected = res.data;
 			vm.editUser = null;
-		
-			
+
+
 		})
-		
+
 	}
-		
-	
-		
+
+
+
 		//Copy info over to edit form
 		vm.setEditUser = function(user) {
 			vm.editUser = angular.copy(vm.selected);
-			
+
 		};
 		vm.setEditContact = function(contact) {
 			vm.editContact = angular.copy(vm.selected);
-			
+
 		};
-			
+
 
 		// reloads user by group
 		vm.findGroupByUserId = function() {
@@ -61,7 +63,6 @@ angular.module('appModule').component('user', {
 			})
 		}
 
-		vm.findGroupByUserId();
 
 		// create new group
 		vm.createGroup = function(newGroup) {
@@ -72,7 +73,7 @@ angular.module('appModule').component('user', {
 			vm.findGroupByUserId();
 			})
 		}
-		
+
 
 	},
 

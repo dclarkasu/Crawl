@@ -16,6 +16,14 @@ angular.module('appModule').factory('eventService', function($http, authService)
 		})
 	};
 
+	// service.showGroup = function(eid) {
+	// 	console.log("in showEvent")
+	// 	return $http ({
+	// 		method : 'GET',
+	// 		url : 'rest/users/1/groups/1/events/'+eid
+	// 	})
+	// };
+
 //	service.indexMembers = function() {
 //		console.log('in member service');
 //		return $http ({
@@ -34,18 +42,18 @@ angular.module('appModule').factory('eventService', function($http, authService)
 //			data : newEvent
 //		})
 //	};
-//
-//	service.updateGroup = function(group) {
-//		return $http ({
-//			method : 'PUT',
-//			url : 'rest/users/1/group/1',
-//			headers : {
-//		        'Content-Type' : 'application/json'
-//		      },
-//		      data : group
-//		})
-//	};
-//
+
+	service.updateEvent = function(eid, event) {
+		return $http ({
+			method : 'PUT',
+			url : 'rest/users/1/groups/1/events/'+eid,
+			headers : {
+		        'Content-Type' : 'application/json'
+		      },
+		      data : event
+		})
+	};
+
 //	service.indexEvents = function() {
 //		return $http({
 //			method : 'GET',

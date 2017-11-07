@@ -27,7 +27,7 @@ angular.module('appModule', ['ngRoute','ngCookies','authModule'])
 			<user></user>
 			`
 	})
-	.when('/user/uid', {
+	.when('/user/:uid', {
 		template : `
 			<user></user>
 			`
@@ -35,10 +35,19 @@ angular.module('appModule', ['ngRoute','ngCookies','authModule'])
 	.when('/venue/:vid', {
 		template: '<venue></venue>'
 	})
+	.when('/groups/:gid', {
+		template: '<group></group>'
+	})
 	.when('/group', {
 		template: '<group></group>'
 	})
 	.when('/event/:eid', {
 		template: '<event></event>'
 	})
+	.when('/unauthorized',{
+		template: '<unauthorized></unauthorized>'
+	})
+	.otherwise({
+		template : '<notfound></notfound>'
+	});
 });

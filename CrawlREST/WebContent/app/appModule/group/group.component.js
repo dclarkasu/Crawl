@@ -30,7 +30,7 @@ angular.module('appModule').component('group', {
 		};
 
 		vm.loadGroup = function() {
-			var promise = groupService.showGroup();
+			var promise = groupService.showGroup($routeParams.gid);
 			promise.then(function(res){
 				console.log(res);
 				console.log('in promise');
