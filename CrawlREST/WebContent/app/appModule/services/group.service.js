@@ -1,42 +1,44 @@
-angular.module('appModule').factory('groupService', function($http, authService){
+angular.module('appModule').factory('groupService', function($http, authService, $cookies){
 	var service = {};
+	
+	var id = $cookies.get("userId");
 
 	service.indexUserGroups = function() {
 		return $http ({
 			method : 'GET',
-			url : 'rest/users/1/groups'
+			url : `rest/users/${id}/groups`
 		})
 	};
 
-	service.showGroup = function() {
+	service.showGroup = function(gid) {
 		console.log("in showGroup")
 		return $http ({
 			method : 'GET',
-			url : 'rest/users/1/groups/1'
+			url : `rest/users/${id}/groups/` + gid
 		})
 	};
 
-	service.indexMembers = function() {
+	service.indexMembers = function(gid) {
 		console.log('in member service');
 		return $http ({
 			method : 'GET',
-			url : 'rest/users/1/group/1'
+			url : `rest/users/${id}/group/` + gid
 		})
 	};
 	
-	service.indexGroupMessages = function() {
+	service.indexGroupMessages = function(gid) {
 		console.log('messages');
 		return $http ({
 			method : 'GET',
-			url : 'rest/users/1/post/group/1'
+			url : `rest/users/${id}/post/group/` + gid
 		})
 	};
 
 
-	service.createEvent = function(newEvent) {
+	service.createEvent = function(newEvent, gid) {
 		return $http({
 			method : 'POST',
-			url : 'rest/users/1/groups/1/events',
+			url : `rest/users/${id}/groups/${gid}/events`,
 			headers : {
 				'ContentType' : 'application/json'
 			},
@@ -44,10 +46,10 @@ angular.module('appModule').factory('groupService', function($http, authService)
 		})
 	};
 
-	service.updateGroup = function(group) {
+	service.updateGroup = function(group, gid) {
 		return $http ({
 			method : 'PUT',
-			url : 'rest/users/1/group/1',
+			url : `rest/users/${id}/group/${gid}`,
 			headers : {
 		        'Content-Type' : 'application/json'
 		      },
@@ -55,17 +57,17 @@ angular.module('appModule').factory('groupService', function($http, authService)
 		})
 	};
 
-	service.indexEvents = function() {
+	service.indexEvents = function(gid) {
 		return $http({
 			method : 'GET',
-			url : 'rest/users/1/groups/1/events'
+			url : `rest/users/${id}/groups/${gid}/events`
 		})
 	};
 
-	service.deleteEvent = function(id) {
+	service.deleteEvent = function(gid, eid) {
 		return $http({
 			method: 'DELETE',
-			url : 'rest/users/1/groups/1/events/'+id
+			url : `rest/users/${id}/groups/${gid}/events/${eid}`
 		})
 	}
 
@@ -76,10 +78,10 @@ angular.module('appModule').factory('groupService', function($http, authService)
 		})
 	};
 
-	service.addUserToGroup = function(gid, uid) {
+	service.addUserToGroup = function(gid) {
 		return $http({
 			method : 'PUT',
-			url : 'rest/users/'+uid +'/groups/'+gid,
+			url : `rest/users/${id}/groups/${gid}`,
 			headers : {
 				'Content-Type' : 'application/json'
 			},
@@ -87,10 +89,10 @@ angular.module('appModule').factory('groupService', function($http, authService)
 		})
 	};
 
-	service.removeUserFromGroup = function(gid, uid) {
+	service.removeUserFromGroup = function(gid) {
 		return $http({
 			method : 'DELETE',
-			url: 'rest/users/'+uid+'/group/'+gid,
+			url: `rest/users/${id}/group/${gid}`,
 		})
 	};
 

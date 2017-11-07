@@ -4,7 +4,9 @@ angular.module('appModule')
 	controller: function($cookies){
 		
 		var vm = this;
-		vm.userId = $cookies.get('userId');
+		vm.getUserId = function(){
+			return $cookies.get('userId');
+		}
 		vm.isLoggedIn = function(){
 			if($cookies.get('userId')){
 				return true

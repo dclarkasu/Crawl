@@ -18,6 +18,7 @@ angular.module('appModule').component('user', {
 		function loadUser(){
 			userService.showUser($routeParams.uid)
 			.then(function(res) {
+				vm.findGroupByUserId();
 				vm.selected = res.data;
 			})
 			.catch(function(err){
@@ -62,7 +63,6 @@ angular.module('appModule').component('user', {
 			})
 		}
 
-		vm.findGroupByUserId();
 
 		// create new group
 		vm.createGroup = function(newGroup) {
