@@ -9,6 +9,7 @@
         <class>entities.Address</class>
         <class>entities.Contact</class>
         <class>entities.Event</class>
+            <class>entities.Friend</class>
         <class>entities.Group</class>
         <class>entities.Login</class>
         <class>entities.Route</class>
