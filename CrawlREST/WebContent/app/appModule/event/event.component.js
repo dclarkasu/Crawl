@@ -1,6 +1,6 @@
 angular.module('appModule').component('event', {
 	templateUrl : "app/appModule/event/event.component.html",
-	controller : function(eventService, $routeParams) {
+	controller : function(eventService, $routeParams, groupService) {
     var vm = this;
 
     vm.event = null;
@@ -8,6 +8,8 @@ angular.module('appModule').component('event', {
     vm.group = null;
 
     vm.route = null;
+
+    vm.members = [];
 
     vm.eventID = $routeParams.eid;
 
@@ -20,6 +22,8 @@ angular.module('appModule').component('event', {
     			vm.event = res.data;
           console.log("Event:");
           console.log(vm.event);
+          vm.loadMembers();
+          console.log('members: ' + vm.members);
     		})
     };
 
@@ -49,6 +53,14 @@ angular.module('appModule').component('event', {
 			})
 			.catch(function(err) {
 				console.log(err);
+			})
+		};
+
+    vm.loadMembers = function() {
+			groupService.indexMembers(vm.event.group.id)
+			.then(function(res) {
+				vm.members = res.data;
+				console.log(vm.members);
 			})
 		};
 

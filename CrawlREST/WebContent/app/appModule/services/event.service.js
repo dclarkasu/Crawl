@@ -1,6 +1,7 @@
-angular.module('appModule').factory('eventService', function($http, authService){
+angular.module('appModule').factory('eventService', function($http, authService, $routeParams, $cookies){
 	var service = {};
 
+	var id = $cookies.get("userId");
 //	service.indexUserGroups = function() {
 //		return $http ({
 //			method : 'GET',
@@ -12,7 +13,7 @@ angular.module('appModule').factory('eventService', function($http, authService)
 		console.log("in showEvent")
 		return $http ({
 			method : 'GET',
-			url : 'rest/users/1/groups/1/events/'+eid
+			url : `rest/users/${id}/group/events/${eid}`
 		})
 	};
 
