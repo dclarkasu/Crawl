@@ -27,4 +27,6 @@ public interface RouteDAO {
 	  public List<Venue> showVenuesByRoute(int uid, int sid); 
 	
 	  public List<RouteVenue> showRouteVenuesByRoute(int uid, int sid); 
+	  
+	  public List<Venue> showAllVenuesExcept(int uid, int sid); 
 }

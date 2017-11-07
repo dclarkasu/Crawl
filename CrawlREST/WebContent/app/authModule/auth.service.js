@@ -1,22 +1,23 @@
 angular.module('authModule')
   .factory('authService', function($http, $cookies) {
     var service = {};
-
-    var saveToken = function(user) {
-    		$cookies.put('userId', user.id);
-    		$cookies.put('email', user.email);
+    
+    function saveUserCookie(login){
+	    	$cookies.put('userId', login.user.id);
+	    	$cookies.put('username', login.username);
+    		
     }
-
-    service.getToken = function() {
-      return {
-    	  	userId: $cookies.get('userId'),
-    	  	email: $cookies.get('email')
-      }
+    service.getUserCookie = function(){
+    		return {
+    			id: $cookies.get('userId'),
+    			username: $cookies.get('username'),
+    		}
     }
+   
 
-    var removeToken = function() {
+    function removeUserCookie() {
     		$cookies.remove('userId');
-    		$cookies.remove('email');
+    		$cookies.remove('username');
     }
 
     service.login = function(user) {
@@ -30,7 +31,7 @@ angular.module('authModule')
 			  data : user
 		    })
 		    .then(function(res){
-		    		saveToken(res.data);
+		    		saveUserCookie(res.data);
 		    		return res;
 		    }).
 		    catch(function(err){
@@ -49,7 +50,7 @@ angular.module('authModule')
 			  data : user
 		    })
 		    .then(function(res){
-		    		saveToken(res.data);
+		    		saveUserCookie(res.data);
 		    		return res;
 		    });
     }
@@ -60,7 +61,7 @@ angular.module('authModule')
 		      url : 'rest/auth/logout',
 		    })
 		    .then(function(res){
-		    		removeToken();
+		    		removeUserCookie();
 		    		return res;
 		    });
     }

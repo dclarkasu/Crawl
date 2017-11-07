@@ -23,6 +23,15 @@ angular.module('appModule').factory('groupService', function($http, authService)
 			url : 'rest/users/1/group/1'
 		})
 	};
+	
+	service.indexGroupMessages = function() {
+		console.log('messages');
+		return $http ({
+			method : 'GET',
+			url : 'rest/users/1/post/group/1'
+		})
+	};
+
 
 	service.createEvent = function(newEvent) {
 		return $http({

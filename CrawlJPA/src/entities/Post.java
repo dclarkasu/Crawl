@@ -21,7 +21,7 @@ public class Post {
 	@JoinColumn(name="group_id")
 	private Group group;
 	
-	@JsonIgnore
+	//@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;

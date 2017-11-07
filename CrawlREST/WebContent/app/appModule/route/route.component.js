@@ -6,6 +6,7 @@ angular.module('appModule').component('route', {
 
 		vm.route = null;
 		vm.routeVenues = null;
+		vm.allVenues = null;
 
 
 		vm.loadRoute = function() {
@@ -16,17 +17,24 @@ angular.module('appModule').component('route', {
 				console.log('in promise');
 				
 				vm.route = res.data;
-			
+				vm.route.id
+				vm.loadAllVenuesExcept(vm.route.id);
 			}).catch(function(err){
 				console.log(err);
 			});
 		}
 	
+		vm.addVenue = function(rid, venue) {
+			routeService.addVenue(rid, venue.id)
+			.then(function(res){
+				vm.resetPage();
+			})
+		}
+		
 		vm.removeVenue = function(rid,vid) {
 			routeService.removeVenue(rid,vid)
 			.then(function(res){
-				vm.loadRoute();
-				vm.loadRouteVenues();
+				vm.resetPage();
 			})
 		}
 		
@@ -34,15 +42,13 @@ angular.module('appModule').component('route', {
 		vm.venueUp = function(rid,vid) {
 			routeService.moveVenueUp(rid,vid)
 			.then(function(res){
-				vm.loadRoute();
-				vm.loadRouteVenues();
+				vm.resetPage();
 			})
 		}
 		vm.venueDown = function(rid,vid) {
 			routeService.moveVenueDown(rid,vid)
 			.then(function(res){
-				vm.loadRoute();
-				vm.loadRouteVenues();
+				vm.resetPage();
 			})
 		}
 		
@@ -55,13 +61,24 @@ angular.module('appModule').component('route', {
 				console.log(vm.routeVenues);
 			})
 		};
-
+		
+	
+		vm.loadAllVenuesExcept = function (rid){
+			console.log('in Load All Venues');
+			console.log(rid);
+			routeService.indexAllVenues(1, rid).then(function(res){
+				vm.allVenues = res.data;
+				console.log(vm.indexAllVenues);
+			})
+		};
 		
 		
 		vm.loadRoute();
 		console.log('vm.route: ' + vm.route);
 		vm.loadRouteVenues();
 		console.log('vm.routeVenues: ' + vm.routeVenues);
+		vm.loadAllVenuesExcept();
+		console.log('vm.allothers: ' + vm.AllVenues);
 
 		vm.loadMembers = function() {
 			console.log('in load members');
@@ -82,7 +99,14 @@ angular.module('appModule').component('route', {
 				console.log(err);
 			})
 		};
+		
+		vm.resetPage = function() {
+			vm.loadRoute();
+			vm.loadRouteVenues();
+			vm.loadAllVenuesExcept(vm.route.id);
+		}
 
 	},
 	controllerAs: 'vm'
 });
+
