@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `friend` (
     REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_friend`
+  CONSTRAINT `fk_user_fr`
     FOREIGN KEY (`friend_id`)
     REFERENCES `user` (`id`)
     ON DELETE NO ACTION
