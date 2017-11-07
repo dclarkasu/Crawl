@@ -11,10 +11,11 @@ angular.module('appModule').component('user', {
 		
 		vm.groups = [];
 
-		
+		loadUser();
 		// Behaviors
 		
 		//show user
+		function loadUser(){
 			userService.showUser($routeParams.uid)
 			.then(function(res) {
 				vm.selected = res.data;
@@ -23,6 +24,7 @@ angular.module('appModule').component('user', {
 				console.log(err);
 				$location.path('_404');
 			})
+		}
 			
 		//update user
 		vm.updateUser = function() {

@@ -1,5 +1,5 @@
 angular.module('appModule')
-.factory('userService', function($http, authService, $cookies, $path) {
+.factory('userService', function($http, authService, $cookies, $location) {
   var service = {};
 
   var BASE_URL = 'http://localhost:8080/CrawlREST/rest';
@@ -7,8 +7,7 @@ angular.module('appModule')
 
   //user
   //findUser
-  service.showUser = function() {
-	  var id = $cookies.get('userId');
+  service.showUser = function(id) {
 	  if(id){
 		  return $http({
 			  method : 'GET',
@@ -18,8 +17,7 @@ angular.module('appModule')
 	  }
   };
   //indexUserByGroup
-  service.indexUserByGroup = function() {
-	  var id = $cookies.get('userId');
+  service.indexUserByGroup = function(id) {
 	  if(id){
 		  return $http({
 			  method : 'GET',

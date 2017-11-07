@@ -113,8 +113,10 @@ public class UserDAOImpl implements UserDAO {
 			e.printStackTrace();
 		}
 		User u = em.find(User.class, id);
-		
-		Contact c = contactDao.updateContact(id, mappedUser.getContact().getId(), mappedUser.getContact());
+		if(mappedUser.getContact() != null) {
+			Contact c = contactDao.updateContact(id, mappedUser.getContact().getId(), mappedUser.getContact());
+			u.setContact(c);
+		}
 		u.setFirstName(mappedUser.getFirstName());
 		u.setLastName(mappedUser.getLastName());
 		u.setImgUrl(mappedUser.getImgUrl());
