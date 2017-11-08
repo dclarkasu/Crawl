@@ -24,7 +24,9 @@ public class User {
 	
 	private String imgUrl;
 	
-	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
+	@JsonIgnore
+	@OneToMany
+	@JoinColumn(name="user_id")
 	private List<User> friends;
 	
 	

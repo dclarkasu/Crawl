@@ -16,7 +16,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import entities.Event;
 import entities.Group;
+import entities.Route;
+import entities.RouteVenue;
 import entities.User;
+import entities.Venue;
 
 @Transactional
 @Repository
@@ -233,6 +236,16 @@ public class GroupDAOImpl implements GroupDAO {
 		System.out.println(eventList);
 		return new HashSet<>(eventList);
 
+	}
+	
+	@Override
+	public Event addRouteToEvent(int rid, int eid) {
+		Route r = em.find(Route.class, rid);
+		Event e = em.find(Event.class, eid);
+
+		e.setRoute(r);
+		
+		return e;
 	}
 
 }

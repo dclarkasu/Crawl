@@ -5,13 +5,11 @@ angular.module('appModule').component('event', {
 
     vm.event = null;
 
-    vm.group = null;
-
-    vm.route = null;
-
     vm.members = [];
 
     vm.eventID = $routeParams.eid;
+
+    vm.routes = [];
 
     //Behaviors
 
@@ -24,6 +22,7 @@ angular.module('appModule').component('event', {
           console.log(vm.event);
           vm.loadMembers();
           console.log('members: ' + vm.members);
+          vm.loadRoutes();
     		})
     };
 
@@ -46,7 +45,9 @@ angular.module('appModule').component('event', {
 		};
 
 		vm.updateEvent = function(event) {
-			groupService.updateEvent(event.id, event)
+      console.log("event : ");
+      console.log(event);
+			eventService.updateEvent(vm.eventID, vm.event.group.id, event)
 			.then(function(res) {
 				vm.loadEvent();
 				vm.editEvent = null;
@@ -61,6 +62,32 @@ angular.module('appModule').component('event', {
 			.then(function(res) {
 				vm.members = res.data;
 				console.log(vm.members);
+			})
+		};
+
+    vm.setNewRoute = function() {
+			vm.newRoute = {};
+		};
+
+		vm.addRoute = function(eid, newRoute) {
+			console.log(newRoute);
+			eventService.addRouteToEvent(eid, newRoute.id)
+			.then(function(res) {
+				// vm.loadRoutes();
+				vm.loadEvent();
+				vm.newRoute = null;
+			})
+			.catch(function(err) {
+				console.log(err);
+			})
+		};
+
+    vm.loadRoutes = function() {
+			console.log('in load routes');
+			eventService.indexRoutes()
+			.then(function(res) {
+				vm.routes = res.data;
+				console.log(vm.routes);
 			})
 		};
 

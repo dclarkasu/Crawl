@@ -26,9 +26,9 @@ public class RouteController {
 	public String ping() {
 		return "pong";
 	}
-
+	//Gets all routes
 	@RequestMapping(path="users/{uid}/routes", method=RequestMethod.GET)
-	public List<Route> show(HttpServletRequest req, HttpServletResponse res,@PathVariable int uid) {
+	public List<Route> indexRoutes(HttpServletRequest req, HttpServletResponse res,@PathVariable int uid) {
 		res.setStatus(202);
 		return routeDao.index(uid);
 	}

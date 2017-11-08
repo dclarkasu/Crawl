@@ -26,5 +26,5 @@ public interface GroupDAO {
 	public Boolean deleteEvent(int gid, int eid);
 	public Set<Event> findEventByGroupId(int gid);
 	public Set<Event> findEventsByUserId(int uid);
-	
+	public Event addRouteToEvent(int rid, int eid);
 }

@@ -4,10 +4,11 @@
     <h3>Event</h3>
     <h1>{{vm.event.name}}</h1>
 		<h2>Group: <a class="link link-active" href="{{'#/group/' + vm.event.group.id}}">{{vm.event.group.name}}</a></h2>
-    <button class="btn" ng-hide="vm.editEvent" ng-click="vm.setEditEvent()">Edit Event</button>
+
+	  <button class="btn" ng-hide="vm.editEvent" ng-click="vm.setEditEvent()">Edit Event</button>
     <div ng-show="vm.editEvent">
       <form class="form-group">
-        <input type="text" placeholder="Event Name" ng-model="editGroup.name"/>
+        <input type="text" placeholder="Event Name" ng-model="editEvent.name"/>
 				<!-- Edit Date?? -->
         <!-- <input type="text" placeholder="Event Name" ng-model="editGroup.name"/> -->
         <button class="btn" ng-click="vm.updateEvent(editEvent); editEvent = {}">Edit</button>
@@ -16,35 +17,38 @@
     </div>
   </div>
 
-  <div ng-show="vm.members">
+  <div ng-show="vm.members && vm.event">
     <h2>Members: </h2>
     <ul ng-repeat="member in vm.members |orderBy:'id'">
       <li>{{member.firstName}} {{member.lastName}}</li>
     </ul>
 	</div>
 
+	<div ng-show="vm.event.route">
+			<h1>HII {{vm.event.route.name}}</h1>
+	</div>
 
-    <!-- <button class="btn" ng-click="vm.setRemoveMember()">Remove Member</button>
-    <div ng-show="vm.memberToRemove">
-      <form class="form-group">
-        <select ng-model="removeSelection" ng-options="member.firstName for member in vm.members">
-        </select>
-        <button class="btn btn-danger" ng-click="vm.removeMember(vm.group.id, removeSelection); member = {}">Remove</button>
-        <button class="btn btn-danger" ng-click="vm.cancel()">Cancel</button>
-      </form>
-    </div>
-  </div> -->
+	<button class="btn" ng-click="vm.setNewRoute()">New Route</button>
+	<div ng-show="vm.newRoute">
+		<form class="form-group">
+			<select ng-model="selected" ng-options="route.name for route in vm.routes">
+			</select>
+			<button class="btn btn-success" ng-click="vm.addRoute(vm.event.id, selected); route = {}">Add</button>
+			<button class="btn btn-danger" ng-click="vm.cancel()">Cancel</button>
+		</form>
+	</div>
+</div>
 
-  <table class="table" ng-show="vm.events">
+  <table class="table" ng-show="vm.event.route">
 		<thead class="thead-dark">
-			<th>Event</th>
+			<th>Route</th>
 			<th>Delete</th>
       <th></th>
       <th></th>
 			<th><button class="btn" ng-hide="vm.newEvent" ng-click="vm.setNewEvent()">Create Event</button></th>
 		</thead>
 		<tbody>
-			<tr ng-repeat="event in vm.events | orderBy:'id'">
+			<tr ng-repeat="route in vm.events | orderBy:'id'">
         <td><a class="badge badge-light" href="{{'#/event/'+event.id}}">{{event.name}}</a></td>
 				<td><button class="btn" id="deleteEventBtn" ng-click="vm.deleteEvent(event.id)">X</button></td>
 			</tr>

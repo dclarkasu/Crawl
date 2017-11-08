@@ -175,4 +175,16 @@ public class GroupController {
 			return events;
 		}
 	}
+
+	@RequestMapping(path="users/{uid}/group/events/{eid}/route/{rid}", method=RequestMethod.PUT)
+	public Event addRouteToEvent(@PathVariable int eid, @PathVariable int rid, HttpServletResponse res) {
+		Event event = groupDAO.addRouteToEvent(rid, eid);
+		if (event == null) {
+			res.setStatus(422);
+			return null;
+		} else {
+			res.setStatus(200);
+			return event;
+		}
+	}
 }

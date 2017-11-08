@@ -19,7 +19,7 @@ public class Event {
 	
 	private String name;
 	
-	@JsonIgnore
+	
 	@ManyToOne
 	@JoinColumn(name="route_id")
 	private Route route;

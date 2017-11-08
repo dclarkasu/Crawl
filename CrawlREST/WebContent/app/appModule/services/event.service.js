@@ -44,10 +44,10 @@ angular.module('appModule').factory('eventService', function($http, authService,
 //		})
 //	};
 
-	service.updateEvent = function(eid, event) {
+	service.updateEvent = function(eid, gid, event) {
 		return $http ({
 			method : 'PUT',
-			url : 'rest/users/1/groups/1/events/'+eid,
+			url : `rest/users/${id}/groups/${gid}/events/${eid}`,
 			headers : {
 		        'Content-Type' : 'application/json'
 		      },
@@ -55,12 +55,23 @@ angular.module('appModule').factory('eventService', function($http, authService,
 		})
 	};
 
-//	service.indexUsers = function() {
-//		return $http({
-//			method : 'GET',
-//			url : 'rest/users'
-//		})
-//	};
+	service.addRouteToEvent = function(eid, rid) {
+		return $http ({
+			method : 'PUT',
+			url : `rest/users/${id}/group/events/${eid}/route/${rid}`,
+			headers : {
+		        'Content-Type' : 'application/json'
+		      },
+		      data : event
+		})
+	};
+
+	service.indexRoutes = function() {
+		return $http({
+			method : 'GET',
+			url : `rest/users/${id}/routes`
+		})
+	};
 
 
 	return service;
