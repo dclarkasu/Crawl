@@ -1,9 +1,9 @@
 angular.module('appModule')
-.factory('userService', function($http, authService, $cookies, $location) {
+.factory('userService', function($http, authService, $cookies, $location, $rootScope) {
   var service = {};
 
   var BASE_URL = 'http://localhost:8080/CrawlREST/rest';
-  
+
 
   //user
   //findUser
@@ -25,14 +25,14 @@ angular.module('appModule')
 		  })
 	  }
   };
-  
+
   //updateUser
   service.updateUser = function(user){
 	  var id = $cookies.get('userId');
 	  if(id){
 	  return $http({
 	      method : 'PUT',
-	      url : `${BASE_URL}/users/${id}`, 
+	      url : `${BASE_URL}/users/${id}`,
 	      headers : {
 	        'Content-Type' : 'application/json'
 	      },
@@ -40,9 +40,9 @@ angular.module('appModule')
 	    })
 	  }
   };
-  
+
   //addContactToUser
-  service.createContact = function(contacts) { 
+  service.createContact = function(contacts) {
 	  var id = $cookies.get('userId');
 	  if(id){
 	  return $http({
@@ -55,10 +55,10 @@ angular.module('appModule')
 	    })
 	  }
   };
-   
+
   //posts
   //createPost
-  service.createPost = function(gid) { 
+  service.createPost = function(gid) {
 	  var id = $cookies.get('userId');
 	  if(id){
 	  return $http({
@@ -68,7 +68,7 @@ angular.module('appModule')
 	        'Content-Type' : 'application/json'
 	      },
 	      data : gid
-	    })  
+	    })
 	  }
   };
   //updatePost
@@ -77,7 +77,7 @@ angular.module('appModule')
 	  if(id){
 	  return $http({
 	      method : 'PUT',
-	      url : `${BASE_URL}/users/${id}/post/${pid}`, 
+	      url : `${BASE_URL}/users/${id}/post/${pid}`,
 	      headers : {
 	        'Content-Type' : 'application/json'
 	      },
@@ -94,7 +94,7 @@ angular.module('appModule')
 	      url : `${BASE_URL}/users/${id}/post/${pid}`
 	    })
 	  }
-		
+
   };
   //findPostByUser
   service.findPostByUser = function() {
@@ -116,7 +116,7 @@ angular.module('appModule')
 		  })
 	  }
   };
-  
+
   //Group findGroupByUserId
   service.findGroupByUserId = function() {
 	  var id = $cookies.get('userId');
@@ -127,9 +127,9 @@ angular.module('appModule')
 		  })
 	  }
   };
-  
+
   //Post createGroup
-  service.createGroup = function(newGroup) { 
+  service.createGroup = function(newGroup) {
 	  var id = $cookies.get('userId');
 	  if(id){
 	  return $http({
@@ -139,17 +139,25 @@ angular.module('appModule')
 	        'Content-Type' : 'application/json'
 	      },
 	      data : newGroup
-	    })  
+	    })
+      .then(function(res) {
+        console.log("Pre Broadcast");
+        $rootScope.$broadcast('createdGroup', {
+				message : "Group Created",
+				group : res.data
+			})
+			   return res;
+      })
 	  }
   };
-	 	  
+
 	  //update contact
 	  service.updateUserWithContact = function(contact){
 		  var id = $cookies.get('userId');
 		  if(id){
 		  return $http({
 		      method : 'PUT',
-		      url : `${BASE_URL}/users/${id}/contact/` + contact.id, 
+		      url : `${BASE_URL}/users/${id}/contact/` + contact.id,
 		      headers : {
 		        'Content-Type' : 'application/json'
 		      },
@@ -164,5 +172,5 @@ angular.module('appModule')
 		  }
 	  }
   return service;
-  
+
 })

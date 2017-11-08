@@ -1,7 +1,7 @@
 angular.module('appModule')
 .component('venue',{
 	templateUrl: 'app/appModule/venue/venue.component.html',
-	controller: function(venueService, $routeParams, $location){
+	controller: function(venueService, $routeParams, $location, geolocate){
 //		AIzaSyBEw2cCO_zGlAgAWJhO8uMTiqe95wBLlEE google map api key
 		var vm = this;
 		vm.venue = null;
@@ -29,7 +29,7 @@ angular.module('appModule')
 			vm.showList = true;
 		}
 		
-		
+		getGeocode()
 		vm.showCreate = function(){
 			vm.copy = {};
 			vm.copyHours = {};
@@ -110,7 +110,14 @@ angular.module('appModule')
 			vm.updateAddress = null;
 		}
 		function getGeocode(){
-			
+			geolocate.geocodeAddress('2095 legacy ridge view colorado springs co 80910')
+			.then(function(res){
+				console.log(res.cord.lat());
+				console.log(res.cord.lng());
+			})
+			.catch(function(err){
+				console.log(err);
+			})
 		}
 		function createHoursString(hourObj){
 			return hourObj.openHour +':'+ hourObj.openMin + hourObj.openAP 
