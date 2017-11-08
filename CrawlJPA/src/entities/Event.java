@@ -2,6 +2,7 @@ package entities;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Event {
 	@Id
@@ -16,6 +20,11 @@ public class Event {
 	private int id;
 	
 	private String name;
+	
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name="admin_id")
+	private User admin;
 	
 	
 	@ManyToOne
@@ -63,6 +72,16 @@ public class Event {
 
 	public int getId() {
 		return id;
+	}
+	
+	
+
+	public User getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(User admin) {
+		this.admin = admin;
 	}
 
 	@Override

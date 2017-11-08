@@ -34,16 +34,7 @@ angular.module('appModule').factory('groupService', function($http, authService,
 		})
 	};
 //Needs a post id!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	service.createPost = function(newPost) {
-		return $http({
-			method : 'POST',
-			url : `rest/users/${id}/posts/1/events`,
-			headers : {
-				'ContentType' : 'application/json'
-			},
-			data : newEvent
-		})
-	};
+
 
 	service.createEvent = function(newEvent, gid) {
 		return $http({
@@ -59,7 +50,7 @@ angular.module('appModule').factory('groupService', function($http, authService,
 	service.createPost = function(uid, gid, newPost) {
 		return $http({
 			method : 'POST',
-			url : 'rest/users/1/group/'+ gid +'/post',
+			url : 'rest/users/'+ uid + '/group/'+ gid +'/post',
 			headers : {
 				'ContentType' : 'application/json'
 			},
