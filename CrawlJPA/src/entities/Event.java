@@ -21,7 +21,7 @@ public class Event {
 	
 	private String name;
 	
-	@JsonIgnore
+	
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="admin_id")
 	private User admin;
