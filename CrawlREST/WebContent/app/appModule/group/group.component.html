@@ -73,18 +73,19 @@
 			<th>USER</th>
 			<th>MESSAGE</th>
 
-      <th></th>
+      <th>REMOVE MESSAGE</th>
       <th></th>
 			<th><button class="btn" ng-hide="vm.newVenue" ng-click="vm.setNewVenue()">Create Venue</button></th>
 		</thead>
 		<tbody>
 
 
-			<tr><td></td><td><form><input type="text" placeholder="New Message" ng-model="vm.newPost.message"><input type="submit" value="Post" ng-click="vm.addPost(vm.group.id, vm.newPost); newPost = {};"> </form>
+			<tr><td></td><td><form><input type="text" placeholder="New Message" ng-model="vm.newPost.message"></td><td><input type="submit" value="Post" ng-click="vm.addPost(vm.group.id, vm.newPost); newPost = {};"> </td></form>
 			<tr ng-repeat="p in vm.messageBoard | orderBy:'-id'">
 
 			 <td>{{p.user.firstName}} {{p.user.lastName}}</td>
         <td>{{p.message}}</td>
+       <td><button ng-show="p.user.id==vm.activeUserId || vm.admin" class="btn" id="removeMessageBtn" ng-click="vm.removeMessage(p.id)">X</button></td>
 
 			</tr>
 		</tbody>

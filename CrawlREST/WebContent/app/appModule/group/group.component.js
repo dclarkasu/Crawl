@@ -10,6 +10,8 @@ angular.module('appModule').component('group', {
 		vm.group = null;
 
 		vm.members = [];
+		
+		vm.activeUserId = null;
 
 		vm.events = [];
 
