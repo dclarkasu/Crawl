@@ -1,4 +1,5 @@
-angular.module('appModule', ['ngRoute','ngCookies','authModule'])
+
+angular.module('appModule', ['ngRoute','ngCookies','authModule', 'ui.bootstrap','ngMap'])
 .config(function($routeProvider){
 	$routeProvider
 	.when('/',{
@@ -32,6 +33,9 @@ angular.module('appModule', ['ngRoute','ngCookies','authModule'])
 			<user></user>
 			`
 	})
+	.when('/venue/',{
+		template: '<venue></venue>'
+	})
 	.when('/venue/:vid', {
 		template: '<venue></venue>'
 	})
@@ -40,6 +44,12 @@ angular.module('appModule', ['ngRoute','ngCookies','authModule'])
 	})
 	.when('/group/:gid', {
 		template: '<group></group>'
+	})
+	.when('/route', {
+		template: '<route></route>'
+	})
+	.when('/route/:rid', {
+		template: '<route></route>'
 	})
 	.when('/event/:eid', {
 		template: '<event></event>'

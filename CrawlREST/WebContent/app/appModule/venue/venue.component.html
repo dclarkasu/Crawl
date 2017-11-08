@@ -1,63 +1,15 @@
-<div ng-hide="vm.copy || vm.update">
-	<div>
-	<h3>{{vm.venue.name}}</h3>
-	<p>phone number: {{vm.venue.contact.phoneNumber}} email: {{vm.venue.contact.email}}</p>
-	<p>{{vm.venue.address.street}} {{vm.venue.address.street2}}</p>
-	<p>{{vm.venue.address.city}}, {{vm.venue.address.state}} {{vm.venue.address.zip}}</p>
-	<p>{{vm.venue.description}}</p>
-	<p>{{vm.venue.hours}}</p>
-	<img alt="pic" ng-src="{{vm.venue.imgUrl}}">
+<div ng-show="vm.showList" class="container">
+	<div ng-hide="vm.copy">
+		<table class="table">
+			<tr ng-repeat="venue in vm.venueList">
+				<td><a href="{{'#/venue/' + venue.id}}">{{venue.name}}</a></td>
+			</tr>
+		</table>
+		<button class="btn" ng-click="vm.showCreate()">Create New Venue</button>
 	</div>
-	<div></div>
-	<button ng-click="vm.showCreate()">Create New Venue</button>
-	<button ng-click="vm.showUpdate()">Updata Venue Information</button>
-</div>
-<div ng-show="vm.update">
-	<h1>stuff update</h1>
-	<div>
-		<h5>Venue Information</h5>
+	<div ng-show="vm.copy">
 		<form>
-			name: <input type="text" name="name" ng-model="vm.update.name"><br>
-			description: <input type="text" name="description" ng-model="vm.update.description"><br>
-			hours: 
-			Open:
-			<select ng-options="hour as hour for hour in vm.hoursList" ng-model="vm.updateHours.openHour"></select> 
-			<select ng-options="min as min for min in vm.minList" ng-model="vm.updateHours.openMin"></select> 
-			<select ng-options="ap as ap for ap in vm.APList" ng-model="vm.updateHours.openAP"></select> 			
-			 - Close:
-			<select ng-options="hour as hour for hour in vm.hoursList" ng-model="vm.updateHours.closeHour"></select> 
-			<select ng-options="min as min for min in vm.minList" ng-model="vm.updateHours.closeMin"></select> 
-			<select ng-options="ap as ap for ap in vm.APList" ng-model="vm.updateHours.closeAP"></select><br>			
-			Image: <input type="text" name="imgUrl" ng-model="vm.update.imgUrl"><br>
-			<input type="submit" value="Update" ng-click="vm.updateVenue()"><br>
-		</form>
-	</div>
-	<div>
-		<h5>Venue Address Information</h5>
-		<form>
-			Street: <input type="text" name="street" ng-model="vm.updateAddress.street"><br>
-			Street2: <input type="text" name="street2" ng-model="vm.updateAddress.street2"><br>
-			City: <input type="text" name="city" ng-model="vm.updateAddress.city"><br>
-			State: 
-			<select ng-options="state as state for state in vm.states" ng-model="vm.updateAddress.state">	
-			</select><br>
-			Zip: <input type="text" name="zip" ng-model="vm.updateAddress.zip"> 
-			<input type="submit" value="Update Address" ng-click="vm.updateVenueAddress()">
-		</form>
-		<h5>Contact Info</h5>
-		<form>
-			Phone Number: <input type="text" name="phone" ng-model="vm.update.contact.phoneNumber">
-			Email : <input type="email" name="email" ng-model="vm.update.contact.email">
-			<input type="submit" value="Update Contact" ng-click="vm.updateVenueContact()">
-		</form>
-	</div>
-	<button ng-click="vm.cancelUpdate()">Cancel</button>
-</div>
-<div ng-show="vm.copy">
-	<h1>stuff copy</h1>
-	<div>
-		<form>
-			<div>
+			<div class="form-group">
 				<h5>Venue Information</h5>
 				name: <input type="text" name="name" ng-model="vm.copy.name"><br>
 				description: <input type="text" name="description" ng-model="vm.copy.description"><br>
@@ -72,23 +24,90 @@
 				<select ng-options="ap as ap for ap in vm.APList" ng-model="vm.copyHours.closeAP"></select><br>			
 				Image: <input type="text" name="imgUrl" ng-model="vm.copy.imgUrl"><br>
 			</div>
-			<div>
+			<div class="form-group" >
 				<h5>Address Information</h5>
-				Street: <input type="text" ng-model="vm.copy.address.street"><br>
-				Street2: <input type="text" ng-model="vm.copy.address.street2"><br>
-				City: <input type="text" ng-model="vm.copy.address.city"><br>
+				Street: <input class="form-control" type="text" ng-model="vm.copy.address.street"><br>
+				Street2: <input class="form-control" type="text" ng-model="vm.copy.address.street2"><br>
+				City: <input class="form-control" type="text" ng-model="vm.copy.address.city"><br>
 				State: 
-				<select ng-options="state as state for state in vm.states" ng-model="vm.copy.address.state">	
+				<select class="form-control" ng-options="state as state for state in vm.states" ng-model="vm.copy.address.state">	
 				</select><br>
-				Zip: <input type="text" ng-model="vm.copy.address.zip"><br>
+				Zip: <input class="form-control" type="text" ng-model="vm.copy.address.zip"><br>
 			</div>
-			<div>
+			<div class="form-group">
 				<h5>Contact Info</h5>
-				Phone Number: <input type="text" name="phone" ng-model="vm.copy.contact.phoneNumber"><br>
-				Email : <input type="email" name="email" ng-model="vm.copy.contact.email"><br>
+				Phone Number: <input class="form-control" type="text" name="phone" ng-model="vm.copy.contact.phoneNumber"><br>
+				Email : <input class="form-control" type="email" name="email" ng-model="vm.copy.contact.email"><br>
 			</div>
-			<input type="submit" value="Create" ng-click="vm.createVenue()">
+			<input class="btn" type="submit" value="Create" ng-click="vm.createVenue()">
 		</form>
+		<button class="btn" ng-click="vm.cancelCreate()">Cancel</button>
 	</div>
-	<button ng-click="vm.cancelCreate()">Cancel</button>
+</div>
+<div ng-hide="vm.showList" class="container">
+	<div ng-hide="vm.update">
+		<div class="row">
+			<div class="col-sm">
+				<h3>{{vm.venue.name}}</h3>
+				phone number: <br>
+				{{vm.venue.contact.phoneNumber}} <br>
+				email: {{vm.venue.contact.email}} <br><br>
+				{{vm.venue.address.street}} {{vm.venue.address.street2}}<br>
+				{{vm.venue.address.city}}, {{vm.venue.address.state}} {{vm.venue.address.zip}}<br><br>
+				<p>{{vm.venue.description}}</p>
+				<p>{{vm.venue.hours}}</p>
+				<button class="btn" ng-click="vm.showUpdate()">Updata Venue Information</button>
+			</div>
+			<div class="col-sm" >
+				<img alt="pic" class="rounded img-fluid" ng-src="{{vm.venue.imgUrl}}">
+			</div>
+			<div class="col-sm">
+				<map></map>
+			</div>
+		</div>
+	</div>
+	<div ng-show="vm.update">
+		<div class="row">
+			<div class="col-sm">
+				<h5>Venue Information</h5>
+				<form class="form-group">
+					name: <input class="form-control" type="text" name="name" ng-model="vm.update.name"><br>
+					description: <input class="form-control" type="text" name="description" ng-model="vm.update.description"><br>
+					hours: <br>
+					Open: <br>
+					<select ng-options="hour as hour for hour in vm.hoursList" ng-model="vm.updateHours.openHour"></select> 
+					<select ng-options="min as min for min in vm.minList" ng-model="vm.updateHours.openMin"></select> 
+					<select ng-options="ap as ap for ap in vm.APList" ng-model="vm.updateHours.openAP"></select> 			
+					<br>Close: <br>
+					<select ng-options="hour as hour for hour in vm.hoursList" ng-model="vm.updateHours.closeHour"></select> 
+					<select ng-options="min as min for min in vm.minList" ng-model="vm.updateHours.closeMin"></select> 
+					<select ng-options="ap as ap for ap in vm.APList" ng-model="vm.updateHours.closeAP"></select><br>			
+					Image: <input class="form-control" type="text" name="imgUrl" ng-model="vm.update.imgUrl"><br>
+					<input class="btn" type="submit" value="Update" ng-click="vm.updateVenue()"><br>
+				</form>
+			</div>
+			<div class="col-sm">
+				<h5>Venue Address Information</h5>
+				<form class="form-group">
+					Street: <input class="form-control" type="text" name="street" ng-model="vm.update.street"><br>
+					Street2: <input class="form-control" type="text" name="street2" ng-model="vm.update.street2"><br>
+					City: <input class="form-control" type="text" name="city" ng-model="vm.update.city"><br>
+						State: 
+						<select  ng-options="state as state for state in vm.states" ng-model="vm.update.state">	
+						</select>
+						Zip: <input type="text" name="zip" ng-model="vm.update.zip"> <br>
+					<input class="btn" type="submit" value="Update Address" ng-click="vm.updateVenueAddress(update)">
+				</form>
+			</div>
+			<div class="col-sm">
+				<h5>Contact Info</h5>
+				<form class="form-group">
+					Phone Number: <input class="form-control" type="text" name="phone" ng-model="vm.update.contact.phoneNumber">
+					Email : <input class="form-control" type="email" name="email" ng-model="vm.update.contact.email">
+					<input class="btn" type="submit" value="Update Contact" ng-click="vm.updateVenueContact()">
+				</form>
+			</div>
+		</div>
+		<button class="btn" ng-click="vm.cancelUpdate()">Cancel</button>
+	</div>
 </div>
