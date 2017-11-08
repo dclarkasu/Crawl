@@ -4,7 +4,7 @@
 				<li class="nav-item"><a class="nav-link active" href="#/">Home</a></li>
 				<li class="nav-item"><a class="nav-link active" href="#/about">About</a></li>
 				<!-- <li class="nav-item"><a class="nav-link active" href="#/route">Route</a></li> -->
-				<li class="nav-item"><a class="nav-link active" href="#/register">Register</a></li>
+				<li class="nav-item" ng-hide="vm.isLoggedIn()"><a class="nav-link active" href="#/register">Register</a></li>
 				<li class="nav-item"><a class="nav-link active" href="#/venue">Venue</a></li>
 
 				<li class="nav-item" ng-show="vm.isLoggedIn()">
