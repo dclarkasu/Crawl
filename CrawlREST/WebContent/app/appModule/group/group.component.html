@@ -1,4 +1,4 @@
-<div class="container">
+<div>
 
 <!-- <button class="btn" ng-click="vm.loadGroup()">Load Group</button> -->
 
@@ -67,28 +67,27 @@
       <button class="btn btn-danger" ng-click="vm.cancel(); newEvent = {}">Cancel</button>
     </form>
   </div>
-  
+
   <table class="table" ng-show="vm.messageBoard">
 		<thead class="thead-dark">
 			<th>USER</th>
 			<th>MESSAGE</th>
-		
+
       <th>REMOVE MESSAGE</th>
       <th></th>
 			<th><button class="btn" ng-hide="vm.newVenue" ng-click="vm.setNewVenue()">Create Venue</button></th>
 		</thead>
 		<tbody>
-		
-		
+
+
 			<tr><td></td><td><form><input type="text" placeholder="New Message" ng-model="vm.newPost.message"></td><td><input type="submit" value="Post" ng-click="vm.addPost(vm.group.id, vm.newPost); newPost = {};"> </td></form>
 			<tr ng-repeat="p in vm.messageBoard | orderBy:'-id'">
-			
+
 			 <td>{{p.user.firstName}} {{p.user.lastName}}</td>
         <td>{{p.message}}</td>
        <td><button ng-show="p.user.id==vm.activeUserId || vm.admin" class="btn" id="removeMessageBtn" ng-click="vm.removeMessage(p.id)">X</button></td>
-				
+
 			</tr>
 		</tbody>
 	</table>
 </div>
-
