@@ -159,4 +159,10 @@ public class UserController {
 	System.out.println("****************************************************************************");
 	return userDao.adminCheck(uid, gid);
 }
+	
+//	@RequestMapping(path="users/{uid}/event/{gid}/admin", method= RequestMethod.GET)
+//	public User checkEventAdmin(HttpServletRequest req, HttpServletResponse res,@PathVariable int uid,@PathVariable int gid){
+//	
+	
+//}
 }

@@ -5,7 +5,7 @@
   <div ng-show="vm.group">
     <h3>Group</h3>
     <h1>{{vm.group.name}}</h1>
-    <button class="btn" ng-hide="vm.editGroup" ng-click="vm.setEditGroup()">Change Group Name</button>
+    <button ng-show="vm.admin" class="btn" ng-hide="vm.editGroup" ng-click="vm.setEditGroup()">Change Group Name</button>
     <div ng-show="vm.editGroup">
       <form class="form-group">
         <input type="text" placeholder="Group Name" ng-model="editGroup.name"/>
