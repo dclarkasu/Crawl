@@ -1,4 +1,5 @@
-angular.module('appModule', ['ngRoute','ngCookies','authModule', 'ui.bootstrap'])
+
+angular.module('appModule', ['ngRoute','ngCookies','authModule', 'ui.bootstrap','ngMap'])
 .config(function($routeProvider){
 	$routeProvider
 	.when('/',{
