@@ -117,11 +117,11 @@ public class UserController {
 	 //posts
 	
 	//works
-	@RequestMapping(path="users/{id}/group/{gid}/post", method=RequestMethod.POST)
-    		public Post createPost(HttpServletRequest req, HttpServletResponse res,@PathVariable int id, @PathVariable int gid,@RequestBody String crawlJson) {
+	@RequestMapping(path="users/{uid}/group/{gid}/post", method=RequestMethod.POST)
+    		public Post createPost(HttpServletRequest req, HttpServletResponse res,@PathVariable int uid, @PathVariable int gid,@RequestBody String crawlJson) {
 			res.setStatus(201);
-			System.out.println("tovihngobvhnrovnrvornvorgnv");
-			return userDao.createPost(id, gid, crawlJson);
+			System.out.println("Controller UID:" + uid + "GID:" + gid);
+			return userDao.createPost(uid, gid, crawlJson);
 		}
 	//works
 	@RequestMapping(path="users/{id}/post/{pid}", method=RequestMethod.PUT)

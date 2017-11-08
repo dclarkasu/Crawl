@@ -158,7 +158,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override // works
 	public Post createPost(int id, int gid, String crawlJson) {
 		 ObjectMapper mapper = new ObjectMapper();
-		 System.out.println("eopgjneotnbvaergoiaegjniooooooeoprfrjnbvaelobvnafovnbavnaelovnalovnalovnaerlovbndrlo");
+		 
 		
 		 try {
 		 Post mappedPost = mapper.readValue(crawlJson, Post.class);
