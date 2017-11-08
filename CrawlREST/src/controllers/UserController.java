@@ -154,10 +154,17 @@ public class UserController {
     }
 	
 	@RequestMapping(path="users/{uid}/group/{gid}/admin", method= RequestMethod.GET)
-	public User checkAdmin(HttpServletRequest req, HttpServletResponse res,@PathVariable int uid,@PathVariable int gid){
+	public User groupCheckAdmin(HttpServletRequest req, HttpServletResponse res,@PathVariable int uid,@PathVariable int gid){
+	return userDao.groupAdminCheck(uid, gid);
+}
 	
-	System.out.println("****************************************************************************");
-	return userDao.adminCheck(uid, gid);
+	@RequestMapping(path="users/{uid}/event/{eid}/admin", method= RequestMethod.GET)
+	public User eventCheckAdmin(HttpServletRequest req, HttpServletResponse res,@PathVariable int uid,@PathVariable int eid){
+	return userDao.eventAdminCheck(uid, eid);
+}
+	@RequestMapping(path="users/{uid}/route/{rid}/admin", method= RequestMethod.GET)
+	public User routeCheckAdmin(HttpServletRequest req, HttpServletResponse res,@PathVariable int uid,@PathVariable int rid){
+	return userDao.routeAdminCheck(uid, rid);
 }
 	
 //	@RequestMapping(path="users/{uid}/event/{gid}/admin", method= RequestMethod.GET)
