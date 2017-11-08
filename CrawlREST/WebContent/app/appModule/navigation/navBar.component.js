@@ -28,8 +28,6 @@ angular.module('appModule')
 			})
 		};
 
-		vm.loadGroupsByUser();
-
 		$scope.$on('createdGroup', function(ev, data) {
 			console.log(ev);
 			console.log(data);
