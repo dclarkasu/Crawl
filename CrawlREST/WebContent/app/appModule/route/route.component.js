@@ -1,6 +1,6 @@
 angular.module('appModule').component('route', {
 	templateUrl : "app/appModule/route/route.component.html",
-	controller : function(routeService) {
+	controller : function(routeService, $routeParams, $cookies) {
 		//Variables
 		var vm = this;
 
@@ -23,6 +23,18 @@ angular.module('appModule').component('route', {
 				console.log(err);
 			});
 		}
+		
+		vm.adminCheck = function() {
+			var promise = routeService.adminCheck($routeParams.eid, $cookies.get('userId'));
+			promise.then(function(res){
+				vm.admin = res.data;
+			}).catch(function(err){
+				console.log(err);
+			});
+			
+		}
+		
+		vm.adminCheck();
 	
 		vm.addVenue = function(rid, venue) {
 			routeService.addVenue(rid, venue.id)
