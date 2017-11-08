@@ -6,6 +6,7 @@
   background-color: red;
 }
 
+/* user page */
 .uimg{
 	height:350px;
 	width:350px;
@@ -14,8 +15,46 @@
 	float: left;
 }
 
+/* user page */
 .uinfo{
 	float: left;
+}
+
+/* home page */
+.img-fluid{
+	height: 350px;
+    width: 100%;
+}
+
+
+.img-wrapper {
+  position: relative;
+  padding-bottom:50px;
+ }
+
+.img-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.img-overlay:before {
+  content: ' ';
+  display: block;
+  /* adjust 'height' to position overlay content vertically */
+  height: 50%;
+}
+
+.box{
+box-shadow: 150px 150px rgba(0, 0, 0, 0.8) inset;
+padding-bottom: 20px;
+}
+
+h1{
+	color: green;
 }
 
 
