@@ -112,8 +112,6 @@ public class GroupController {
 	@RequestMapping(path="users/{uid}/groups/{gid}/events", method=RequestMethod.POST)
 	public Event createEvent(@PathVariable int uid, @PathVariable int gid, @RequestBody String eventJSON, HttpServletResponse res) {
 		Event event = groupDAO.createEvent(uid, gid, eventJSON);
-		System.out.println("??????????????????????????????????????");
-		System.out.println("UID: " + uid + "GID"+ gid);
 		if (event == null) {
 			res.setStatus(400);
 			return null;

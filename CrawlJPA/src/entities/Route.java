@@ -25,7 +25,7 @@ public class Route {
 	
 	private int edited;
 	
-	@JsonIgnore
+	
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="admin_id")
 	private User admin;
@@ -77,6 +77,16 @@ public class Route {
 
 	public void setRouteVenues(List<RouteVenue> routeVenues) {
 		this.routeVenues = routeVenues;
+	}
+	
+	
+
+	public User getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(User admin) {
+		this.admin = admin;
 	}
 
 	@Override

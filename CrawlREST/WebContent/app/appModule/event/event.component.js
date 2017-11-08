@@ -1,6 +1,6 @@
 angular.module('appModule').component('event', {
 	templateUrl : "app/appModule/event/event.component.html",
-	controller : function(eventService, $routeParams, groupService) {
+	controller : function(eventService, $routeParams, groupService, $cookies) {
     var vm = this;
 
     vm.admin = null;
@@ -81,6 +81,21 @@ angular.module('appModule').component('event', {
 				console.log(vm.members);
 			})
 		};
+		
+		vm.adminCheck = function() {
+			var promise = eventService.adminCheck($routeParams.eid, $cookies.get('userId'));
+			promise.then(function(res){
+				vm.admin = res.data;
+			}).catch(function(err){
+				console.log(err);
+			});
+			
+		}
+		
+		vm.adminCheck();
+		console.log('vm.check: ' + vm.admin);
+		
+		
 
     vm.setNewRoute = function() {
 			vm.newRoute = {};

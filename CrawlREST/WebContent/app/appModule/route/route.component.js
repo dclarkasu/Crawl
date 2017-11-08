@@ -7,7 +7,7 @@ angular.module('appModule').component('route', {
 		vm.route = null;
 		vm.routeVenues = null;
 		vm.allVenues = null;
-
+		vm.admin = null;
 
 		vm.loadRoute = function() {
 			var promise = routeService.showRoute();
