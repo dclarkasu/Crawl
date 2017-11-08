@@ -117,11 +117,11 @@ public class UserController {
 	 //posts
 	
 	//works
-	@RequestMapping(path="users/{id}/group/{gid}/post", method=RequestMethod.POST)
-    		public Post createPost(HttpServletRequest req, HttpServletResponse res,@PathVariable int id, @PathVariable int gid,@RequestBody String crawlJson) {
+	@RequestMapping(path="users/{uid}/group/{gid}/post", method=RequestMethod.POST)
+    		public Post createPost(HttpServletRequest req, HttpServletResponse res,@PathVariable int uid, @PathVariable int gid,@RequestBody String crawlJson) {
 			res.setStatus(201);
-			System.out.println("tovihngobvhnrovnrvornvorgnv");
-			return userDao.createPost(id, gid, crawlJson);
+			System.out.println("Controller UID:" + uid + "GID:" + gid);
+			return userDao.createPost(uid, gid, crawlJson);
 		}
 	//works
 	@RequestMapping(path="users/{id}/post/{pid}", method=RequestMethod.PUT)
@@ -154,10 +154,17 @@ public class UserController {
     }
 	
 	@RequestMapping(path="users/{uid}/group/{gid}/admin", method= RequestMethod.GET)
-	public User checkAdmin(HttpServletRequest req, HttpServletResponse res,@PathVariable int uid,@PathVariable int gid){
-	System.out.println(userDao.adminCheck(uid, gid).getFirstName());
-	System.out.println("****************************************************************************");
-	return userDao.adminCheck(uid, gid);
+	public User groupCheckAdmin(HttpServletRequest req, HttpServletResponse res,@PathVariable int uid,@PathVariable int gid){
+	return userDao.groupAdminCheck(uid, gid);
+}
+	
+	@RequestMapping(path="users/{uid}/event/{eid}/admin", method= RequestMethod.GET)
+	public User eventCheckAdmin(HttpServletRequest req, HttpServletResponse res,@PathVariable int uid,@PathVariable int eid){
+	return userDao.eventAdminCheck(uid, eid);
+}
+	@RequestMapping(path="users/{uid}/route/{rid}/admin", method= RequestMethod.GET)
+	public User routeCheckAdmin(HttpServletRequest req, HttpServletResponse res,@PathVariable int uid,@PathVariable int rid){
+	return userDao.routeAdminCheck(uid, rid);
 }
 	
 //	@RequestMapping(path="users/{uid}/event/{gid}/admin", method= RequestMethod.GET)

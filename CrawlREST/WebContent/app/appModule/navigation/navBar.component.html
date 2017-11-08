@@ -1,24 +1,22 @@
-<div class="container-fluid">
-	<div class="navbar-header">
+<div id="navbar">
 		<div>
 			<ul class="navbar navbar-dark bg-dark">
 				<li class="nav-item"><a class="nav-link active" href="#/">Home</a></li>
 				<li class="nav-item"><a class="nav-link active" href="#/about">About</a></li>
 				<!-- <li class="nav-item"><a class="nav-link active" href="#/route">Route</a></li> -->
-				<li class="nav-item"><a class="nav-link active" href="#/register">Register</a></li>
+				<li class="nav-item" ng-hide="vm.isLoggedIn()"><a class="nav-link active" href="#/register">Register</a></li>
 				<li class="nav-item"><a class="nav-link active" href="#/venue">Venue</a></li>
 
-				<!-- Select -->
 				<li class="nav-item" ng-show="vm.isLoggedIn()">
 					<div>
     				<!-- Simple dropdown -->
     					<span uib-dropdown on-toggle="toggled(open)">
       					<a href id="simple-dropdown" uib-dropdown-toggle>
-        				Click me for a dropdown, yo!
+        				Groups
       					</a>
       					<ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
         					<li ng-repeat="group in vm.groups">
-          					<a href>{{group.name}}</a>
+          					<a href="{{'#/group/' + group.id}}">{{group.name}}</a>
         					</li>
       					</ul>
     					</span>
@@ -32,5 +30,4 @@
 				<li class="nav-item active" ng-show="vm.isLoggedIn()"><logout></logout></li>
 			</ul>
 		</div>
-	</div>
 </div>

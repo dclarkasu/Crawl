@@ -35,7 +35,7 @@ public class Group {
 	//many to many with user via virtual assoc. table
 //	@JsonBackReference(value="userToGroup")
 	@JsonIgnore
-	@ManyToMany(cascade = CascadeType.REMOVE)
+	@ManyToMany
 	@JoinTable(name="user_group",
 	joinColumns=@JoinColumn(name="group_id"),
 	inverseJoinColumns=@JoinColumn(name="user_id"))

@@ -15,9 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import entities.Contact;
+import entities.Event;
 import entities.Group;
 import entities.Login;
 import entities.Post;
+import entities.Route;
 import entities.User;
 
 @Transactional
@@ -158,7 +160,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override // works
 	public Post createPost(int id, int gid, String crawlJson) {
 		 ObjectMapper mapper = new ObjectMapper();
-		 System.out.println("eopgjneotnbvaergoiaegjniooooooeoprfrjnbvaelobvnafovnbavnaelovnalovnalovnaerlovbndrlo");
+		 
 		
 		 try {
 		 Post mappedPost = mapper.readValue(crawlJson, Post.class);
@@ -205,13 +207,32 @@ public class UserDAOImpl implements UserDAO {
 
 
 	@Override
-	public User adminCheck(int uid, int gid) {
-
+	public User groupAdminCheck(int uid, int gid) {
 		Group group = em.find(Group.class, gid);
 		User user = em.find(User.class, uid);
 		if(group.getAdmin()==user) {
 		return user ;
 	}
 		return null;
+}
+	
+	@Override
+	public User eventAdminCheck(int uid, int eid) {
+		Event event = em.find(Event.class, eid);
+		User user = em.find(User.class, uid);
+		if(event.getAdmin()==user) {
+		return user ;
+	}
+		return null;
+}
+	@Override
+	public User routeAdminCheck(int uid, int rid) {
+		Route route = em.find(Route.class, rid);
+		User user = em.find(User.class, uid);
+		if(route.getAdmin()==user) {
+		return user ;
+	}
+		return null;
+}
 
-}}
+}

@@ -153,15 +153,17 @@ public class GroupDAOImpl implements GroupDAO {
 	//Event Methods*****************************
 
 	@Override
-	public Event createEvent(int gid, String eventJSON) {
+	public Event createEvent(int uid, int gid, String eventJSON) {
 		System.out.println("gid: " + gid);
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			Event mappedEvent = mapper.readValue(eventJSON, Event.class);
+			User user = em.find(User.class, uid);
 			Group group = em.find(Group.class, gid);
 			System.out.println("***********************************************");
 			System.out.println(group);
 			System.out.println(mappedEvent);
+			mappedEvent.setAdmin(user);
 			mappedEvent.setGroup(group);
 			em.persist(mappedEvent);
 			em.flush();

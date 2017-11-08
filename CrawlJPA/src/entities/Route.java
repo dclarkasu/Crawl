@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
@@ -21,6 +22,13 @@ public class Route {
 	private int id;
 	
 	private String name;
+	
+	private int edited;
+	
+	
+	@OneToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name="admin_id")
+	private User admin;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="route", fetch=FetchType.EAGER)
@@ -51,6 +59,34 @@ public class Route {
 
 	public int getId() {
 		return id;
+	}
+
+	
+	
+	public int getEdited() {
+		return edited;
+	}
+
+	public void setEdited(int edited) {
+		this.edited = edited;
+	}
+
+	public List<RouteVenue> getRouteVenues() {
+		return routeVenues;
+	}
+
+	public void setRouteVenues(List<RouteVenue> routeVenues) {
+		this.routeVenues = routeVenues;
+	}
+	
+	
+
+	public User getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(User admin) {
+		this.admin = admin;
 	}
 
 	@Override

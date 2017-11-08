@@ -10,6 +10,8 @@ angular.module('appModule').component('group', {
 		vm.group = null;
 
 		vm.members = [];
+		
+		vm.activeUserId = null;
 
 		vm.events = [];
 
@@ -30,6 +32,10 @@ angular.module('appModule').component('group', {
 			})
 		};
 		
+		vm.findActiveUserId = function(){
+			vm.activeUserId = $cookies.get('userId');
+		}
+		
 
 		vm.loadGroup = function() {
 			var promise = groupService.showGroup($routeParams.gid);
@@ -44,6 +50,8 @@ angular.module('appModule').component('group', {
 
 		vm.loadGroup();
 		console.log('vm.group: ' + vm.group);
+		vm.findActiveUserId();
+		console.log('vm.activeUserId: ' + vm.activeUserId);
 
 		vm.adminCheck = function() {
 			var promise = groupService.adminCheck($routeParams.gid, $cookies.get('userId'));
@@ -95,7 +103,7 @@ angular.module('appModule').component('group', {
 
 		vm.addEvent = function(newEvent) {
 			console.log(newEvent);
-			groupService.createEvent(newEvent, $routeParams.gid)
+			groupService.createEvent(newEvent, $routeParams.gid, vm.activeUserId)
 			.then(function(res) {
 				vm.loadEvents();
 				vm.loadGroup();
@@ -130,8 +138,16 @@ angular.module('appModule').component('group', {
 		};
 		
 		vm.addPost = function(gid, newPost) {
-			console.log("1A");
-			groupService.createPost(1, gid, newPost)
+			console.log(vm.activeUserId);
+			groupService.createPost(vm.activeUserId, gid, newPost)
+			.then(function(res){
+				vm.loadMessages();
+			})
+		}
+		
+		vm.removePost = function(pid) {
+			
+			groupService.deletePost(vm.activeUserId, pid)
 			.then(function(res){
 				vm.loadMessages();
 			})
@@ -186,6 +202,8 @@ angular.module('appModule').component('group', {
 			})
 		}
 
+		vm.rem
+		
 		vm.setRemoveMember = function() {
 			vm.memberToRemove = {};
 		};

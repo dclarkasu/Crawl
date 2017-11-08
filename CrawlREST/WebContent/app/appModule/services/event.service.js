@@ -16,6 +16,13 @@ angular.module('appModule').factory('eventService', function($http, authService,
 			url : `rest/users/${id}/group/events/${eid}`
 		})
 	};
+	
+	service.adminCheck = function(eid, uid) {
+		return $http ({
+			method : 'GET',
+			url : `rest/users/${uid}/event/${eid}/admin`,  
+		})
+	};
 
 	// service.showGroup = function(eid) {
 	// 	console.log("in showEvent")
