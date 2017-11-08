@@ -29,9 +29,7 @@ angular.module('appModule')
 		};
 
 		vm.loadGroupsByUser();
-		console.log(vm.groups);
-		console.log('vm.groups after Call');
-
+		
 
 	},
 	controllerAs: 'vm'
