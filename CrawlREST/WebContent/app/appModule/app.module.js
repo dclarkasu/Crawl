@@ -1,4 +1,5 @@
-angular.module('appModule', ['ngRoute','ngCookies','authModule','ngMap'])
+
+angular.module('appModule', ['ngRoute','ngCookies','authModule', 'ui.bootstrap','ngMap'])
 .config(function($routeProvider){
 	$routeProvider
 	.when('/',{
@@ -43,6 +44,12 @@ angular.module('appModule', ['ngRoute','ngCookies','authModule','ngMap'])
 	})
 	.when('/group/:gid', {
 		template: '<group></group>'
+	})
+	.when('/route', {
+		template: '<route></route>'
+	})
+	.when('/route/:rid', {
+		template: '<route></route>'
 	})
 	.when('/event/:eid', {
 		template: '<event></event>'

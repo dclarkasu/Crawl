@@ -26,7 +26,8 @@ public interface UserDAO {
 	public Post createPost(int id, int gid, String crawlJson);
 	public Post updatePost(int pid, String crawlJson);
 	public Boolean deletePost(int pid);
-	User addContactToUser(Contact contact, int id);
+	public User addContactToUser(Contact contact, int id);
+	public User adminCheck(int uid, int gid);
 	
 
 }

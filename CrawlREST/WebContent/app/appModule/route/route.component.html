@@ -30,7 +30,7 @@
 			<tr ng-repeat="v in vm.routeVenues | orderBy:'spot'">
 			<td><button class="btn" id="moveVenueDown" ng-click="vm.venueDown(vm.route.id, v.venue.id)">&#9650</button><button class="btn" id="moveVenueUp" ng-click="vm.venueUp(v.route.id,v.venue.id)">&#9661</button></td>
 			 <td>{{v.spot}}</td>
-        <td><a class="badge badge-light" href="#/venue">{{v.venue.name}}</a></td>
+        <td><a class="badge badge-light" href="{{'#/venue/' + v.id}}">{{v.venue.name}}</a></td>
 				<td><button class="btn" id="removeVenueBtn" ng-click="vm.removeVenue(vm.route.id, v.venue.id)">X</button></td>
 			</tr>
 		</tbody>

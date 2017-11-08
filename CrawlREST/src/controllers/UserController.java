@@ -153,4 +153,16 @@ public class UserController {
         return "pong";
     }
 	
+	@RequestMapping(path="users/{uid}/group/{gid}/admin", method= RequestMethod.GET)
+	public User checkAdmin(HttpServletRequest req, HttpServletResponse res,@PathVariable int uid,@PathVariable int gid){
+	System.out.println(userDao.adminCheck(uid, gid).getFirstName());
+	System.out.println("****************************************************************************");
+	return userDao.adminCheck(uid, gid);
+}
+	
+//	@RequestMapping(path="users/{uid}/event/{gid}/admin", method= RequestMethod.GET)
+//	public User checkEventAdmin(HttpServletRequest req, HttpServletResponse res,@PathVariable int uid,@PathVariable int gid){
+//	
+	
+//}
 }
