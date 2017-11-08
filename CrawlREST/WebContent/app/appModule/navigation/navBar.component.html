@@ -38,8 +38,18 @@
 </li>
 				<!-- Select -->
 				<li class="nav-item" ng-show="vm.isLoggedIn()">
-					<select ng-model="selected" ng-options="group.name for group in vm.groups">
-	        </select>
+					<div>
+    				<!-- Simple dropdown -->
+    					<span uib-dropdown on-toggle="toggled(open)">
+      					<a href id="simple-dropdown" uib-dropdown-toggle>
+        				Click me for a dropdown, yo!
+      					</a>
+      					<ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
+        					<li ng-repeat="group in vm.groups">
+          					<a href>{{group.name}}</a>
+        					</li>
+      					</ul>
+    					</span>
 				</li>
 
 				<!-- Remainder of navbar -->
