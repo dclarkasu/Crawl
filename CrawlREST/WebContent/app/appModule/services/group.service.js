@@ -77,6 +77,15 @@ angular.module('appModule').factory('groupService', function($http, authService,
 		      data : group
 		})
 	};
+	
+	service.adminCheck = function(gid, uid) {
+		console.log("Admin Check Check")
+		return $http ({
+			method : 'GET',
+			url : `rest/users/${uid}/group/${gid}/admin`,
+		      
+		})
+	};
 
 	service.indexEvents = function(gid) {
 		return $http({
