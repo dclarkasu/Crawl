@@ -20,7 +20,7 @@ public interface GroupDAO {
 //	public Group findGroupByEventId(int eid);
 	
 	//Event Specific Methods
-	public Event createEvent(int gid, String eventJSON);
+	public Event createEvent(int uid, int gid, String eventJSON);
 	public Event findEventById(int eid);
 	public Event updateEvent(int gid, int eid, String eventJSON);
 	public Boolean deleteEvent(int gid, int eid);

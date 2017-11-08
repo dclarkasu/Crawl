@@ -103,7 +103,7 @@ angular.module('appModule').component('group', {
 
 		vm.addEvent = function(newEvent) {
 			console.log(newEvent);
-			groupService.createEvent(newEvent, $routeParams.gid)
+			groupService.createEvent(newEvent, $routeParams.gid, vm.activeUserId)
 			.then(function(res) {
 				vm.loadEvents();
 				vm.loadGroup();
@@ -140,6 +140,14 @@ angular.module('appModule').component('group', {
 		vm.addPost = function(gid, newPost) {
 			console.log(vm.activeUserId);
 			groupService.createPost(vm.activeUserId, gid, newPost)
+			.then(function(res){
+				vm.loadMessages();
+			})
+		}
+		
+		vm.removePost = function(pid) {
+			
+			groupService.deletePost(vm.activeUserId, pid)
 			.then(function(res){
 				vm.loadMessages();
 			})
@@ -194,6 +202,8 @@ angular.module('appModule').component('group', {
 			})
 		}
 
+		vm.rem
+		
 		vm.setRemoveMember = function() {
 			vm.memberToRemove = {};
 		};

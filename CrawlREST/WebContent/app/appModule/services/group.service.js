@@ -57,6 +57,14 @@ angular.module('appModule').factory('groupService', function($http, authService,
 			data : newPost
 		})
 	};
+	
+	service.deletePost = function(uid, pid) {
+		return $http({
+			method : 'DELETE',
+			url : 'rest/users/'+ uid + '/post/'+ pid
+			
+		})
+	};
 
 	service.updateGroup = function(group, gid) {
 		return $http ({
