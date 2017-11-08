@@ -1,7 +1,7 @@
 angular.module('appModule')
 .component('navBar',{
 	templateUrl: 'app/appModule/navigation/navBar.component.html',
-	controller: function($cookies, groupService){
+	controller: function($cookies, groupService, $scope){
 
 		var vm = this;
 
@@ -28,8 +28,12 @@ angular.module('appModule')
 			})
 		};
 
-		vm.loadGroupsByUser();
-		
+		$scope.$on('createdGroup', function(ev, data) {
+			console.log(ev);
+			console.log(data);
+			console.log("In navBar js");
+			vm.loadGroupsByUser();
+		})
 
 	},
 	controllerAs: 'vm'

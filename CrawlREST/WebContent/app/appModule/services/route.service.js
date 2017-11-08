@@ -65,6 +65,15 @@ angular.module('appModule').factory('routeService', function($http, authService,
 			url : `rest/users/` + $cookies.get('userId') + `/routes/1/routeVenues`
 		})
 	};
+	
+	service.adminCheck = function(rid, uid) {
+
+		return $http ({
+			method : 'GET',
+			url : `rest/users/${uid}/route/${rid}/admin`,
+		      
+		})
+	};
 
 	service.updateRoute = function(route) {
 		return $http ({

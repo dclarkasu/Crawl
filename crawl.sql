@@ -130,7 +130,7 @@ DROP TABLE IF EXISTS `route` ;
 CREATE TABLE IF NOT EXISTS `route` (
   `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL DEFAULT NULL,
-  `edited` TINYINT(1) NULL DEFAULT 0,  
+  `edited` TINYINT(1) NULL DEFAULT 0,
   `admin_id` INT(10) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
@@ -314,13 +314,13 @@ INSERT INTO contact (phone_number, email) VALUES ('555-555-5510', 'true@gmail.co
 INSERT INTO contact (phone_number, email) VALUES ('555-555-5511', 'skylark@gmail.com');
 INSERT INTO contact (phone_number, email) VALUES ('555-555-5512', 'mcman@gmail.com');
 
-INSERT INTO user (first_name,last_name,contact_id) VALUES ('bill','james',1);
-INSERT INTO user (first_name,last_name,contact_id) VALUES ('lisa','burns',2);
-INSERT INTO user (first_name,last_name,contact_id) VALUES ('david','brown',3);
-INSERT INTO user (first_name,last_name,contact_id) VALUES ('pam','grey',4);
+INSERT INTO user (first_name,last_name,contact_id) VALUES ('Bill','James',1);
+INSERT INTO user (first_name,last_name,contact_id) VALUES ('Lisa','Burns',2);
+INSERT INTO user (first_name,last_name,contact_id) VALUES ('David','Brown',3);
+INSERT INTO user (first_name,last_name,contact_id) VALUES ('Pam','Grey',4);
 
-INSERT INTO crawl_group (name, admin_id) VALUES ('pub day',3);
-INSERT INTO crawl_group (name, admin_id) VALUES ('skywalker', 1);
+INSERT INTO crawl_group (name, admin_id) VALUES ('Pub Day',3);
+INSERT INTO crawl_group (name, admin_id) VALUES ('Skywalker', 1);
 
 INSERT INTO user_group (user_id, group_id) VALUES (2,1);
 INSERT INTO user_group (user_id, group_id) VALUES (3,1);
@@ -338,23 +338,23 @@ INSERT INTO login (user_name,password,user_id) VALUES ('red','$2a$10$Gs0mtbWIXqy
 INSERT INTO post (group_id,user_id,message) VALUES (1,3,'lets go dude');
 
 INSERT INTO address (longitude,lat,street,street2,city,state,zip)
-VALUES  (100.10,80.34,'123 way road','','Denver','CO','80910'),
-        (90.11,90.34,'323 red road','','Denver','CO','80909'),
-        (80.12,100.34,'523 back road','','Denver','CO','80110'),
-        (70.13,110.34,'623 road road','','Denver','CO','80909');
+VALUES  (100.10,80.34,'123 Way Rd','','Denver','CO','80910'),
+        (90.11,90.34,'323 Red Rd','','Denver','CO','80909'),
+        (80.12,100.34,'523 Back Rd','','Denver','CO','80110'),
+        (70.13,110.34,'623 Road Rd','','Denver','CO','80909');
 
 INSERT INTO venue (name,description,hours,address_id,contact_id)
-VALUES ('sputnik','fun place here','11:00AM-2:00PM',1,5),
-      ('true brew','fun place here','11:00AM-3:00PM',2,6),
-      ('skylark','fun place here','10:00AM-12:00PM',3,7),
-      ('mcman bar & grill','fun place here','11:00AM-1:00PM',4,8);
+VALUES ('Sputnik','Fun place here','11:00AM-2:00PM',1,5),
+      ('True brew','Fun place here','11:00AM-3:00PM',2,6),
+      ('Skylark','Fun place here','10:00AM-12:00PM',3,7),
+      ('Mcman Bar & Grill','Fun place here','11:00AM-1:00PM',4,8);
 
-INSERT INTO route (name,admin_id) VALUES ('party route',1),('fun route',2);
+INSERT INTO route (name,admin_id) VALUES ('Party Route',1),('Fun Route',2);
 
 INSERT INTO route_venue (route_id,venue_id,spot) VALUES (1,1,1),(1,2,2),(1,3,3),(2,2,1),(2,3,2),(2,4,3);
 
 INSERT INTO event (name,route_id,group_id,date,admin_id)
-VALUES ('pams birthday',1,1,now(),1),('friday night',2,1,now(),2);
+VALUES ('Pams Birthday',1,1,now(),1),('Friday Night',2,1,now(),2);
 
 DROP USER 'crawluser'@'localhost';
 CREATE USER 'crawluser'@'localhost' IDENTIFIED BY 'crawl';GRANT SELECT, INSERT, TRIGGER ON TABLE * TO 'crawluser'@'localhost';

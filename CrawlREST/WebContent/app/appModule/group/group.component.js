@@ -100,6 +100,10 @@ angular.module('appModule').component('group', {
 		vm.setNewEvent = function() {
 			vm.newEvent = {};
 		};
+		
+		vm.setNewPost = function() {
+			vm.newPost = null;
+		};
 
 		vm.addEvent = function(newEvent) {
 			console.log(newEvent);
@@ -142,6 +146,7 @@ angular.module('appModule').component('group', {
 			groupService.createPost(vm.activeUserId, gid, newPost)
 			.then(function(res){
 				vm.loadMessages();
+				vm.setNewPost();
 			})
 		}
 		
