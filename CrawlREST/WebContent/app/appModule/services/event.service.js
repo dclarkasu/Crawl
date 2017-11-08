@@ -1,6 +1,6 @@
 angular.module('appModule').factory('eventService', function($http, authService, $routeParams, $cookies){
 	var service = {};
-
+	var gid = $cookies.get("userId")
 	var id = $cookies.get("userId");
 //	service.indexUserGroups = function() {
 //		return $http ({
@@ -65,6 +65,15 @@ angular.module('appModule').factory('eventService', function($http, authService,
 		      data : event
 		})
 	};
+	
+//	service.adminCheck = function(gid, uid) {
+//		console.log("Admin Check Check")
+//		return $http ({
+//			method : 'GET',
+//			url : `rest/users/${uid}/event/${gid}/admin`,
+//		      
+//		})
+//	};
 
 	service.indexRoutes = function() {
 		return $http({

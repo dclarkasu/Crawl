@@ -3,6 +3,8 @@ angular.module('appModule').component('event', {
 	controller : function(eventService, $routeParams, groupService) {
     var vm = this;
 
+    vm.admin = null;
+    
     vm.event = null;
 
     vm.members = [];
@@ -12,7 +14,8 @@ angular.module('appModule').component('event', {
     vm.routes = [];
 
     //Behaviors
-
+  
+   
     vm.loadEvent = function() {
     		eventService.showEvent(vm.eventID)
     		.then(function(res) {
@@ -27,7 +30,21 @@ angular.module('appModule').component('event', {
     };
 
     vm.loadEvent();
-
+    console.log ("is this here:" + $routeParams.eid);
+//    vm.adminCheck = function() {
+//		var promise = groupService.adminCheck($routeParams.gid, $cookies.get('userId'));
+//		
+//		promise.then(function(res){
+//			console.log(res);
+//			console.log('in admin promise');
+//			
+//			vm.admin = res.data;
+//		}).catch(function(err){
+//			console.log(err);
+//		});
+//		
+//	}
+    
     // vm.loadGroup = function() {
 		// 	groupService.showGroup()
 		// 	.then(function(res){
