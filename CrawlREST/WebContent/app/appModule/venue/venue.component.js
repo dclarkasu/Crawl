@@ -29,7 +29,7 @@ angular.module('appModule')
 			vm.showList = true;
 		}
 		
-		console.log(vm.showList);
+		
 		vm.showCreate = function(){
 			vm.copy = {};
 			vm.copyHours = {};
@@ -109,7 +109,9 @@ angular.module('appModule')
 			vm.update = null;
 			vm.updateAddress = null;
 		}
-		
+		function getGeocode(){
+			
+		}
 		function createHoursString(hourObj){
 			return hourObj.openHour +':'+ hourObj.openMin + hourObj.openAP 
 			+'-'+ hourObj.closeHour +':'+ hourObj.closeMin + hourObj.closeAP;
