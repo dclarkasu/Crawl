@@ -130,8 +130,15 @@ DROP TABLE IF EXISTS `route` ;
 CREATE TABLE IF NOT EXISTS `route` (
   `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL DEFAULT NULL,
+  `edited` TINYINT(1) NULL DEFAULT NULL,  
+  `admin_id` INT(10) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC))
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+  CONSTRAINT `fk_route_user`
+    FOREIGN KEY (`admin_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -146,6 +153,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   `name` VARCHAR(45) NULL DEFAULT NULL,
   `route_id` INT(10) UNSIGNED NULL DEFAULT NULL,
   `group_id` INT(10) UNSIGNED NULL DEFAULT NULL,
+  `admin_id` INT(10) UNSIGNED NULL DEFAULT NULL,
   `date` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
@@ -157,6 +165,11 @@ CREATE TABLE IF NOT EXISTS `event` (
   CONSTRAINT `fk_event_route`
     FOREIGN KEY (`route_id`)
     REFERENCES `route` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_event_user`
+    FOREIGN KEY (`admin_id`)
+    REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -336,12 +349,12 @@ VALUES ('sputnik','fun place here','11:00AM-2:00PM',1,5),
       ('skylark','fun place here','10:00AM-12:00PM',3,7),
       ('mcman bar & grill','fun place here','11:00AM-1:00PM',4,8);
 
-INSERT INTO route (name) VALUES ('party route'),('fun route');
+INSERT INTO route (name,admin_id) VALUES ('party route',1),('fun route',2);
 
 INSERT INTO route_venue (route_id,venue_id,spot) VALUES (1,1,1),(1,2,2),(1,3,3),(2,2,1),(2,3,2),(2,4,3);
 
-INSERT INTO event (name,route_id,group_id,date)
-VALUES ('pams birthday',1,1,now()),('friday night',2,1,now());
+INSERT INTO event (name,route_id,group_id,date,admin_id)
+VALUES ('pams birthday',1,1,now(),1),('friday night',2,1,now(),2);
 
 DROP USER 'crawluser'@'localhost';
 CREATE USER 'crawluser'@'localhost' IDENTIFIED BY 'crawl';GRANT SELECT, INSERT, TRIGGER ON TABLE * TO 'crawluser'@'localhost';
