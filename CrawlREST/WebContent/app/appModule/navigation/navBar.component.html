@@ -8,34 +8,6 @@
 				<li class="nav-item"><a class="nav-link active" href="#/register">Register</a></li>
 				<li class="nav-item"><a class="nav-link active" href="#/venue">Venue</a></li>
 
-				<!-- <li class="nav-item">
-					<span uib-dropdown on-toggle="toggled(open)">
-						<a class="nav-link active" href id="simple-dropdown" uib-dropdown-toggle>
-						Groups
-						</a>
-						<ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
-							<li ng-repeat="group in vm.groups">
-								<a href>Hello</a>
-								<a href>{{group.name}}</a>
-							</li>
-						</ul>
-					</span>
-				</li> -->
-
-<!-- Dropdown template -->
- <li class="nav-item">
-				<!-- Simple dropdown -->
-			    <span uib-dropdown on-toggle="toggled(open)">
-			      <a href id="simple-dropdown" uib-dropdown-toggle>
-			        Click me for a dropdown, yo!
-			      </a>
-			      <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
-			        <li ng-repeat="choice in items">
-			          <a href>{{choice}}</a>
-			        </li>
-			      </ul>
-			    </span>
-</li>
 				<!-- Select -->
 				<li class="nav-item" ng-show="vm.isLoggedIn()">
 					<div>
@@ -62,48 +34,3 @@
 		</div>
 	</div>
 </div>
-
-		<!-- Flak navbar -->
-		<!-- <nav class="navbar navbar-inverse navbar-fixed-top">
-
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#myNavbar" name="button">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>Hello
-				</button>
-				<a class="navbar-brand" href="#/"> <span class="logoC">C</span><span
-					class="logoR">R</span><span class="logoA">A</span><span class="logoW">W</span><span class="logoL">L</span></a>
-				<div class="login-link"></div>
-			</div>
-
-			<div class="collapse navbar-collapse" id="myNavbar">
-
-					<ul class="nav navbar-nav navbar-right">
-						<ul class="nav navbar-nav ">
-						<c:choose>
-							<c:when test="${not empty user}">
-
-							</c:when>
-								<c:otherwise>
-									<li><a href="about.do">What is Flak?</a></li>
-								</c:otherwise>
-						</c:choose>
-								 <c:if test="${not empty groups}">
-							<li class="dropdown"><a class="dropdown-toggle"
-									data-toggle="dropdown" href="#"><span class="caret"></span>&nbsp;GROUPS</a>
-									<ul class="dropdown-menu">
-									<c:forEach var="group" items="${groups}">
-										<li><a href="getDashboardByUser.do?gid=${group.id}">${group.name}
-										</a></li>
-										<br />
-									</c:forEach>
-								</c:if>
-									</ul>
-							<li><a href="#/login">LOGIN</a></li>
-						</ul>
-					</ul>
-				</div>
-			</div>
-		</div> -->
