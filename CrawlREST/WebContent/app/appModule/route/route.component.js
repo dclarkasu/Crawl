@@ -66,7 +66,7 @@ angular.module('appModule').component('route', {
 		vm.loadAllVenuesExcept = function (rid){
 			console.log('in Load All Venues');
 			console.log(rid);
-			routeService.indexAllVenues(1, rid).then(function(res){
+			routeService.indexAllVenues(rid).then(function(res){
 				vm.allVenues = res.data;
 				console.log(vm.indexAllVenues);
 			})

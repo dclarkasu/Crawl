@@ -15,7 +15,6 @@ angular.module('appModule')
                     
                     geolocate.geocodeAddress('2095 legacy ridge view colorado springs co 80910')
                     .then(function(res){
-                    	    console.log
                         vm.mapOptions = {
                                   center: res.cord,
                                   markers : [res.cord],
