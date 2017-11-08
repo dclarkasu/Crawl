@@ -41,6 +41,12 @@ angular.module('appModule', ['ngRoute','ngCookies','authModule'])
 	.when('/group/:gid', {
 		template: '<group></group>'
 	})
+	.when('/route', {
+		template: '<route></route>'
+	})
+	.when('/route/:rid', {
+		template: '<route></route>'
+	})
 	.when('/event/:eid', {
 		template: '<event></event>'
 	})

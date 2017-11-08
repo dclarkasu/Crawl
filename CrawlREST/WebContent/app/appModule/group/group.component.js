@@ -5,7 +5,8 @@ angular.module('appModule').component('group', {
 		var vm = this;
 //		vm.userId = $cookies.get("userId")
 				
-
+		vm.admin = null;
+		
 		vm.group = null;
 
 		vm.members = [];
