@@ -32,6 +32,9 @@ angular.module('appModule', ['ngRoute','ngCookies','authModule', 'ui.bootstrap']
 			<user></user>
 			`
 	})
+	.when('/venue/',{
+		template: '<venue></venue>'
+	})
 	.when('/venue/:vid', {
 		template: '<venue></venue>'
 	})
@@ -40,6 +43,12 @@ angular.module('appModule', ['ngRoute','ngCookies','authModule', 'ui.bootstrap']
 	})
 	.when('/group/:gid', {
 		template: '<group></group>'
+	})
+	.when('/route', {
+		template: '<route></route>'
+	})
+	.when('/route/:rid', {
+		template: '<route></route>'
 	})
 	.when('/event/:eid', {
 		template: '<event></event>'

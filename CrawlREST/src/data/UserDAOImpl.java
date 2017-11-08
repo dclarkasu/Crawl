@@ -203,4 +203,15 @@ public class UserDAOImpl implements UserDAO {
 		}
 	}
 
-}
+
+	@Override
+	public User adminCheck(int uid, int gid) {
+
+		Group group = em.find(Group.class, gid);
+		User user = em.find(User.class, uid);
+		if(group.getAdmin()==user) {
+		return user ;
+	}
+		return null;
+
+}}

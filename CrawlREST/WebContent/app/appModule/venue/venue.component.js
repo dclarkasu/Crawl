@@ -9,7 +9,9 @@ angular.module('appModule')
 		vm.copyHours = null;
 		vm.update = null;
 		vm.updateHours = null;
-		vm.updateAddress = null;
+		vm.venueList = [];
+		vm.showList = true;
+		
 		vm.states = ["AL","AK","AZ","AR","CA","CO","CT","DE","DC","FL","GA","HI","ID"
 			,"IL","IN","IA","KS","KY","LA","ME","MT","NE","NV","NH","NJ","NM","NY","NC"
 			,"ND","OH","OK","OR","MD","MA","MI","MN","MS","MO","PA","RI","SC","SD","TN"
@@ -19,8 +21,15 @@ angular.module('appModule')
 		vm.APList = ['AM','PM'];
 		vm.minList = ['00','15','30','45'];
 		
-		loadVenue();
+		if($routeParams.vid){
+			loadVenue();
+			vm.showList = false;
+		} else {
+			loadVenueList();
+			vm.showList = true;
+		}
 		
+		console.log(vm.showList);
 		vm.showCreate = function(){
 			vm.copy = {};
 			vm.copyHours = {};
@@ -29,6 +38,15 @@ angular.module('appModule')
 			vm.copy = null;
 			vm.copyHours = null;
 		}
+		vm.makeInactive = function(venue){
+			venueService.makeVenueInactive(venue.id)
+			.then(function(res){
+				loadVenue();
+			})
+			.catch(function(err){
+				console.log(err)
+			})
+		};
 		vm.createVenue = function(){
 			vm.copy.hours = createHoursString(vm.copyHours);
 			console.log(vm.copy);
@@ -64,9 +82,8 @@ angular.module('appModule')
 				console.log(err);
 			})
 		};
-		vm.updateVenueAddress = function(){
-			console.log(vm.updateAddress);
-			venueService.updateAddress(vm.updateAddress, $routeParams.vid)
+		vm.updateVenueAddress = function(venue){
+			venueService.updateAddress(venue.address, $routeParams.vid)
 			.then(function(res){
 				vm.update = null;
 				vm.updateAddress = null;
@@ -115,6 +132,15 @@ angular.module('appModule')
 			.then(function(res){
 				vm.venue = res.data;
 				console.log(vm.venue);
+			})
+			.catch(function(err){
+				console.log(err);
+			});
+		}
+		function loadVenueList(){
+			venueService.indexVenue()
+			.then(function(res){
+				vm.venueList = res.data;
 			})
 			.catch(function(err){
 				console.log(err);

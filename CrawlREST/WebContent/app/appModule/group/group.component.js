@@ -1,11 +1,12 @@
 angular.module('appModule').component('group', {
 	templateUrl : "app/appModule/group/group.component.html",
-	controller : function(groupService, $routeParams) {
-		//Variables
+	controller : function(groupService, $routeParams, $cookies) {
+		// Variables
 		var vm = this;
-//		vm.userId = $cookies.get("userId")
+// vm.userId = $cookies.get("userId")
 				
-
+		vm.admin = null;
+		
 		vm.group = null;
 
 		vm.members = [];
@@ -20,7 +21,7 @@ angular.module('appModule').component('group', {
 		
 		vm.newPost = null;
 		
-		//Behaviors
+		// Behaviors
 		vm.groupsByUser = function() {
 			groupService.indexUserGroups()
 			.then(function(res){
@@ -28,6 +29,7 @@ angular.module('appModule').component('group', {
 				vm.groupList = res.data;
 			})
 		};
+		
 
 		vm.loadGroup = function() {
 			var promise = groupService.showGroup($routeParams.gid);
@@ -43,6 +45,23 @@ angular.module('appModule').component('group', {
 		vm.loadGroup();
 		console.log('vm.group: ' + vm.group);
 
+		vm.adminCheck = function() {
+			var promise = groupService.adminCheck($routeParams.gid, $cookies.get('userId'));
+			
+			promise.then(function(res){
+				console.log(res);
+				console.log('in admin promise');
+				
+				vm.admin = res.data;
+			}).catch(function(err){
+				console.log(err);
+			});
+			
+		}
+		
+		vm.adminCheck();
+		console.log('vm.check: ' + vm.admin);
+		
 		vm.loadMembers = function() {
 			console.log('in load members');
 			groupService.indexMembers($routeParams.gid)
@@ -184,6 +203,7 @@ angular.module('appModule').component('group', {
 			})
 		}
 
+		console.log('ADMIN: ' + vm.admin);
 	},
 	controllerAs: 'vm'
 });

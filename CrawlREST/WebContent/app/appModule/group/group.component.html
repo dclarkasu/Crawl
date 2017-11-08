@@ -32,7 +32,7 @@
     </div>
   </div>
 
-    <button class="btn" ng-click="vm.setRemoveMember()">Remove Member</button>
+    <button ng-show="vm.admin" class="btn" ng-click="vm.setRemoveMember()">Remove Member</button>
     <div ng-show="vm.memberToRemove">
       <form class="form-group">
         <select ng-model="removeSelection" ng-options="member.firstName for member in vm.members">
@@ -46,7 +46,7 @@
   <table class="table" ng-show="vm.events">
 		<thead class="thead-dark">
 			<th>Event</th>
-			<th>Delete</th>
+			<th ng-show="vm.admin">Delete</th>
       <th></th>
       <th></th>
 			<th><button class="btn" ng-hide="vm.newEvent" ng-click="vm.setNewEvent()">Create Event</button></th>
@@ -54,7 +54,7 @@
 		<tbody>
 			<tr ng-repeat="event in vm.events | orderBy:'id'">
         <td><a class="badge badge-light" href="{{'#/event/'+event.id}}">{{event.name}}</a></td>
-				<td><button class="btn" id="deleteEventBtn" ng-click="vm.deleteEvent(event.id)">X</button></td>
+				<td ng-show="vm.admin"><button class="btn" id="deleteEventBtn" ng-click="vm.deleteEvent(event.id)">X</button></td>
 			</tr>
 		</tbody>
 	</table>
@@ -90,3 +90,4 @@
 		</tbody>
 	</table>
 </div>
+
