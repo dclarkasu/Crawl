@@ -87,7 +87,10 @@ angular.module('appModule').component('group', {
 		};
 
 		vm.updateGroup = function(group) {
-			groupService.updateGroup(group)
+			console.log("Group: ");
+			console.log(group);
+			console.log("group id in component: " + vm.group.id);
+			groupService.updateGroup(group, vm.group.id)
 			.then(function(res) {
 				vm.loadGroup();
 				vm.editGroup = null;
