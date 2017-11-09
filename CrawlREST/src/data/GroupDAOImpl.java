@@ -244,7 +244,8 @@ public class GroupDAOImpl implements GroupDAO {
 	public Event addRouteToEvent(int rid, int eid) {
 		Route r = em.find(Route.class, rid);
 		Event e = em.find(Event.class, eid);
-
+		System.out.println("RID: " + rid);
+		System.out.println("EID: " + eid);
 		e.setRoute(r);
 		
 		return e;
