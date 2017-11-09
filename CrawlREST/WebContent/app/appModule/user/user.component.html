@@ -1,38 +1,38 @@
 <h1 >User Profile</h1>
-<h3>{{vm.selected.username}}</h3>
-<div ng-show="vm.selected && !vm.editUser">
-<img class="uimg" alt="pic" ng-src="{{vm.selected.imgUrl}}">
+	<h3>{{vm.selected.username}}</h3>
+  <div ng-show="vm.selected && !vm.editUser">
+	<img class="uimg" alt="pic" ng-src="{{vm.selected.imgUrl}}">
 
-<div><strong>First Name:</strong> {{vm.selected.firstName}}</div>
-<div><strong>Last Name:</strong> {{vm.selected.lastName}}</div>
-<div>Phone: {{vm.selected.contact.phoneNumber}}</div>
-<div>Email: {{vm.selected.contact.email}}</div><br>
-<button class="btn btn-md btn-success"ng-click="vm.setEditUser()">Edit</button><br>
-</div>
-
-
-<div ng-show="vm.editUser">
-<h3>Update Profile</h3>
-<form>
-  <label>First Name: </label><input type="text" ng-model="vm.editUser.firstName"/><br />
-  <label>Last Name: </label><input type="text" ng-model="vm.editUser.lastName"/><br />
-  <label>imgUrl: </label><input type="text" ng-model="vm.editUser.imgUrl"/><br />
-  <label>Phone: </label><input type="text" ng-model="vm.editUser.contact.phoneNumber"/><br />
-  <label>Email: </label><input type="email" ng-model="vm.editUser.contact.email"/><br />
-  <input type="submit" value="Cancel" ng-click="vm.editUser = null" />
-  <input type="submit" value="Save" ng-click="vm.updateUser()" ng-show="vm.editUser"/>
-</form>
-</div>
-
-<div class="uinfo">
-<h4>Your Groups:</h4>
-<div ng-repeat = "group in vm.groups">
-<a href="{{'#/group/' + group.id}}"><strong>{{group.name}}</strong></a>
-</div>
+	<div><strong>First Name:</strong> {{vm.selected.firstName}}</div>
+	<div><strong>Last Name:</strong> {{vm.selected.lastName}}</div>
+	<div>Phone: {{vm.selected.contact.phoneNumber}}</div>
+	<div>Email: {{vm.selected.contact.email}}</div><br>
+	<button class="btn btn-md btn-success"ng-click="vm.setEditUser()">Edit</button><br>
+  </div>
 
 
-<form>
-<input type="text" placeholder="Name" ng-model="newGroup.name"/><br />
-<input class="btn btn-md btn-success" type ="submit" value="Create Group" ng-click="vm.createGroup(newGroup); newGroup = {};"/>
-</form>
-</div>
+	<div ng-show="vm.editUser">
+		<h3>Update Profile</h3>
+			<form>
+			  <label>First Name: </label><input type="text" ng-model="vm.editUser.firstName"/><br />
+			  <label>Last Name: </label><input type="text" ng-model="vm.editUser.lastName"/><br />
+			  <label>imgUrl: </label><input type="text" ng-model="vm.editUser.imgUrl"/><br />
+			  <label>Phone: </label><input type="text" ng-model="vm.editUser.contact.phoneNumber"/><br />
+			  <label>Email: </label><input type="email" ng-model="vm.editUser.contact.email"/><br />
+			  <input type="submit" value="Cancel" ng-click="vm.editUser = null" />
+			  <input type="submit" value="Save" ng-click="vm.updateUser()" ng-show="vm.editUser"/>
+			</form>
+	</div>
+
+	<div class="uinfo">
+		<h4>Your Groups:</h4>
+			<div ng-repeat = "group in vm.groups">
+				<a href="{{'#/group/' + group.id}}"><strong>{{group.name}}</strong></a>
+			</div>
+
+
+		<form>
+			<input type="text" placeholder="Name" ng-model="newGroup.name"/><br />
+			<input class="btn btn-md btn-success" type ="submit" value="Create Group" ng-click="vm.createGroup(newGroup); newGroup = {};"/>
+		</form>
+	</div>
