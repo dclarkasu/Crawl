@@ -129,9 +129,11 @@ public class VenueDAOImpl implements VenueDAO {
 	
 	@Override
 	public Address updateAddress(String json, int id) {
+		System.out.println(json);
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			Address addressInput = mapper.readValue(json, Address.class);
+			System.out.println(addressInput);
 			Address addressManaged = em.find(Address.class, id);
 			if(addressManaged != null) {
 				addressManaged.setCity(addressInput.getCity());
