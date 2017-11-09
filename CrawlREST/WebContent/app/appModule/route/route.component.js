@@ -10,7 +10,7 @@ angular.module('appModule').component('route', {
 		vm.admin = null;
 
 		vm.loadRoute = function() {
-			var promise = routeService.showRoute();
+			var promise = routeService.showRoute($routeParams.rid);
 
 			promise.then(function(res){
 				console.log(res);
@@ -67,7 +67,7 @@ angular.module('appModule').component('route', {
 
 		vm.loadRouteVenues = function() {
 			console.log('in load venues');
-			routeService.indexRouteVenues()
+			routeService.indexRouteVenues($routeParams.rid)
 			.then(function(res) {
 				vm.routeVenues = res.data;
 				console.log(vm.routeVenues);
@@ -109,7 +109,7 @@ angular.module('appModule').component('route', {
 		};
 
 		vm.updateRoute = function(route) {
-			routeService.updateRoute(route)
+			routeService.updateRoute(route, $routeParams.rid)
 			.then(function(res) {
 				vm.loadRoute();
 				vm.editRoute = null;
