@@ -1,8 +1,9 @@
 <div class="container">
 
 <!-- <button class="btn" ng-click="vm.loadGroup()">Load Group</button> -->
-
+  
   <div ng-show="vm.route">
+  	<map-view></map-view>
     <h3>Route</h3>
     <h1>{{vm.route.name}}</h1>
     <button ng-show="vm.admin && !vm.editRoute" class="btn"  ng-click="vm.setEditRoute()">Edit Route</button>
