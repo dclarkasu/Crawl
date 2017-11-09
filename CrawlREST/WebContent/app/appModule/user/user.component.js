@@ -36,13 +36,8 @@ angular.module('appModule').component('user', {
 
 			vm.selected = res.data;
 			vm.editUser = null;
-
-
 		})
-
 	}
-
-
 
 		//Copy info over to edit form
 		vm.setEditUser = function(user) {
