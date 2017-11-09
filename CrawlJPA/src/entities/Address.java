@@ -69,5 +69,28 @@ public class Address {
 	public void setZip(String zip) {
 		this.zip = zip;
 	}
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Address [id=");
+		builder.append(id);
+		builder.append(", longitude=");
+		builder.append(longitude);
+		builder.append(", latitude=");
+		builder.append(latitude);
+		builder.append(", street=");
+		builder.append(street);
+		builder.append(", street2=");
+		builder.append(street2);
+		builder.append(", city=");
+		builder.append(city);
+		builder.append(", state=");
+		builder.append(state);
+		builder.append(", zip=");
+		builder.append(zip);
+		builder.append("]");
+		return builder.toString();
+	}
+	
 	
 }

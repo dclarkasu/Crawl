@@ -48,19 +48,21 @@ angular.module('appModule')
 		};
 		vm.createVenue = function(){
 			vm.copy.hours = createHoursString(vm.copyHours);
-			console.log(vm.copy);
-			var address = getGeocode(vm.copy.address);
-			vm.copy.address = address;
-			console.log(vm.copy);
-//			venueService.createVenue(vm.copy)
-//			.then(function(res){
-//				console.log(res.data);
-//				var id = res.data.id;
-//				$location.path("/venue/" + id);
-//			})
-//			.catch(function(err){
-//				console.log(err);
-//			});
+			getGeocode(vm.copy.address)
+			.then(function(address){
+				vm.copy.address = address;
+				venueService.createVenue(vm.copy)
+				.then(function(res){
+					var id = res.data.id;
+					$location.path("/venue/" + id);
+				})
+				.catch(function(err){
+					console.log(err);
+				});
+			})
+			.catch(function(err){
+				console.log(err);
+			})
 		}
 		
 		vm.showUpdate = function(){
@@ -73,11 +75,9 @@ angular.module('appModule')
 		vm.updateVenue = function(){
 			vm.update.hours = createHoursString(vm.updateHours);
 			console.log(vm.update);
-			vm.update.address = null;
 			venueService.updateVenue(vm.update, $routeParams.vid)
 			.then(function(res){
 				vm.update = null;
-				vm.updateAddress = null;
 				loadVenue();
 			})
 			.catch(function(err){
@@ -85,17 +85,18 @@ angular.module('appModule')
 			})
 		};
 		vm.updateVenueAddress = function(venue){
-			console.log(venue.address);
-			var address = getGeocode(venue.address);
-			venueService.updateAddress(venue.address, $routeParams.vid)
-			.then(function(res){
-				vm.update = null;
-				vm.updateAddress = null;
-				loadVenue();
-			})
-			.catch(function(err){
-				console.log(err)
-			})
+			getGeocode(venue.address)
+				.then(function(address) {
+					venueService.updateAddress(address, $routeParams.vid)
+					.then(function(res){
+						vm.update = null;
+						vm.updateAddress = null;
+						loadVenue();
+					})
+						.catch(function(err){
+							console.log(err)
+						})
+				})
 		};
 		vm.updateVenueContact = function(){
 			console.log(vm.update);
@@ -115,19 +116,17 @@ angular.module('appModule')
 		}
 		function getGeocode(address){
 			var textAddress = address.street + " " + address.city + " " + address.state + " " + address.zip;
-			console.log(textAddress);
-			geolocate.geocodeAddress(textAddress)
+			return geolocate.geocodeAddress(textAddress)
 			.then(function(res){
-				console.log(res.cord.lat());
-				console.log(res.cord.lng());
-				address.longitude = res.cord.lng();
-				address.latitude = res.cord.lat();
+				address.longitude =  res.cord.lng();
+				address.latitude =  res.cord.lat();
+				return address;
 			})
 			.catch(function(err){
 				console.log(err);
 			});
-			return address;
 		}
+		
 		function createHoursString(hourObj){
 			return hourObj.openHour +':'+ hourObj.openMin + hourObj.openAP 
 			+'-'+ hourObj.closeHour +':'+ hourObj.closeMin + hourObj.closeAP;
