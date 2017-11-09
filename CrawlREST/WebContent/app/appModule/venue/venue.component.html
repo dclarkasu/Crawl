@@ -1,16 +1,18 @@
-<div ng-show="vm.showList" class="container">
+<div class="jumbotron jumbotron-fluid">
+ <div ng-show="vm.showList" class="container">
 	<div ng-hide="vm.copy">
+	  <h1>Venues</h1>
 		<table class="table">
 			<tr ng-repeat="venue in vm.venueList">
 				<td><a href="{{'#/venue/' + venue.id}}">{{venue.name}}</a></td>
 			</tr>
 		</table>
-		<button class="btn" ng-click="vm.showCreate()">Create New Venue</button>
+		<button class="btn btn-success" ng-click="vm.showCreate()">Create New Venue</button>
 	</div>
 	<div ng-show="vm.copy">
 		<form>
 			<div class="form-group">
-				<h5>Venue Information</h5>
+				<h2>Venue Information</h2>
 				Name: <input type="text" name="name" ng-model="vm.copy.name"><br>
 				Description: <input type="text" name="description" ng-model="vm.copy.description"><br>
 				Hours: 
@@ -39,16 +41,16 @@
 				Phone Number: <input class="form-control" type="text" name="phone" ng-model="vm.copy.contact.phoneNumber"><br>
 				Email : <input class="form-control" type="email" name="email" ng-model="vm.copy.contact.email"><br>
 			</div>
-			<input class="btn" type="submit" value="Create" ng-click="vm.createVenue()">
-		</form>
-		<button class="btn" ng-click="vm.cancelCreate()">Cancel</button>
+			<input class="btn btn-success" type="submit" value="Create" ng-click="vm.createVenue()">
+		</form><br>
+		<button class="btn btn-danger" ng-click="vm.cancelCreate()">Cancel</button>
 	</div>
 </div>
 <div ng-hide="vm.showList" class="container">
 	<div ng-hide="vm.update">
 		<div class="row">
 			<div class="col-sm">
-				<h3>{{vm.venue.name}}</h3>
+				<h2>{{vm.venue.name}}</h2>
 				phone number: <br>
 				{{vm.venue.contact.phoneNumber}} <br>
 				email: {{vm.venue.contact.email}} <br><br>
@@ -56,7 +58,7 @@
 				{{vm.venue.address.city}}, {{vm.venue.address.state}} {{vm.venue.address.zip}}<br><br>
 				<p>{{vm.venue.description}}</p>
 				<p>{{vm.venue.hours}}</p>
-				<button class="btn" ng-click="vm.showUpdate()">Update Venue Information</button>
+				<button class="btn btn-success" ng-click="vm.showUpdate()">Update Venue Information</button>
 			</div>
 			<div class="col-sm" >
 				<img alt="pic" class="rounded img-fluid" ng-src="{{vm.venue.imgUrl}}">
@@ -69,7 +71,7 @@
 	<div ng-show="vm.update">
 		<div class="row">
 			<div class="col-sm">
-				<h5>Venue Information</h5>
+				<h4>Venue Information</h4>
 				<form class="form-group">
 					name: <input class="form-control" type="text" name="name" ng-model="vm.update.name"><br>
 					description: <input class="form-control" type="text" name="description" ng-model="vm.update.description"><br>
@@ -83,11 +85,11 @@
 					<select ng-options="min as min for min in vm.minList" ng-model="vm.updateHours.closeMin"></select> 
 					<select ng-options="ap as ap for ap in vm.APList" ng-model="vm.updateHours.closeAP"></select><br>			
 					Image: <input class="form-control" type="text" name="imgUrl" ng-model="vm.update.imgUrl"><br>
-					<input class="btn" type="submit" value="Update" ng-click="vm.updateVenue()"><br>
+					<input class="btn btn-success" type="submit" value="Update" ng-click="vm.updateVenue()"><br>
 				</form>
 			</div>
 			<div class="col-sm">
-				<h5>Venue Address Information</h5>
+				<h4>Venue Address Information</h4>
 				<form class="form-group">
 					Street: <input class="form-control" type="text" name="street" ng-model="vm.update.address.street"><br>
 					Street2: <input class="form-control" type="text" name="street2" ng-model="vm.update.address.street2"><br>
@@ -96,18 +98,19 @@
 						<select  ng-options="state as state for state in vm.states" ng-model="vm.update.address.state">	
 						</select>
 						Zip: <input type="text" name="zip" ng-model="vm.update.address.zip"> <br>
-					<input class="btn" type="submit" value="Update Address" ng-click="vm.updateVenueAddress(vm.update)">
+					<input class="btn btn-success" type="submit" value="Update Address" ng-click="vm.updateVenueAddress(vm.update)">
 				</form>
 			</div>
 			<div class="col-sm">
-				<h5>Contact Info</h5>
+				<h4>Contact Info</h4>
 				<form class="form-group">
 					Phone Number: <input class="form-control" type="text" name="phone" ng-model="vm.update.contact.phoneNumber">
 					Email : <input class="form-control" type="email" name="email" ng-model="vm.update.contact.email">
-					<input class="btn" type="submit" value="Update Contact" ng-click="vm.updateVenueContact()">
+					<input class="btn btn-success" type="submit" value="Update Contact" ng-click="vm.updateVenueContact()">
 				</form>
 			</div>
 		</div>
-		<button class="btn" ng-click="vm.cancelUpdate()">Cancel</button>
+		<button class="btn btn-danger" ng-click="vm.cancelUpdate()">Cancel</button>
 	</div>
+ </div>
 </div>
