@@ -12,12 +12,12 @@ public class Address {
 	// entities
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String city;
+	private int id;
 	
 	@Column(name = "lat")
 	private double latitude;
 	
-	private int id;
+	private String city;
 	private double longitude;
 	private String state;
 	private String street;

@@ -92,6 +92,7 @@ angular.module('appModule').component('event', {
 				vm.routes = res.data;
 			})
 		};
+	vm.loadRoutes();
 
   },
 controllerAs: 'vm'
