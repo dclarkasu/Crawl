@@ -41,12 +41,12 @@ public class LoginTest {
 	public void test_Login_Username_mapped() {
 		assertEquals("cage", l.getUsername());
 	}
-	
+
 	@Test
 	public void test_Login_password_mapped() {
 		assertEquals("pass1", l.getPassword());
 	}
-	
+
 	@Test
 	public void test_Login_user_mapped() {
 		assertEquals("bill", l.getUser().getFirstName());

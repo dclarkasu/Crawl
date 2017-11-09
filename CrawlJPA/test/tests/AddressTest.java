@@ -42,12 +42,13 @@ public class AddressTest {
 		assertEquals(address.getLongitude(), 100.1, 0.02);
 	}
 
-//	@Test
-//	public void test_User_To_Contact() {
-//		User user = em.find(User.class, 1);
-//		assertEquals(user.getGroups().get(0).getName(), "pub day");
-//		assertNotNull(user.getGroups());
-//		assertEquals(user.getGroups().get(0).getUsers().get(0).getFirstName(), "bill");
-//	}
+	// @Test
+	// public void test_User_To_Contact() {
+	// User user = em.find(User.class, 1);
+	// assertEquals(user.getGroups().get(0).getName(), "pub day");
+	// assertNotNull(user.getGroups());
+	// assertEquals(user.getGroups().get(0).getUsers().get(0).getFirstName(),
+	// "bill");
+	// }
 
 }

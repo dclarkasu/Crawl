@@ -1,52 +1,64 @@
 <div class="container">
 
-<!-- <button class="btn" ng-click="vm.loadGroup()">Load Group</button> -->
-  
-  <div ng-show="vm.route">
-  	<map-view></map-view>
-    <h3>Route</h3>
-    <h1>{{vm.route.name}}</h1>
-   
-  </div>
-  
-  <form ng-show="vm.admin" class="form-group">
-        <select ng-model="selected" ng-options="venue.name for venue in vm.allVenues">
-        </select>
-        <button class="btn btn-success" ng-click="vm.addVenue(vm.route.id, selected)">Add Venue to Route</button>
+	<!-- <button class="btn" ng-click="vm.loadGroup()">Load Group</button> -->
 
-      </form>
+	<div ng-show="vm.route">
+		<map-view></map-view>
+		<h3>Route</h3>
+		<h1>{{vm.route.name}}</h1>
 
-  <table class="table" ng-show="vm.route">
+	</div>
+
+	<form ng-show="vm.admin" class="form-group">
+		<select ng-model="selected"
+			ng-options="venue.name for venue in vm.allVenues">
+		</select>
+		<button class="btn btn-success"
+			ng-click="vm.addVenue(vm.route.id, selected)">Add Venue to
+			Route</button>
+
+	</form>
+
+	<table class="table" ng-show="vm.route">
 		<thead class="thead-dark">
 			<th ng-show="vm.admin">MOVE</th>
 			<th>ORDER</th>
 			<th>VENUE</th>
 			<th ng-show="vm.admin">DELETE</th>
-      <th></th>
-      <th></th>
-			<th><button ng-show="vm.admin" class="btn" ng-hide="vm.newVenue"  onclick="window.location.href = '#/venue/showCreate/true';">Create Venue</button></th>
+			<th></th>
+			<th></th>
+			<th><button ng-show="vm.admin" class="btn" ng-hide="vm.newVenue"
+					onclick="window.location.href = '#/venue/showCreate/true';">Create
+					Venue</button></th>
 		</thead>
 		<tbody>
 			<tr ng-repeat="v in vm.routeVenues | orderBy:'spot'">
-			<td ng-show="vm.admin"><button class="btn" id="moveVenueDown" ng-click="vm.venueDown(vm.route.id, v.venue.id)">&#9650</button><button class="btn" id="moveVenueUp" ng-click="vm.venueUp(v.route.id,v.venue.id)">&#9661</button></td>
-			 <td>{{v.spot}}</td>
-        <td><a class="badge badge-light" href="{{'#/venue/' + v.venue.id}}">{{v.venue.name}}</a></br>
-        {{v.venue.address.street}}</br>
-        <p ng-show="{{v.venue.street2}}">{{v.venue.address.street2}}</br></p>
-        {{v.venue.address.city}}, {{v.venue.address.state}} {{v.venue.address.zip}} 
-        </td>
-				<td ng-show="vm.admin"><button class="btn" id="removeVenueBtn" ng-click="vm.removeVenue(vm.route.id, v.venue.id)">X</button></td>
+				<td ng-show="vm.admin"><button class="btn" id="moveVenueDown"
+						ng-click="vm.venueDown(vm.route.id, v.venue.id)">&#9650</button>
+					<button class="btn" id="moveVenueUp"
+						ng-click="vm.venueUp(v.route.id,v.venue.id)">&#9661</button></td>
+				<td>{{v.spot}}</td>
+				<td><a class="badge badge-light"
+					href="{{'#/venue/' + v.venue.id}}">{{v.venue.name}}</a></br>
+					{{v.venue.address.street}}</br>
+					<p ng-show="{{v.venue.street2}}">
+						{{v.venue.address.street2}}</br>
+					</p> {{v.venue.address.city}}, {{v.venue.address.state}}
+					{{v.venue.address.zip}}</td>
+				<td ng-show="vm.admin"><button class="btn" id="removeVenueBtn"
+						ng-click="vm.removeVenue(vm.route.id, v.venue.id)">X</button></td>
 			</tr>
 		</tbody>
 	</table>
 
- 
 
-  <div ng-show="vm.editRoute">
-    <form class="form-route">
-      <input type="text" placeholder="Route Name" ng-model="editRoute.name"/>
-      <button class="btn" ng-click="vm.updateRoute(editRoute); editRoute = {}">Edit</button>
-    </form>
-  </div>
+
+	<div ng-show="vm.editRoute">
+		<form class="form-route">
+			<input type="text" placeholder="Route Name" ng-model="editRoute.name" />
+			<button class="btn"
+				ng-click="vm.updateRoute(editRoute); editRoute = {}">Edit</button>
+		</form>
+	</div>
 
 </div>
