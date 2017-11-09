@@ -18,6 +18,18 @@ angular.module('appModule').factory('routeService', function($http, authService,
 		})
 	};
 	
+	service.createRoute= function(eid) {
+		var id = $cookies.get("userId");
+		return $http ({
+			method : 'POST',
+			url : `rest/users/${id}/routes`,
+			headers : {
+		        'Content-Type' : 'application/json'
+		      },
+		      data : event
+		})
+	};
+	
 	service.removeVenue = function(rid,vid) {
 		console.log("removing Venue from route")
 		return $http ({

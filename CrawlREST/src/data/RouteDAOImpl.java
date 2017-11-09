@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Group;
 import entities.Route;
 import entities.RouteVenue;
+import entities.User;
 import entities.Venue;
 
 @Transactional
@@ -41,6 +42,8 @@ public class RouteDAOImpl implements RouteDAO {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			Route mappedRoute = mapper.readValue(routeJson, Route.class);
+			User user = em.find(User.class, uid);
+			mappedRoute.setAdmin(user);
 			em.persist(mappedRoute);
 			em.flush();
 			return mappedRoute;

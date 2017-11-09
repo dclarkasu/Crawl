@@ -63,7 +63,7 @@ angular.module('appModule').factory('eventService', function($http, authService,
 		})
 	};
 
-	service.addRouteToEvent = function(eid, rid) {
+	service.addRouteToEvent = function(rid, eid) {
 		var id = $cookies.get("userId");
 		return $http ({
 			method : 'PUT',
@@ -74,6 +74,7 @@ angular.module('appModule').factory('eventService', function($http, authService,
 		      data : event
 		})
 	};
+	
 	
 //	service.adminCheck = function(gid, uid) {
 //		console.log("Admin Check Check")
@@ -89,6 +90,18 @@ angular.module('appModule').factory('eventService', function($http, authService,
 		return $http({
 			method : 'GET',
 			url : `rest/users/${id}/routes`
+		})
+	};
+	
+	service.createRoute = function(newRoute) {
+		var id = $cookies.get("userId");
+		return $http({
+			method : 'POST',
+			url : `rest/users/${id}/routes`,
+			headers : {
+				'ContentType' : 'application/json'
+			},
+			data : newRoute
 		})
 	};
 

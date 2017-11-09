@@ -33,10 +33,18 @@
 		<form class="form-group">
 			<select ng-model="selected" ng-options="route.name for route in vm.routes">
 			</select>
-			<button class="btn btn-success" ng-click="vm.addRoute(vm.event.id, selected); route = {}">Add</button>
+			<button class="btn btn-success" ng-click="vm.addRoute(selected); route = {}">Add</button>
 			<button class="btn btn-danger" ng-click="vm.cancel()">Cancel</button>
 		</form>
+		
+		 
 	</div>
+	<div>
+    <form class="form-group">
+      <input type="text" placeholder="Route Name" ng-model="newRoute.name"/>
+      <button class="btn" ng-click="vm.createRoute(newRoute); newRoute = {}">Add</button>
+    </form>
+  </div>
 </div>
 
   <table class="table" ng-show="vm.event.route">

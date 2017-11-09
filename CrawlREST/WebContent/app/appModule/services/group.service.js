@@ -1,4 +1,4 @@
-angular.module('appModule').factory('groupService', function($http, authService, $cookies){
+angular.module('appModule').factory('groupService', function($http, authService, $cookies, $rootScope){
 	var service = {};
 
 
@@ -72,6 +72,7 @@ angular.module('appModule').factory('groupService', function($http, authService,
 	};
 
 	service.updateGroup = function(group, gid) {
+		console.log("gid: " + gid);
 		var id = $cookies.get("userId");
 		return $http ({
 			method : 'PUT',
@@ -80,6 +81,15 @@ angular.module('appModule').factory('groupService', function($http, authService,
 		        'Content-Type' : 'application/json'
 		      },
 		      data : group
+		})
+		.then(function(res) {
+			console.log("res from update", res);
+			$rootScope.$broadcast('updatedGroup', {
+				message : "Group Updated",
+				group : res.data
+			})
+
+			return res;
 		})
 	};
 
@@ -140,6 +150,14 @@ angular.module('appModule').factory('groupService', function($http, authService,
 		return $http({
 			method : 'DELETE',
 			url : 'rest/users/'+ id + '/groups/'+ gid
+		})
+		.then(function(res) {
+			$rootScope.$broadcast('deleteGroup', {
+				message : "Group Deleted",
+				groupID : gid
+			})
+
+			return res;
 		})
 	};
 

@@ -41,6 +41,31 @@ angular.module('appModule')
 			vm.groups = data.groups;
 		})
 
+		$scope.$on('updatedGroup', function(ev, data) {
+			console.log(ev);
+			console.log(data);
+			vm.groups.forEach(function(val, idx, arr) {
+				if (val.id === data.group.id) {
+					console.log("FOUND");
+					arr[idx] = data.group;
+				}
+			})
+			console.log(vm.groups)
+			// $scope.$apply();
+		})
+
+		$scope.$on('deleteGroup', function(ev, data) {
+			console.log(ev);
+			console.log(data);
+			vm.groups.forEach(function(val, idx, arr) {
+				if (val.id === data.groupID) {
+					arr.splice(idx, 1);
+				}
+			})
+			console.log("Groups after delete: ");
+			console.log(vm.groups)
+		})
+
 	},
 	controllerAs: 'vm'
 });
