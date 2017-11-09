@@ -2,25 +2,20 @@
 
 	<!-- <button class="btn" ng-click="vm.loadGroup()">Load Group</button> -->
 
-	<div ng-show="vm.group">
-		<h3>Group</h3>
-		<h1>{{vm.group.name}}</h1>
-		<button ng-show="vm.admin" class="btn" ng-hide="vm.editGroup"
-			ng-click="vm.setEditGroup()">Change Group Name</button>
-		<button ng-show="vm.admin" class="btn btn-danger"
-			ng-click="vm.deleteGroup(vm.group.id)">Delete Group</button>
-		<div ng-show="vm.editGroup">
-			<form class="form-group">
-				<input type="text" placeholder="Group Name"
-					ng-model="editGroup.name" />
-				<button class="btn"
-					ng-click="vm.updateGroup(editGroup); editGroup = {}">Edit</button>
-				<button class="btn btn-danger"
-					ng-click="vm.cancel(); editGroup = {}">Cancel</button>
-			</form>
-		</div>
-	</div>
 
+  <div ng-show="vm.group">
+    <h1>Group</h1>
+    <h3>{{vm.group.name}}</h3>
+    <button ng-show="vm.admin" class="btn btn-success" ng-hide="vm.editGroup" ng-click="vm.setEditGroup()">Change Group Name</button>
+    <button ng-show="vm.admin" class="btn btn-danger" ng-click="vm.deleteGroup(vm.group.id)">Delete Group</button>
+    <div ng-show="vm.editGroup">
+      <form class="form-group">
+        <input type="text" placeholder="Group Name" ng-model="editGroup.name"/>
+        <button class="btn btn-success" ng-click="vm.updateGroup(editGroup); editGroup = {}">Edit</button>
+        <button class="btn btn-danger" ng-click="vm.cancel(); editGroup = {}">Cancel</button>
+      </form>
+    </div>
+  </div>
 
 	<div ng-show="vm.members && vm.group">
 		<h2>Members:</h2>
@@ -28,84 +23,67 @@
 			<li>{{member.firstName}} {{member.lastName}}</li>
 		</ul>
 
-		<button class="btn" ng-click="vm.setNewMember()">New Member</button>
-		<div ng-show="vm.newMember">
-			<form class="form-group">
-				<select ng-model="selected"
-					ng-options="user.firstName for user in vm.users">
-				</select>
-				<button class="btn btn-success"
-					ng-click="vm.addMember(vm.group.id, selected); user = {}">Add</button>
-				<button class="btn btn-danger" ng-click="vm.cancel()">Cancel</button>
-			</form>
-		</div>
-	</div>
+    <button class="btn btn-success" ng-click="vm.setNewMember()">New Member</button>
+    <div ng-show="vm.newMember">
+      <form class="form-group">
+        <select ng-model="selected" ng-options="user.firstName for user in vm.users">
+        </select>
+        <button class="btn btn-success" ng-click="vm.addMember(vm.group.id, selected); user = {}">Add</button>
+        <button class="btn btn-danger" ng-click="vm.cancel()">Cancel</button>
+      </form>
+    </div>
+  </div>
 
-	<button ng-show="vm.admin" class="btn" ng-click="vm.setRemoveMember()">Remove
-		Member</button>
-	<div ng-show="vm.memberToRemove">
-		<form class="form-group">
-			<select ng-model="removeSelection"
-				ng-options="member.firstName for member in vm.members">
-			</select>
-			<button class="btn btn-danger"
-				ng-click="vm.removeMember(vm.group.id, removeSelection); member = {}">Remove</button>
-			<button class="btn btn-danger" ng-click="vm.cancel()">Cancel</button>
-		</form>
-	</div>
-</div>
+    <button ng-show="vm.admin" class="btn btn-danger" ng-click="vm.setRemoveMember()">Remove Member</button>
+    <div ng-show="vm.memberToRemove">
+      <form class="form-group">
+        <select ng-model="removeSelection" ng-options="member.firstName for member in vm.members">
+        </select>
+        <button class="btn btn-danger" ng-click="vm.removeMember(vm.group.id, removeSelection); member = {}">Remove</button>
+        <button class="btn btn-danger" ng-click="vm.cancel()">Cancel</button>
+      </form>
+    </div>
+  </div>
 <h3>GROUP EVENTS</h3>
-<table class="table" ng-show="vm.events">
-	<thead class="thead-dark">
-		<th>EVENT</th>
-		<th>HOST</th>
-		<th>DELETE</th>
-		<th></th>
-		<th><button class="btn" ng-hide="vm.newEvent"
-				ng-click="vm.setNewEvent()">Create Event</button></th>
-	</thead>
-	<tbody>
-		<tr ng-repeat="event in vm.events | orderBy:'id'">
-			<td><a class="badge badge-light" href="{{'#/event/'+event.id}}">{{event.name}}</a></td>
-			<td>{{event.admin.lastName}}, {{event.admin.firstName}}</td>
-			<td ng-show="vm.admin || event.admin.id==vm.activeUserId"><button
-					class="btn" id="deleteEventBtn" ng-click="vm.deleteEvent(event.id)">X</button></td>
-		</tr>
-	</tbody>
-</table>
+  <table class="table" ng-show="vm.events">
+		<thead class="thead-dark">
+			<th>EVENT</th>
+      <th>HOST</th>
+			<th>DELETE</th>
+      <th></th>
+			<th><button class="btn btn-success" ng-hide="vm.newEvent" ng-click="vm.setNewEvent()">Create Event</button></th>
+		</thead>
+		<tbody>
+			<tr ng-repeat="event in vm.events | orderBy:'id'">
+        <td><a class="badge badge-light" href="{{'#/event/'+event.id}}">{{event.name}}</a></td><td>{{event.admin.lastName}}, {{event.admin.firstName}}</td>
+				<td ng-show="vm.admin || event.admin.id==vm.activeUserId"><button class="btn btn-danger" id="deleteEventBtn" ng-click="vm.deleteEvent(event.id)">X</button></td>
+			</tr>
+		</tbody>
+	</table>
 
 
-<div ng-show="vm.newEvent">
-	<form class="form-group">
-		<input type="text" placeholder="Event Name" ng-model="newEvent.name" />
-		<button class="btn" ng-click="vm.addEvent(newEvent); newEvent = {}">Add</button>
-		<button class="btn btn-danger" ng-click="vm.cancel(); newEvent = {}">Cancel</button>
-	</form>
-</div>
+  <div ng-show="vm.newEvent">
+    <form class="form-group">
+      <input type="text" placeholder="Event Name" ng-model="newEvent.name"/>
+      <button class="btn btn-success" ng-click="vm.addEvent(newEvent); newEvent = {}">Add</button>
+      <button class="btn btn-danger" ng-click="vm.cancel(); newEvent = {}">Cancel</button>
+    </form>
+  </div>
 <h3>MESSAGE BOARD</h3>
-<table class="table" ng-show="vm.messageBoard">
-	<thead class="thead-dark">
-		<th>USER</th>
-		<th>MESSAGE</th>
-		<th>ADD/REMOVE</th>
-		<th></th>
-	</thead>
-	<tbody>
-		<tr>
-			<td></td>
-			<td><form>
-					<input type="text" placeholder="New Message"
-						ng-model="vm.newPost.message"></td>
-			<td><input type="submit" value="Post"
-				ng-click="vm.addPost(vm.group.id, vm.newPost); newPost = {};">
-			</td>
-			</form>
-		<tr ng-repeat="p in vm.messageBoard | orderBy:'-id'">
+  <table class="table" ng-show="vm.messageBoard">
+		<thead class="thead-dark">
+			<th>USER</th>
+			<th>MESSAGE</th>
+      <th>ADD/REMOVE</th>
+      <th></th>
+		</thead>
+		<tbody>
+			<tr><td></td><td><form><input type="text" placeholder="New Message" ng-model="vm.newPost.message"></td><td><input type="submit" class="btn btn-success" value="Post" ng-click="vm.addPost(vm.group.id, vm.newPost); newPost = {};"> </td></form>
+			<tr ng-repeat="p in vm.messageBoard | orderBy:'-id'">
 
-			<td>{{p.user.firstName}} {{p.user.lastName}}</td>
-			<td>{{p.message}}</td>
-			<td><button ng-show="p.user.id==vm.activeUserId || vm.admin"
-					class="btn" id="removeMessageBtn" ng-click="vm.removePost(p.id)">X</button></td>
+			 <td>{{p.user.firstName}} {{p.user.lastName}}</td>
+        <td>{{p.message}}</td>
+       <td><button ng-show="p.user.id==vm.activeUserId || vm.admin" class="btn btn-danger" id="removeMessageBtn" ng-click="vm.removePost(p.id)">X</button></td>
 
 		</tr>
 	</tbody>
