@@ -43,6 +43,11 @@ angular.module('appModule').component('route', {
 			})
 		}
 
+		vm.newVenuePage = function(){
+			console.log("VENUE CLICK")
+			routeService.newVenuePage()
+		}
+		
 		vm.removeVenue = function(rid,vid) {
 			routeService.removeVenue(rid,vid)
 			.then(function(res){
