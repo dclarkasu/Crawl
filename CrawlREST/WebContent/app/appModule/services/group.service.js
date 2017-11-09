@@ -156,7 +156,6 @@ angular.module('appModule').factory('groupService', function($http, authService,
 				message : "Group Deleted",
 				groupID : gid
 			})
-
 			return res;
 		})
 	};
