@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import entities.Event;
 import entities.Group;
+import entities.Post;
 import entities.Route;
 import entities.RouteVenue;
 import entities.User;
@@ -87,6 +88,9 @@ public class GroupDAOImpl implements GroupDAO {
 
 	@Override
 	public Boolean deleteGroup(int gid) {
+		String query = "DELETE FROM Post p WHERE p.group.id = :gid";
+		em.createQuery(query).setParameter("gid", gid).executeUpdate();
+		
 		Group group = em.find(Group.class, gid);
 		if(group != null) {
 			em.remove(group);

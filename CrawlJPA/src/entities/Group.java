@@ -42,7 +42,7 @@ public class Group {
 	private List<User> users;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="group")
+	@OneToMany(mappedBy="group", cascade=CascadeType.REMOVE)
 	private List<Event> events;
 
 	//Gets and Sets

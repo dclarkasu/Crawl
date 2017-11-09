@@ -8,6 +8,8 @@ angular.module('appModule')
 		vm.groups = [];
 
 		//Behaviors
+
+
 		vm.getUserId = function(){
 			return $cookies.get('userId');
 		};
@@ -28,6 +30,8 @@ angular.module('appModule')
 			})
 		};
 
+		vm.loadGroupsByUser();
+		
 		$scope.$on('createdGroup', function(ev, data) {
 			console.log(ev);
 			console.log(data);

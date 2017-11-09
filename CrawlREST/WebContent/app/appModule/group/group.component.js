@@ -234,10 +234,10 @@ angular.module('appModule').component('group', {
 			if (choice) {
 				groupService.deleteGroup(id)
 				.then(function(res) {
-					vm.loadGroup();
-					vm.loadAllUsers();
-					vm.loadMembers();
-					$location.path('#/user/'+vm.admin.id);
+					// vm.loadGroup();
+					// vm.loadAllUsers();
+					// vm.loadMembers();
+					$location.path('user/'+vm.admin.id);
 				})
 				.catch(function(err) {
 					console.log(err);
