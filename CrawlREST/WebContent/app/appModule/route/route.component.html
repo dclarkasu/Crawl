@@ -31,7 +31,7 @@
 			<tr ng-repeat="v in vm.routeVenues | orderBy:'spot'">
 			<td ng-show="vm.admin"><button class="btn" id="moveVenueDown" ng-click="vm.venueDown(vm.route.id, v.venue.id)">&#9650</button><button class="btn" id="moveVenueUp" ng-click="vm.venueUp(v.route.id,v.venue.id)">&#9661</button></td>
 			 <td>{{v.spot}}</td>
-        <td><a class="badge badge-light" href="{{'#/venue/' + v.id}}">{{v.venue.name}}</a></br>
+        <td><a class="badge badge-light" href="{{'#/venue/' + v.venue.id}}">{{v.venue.name}}</a></br>
         {{v.venue.address.street}}</br>
         {{v.venue.address.street2}}</br>
         {{v.venue.address.city}}, {{v.venue.address.state}} {{v.venue.address.zip}} 

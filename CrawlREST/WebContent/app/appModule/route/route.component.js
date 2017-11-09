@@ -1,6 +1,6 @@
 angular.module('appModule').component('route', {
 	templateUrl : "app/appModule/route/route.component.html",
-	controller : function(routeService, $routeParams, $cookies) {
+	controller : function(routeService, $routeParams, $cookies, $rootScope) {
 		//Variables
 		var vm = this;
 
@@ -70,14 +70,14 @@ angular.module('appModule').component('route', {
 			routeService.indexRouteVenues()
 			.then(function(res) {
 				vm.routeVenues = res.data;
-				console.log(vm.routeVenues);
+//				console.log(vm.routeVenues);
 				var cords = CreateCordArray();
 				console.log(cords);
-//				$rootScope.$broadcast('map', {
-//					center: cords[0],
-//					markers : cords,
-//					zoom: 14
-//				});
+				$rootScope.$broadcast('map', {
+					center: cords[0],
+					markers : cords,
+					zoom: 14
+				});
 			})
 		};
 
@@ -126,14 +126,16 @@ angular.module('appModule').component('route', {
 		}
 		function CreateCordArray(){
 			arr = [];
-			vm.allVenues.forEach(function(val){
+			vm.routeVenues.forEach(function(val){
+				console.log(val.venue);
 				var cord = {
-					lng : val.address.longitude,
-					lat : val.address.latitude,
+					lng : val.venue.address.longitude,
+					lat : val.venue.address.latitude,
 					title : val.venue.name	
 				};
 				arr.push(cord);
 			})
+			return arr;
 		}
 
 	},

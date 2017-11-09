@@ -29,7 +29,10 @@ angular.module('appModule')
 			vm.showList = true;
 		}
 		
-		
+		vm.showCreate = function(){
+			vm.copy = {};
+			vm.copyHours = {};
+		};
 		vm.cancelCreate = function(){
 			vm.copy = null;
 			vm.copyHours = null;
@@ -46,15 +49,18 @@ angular.module('appModule')
 		vm.createVenue = function(){
 			vm.copy.hours = createHoursString(vm.copyHours);
 			console.log(vm.copy);
-			venueService.createVenue(vm.copy)
-			.then(function(res){
-				console.log(res.data);
-				var id = res.data.id;
-				$location.path("/venue/" + id);
-			})
-			.catch(function(err){
-				console.log(err);
-			});
+			var address = getGeocode(vm.copy.address);
+			vm.copy.address = address;
+			console.log(vm.copy);
+//			venueService.createVenue(vm.copy)
+//			.then(function(res){
+//				console.log(res.data);
+//				var id = res.data.id;
+//				$location.path("/venue/" + id);
+//			})
+//			.catch(function(err){
+//				console.log(err);
+//			});
 		}
 		
 		vm.showUpdate = function(){
@@ -79,6 +85,8 @@ angular.module('appModule')
 			})
 		};
 		vm.updateVenueAddress = function(venue){
+			console.log(venue.address);
+			var address = getGeocode(venue.address);
 			venueService.updateAddress(venue.address, $routeParams.vid)
 			.then(function(res){
 				vm.update = null;
@@ -105,15 +113,20 @@ angular.module('appModule')
 			vm.update = null;
 			vm.updateAddress = null;
 		}
-		function getGeocode(){
-			geolocate.geocodeAddress('2095 legacy ridge view colorado springs co 80910')
+		function getGeocode(address){
+			var textAddress = address.street + " " + address.city + " " + address.state + " " + address.zip;
+			console.log(textAddress);
+			geolocate.geocodeAddress(textAddress)
 			.then(function(res){
 				console.log(res.cord.lat());
 				console.log(res.cord.lng());
+				address.longitude = res.cord.lng();
+				address.latitude = res.cord.lat();
 			})
 			.catch(function(err){
 				console.log(err);
-			})
+			});
+			return address;
 		}
 		function createHoursString(hourObj){
 			return hourObj.openHour +':'+ hourObj.openMin + hourObj.openAP 
