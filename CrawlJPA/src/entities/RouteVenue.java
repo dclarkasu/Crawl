@@ -9,29 +9,24 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="route_venue")
+@Table(name = "route_venue")
 public class RouteVenue {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	
-	
+
 	@ManyToOne
-	@JoinColumn(name="route_id")
-	private  Route route;
-	
-	
+	@JoinColumn(name = "route_id")
+	private Route route;
+
 	@ManyToOne
-	@JoinColumn(name="venue_id")
-	private  Venue venue;
-	
+	@JoinColumn(name = "venue_id")
+	private Venue venue;
 
 	private int spot;
 
-
-
+	// Gets and Sets
 	public Route getRoute() {
 		return route;
 	}
@@ -62,9 +57,7 @@ public class RouteVenue {
 
 	@Override
 	public String toString() {
-		return "Route_Venue [id=" + id + ": "+ venue.getName() +" ]";
+		return "Route_Venue [id=" + id + ": " + venue.getName() + " ]";
 	}
-	
-	
-	
+
 }

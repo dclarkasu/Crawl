@@ -1,56 +1,71 @@
 <div class="container">
 
-  <div ng-show="vm.event">
-    <h3>Event</h3>
-    <h1>{{vm.event.name}}</h1>
-		<h2>Group: <a class="link link-active" href="{{'#/group/' + vm.event.group.id}}">{{vm.event.group.name}}</a></h2>
+	<div ng-show="vm.event">
+		<h3>Event</h3>
+		<h1>{{vm.event.name}}</h1>
+		<h2>
+			Group: <a class="link link-active"
+				href="{{'#/group/' + vm.event.group.id}}">{{vm.event.group.name}}</a>
+		</h2>
 
-	  <button ng-show="vm.admin" class="btn" ng-hide="vm.editEvent" ng-click="vm.setEditEvent()">Edit Event</button>
-    <div ng-show="vm.editEvent">
-      <form class="form-group">
-        <input type="text" placeholder="Event Name" ng-model="editEvent.name"/>
+		<button ng-show="vm.admin" class="btn" ng-hide="vm.editEvent"
+			ng-click="vm.setEditEvent()">Edit Event</button>
+		<div ng-show="vm.editEvent">
+			<form class="form-group">
+				<input type="text" placeholder="Event Name"
+					ng-model="editEvent.name" />
 				<!-- Edit Date?? -->
-        <!-- <input type="text" placeholder="Event Name" ng-model="editGroup.name"/> -->
-        <button class="btn" ng-click="vm.updateEvent(editEvent); editEvent = {}">Edit</button>
-        <button class="btn btn-danger" ng-click="vm.cancel(); editEvent = {}">Cancel</button>
-      </form>
-    </div>
-  </div>
+				<!-- <input type="text" placeholder="Event Name" ng-model="editGroup.name"/> -->
+				<button class="btn"
+					ng-click="vm.updateEvent(editEvent); editEvent = {}">Edit</button>
+				<button class="btn btn-danger"
+					ng-click="vm.cancel(); editEvent = {}">Cancel</button>
+			</form>
+		</div>
+	</div>
 
-  <div ng-show="vm.members && vm.event">
-    <h2>Members: </h2>
-    <ul ng-repeat="member in vm.members |orderBy:'id'">
-      <li>{{member.firstName}} {{member.lastName}}</li>
-    </ul>
+	<div ng-show="vm.members && vm.event">
+		<h2>Members:</h2>
+		<ul ng-repeat="member in vm.members |orderBy:'id'">
+			<li>{{member.firstName}} {{member.lastName}}</li>
+		</ul>
 	</div>
 
 	<div ng-show="vm.event.route">
-			<h1><a class="badge badge-light" href="{{'#/route/' + vm.event.route.id}}">{{vm.event.route.id}} {{vm.event.route.name}}</a></h1>
+		<h1>
+			<a class="badge badge-light"
+				href="{{'#/route/' + vm.event.route.id}}">{{vm.event.route.id}}
+				{{vm.event.route.name}}</a>
+		</h1>
 	</div>
 
-	<button ng-show="vm.admin" class="btn" ng-click="vm.setNewRoute()">New Route</button>
+	<button ng-show="vm.admin" class="btn" ng-click="vm.setNewRoute()">New
+		Route</button>
 	<div ng-show="vm.newRoute">
 		<form class="form-group">
-			<select ng-model="selected" ng-options="route.name for route in vm.routes">
+			<select ng-model="selected"
+				ng-options="route.name for route in vm.routes">
 			</select>
-			<button class="btn btn-success" ng-click="vm.addRoute(selected); route = {}">Add</button>
+			<button class="btn btn-success"
+				ng-click="vm.addRoute(selected); route = {}">Add</button>
 			<button class="btn btn-danger" ng-click="vm.cancel()">Cancel</button>
 		</form>
-		
-		 
+
+
 	</div>
 	<div>
-    <form ng-show="vm.admin" class="form-group">
-      <input type="text" placeholder="Route Name" ng-model="newRoute.name"/>
-      <button class="btn" ng-click="vm.createRoute(newRoute); newRoute = {}">Add</button>
-    </form>
-  </div>
+		<form ng-show="vm.admin" class="form-group">
+			<input type="text" placeholder="Route Name" ng-model="newRoute.name" />
+			<button class="btn"
+				ng-click="vm.createRoute(newRoute); newRoute = {}">Add</button>
+		</form>
+	</div>
 </div>
 
 
 
 
-  <!-- <div ng-show="vm.newEvent">
+<!-- <div ng-show="vm.newEvent">
     <form class="form-group">
       <input type="text" placeholder="Event Name" ng-model="newEvent.name"/>
       <button class="btn" ng-click="vm.addEvent(newEvent); newEvent = {}">Add</button>

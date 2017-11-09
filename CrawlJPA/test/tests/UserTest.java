@@ -38,7 +38,7 @@ public class UserTest {
 	@Test
 	public void user_Connected_To_DB() {
 		user = em.find(User.class, 1);
-		assertEquals(user.getFirstName(),"bill");
+		assertEquals(user.getFirstName(), "bill");
 		assertEquals(user.getLastName(), "james");
 		assertEquals(user.getId(), 1);
 	}

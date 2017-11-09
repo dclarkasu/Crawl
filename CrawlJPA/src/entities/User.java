@@ -1,4 +1,4 @@
- package entities;
+package entities;
 
 import java.util.List;
 
@@ -18,38 +18,35 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class User {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	private String imgUrl;
-	
+
+	@OneToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "contact_id")
+	private Contact contact;
+
+	@Column(name = "first_name")
+	private String firstName;
+
 	@JsonIgnore
 	@OneToMany
-	@JoinColumn(name="user_id")
+	@JoinColumn(name = "user_id")
 	private List<User> friends;
-	
-	
 
-	@Column(name="first_name")
-	private String firstName;
-	
-	@Column(name="last_name")
-	private String lastName;
-	
-	@OneToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name="contact_id")
-	private Contact contact;
-	
 	@JsonIgnore
-//	@JsonManagedReference(value="userToGroup")
-	@ManyToMany(mappedBy="users", cascade = CascadeType.PERSIST)
+	@ManyToMany(mappedBy = "users", cascade = CascadeType.PERSIST)
 	private List<Group> groups;
 
+	@Column(name = "last_name")
+	private String lastName;
+
 	@JsonIgnore
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy = "user")
 	private List<Post> posts;
-	
-	//Gets and Sets
+
+	private String imgUrl;
+
+	// Gets and Sets
 	public String getFirstName() {
 		return firstName;
 	}
@@ -57,7 +54,6 @@ public class User {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	
 
 	public String getImgUrl() {
 		return imgUrl;
@@ -86,30 +82,21 @@ public class User {
 	public int getId() {
 		return id;
 	}
-	
+
 	public List<Group> getGroups() {
 		return groups;
 	}
-	
+
 	public void setGroups(List<Group> groups) {
 		this.groups = groups;
 	}
-	
+
 	public List<User> getFriends() {
 		return friends;
 	}
 
 	public void setFriends(List<User> friends) {
 		this.friends = friends;
-	}
-	
-//	public void addGroup(Group group) {
-//		this.groups.add(group);
-//	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", contact=" + contact + "]";
 	}
 
 	public List<Post> getPosts() {
@@ -119,5 +106,10 @@ public class User {
 	public void setPosts(List<Post> posts) {
 		this.posts = posts;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", contact=" + contact + "]";
+	}
+
 }

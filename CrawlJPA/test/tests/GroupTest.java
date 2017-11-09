@@ -48,9 +48,10 @@ public class GroupTest {
 		Group group = em.find(Group.class, 1);
 		assertEquals(group.getUsers().get(0).getFirstName(), "bill");
 		assertNotNull(group.getUsers());
-		assertEquals(group.getAdmin().getGroups().get(0).getUsers().get(0).getContact().getPhoneNumber(), "555-555-5555");
+		assertEquals(group.getAdmin().getGroups().get(0).getUsers().get(0).getContact().getPhoneNumber(),
+				"555-555-5555");
 	}
-	
+
 	@Test
 	public void test_Group_To_Event() {
 		Group group = em.find(Group.class, 1);

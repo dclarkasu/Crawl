@@ -53,7 +53,7 @@ public class PostTest {
 		Post post = em.find(Post.class, 1);
 		assertEquals(post.getUser().getFirstName(), "david");
 		assertEquals(post.getUser().getGroups().get(0).getAdmin().getContact().getPhoneNumber(), "555-555-5557");
-		
+
 	}
 
 }
