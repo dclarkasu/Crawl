@@ -8,6 +8,9 @@ angular.module('appModule', ['ngRoute','ngCookies','authModule', 'ui.bootstrap',
 	.when('/about',{
 		template: '<about></about>'
 	})
+	.when('/about/poem/:poem',{
+		template: '<about></about>'
+	})
 	.when('/login', {
 		template : `
 		<login></login>

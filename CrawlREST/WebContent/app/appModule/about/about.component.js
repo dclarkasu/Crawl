@@ -1,11 +1,15 @@
 angular.module('appModule')
 .component('about',{
 	templateUrl: 'app/appModule/about/about.component.html',
-	controller: function(){
+	controller: function($routeParams){
 		
 		var vm = this;
 		
-		vm.message = 'about works';
+		vm.egg = null;
+		
+		if($routeParams.poem){
+			vm.egg=true;
+		}
 	},
 	controllerAs: 'vm'
 });
