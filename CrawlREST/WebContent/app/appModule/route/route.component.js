@@ -11,46 +11,46 @@ angular.module('appModule').component('route', {
 
 		vm.loadRoute = function() {
 			var promise = routeService.showRoute();
-			
+
 			promise.then(function(res){
 				console.log(res);
 				console.log('in promise');
-				
+
 				vm.route = res.data;
-				vm.route.id
+				console.log("Route ID:"+ vm.route.id)
 				vm.loadAllVenuesExcept(vm.route.id);
 			}).catch(function(err){
 				console.log(err);
 			});
 		}
-		
+
 		vm.adminCheck = function() {
-			var promise = routeService.adminCheck($routeParams.eid, $cookies.get('userId'));
+			var promise = routeService.adminCheck($routeParams.rid, $cookies.get('userId'));
 			promise.then(function(res){
 				vm.admin = res.data;
 			}).catch(function(err){
 				console.log(err);
 			});
-			
+
 		}
-		
+
 		vm.adminCheck();
-	
+
 		vm.addVenue = function(rid, venue) {
 			routeService.addVenue(rid, venue.id)
 			.then(function(res){
 				vm.resetPage();
 			})
 		}
-		
+
 		vm.removeVenue = function(rid,vid) {
 			routeService.removeVenue(rid,vid)
 			.then(function(res){
 				vm.resetPage();
 			})
 		}
-		
-		
+
+
 		vm.venueUp = function(rid,vid) {
 			routeService.moveVenueUp(rid,vid)
 			.then(function(res){
@@ -63,8 +63,8 @@ angular.module('appModule').component('route', {
 				vm.resetPage();
 			})
 		}
-		
-	
+
+
 		vm.loadRouteVenues = function() {
 			console.log('in load venues');
 			routeService.indexRouteVenues()
@@ -73,8 +73,8 @@ angular.module('appModule').component('route', {
 				console.log(vm.routeVenues);
 			})
 		};
-		
-	
+
+
 		vm.loadAllVenuesExcept = function (rid){
 			console.log('in Load All Venues');
 			console.log(rid);
@@ -83,8 +83,8 @@ angular.module('appModule').component('route', {
 				console.log(vm.indexAllVenues);
 			})
 		};
-		
-		
+
+
 		vm.loadRoute();
 		console.log('vm.route: ' + vm.route);
 		vm.loadRouteVenues();
@@ -111,7 +111,7 @@ angular.module('appModule').component('route', {
 				console.log(err);
 			})
 		};
-		
+
 		vm.resetPage = function() {
 			vm.loadRoute();
 			vm.loadRouteVenues();
@@ -121,4 +121,3 @@ angular.module('appModule').component('route', {
 	},
 	controllerAs: 'vm'
 });
-
