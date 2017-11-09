@@ -12,22 +12,22 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Post {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	
+
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="group_id")
+	@JoinColumn(name = "group_id")
 	private Group group;
-	
-	//@JsonIgnore
+
+	// @JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	private String message;
 
+	// Gets and Sets
 	public Group getGroup() {
 		return group;
 	}
@@ -60,6 +60,5 @@ public class Post {
 	public String toString() {
 		return "Post [message=" + message + "]";
 	}
-	
-	
+
 }

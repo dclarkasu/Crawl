@@ -10,20 +10,21 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Login {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name="user_name")
-	private String username;
-	
-	private String password;
-	
+
 	@OneToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name = "user_id")
 	private User user;
 
+	@Column(name = "user_name")
+	private String username;
+
+	private String password;
+
+	//Gets and Sets
 	public String getUsername() {
 		return username;
 	}

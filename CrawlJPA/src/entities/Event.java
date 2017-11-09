@@ -13,30 +13,29 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Event {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	private String name;
-	
-	
+
 	@OneToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name="admin_id")
+	@JoinColumn(name = "admin_id")
 	private User admin;
-	
-	
-	@ManyToOne
-	@JoinColumn(name="route_id")
-	private Route route;
-	
-	@ManyToOne
-	@JoinColumn(name="group_id")
-	private Group group;
-	
-	@Column(name="date")
+
+	@Column(name = "date")
 	private Date date;
+
+	@ManyToOne
+	@JoinColumn(name = "group_id")
+	private Group group;
+
+	@ManyToOne
+	@JoinColumn(name = "route_id")
+	private Route route;
+
+	private String name;
 
 	public String getName() {
 		return name;
@@ -73,8 +72,6 @@ public class Event {
 	public int getId() {
 		return id;
 	}
-	
-	
 
 	public User getAdmin() {
 		return admin;
@@ -88,8 +85,5 @@ public class Event {
 	public String toString() {
 		return "Event [name=" + name + "]";
 	}
-	
-	
-	
+
 }
-	

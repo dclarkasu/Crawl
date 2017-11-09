@@ -8,18 +8,19 @@ import javax.persistence.Id;
 
 @Entity
 public class Contact {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name="phone_number")
+
+	@Column(name = "phone_number")
 	private String phoneNumber;
-	
+
 	private String email;
-	//Unidirectional relationship with User and Venue therefore doesn't require an object of those
-	
-	//Gets and Sets
+	// Unidirectional relationship with User and Venue therefore doesn't require an
+	// object of those
+
+	// Gets and Sets
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -44,7 +45,5 @@ public class Contact {
 	public String toString() {
 		return "Contact [id=" + id + ", phoneNumber=" + phoneNumber + ", email=" + email + "]";
 	}
-	
-	
-	
+
 }
