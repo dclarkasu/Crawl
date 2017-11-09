@@ -1,6 +1,6 @@
 angular.module('appModule').component('route', {
 	templateUrl : "app/appModule/route/route.component.html",
-	controller : function(routeService, $routeParams, $cookies, $rootScope) {
+	controller : function(routeService, $routeParams, $cookies, $rootScope, $location) {
 		//Variables
 		var vm = this;
 
@@ -44,8 +44,7 @@ angular.module('appModule').component('route', {
 		}
 
 		vm.newVenuePage = function(){
-			console.log("VENUE CLICK")
-			routeService.newVenuePage()
+			$location.path('#/venue/');
 		}
 		
 		vm.removeVenue = function(rid,vid) {
