@@ -1,6 +1,6 @@
 angular.module('appModule').component('group', {
 	templateUrl : "app/appModule/group/group.component.html",
-	controller : function(groupService, $routeParams, $cookies) {
+	controller : function(groupService, $routeParams, $cookies, $location) {
 		// Variables
 		var vm = this;
 // vm.userId = $cookies.get("userId")
@@ -234,6 +234,7 @@ angular.module('appModule').component('group', {
 					vm.loadGroup();
 					vm.loadAllUsers();
 					vm.loadMembers();
+					$location.path('#/user/'+vm.admin.id);
 				})
 				.catch(function(err) {
 					console.log(err);
