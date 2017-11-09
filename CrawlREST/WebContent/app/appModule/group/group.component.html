@@ -56,7 +56,7 @@
 		<tbody>
 			<tr ng-repeat="event in vm.events | orderBy:'id'">
         <td><a class="badge badge-light" href="{{'#/event/'+event.id}}">{{event.name}}</a></td><td>{{event.admin.lastName}}, {{event.admin.firstName}}</td>
-				<td ng-show="vm.admin"><button class="btn" id="deleteEventBtn" ng-click="vm.deleteEvent(event.id)">X</button></td>
+				<td ng-show="vm.admin || event.admin.id==vm.activeUserId"><button class="btn" id="deleteEventBtn" ng-click="vm.deleteEvent(event.id)">X</button></td>
 			</tr>
 		</tbody>
 	</table>

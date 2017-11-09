@@ -40,7 +40,7 @@
 		 
 	</div>
 	<div>
-    <form class="form-group">
+    <form ng-show="vm.admin" class="form-group">
       <input type="text" placeholder="Route Name" ng-model="newRoute.name"/>
       <button class="btn" ng-click="vm.createRoute(newRoute); newRoute = {}">Add</button>
     </form>
