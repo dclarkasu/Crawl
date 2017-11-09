@@ -11,16 +11,16 @@ import javax.persistence.ManyToOne;
 public class Friend {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@ManyToOne
-	@JoinColumn(name="user_id")
-	private  User user;
 
 	@ManyToOne
-	@JoinColumn(name="friend_id")
-	private  User fUser;
+	@JoinColumn(name = "friend_id")
+	private User fUser;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 
 	public User getfUser() {
 		return fUser;
@@ -46,7 +46,5 @@ public class Friend {
 	public String toString() {
 		return "Friend [user=" + user + ", friend=" + fUser + "]";
 	}
-	
 
 }
-

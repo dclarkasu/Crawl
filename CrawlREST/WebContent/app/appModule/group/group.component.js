@@ -3,24 +3,15 @@ angular.module('appModule').component('group', {
 	controller : function(groupService, $routeParams, $cookies, $location) {
 		// Variables
 		var vm = this;
-// vm.userId = $cookies.get("userId")
 
 		vm.admin = null;
-
 		vm.group = null;
-
 		vm.members = [];
-
 		vm.activeUserId = null;
-
 		vm.events = [];
-
 		vm.users = [];
-
 		vm.groupList = [];
-
 		vm.messageBoard = [];
-
 		vm.newPost = null;
 
 		// Behaviors
@@ -36,12 +27,10 @@ angular.module('appModule').component('group', {
 			vm.activeUserId = $cookies.get('userId');
 		}
 
-
 		vm.loadGroup = function() {
 			var promise = groupService.showGroup($routeParams.gid);
 			promise.then(function(res){
 				console.log(res);
-				console.log('in promise');
 				vm.group = res.data;
 			}).catch(function(err){
 				console.log(err);
@@ -49,17 +38,12 @@ angular.module('appModule').component('group', {
 		}
 
 		vm.loadGroup();
-		console.log('vm.group: ' + vm.group);
 		vm.findActiveUserId();
-		console.log('vm.activeUserId: ' + vm.activeUserId);
 
 		vm.adminCheck = function() {
 			var promise = groupService.adminCheck($routeParams.gid, $cookies.get('userId'));
-
 			promise.then(function(res){
 				console.log(res);
-				console.log('in admin promise');
-
 				vm.admin = res.data;
 			}).catch(function(err){
 				console.log(err);
@@ -68,28 +52,21 @@ angular.module('appModule').component('group', {
 		}
 
 		vm.adminCheck();
-		console.log('vm.check: ' + vm.admin);
 
 		vm.loadMembers = function() {
-			console.log('in load members');
 			groupService.indexMembers($routeParams.gid)
 			.then(function(res) {
 				vm.members = res.data;
-				console.log(vm.members);
 			})
 		};
 
 		vm.loadMembers();
-		console.log('members: ' + vm.members);
 
 		vm.setEditGroup = function() {
 			vm.editGroup = angular.copy(vm.group);
 		};
 
 		vm.updateGroup = function(group) {
-			console.log("Group: ");
-			console.log(group);
-			console.log("group id in component: " + vm.group.id);
 			groupService.updateGroup(group, vm.group.id)
 			.then(function(res) {
 				vm.loadGroup();
@@ -222,9 +199,6 @@ angular.module('appModule').component('group', {
 			if (choice) {
 				groupService.deleteGroup(id)
 				.then(function(res) {
-					// vm.loadGroup();
-					// vm.loadAllUsers();
-					// vm.loadMembers();
 					$location.path('user/'+vm.admin.id);
 				})
 				.catch(function(err) {
@@ -235,7 +209,6 @@ angular.module('appModule').component('group', {
 			}
 		}
 
-		console.log('ADMIN: ' + vm.admin);
 	},
 	controllerAs: 'vm'
 });

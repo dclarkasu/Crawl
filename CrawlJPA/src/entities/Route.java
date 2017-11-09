@@ -15,32 +15,30 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Route {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	private String name;
+
+	@OneToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "admin_id")
+	private User admin;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "route", fetch = FetchType.EAGER)
+	private List<RouteVenue> routeVenues;
+
+	@JsonIgnore
+	@ManyToMany(cascade = { CascadeType.ALL })
+	@JoinTable(name = "route_venue", joinColumns = @JoinColumn(name = "route_id"), inverseJoinColumns = @JoinColumn(name = "venue_id"))
+	private List<Venue> venues;
 	
 	private int edited;
-	
-	
-	@OneToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name="admin_id")
-	private User admin;
-	
-	@JsonIgnore
-	@OneToMany(mappedBy="route", fetch=FetchType.EAGER)
-	private List<RouteVenue> routeVenues;
-	
-	@JsonIgnore
-	@ManyToMany(cascade= {CascadeType.ALL})
-	@JoinTable(name="route_venue",
-	joinColumns = @JoinColumn(name="route_id"),
-	inverseJoinColumns = @JoinColumn(name="venue_id"))
-	private List<Venue> venues;
+	private String name;
 
+	//Gets and Sets
 	public String getName() {
 		return name;
 	}
@@ -61,8 +59,6 @@ public class Route {
 		return id;
 	}
 
-	
-	
 	public int getEdited() {
 		return edited;
 	}
@@ -78,8 +74,6 @@ public class Route {
 	public void setRouteVenues(List<RouteVenue> routeVenues) {
 		this.routeVenues = routeVenues;
 	}
-	
-	
 
 	public User getAdmin() {
 		return admin;
@@ -93,6 +87,5 @@ public class Route {
 	public String toString() {
 		return "Route [name=" + name + "]";
 	}
-	
-	
+
 }

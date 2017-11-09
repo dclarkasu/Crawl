@@ -10,8 +10,6 @@ angular.module('appModule')
 		  $scope.active = 0;
 		  var slides = $scope.slides = [];
 		  var currIndex = 0;
-		  
-		  
 
 		  $scope.addSlide = function(url) {
 		    slides.push({
@@ -20,7 +18,7 @@ angular.module('appModule')
 		    });
 		  }
 		  
-		    function loadSlides(){
+		 function loadSlides(){
 		    	$scope.addSlide("css/img/wine-crawl.jpg")
 		    	$scope.addSlide("css/img/bach-party.jpg")
 		    }
@@ -31,10 +29,6 @@ angular.module('appModule')
 		    var indexes = generateIndexesArray();
 		    assignNewIndexesToSlides(indexes);
 		  };
-
-//		  for (var i = 0; i < 2; i++) {
-//		    $scope.addSlide();
-//		  }
 
 		  // Randomize logic below
 

@@ -1,176 +1,172 @@
-angular.module('appModule')
-.factory('userService', function($http, authService, $cookies, $location, $rootScope) {
-  var service = {};
+angular.module('appModule').factory('userService',
+		function($http, authService, $cookies, $location, $rootScope) {
+			var service = {};
 
-  var BASE_URL = 'http://localhost:8080/CrawlREST/rest';
+			var BASE_URL = 'http://localhost:8080/CrawlREST/rest';
 
+			// user
+			// findUser
+			service.showUser = function(id) {
+				if (id) {
+					return $http({
+						method : 'GET',
+						url : `${BASE_URL}/users/${id}`
+					})
+				}
+			};
+			// indexUserByGroup
+			service.indexUserByGroup = function(id) {
+				if (id) {
+					return $http({
+						method : 'GET',
+						url : `${BASE_URL}/users/${id}/group/` + group.id
+					})
+				}
+			};
 
-  //user
-  //findUser
-  service.showUser = function(id) {
-	  if(id){
-		  return $http({
-			  method : 'GET',
-			  url : `${BASE_URL}/users/${id}`
-		  })
-		  console.log(id);
-	  }
-  };
-  //indexUserByGroup
-  service.indexUserByGroup = function(id) {
-	  if(id){
-		  return $http({
-			  method : 'GET',
-			  url : `${BASE_URL}/users/${id}/group/` + group.id
-		  })
-	  }
-  };
+			// updateUser
+			service.updateUser = function(user) {
+				var id = $cookies.get('userId');
+				if (id) {
+					return $http({
+						method : 'PUT',
+						url : `${BASE_URL}/users/${id}`,
+						headers : {
+							'Content-Type' : 'application/json'
+						},
+						data : user
+					})
+				}
+			};
 
-  //updateUser
-  service.updateUser = function(user){
-	  var id = $cookies.get('userId');
-	  if(id){
-	  return $http({
-	      method : 'PUT',
-	      url : `${BASE_URL}/users/${id}`,
-	      headers : {
-	        'Content-Type' : 'application/json'
-	      },
-	      data : user
-	    })
-	  }
-  };
+			// addContactToUser
+			service.createContact = function(contacts) {
+				var id = $cookies.get('userId');
+				if (id) {
+					return $http({
+						method : 'POST',
+						url : `${BASE_URL}/users/${id}/contacts`,
+						headers : {
+							'Content-Type' : 'application/json'
+						},
+						data : contacts
+					})
+				}
+			};
 
-  //addContactToUser
-  service.createContact = function(contacts) {
-	  var id = $cookies.get('userId');
-	  if(id){
-	  return $http({
-	      method : 'POST',
-	      url : `${BASE_URL}/users/${id}/contacts`,
-	      headers : {
-	        'Content-Type' : 'application/json'
-	      },
-	      data : contacts
-	    })
-	  }
-  };
+			// posts
+			// createPost
+			service.createPost = function(gid) {
+				var id = $cookies.get('userId');
+				if (id) {
+					return $http({
+						method : 'POST',
+						url : `${BASE_URL}/users/${id}/group/${gid}/post`,
+						headers : {
+							'Content-Type' : 'application/json'
+						},
+						data : gid
+					})
+				}
+			};
+			// updatePost
+			service.updatePost = function(pid) {
+				var id = $cookies.get('userId');
+				if (id) {
+					return $http({
+						method : 'PUT',
+						url : `${BASE_URL}/users/${id}/post/${pid}`,
+						headers : {
+							'Content-Type' : 'application/json'
+						},
+						data : pid
+					})
+				}
+			};
+			// destroyPost
+			service.destroyPost = function(pid) {
+				var id = $cookies.get('userId');
+				if (uid) {
+					return $http({
+						method : 'DELETE',
+						url : `${BASE_URL}/users/${id}/post/${pid}`
+					})
+				}
 
-  //posts
-  //createPost
-  service.createPost = function(gid) {
-	  var id = $cookies.get('userId');
-	  if(id){
-	  return $http({
-	      method : 'POST',
-	      url : `${BASE_URL}/users/${id}/group/${gid}/post`,
-	      headers : {
-	        'Content-Type' : 'application/json'
-	      },
-	      data : gid
-	    })
-	  }
-  };
-  //updatePost
-  service.updatePost = function(pid){
-	  var id = $cookies.get('userId');
-	  if(id){
-	  return $http({
-	      method : 'PUT',
-	      url : `${BASE_URL}/users/${id}/post/${pid}`,
-	      headers : {
-	        'Content-Type' : 'application/json'
-	      },
-	      data : pid
-	    })
-	  }
-  };
-  //destroyPost
-  service.destroyPost = function(pid){
-	  var id = $cookies.get('userId');
-	  if(uid){
-	  return $http({
-	      method : 'DELETE',
-	      url : `${BASE_URL}/users/${id}/post/${pid}`
-	    })
-	  }
+			};
+			// findPostByUser
+			service.findPostByUser = function() {
+				var id = $cookies.get('userId');
+				if (id) {
+					return $http({
+						method : 'GET',
+						url : `${BASE_URL}/users/${id}/post`
+					})
+				}
+			};
+			// findPostByGroup
+			service.findPostByGroup = function() {
+				var id = $cookies.get('userId');
+				if (id) {
+					return $http({
+						method : 'GET',
+						url : `${BASE_URL}/users/${id}/post/group/${gid}`
+					})
+				}
+			};
 
-  };
-  //findPostByUser
-  service.findPostByUser = function() {
-	  var id = $cookies.get('userId');
-	  if(id){
-		  return $http({
-			  method : 'GET',
-			  url : `${BASE_URL}/users/${id}/post`
-		  })
-	  }
-  };
-  //findPostByGroup
-  service.findPostByGroup = function() {
-	  var id = $cookies.get('userId');
-	  if(id){
-		  return $http({
-			  method : 'GET',
-			  url : `${BASE_URL}/users/${id}/post/group/${gid}`
-		  })
-	  }
-  };
+			// Group findGroupByUserId
+			service.findGroupByUserId = function() {
+				var id = $cookies.get('userId');
+				if (id) {
+					return $http({
+						method : 'GET',
+						url : `${BASE_URL}/users/${id}/groups`
+					})
+				}
+			};
 
-  //Group findGroupByUserId
-  service.findGroupByUserId = function() {
-	  var id = $cookies.get('userId');
-	  if(id){
-		  return $http({
-			  method : 'GET',
-			  url : `${BASE_URL}/users/${id}/groups`
-		  })
-	  }
-  };
+			// Post createGroup
+			service.createGroup = function(newGroup) {
+				var id = $cookies.get('userId');
+				if (id) {
+					return $http({
+						method : 'POST',
+						url : `${BASE_URL}/users/${id}/groups`,
+						headers : {
+							'Content-Type' : 'application/json'
+						},
+						data : newGroup
+					}).then(function(res) {
+						$rootScope.$broadcast('createdGroup', {
+							message : "Group Created",
+							group : res.data
+						})
+						return res;
+					})
+				}
+			};
 
-  //Post createGroup
-  service.createGroup = function(newGroup) {
-	  var id = $cookies.get('userId');
-	  if(id){
-	  return $http({
-	      method : 'POST',
-	      url : `${BASE_URL}/users/${id}/groups`,
-	      headers : {
-	        'Content-Type' : 'application/json'
-	      },
-	      data : newGroup
-	    })
-      .then(function(res) {
-        console.log("Pre Broadcast");
-        $rootScope.$broadcast('createdGroup', {
-				message : "Group Created",
-				group : res.data
-			})
-			   return res;
-      })
-	  }
-  };
+			// update contact
+			service.updateUserWithContact = function(contact) {
+				var id = $cookies.get('userId');
+				if (id) {
+					return $http({
+						method : 'PUT',
+						url : `${BASE_URL}/users/${id}/contact/` + contact.id,
+						headers : {
+							'Content-Type' : 'application/json'
+						},
+						data : contact
+					})
+				} // terminates if
+			}; // terminates updateUserWithContact
 
-	  //update contact
-	  service.updateUserWithContact = function(contact){
-		  var id = $cookies.get('userId');
-		  if(id){
-		  return $http({
-		      method : 'PUT',
-		      url : `${BASE_URL}/users/${id}/contact/` + contact.id,
-		      headers : {
-		        'Content-Type' : 'application/json'
-		      },
-		      data : contact
-		    })
-		  } // terminates if
-	  }; // terminates updateUserWithContact
+			function checkLogged() {
+				if (!$cookies.get('userId')) {
+					$location.path('/unauthorized');
+				}
+			}
+			return service;
 
-	  function checkLogged(){
-		  if(!$cookies.get('userId')){
-			  $location.path('/unauthorized');
-		  }
-	  }
-  return service;
-
-})
+		})

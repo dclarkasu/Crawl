@@ -1,8 +1,7 @@
-angular.module('appModule')
-.component('unauthorized', {
+angular.module('appModule').component('unauthorized', {
 	templateUrl : 'app/appModule/unauthorized/unauthorized.component.html',
-	controller : function(){
-		
+	controller : function() {
+
 	},
 	controllerAs : 'vm'
 })

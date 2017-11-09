@@ -68,7 +68,6 @@ angular.module('appModule').component('event', {
 			groupService.indexMembers(vm.event.group.id)
 			.then(function(res) {
 				vm.members = res.data;
-				console.log(vm.members);
 			})
 		};
 		
@@ -88,11 +87,9 @@ angular.module('appModule').component('event', {
 		};
 		
 	vm.loadRoutes = function() {
-			console.log('in load routes');
 			eventService.indexRoutes()
 			.then(function(res) {
 				vm.routes = res.data;
-				console.log(vm.routes);
 			})
 		};
 

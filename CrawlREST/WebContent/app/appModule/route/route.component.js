@@ -14,10 +14,7 @@ angular.module('appModule').component('route', {
 
 			promise.then(function(res){
 				console.log(res);
-				console.log('in promise');
-
 				vm.route = res.data;
-				console.log("Route ID:"+ vm.route.id)
 				vm.loadAllVenuesExcept(vm.route.id);
 			}).catch(function(err){
 				console.log(err);
@@ -70,13 +67,10 @@ angular.module('appModule').component('route', {
 
 
 		vm.loadRouteVenues = function() {
-			console.log('in load venues');
 			routeService.indexRouteVenues($routeParams.rid)
 			.then(function(res) {
 				vm.routeVenues = res.data;
-//				console.log(vm.routeVenues);
 				var cords = CreateCordArray();
-				console.log(cords);
 				$rootScope.$broadcast('map', {
 					center: cords[0],
 					markers : cords,
@@ -87,28 +81,20 @@ angular.module('appModule').component('route', {
 
 
 		vm.loadAllVenuesExcept = function (rid){
-			console.log('in Load All Venues');
-			console.log(rid);
 			routeService.indexAllVenues(rid).then(function(res){
 				vm.allVenues = res.data;
-				console.log(vm.indexAllVenues);
 			})
 		};
 
 
 		vm.loadRoute();
-		console.log('vm.route: ' + vm.route);
 		vm.loadRouteVenues();
-		console.log('vm.routeVenues: ' + vm.routeVenues);
 		vm.loadAllVenuesExcept();
-		console.log('vm.allothers: ' + vm.AllVenues);
 
 		vm.loadMembers = function() {
-			console.log('in load members');
 			groupService.indexMembers()
 			.then(function(res) {
 				vm.members = res.data;
-				console.log(vm.members);
 			})
 		};
 
@@ -131,7 +117,6 @@ angular.module('appModule').component('route', {
 		function CreateCordArray(){
 			arr = [];
 			vm.routeVenues.forEach(function(val){
-				console.log(val.venue);
 				var cord = {
 					lng : val.venue.address.longitude,
 					lat : val.venue.address.latitude,

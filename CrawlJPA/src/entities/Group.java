@@ -17,35 +17,33 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="crawl_group")
+@Table(name = "crawl_group")
 public class Group {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	private String name;
-	
-	//one to one with User for admin user
+
+
+	// one to one with User for admin user
 	@JsonIgnore
 	@OneToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name="admin_id")
+	@JoinColumn(name = "admin_id")
 	private User admin;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "group", cascade = CascadeType.REMOVE)
+	private List<Event> events;
 	
-	//many to many with user via virtual assoc. table
-//	@JsonBackReference(value="userToGroup")
+	// many to many with user via virtual assoc. table
+	// @JsonBackReference(value="userToGroup")
 	@JsonIgnore
 	@ManyToMany
-	@JoinTable(name="user_group",
-	joinColumns=@JoinColumn(name="group_id"),
-	inverseJoinColumns=@JoinColumn(name="user_id"))
+	@JoinTable(name = "user_group", joinColumns = @JoinColumn(name = "group_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> users;
-	
-	@JsonIgnore
-	@OneToMany(mappedBy="group", cascade=CascadeType.REMOVE)
-	private List<Event> events;
 
-	//Gets and Sets
+	private String name;
+	// Gets and Sets
 	public String getName() {
 		return name;
 	}
@@ -81,13 +79,10 @@ public class Group {
 	public void setEvents(List<Event> events) {
 		this.events = events;
 	}
-	
-	
 
 	@Override
 	public String toString() {
 		return "Group [id=" + id + ", name=" + name + ", admin=" + admin.getFirstName() + "]";
 	}
-	
-	
+
 }

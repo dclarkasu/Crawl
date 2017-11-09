@@ -25,49 +25,34 @@ angular.module('appModule')
 			groupService.indexUserGroups()
 			.then(function(res) {
 				vm.groups = res.data;
-				console.log(vm.groups);
-				console.log('vm.groups in load');
 			})
 		};
 
 		vm.loadGroupsByUser();
 		
 		$scope.$on('createdGroup', function(ev, data) {
-			console.log(ev);
-			console.log(data);
-			console.log("In navBar js");
 			vm.loadGroupsByUser();
 		})
 
 		$scope.$on('getUserGroups', function(ev, data) {
-			console.log(ev);
-			console.log(data.groups);
 			vm.groups = data.groups;
 		})
 
 		$scope.$on('updatedGroup', function(ev, data) {
-			console.log(ev);
-			console.log(data);
 			vm.groups.forEach(function(val, idx, arr) {
 				if (val.id === data.group.id) {
 					console.log("FOUND");
 					arr[idx] = data.group;
 				}
 			})
-			console.log(vm.groups)
-			// $scope.$apply();
 		})
 
 		$scope.$on('deleteGroup', function(ev, data) {
-			console.log(ev);
-			console.log(data);
 			vm.groups.forEach(function(val, idx, arr) {
 				if (val.id === data.groupID) {
 					arr.splice(idx, 1);
 				}
 			})
-			console.log("Groups after delete: ");
-			console.log(vm.groups)
 		})
 
 	},
