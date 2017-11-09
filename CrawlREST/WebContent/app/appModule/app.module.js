@@ -36,6 +36,9 @@ angular.module('appModule', ['ngRoute','ngCookies','authModule', 'ui.bootstrap',
 	.when('/venue/',{
 		template: '<venue></venue>'
 	})
+	.when('/venue/showCreate/:showCreate',{
+		template: '<venue></venue>'
+	})
 	.when('/venue/:vid', {
 		template: '<venue></venue>'
 	})
