@@ -44,10 +44,13 @@ public class VenueDAOImpl implements VenueDAO {
 
 	@Override
 	public Venue createVenue(String json) {
+		System.out.println(json);
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			Venue venue = mapper.readValue(json, Venue.class);
 			venue.setActive(true);
+			System.out.println(venue);
+			System.out.println(venue.getAddress());
 			em.persist(venue);
 			em.flush();
 			return venue;

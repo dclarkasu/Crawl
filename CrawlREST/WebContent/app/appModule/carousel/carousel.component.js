@@ -10,29 +10,31 @@ angular.module('appModule')
 		  $scope.active = 0;
 		  var slides = $scope.slides = [];
 		  var currIndex = 0;
+		  
+		  
 
-		  $scope.addSlide = function() {
-		    var newWidth = 600 + slides.length + 1;
+		  $scope.addSlide = function(url) {
 		    slides.push({
-		      image: 'https://images.unsplash.com/photo-1421622548261-c45bfe178854?auto=format&fit=crop&w=600&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D',
-		      text: 'Bar Crawl',
+		      image: url,
 		      id: currIndex++
 		    });
-		    slides.push({
-		    	image: 'https://images.unsplash.com/photo-1498429152472-9a433d9ddf3b?auto=format&fit=crop&w=600&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D',
-		    	text: 'Wine Crawl',
-		    	id: currIndex++
-		    });
-		  };
+		  }
+		  
+		    function loadSlides(){
+		    	$scope.addSlide("css/img/wine-crawl.jpg")
+		    	$scope.addSlide("css/img/bach-party.jpg")
+		    }
+		    loadSlides()	
+		    
 
 		  $scope.randomize = function() {
 		    var indexes = generateIndexesArray();
 		    assignNewIndexesToSlides(indexes);
 		  };
 
-		  for (var i = 0; i < 1; i++) {
-		    $scope.addSlide();
-		  }
+//		  for (var i = 0; i < 2; i++) {
+//		    $scope.addSlide();
+//		  }
 
 		  // Randomize logic below
 

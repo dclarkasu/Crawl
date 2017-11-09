@@ -10,11 +10,11 @@ angular.module('appModule').factory('routeService', function($http, authService,
 		})
 	};
 
-	service.showRoute = function() {
+	service.showRoute = function(rid) {
 		console.log("in showRoute")
 		return $http ({
 			method : 'GET',
-			url : `rest/users/` + $cookies.get('userId') + `/routes/1`
+			url : `rest/users/` + $cookies.get('userId') + `/routes/${rid}` 
 		})
 	};
 	
@@ -70,11 +70,11 @@ angular.module('appModule').factory('routeService', function($http, authService,
 		})
 	};
 
-	service.indexRouteVenues = function() {
+	service.indexRouteVenues = function(rid) {
 		console.log('in route service');
 		return $http ({
 			method : 'GET',
-			url : `rest/users/` + $cookies.get('userId') + `/routes/1/routeVenues`
+			url : `rest/users/` + $cookies.get('userId') + `/routes/${rid}/routeVenues`
 		})
 	};
 	
@@ -87,10 +87,10 @@ angular.module('appModule').factory('routeService', function($http, authService,
 		})
 	};
 
-	service.updateRoute = function(route) {
+	service.updateRoute = function(route, rid) {
 		return $http ({
 			method : 'PUT',
-			url : `rest/users/` + $cookies.get('userId') + `/route/1`,
+			url : `rest/users/` + $cookies.get('userId') + `/route/${rid}`,
 			headers : {
 		        'Content-Type' : 'application/json'
 		      },
