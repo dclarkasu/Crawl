@@ -337,17 +337,17 @@ INSERT INTO login (user_name,password,user_id) VALUES ('red','$2a$10$Gs0mtbWIXqy
 
 INSERT INTO post (group_id,user_id,message) VALUES (1,3,'lets go dude');
 
-INSERT INTO address (longitude,lat,street,street2,city,state,zip)
-VALUES  (100.10,80.34,'123 Way Rd','','Denver','CO','80910'),
-        (90.11,90.34,'323 Red Rd','','Denver','CO','80909'),
-        (80.12,100.34,'523 Back Rd','','Denver','CO','80110'),
-        (70.13,110.34,'623 Road Rd','','Denver','CO','80909');
+INSERT INTO address (longitude,lat,street,city,state,zip)
+VALUES  (-104.976338,39.769913,'3563 Wazee St','Denver','CO','80216'),
+        (-104.973633,39.767854,'3559 Larimer St','Denver','CO','80205'),
+        (-104.977484,39.764170,'3200 Larimer St','Denver','CO','80205'),
+        (-104.992788,39.747092,'1660 Champa St','Denver','CO','80205');
 
 INSERT INTO venue (name,description,hours,address_id,contact_id)
-VALUES ('Sputnik','Fun place here','11:00AM-2:00PM',1,5),
-      ('True brew','Fun place here','11:00AM-3:00PM',2,6),
-      ('Skylark','Fun place here','10:00AM-12:00PM',3,7),
-      ('Mcman Bar & Grill','Fun place here','11:00AM-1:00PM',4,8);
+VALUES ("Bigsby's Folly Craft Winery & Restaurant",'Fun place here','11:00AM-2:00PM',1,5),
+      ('Wine & Whey','Fun place here','11:00AM-3:00PM',2,6),
+      ('The Infinite Monkey Theorem','Fun place here','10:00AM-12:00PM',3,7),
+      ('Mile High Wine Tours','Fun place here','11:00AM-1:00PM',4,8);
 
 INSERT INTO route (name,admin_id) VALUES ('Party Route',1),('Fun Route',2);
 

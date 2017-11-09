@@ -2,7 +2,9 @@ angular.module('appModule')
 .component('carouselComponent', {
 	templateUrl: "app/appModule/carousel/carousel.component.html",
 	controller : function($scope){
-				
+		
+		var vm = this;
+		
 		$scope.myInterval = 5000;
 		  $scope.noWrapSlides = false;
 		  $scope.active = 0;
@@ -12,9 +14,14 @@ angular.module('appModule')
 		  $scope.addSlide = function() {
 		    var newWidth = 600 + slides.length + 1;
 		    slides.push({
-		      image: '//unsplash.it/' + newWidth + '/300',
-		      text: ['Nice image','Awesome photograph','That is so cool','I love that'][slides.length % 4],
+		      image: 'https://images.unsplash.com/photo-1421622548261-c45bfe178854?auto=format&fit=crop&w=600&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D',
+		      text: 'Bar Crawl',
 		      id: currIndex++
+		    });
+		    slides.push({
+		    	image: 'https://images.unsplash.com/photo-1498429152472-9a433d9ddf3b?auto=format&fit=crop&w=600&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D',
+		    	text: 'Wine Crawl',
+		    	id: currIndex++
 		    });
 		  };
 
@@ -23,7 +30,7 @@ angular.module('appModule')
 		    assignNewIndexesToSlides(indexes);
 		  };
 
-		  for (var i = 0; i < 4; i++) {
+		  for (var i = 0; i < 1; i++) {
 		    $scope.addSlide();
 		  }
 
