@@ -5,7 +5,6 @@ angular.module('appModule')
 		
 		var vm = this;
 		
-		
 	},
 	controllerAs: 'vm'
 });
