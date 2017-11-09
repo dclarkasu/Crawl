@@ -71,6 +71,13 @@ angular.module('appModule').component('route', {
 			.then(function(res) {
 				vm.routeVenues = res.data;
 				console.log(vm.routeVenues);
+				var cords = CreateCordArray();
+				console.log(cords);
+//				$rootScope.$broadcast('map', {
+//					center: cords[0],
+//					markers : cords,
+//					zoom: 14
+//				});
 			})
 		};
 		
@@ -116,6 +123,17 @@ angular.module('appModule').component('route', {
 			vm.loadRoute();
 			vm.loadRouteVenues();
 			vm.loadAllVenuesExcept(vm.route.id);
+		}
+		function CreateCordArray(){
+			arr = [];
+			vm.allVenues.forEach(function(val){
+				var cord = {
+					lng : val.address.longitude,
+					lat : val.address.latitude,
+					title : val.venue.name	
+				};
+				arr.push(cord);
+			})
 		}
 
 	},
