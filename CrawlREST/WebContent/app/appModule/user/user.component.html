@@ -7,7 +7,7 @@
 <div><strong>Last Name:</strong> {{vm.selected.lastName}}</div>
 <div>Phone: {{vm.selected.contact.phoneNumber}}</div>
 <div>Email: {{vm.selected.contact.email}}</div><br>
-<button ng-click="vm.setEditUser()">Edit</button><br>
+<button class="btn btn-md btn-success"ng-click="vm.setEditUser()">Edit</button><br>
 </div>
 
 
@@ -33,6 +33,6 @@
 
 <form>
 <input type="text" placeholder="Name" ng-model="newGroup.name"/><br />
-<input type ="submit" value="Create Group" ng-click="vm.createGroup(newGroup); newGroup = {};"/>
+<input class="btn btn-md btn-success" type ="submit" value="Create Group" ng-click="vm.createGroup(newGroup); newGroup = {};"/>
 </form>
 </div>

@@ -24,8 +24,7 @@
 			<th ng-show="vm.admin">DELETE</th>
       <th></th>
       <th></th>
-      		<th><button class="btn btn-md btn-success" onclick="window.location.href = '#/venue';">Create</button></th>
-
+			<th><button ng-show="vm.admin" class="btn" ng-hide="vm.newVenue"  onclick="window.location.href = '#/venue/showCreate/true';">Create Venue</button></th>
 		</thead>
 		<tbody>
 			<tr ng-repeat="v in vm.routeVenues | orderBy:'spot'">

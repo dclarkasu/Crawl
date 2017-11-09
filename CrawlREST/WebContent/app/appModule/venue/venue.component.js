@@ -21,6 +21,10 @@ angular.module('appModule')
 		vm.APList = ['AM','PM'];
 		vm.minList = ['00','15','30','45'];
 		
+		if($routeParams.showCreate){
+			vm.copy=true;
+		}
+		
 		if($routeParams.vid){
 			loadVenue();
 			vm.showList = false;

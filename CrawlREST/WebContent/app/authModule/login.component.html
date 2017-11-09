@@ -1,8 +1,13 @@
-<h1>Please Login</h1> <br>
+<div class="jumbotron jumbotron-fluid">
+<center><h1>Please Login</h1> <br>
 <form class="form-group">
-	Name: <input type="text" ng-model="user.username"><br>
+	<strong>Name: <input type="text" ng-model="user.username"><br>
 	Password: <input type="password" ng-model="user.password"><br>
-	<button class="btn btn-md btn-success" ng-click="vm.login(user)">Log in</button>	
+	</strong>
+	<button class="btn btn-primary btn-lg" ng-click="vm.login(user)">Log in</button>	
 </form>
 <br><br>
 <p><strong>If you have not registered yet, please <a href='#/register'>Register Here</a></strong> </p>
+</center>
+</div>
+
