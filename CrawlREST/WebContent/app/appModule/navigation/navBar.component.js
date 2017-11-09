@@ -35,6 +35,12 @@ angular.module('appModule')
 			vm.loadGroupsByUser();
 		})
 
+		$scope.$on('getUserGroups', function(ev, data) {
+			console.log(ev);
+			console.log(data.groups);
+			vm.groups = data.groups;
+		})
+
 	},
 	controllerAs: 'vm'
 });
