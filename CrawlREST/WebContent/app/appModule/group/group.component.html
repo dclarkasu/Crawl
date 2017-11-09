@@ -28,8 +28,8 @@
       <form class="form-group">
         <select ng-model="selected" ng-options="user.firstName for user in vm.users">
         </select>
-        <button class="btn btn-success" ng-click="vm.addMember(vm.group.id, selected); user = {}">Add</button>
-        <button class="btn btn-danger" ng-click="vm.cancel()">Cancel</button>
+        <button class="btn" ng-click="vm.addMember(vm.group.id, selected); user = {}">Add</button>
+        <button class="btn" ng-click="vm.cancel()">Cancel</button>
       </form>
     </div>
   </div>
@@ -39,8 +39,8 @@
       <form class="form-group">
         <select ng-model="removeSelection" ng-options="member.firstName for member in vm.members">
         </select>
-        <button class="btn btn-danger" ng-click="vm.removeMember(vm.group.id, removeSelection); member = {}">Remove</button>
-        <button class="btn btn-danger" ng-click="vm.cancel()">Cancel</button>
+        <button class="btn" ng-click="vm.removeMember(vm.group.id, removeSelection); member = {}">Remove</button>
+        <button class="btn" ng-click="vm.cancel()">Cancel</button>
       </form>
     </div>
   </div>
@@ -65,8 +65,8 @@
   <div ng-show="vm.newEvent">
     <form class="form-group">
       <input type="text" placeholder="Event Name" ng-model="newEvent.name"/>
-      <button class="btn btn-success" ng-click="vm.addEvent(newEvent); newEvent = {}">Add</button>
-      <button class="btn btn-danger" ng-click="vm.cancel(); newEvent = {}">Cancel</button>
+      <button class="btn" ng-click="vm.addEvent(newEvent); newEvent = {}">Add</button>
+      <button class="btn" ng-click="vm.cancel(); newEvent = {}">Cancel</button>
     </form>
   </div>
 <h3>MESSAGE BOARD</h3>
