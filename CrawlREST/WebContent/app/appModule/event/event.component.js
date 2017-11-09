@@ -1,6 +1,6 @@
 angular.module('appModule').component('event', {
 	templateUrl : "app/appModule/event/event.component.html",
-	controller : function(eventService, $routeParams, groupService) {
+	controller : function(eventService, $routeParams, groupService, $cookies) {
     var vm = this;
 
     vm.admin = null;

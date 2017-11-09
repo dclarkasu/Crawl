@@ -1,10 +1,12 @@
-angular.module('appModule').factory('routeService', function($http, authService){
+angular.module('appModule').factory('routeService', function($http, authService, $cookies){
 	var service = {};
-
+	
+	var id = $cookies.get('userId');
+	
 	service.indexEventRoutes = function() {
 		return $http ({
 			method : 'GET',
-			url : 'rest/users/1/routes'
+			url : `rest/users/`+ $cookies.get('userId') + `/routes`
 		})
 	};
 
@@ -12,7 +14,7 @@ angular.module('appModule').factory('routeService', function($http, authService)
 		console.log("in showRoute")
 		return $http ({
 			method : 'GET',
-			url : 'rest/users/1/routes/1'
+			url : `rest/users/` + $cookies.get('userId') + `/routes/1`
 		})
 	};
 	
@@ -20,7 +22,7 @@ angular.module('appModule').factory('routeService', function($http, authService)
 		console.log("removing Venue from route")
 		return $http ({
 			method : 'PUT',
-			url : 'rest/users/1/routes/'+rid +'/removeVenues/'+vid
+			url : `rest/users/` + $cookies.get('userId') + `/routes/${rid}/removeVenues/${vid}`
 		})
 	};
 	
@@ -28,7 +30,7 @@ angular.module('appModule').factory('routeService', function($http, authService)
 		console.log("adding Venue from route")
 		return $http ({
 			method : 'PUT',
-			url : 'rest/users/1/routes/'+ rid +'/addVenues/' + vid
+			url : `rest/users/` + $cookies.get('userId') + `/routes/${rid}/addVenues/${vid}`
 		})
 	};
 	
@@ -36,15 +38,15 @@ angular.module('appModule').factory('routeService', function($http, authService)
 		console.log("moving Venue Up")
 		return $http ({
 			method : 'PUT',
-			url : 'rest/users/1/routes/'+rid +'/venues/'+vid+'/change/0'
+			url : `rest/users/` + $cookies.get('userId') + `/routes/${rid}/venues/${vid}/change/0`
 		})
 	};
 	
-	service.indexAllVenues = function (uid, rid) {
+	service.indexAllVenues = function (rid) {
 		console.log("indexing Venues")
 		return $http ({
 			method : 'GET',
-			url : 'rest/users/1/venuesExcept/' + rid
+			url : `rest/users/` + $cookies.get('userId') + `/venuesExcept/${rid}`
 		})
 	};
 	
@@ -52,7 +54,7 @@ angular.module('appModule').factory('routeService', function($http, authService)
 		console.log("moving Venue down")
 		return $http ({
 			method : 'PUT',
-			url : 'rest/users/1/routes/'+rid +'/venues/'+vid+'/change/2'
+			url : `rest/users/` + $cookies.get('userId') + `/routes/${rid}/venues/${vid}/change/2`
 		})
 	};
 
@@ -60,14 +62,23 @@ angular.module('appModule').factory('routeService', function($http, authService)
 		console.log('in route service');
 		return $http ({
 			method : 'GET',
-			url : 'rest/users/1/routes/1/routeVenues'
+			url : `rest/users/` + $cookies.get('userId') + `/routes/1/routeVenues`
+		})
+	};
+	
+	service.adminCheck = function(rid, uid) {
+
+		return $http ({
+			method : 'GET',
+			url : `rest/users/${uid}/route/${rid}/admin`,
+		      
 		})
 	};
 
 	service.updateRoute = function(route) {
 		return $http ({
 			method : 'PUT',
-			url : 'rest/users/1/route/1',
+			url : `rest/users/` + $cookies.get('userId') + `/route/1`,
 			headers : {
 		        'Content-Type' : 'application/json'
 		      },

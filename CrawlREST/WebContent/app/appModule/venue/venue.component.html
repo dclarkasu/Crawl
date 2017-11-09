@@ -11,9 +11,9 @@
 		<form>
 			<div class="form-group">
 				<h5>Venue Information</h5>
-				name: <input type="text" name="name" ng-model="vm.copy.name"><br>
-				description: <input type="text" name="description" ng-model="vm.copy.description"><br>
-				hours: 
+				Name: <input type="text" name="name" ng-model="vm.copy.name"><br>
+				Description: <input type="text" name="description" ng-model="vm.copy.description"><br>
+				Hours: 
 				Open:
 				<select ng-options="hour as hour for hour in vm.hoursList" ng-model="vm.copyHours.openHour"></select> 
 				<select ng-options="min as min for min in vm.minList" ng-model="vm.copyHours.openMin"></select> 
@@ -56,7 +56,7 @@
 				{{vm.venue.address.city}}, {{vm.venue.address.state}} {{vm.venue.address.zip}}<br><br>
 				<p>{{vm.venue.description}}</p>
 				<p>{{vm.venue.hours}}</p>
-				<button class="btn" ng-click="vm.showUpdate()">Updata Venue Information</button>
+				<button class="btn" ng-click="vm.showUpdate()">Update Venue Information</button>
 			</div>
 			<div class="col-sm" >
 				<img alt="pic" class="rounded img-fluid" ng-src="{{vm.venue.imgUrl}}">

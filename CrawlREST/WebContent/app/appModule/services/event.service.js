@@ -1,7 +1,6 @@
 angular.module('appModule').factory('eventService', function($http, authService, $routeParams, $cookies){
 	var service = {};
-	var gid = $cookies.get("userId")
-	var id = $cookies.get("userId");
+	
 //	service.indexUserGroups = function() {
 //		return $http ({
 //			method : 'GET',
@@ -10,6 +9,7 @@ angular.module('appModule').factory('eventService', function($http, authService,
 //	};
 
 	service.showEvent = function(eid) {
+		var id = $cookies.get("userId");
 		console.log("in showEvent")
 		return $http ({
 			method : 'GET',
@@ -52,6 +52,7 @@ angular.module('appModule').factory('eventService', function($http, authService,
 //	};
 
 	service.updateEvent = function(eid, gid, event) {
+		var id = $cookies.get("userId");
 		return $http ({
 			method : 'PUT',
 			url : `rest/users/${id}/groups/${gid}/events/${eid}`,
@@ -63,6 +64,7 @@ angular.module('appModule').factory('eventService', function($http, authService,
 	};
 
 	service.addRouteToEvent = function(eid, rid) {
+		var id = $cookies.get("userId");
 		return $http ({
 			method : 'PUT',
 			url : `rest/users/${id}/group/events/${eid}/route/${rid}`,
@@ -83,6 +85,7 @@ angular.module('appModule').factory('eventService', function($http, authService,
 //	};
 
 	service.indexRoutes = function() {
+		var id = $cookies.get("userId");
 		return $http({
 			method : 'GET',
 			url : `rest/users/${id}/routes`

@@ -1,6 +1,6 @@
 angular.module('appModule').component('user', {
 	templateUrl : 'app/appModule/user/user.component.html',
-	controller : function(userService,$routeParams, $location) {
+	controller : function(userService,$routeParams, $location, $scope) {
 
 
 		// Variables
@@ -73,7 +73,6 @@ angular.module('appModule').component('user', {
 			vm.findGroupByUserId();
 			})
 		}
-
 
 	},
 

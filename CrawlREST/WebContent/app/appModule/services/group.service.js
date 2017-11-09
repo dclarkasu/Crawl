@@ -1,9 +1,10 @@
 angular.module('appModule').factory('groupService', function($http, authService, $cookies){
 	var service = {};
 	
-	var id = $cookies.get("userId");
+	
 
 	service.indexUserGroups = function() {
+		var id = $cookies.get("userId");
 		return $http ({
 			method : 'GET',
 			url : `rest/users/${id}/groups`
@@ -12,6 +13,7 @@ angular.module('appModule').factory('groupService', function($http, authService,
 
 	service.showGroup = function(gid) {
 		console.log("in showGroup")
+		var id = $cookies.get("userId");
 		return $http ({
 			method : 'GET',
 			url : `rest/users/${id}/groups/` + gid
@@ -20,6 +22,7 @@ angular.module('appModule').factory('groupService', function($http, authService,
 
 	service.indexMembers = function(gid) {
 		console.log('in member service');
+		var id = $cookies.get("userId");
 		return $http ({
 			method : 'GET',
 			url : `rest/users/${id}/group/` + gid
@@ -28,6 +31,7 @@ angular.module('appModule').factory('groupService', function($http, authService,
 	
 	service.indexGroupMessages = function(gid) {
 		console.log('messages');
+		var id = $cookies.get("userId");
 		return $http ({
 			method : 'GET',
 			url : `rest/users/${id}/post/group/` + gid
@@ -37,6 +41,7 @@ angular.module('appModule').factory('groupService', function($http, authService,
 
 
 	service.createEvent = function(newEvent, gid) {
+		var id = $cookies.get("userId");
 		return $http({
 			method : 'POST',
 			url : `rest/users/${id}/groups/${gid}/events`,
@@ -67,6 +72,7 @@ angular.module('appModule').factory('groupService', function($http, authService,
 	};
 
 	service.updateGroup = function(group, gid) {
+		var id = $cookies.get("userId");
 		return $http ({
 			method : 'PUT',
 			url : `rest/users/${id}/group/${gid}`,
@@ -87,6 +93,7 @@ angular.module('appModule').factory('groupService', function($http, authService,
 	};
 
 	service.indexEvents = function(gid) {
+		var id = $cookies.get("userId");
 		return $http({
 			method : 'GET',
 			url : `rest/users/${id}/groups/${gid}/events`
@@ -94,6 +101,7 @@ angular.module('appModule').factory('groupService', function($http, authService,
 	};
 
 	service.deleteEvent = function(gid, eid) {
+		var id = $cookies.get("userId");
 		return $http({
 			method: 'DELETE',
 			url : `rest/users/${id}/groups/${gid}/events/${eid}`
@@ -108,6 +116,7 @@ angular.module('appModule').factory('groupService', function($http, authService,
 	};
 
 	service.addUserToGroup = function(gid, mid) {
+		var id = $cookies.get("userId");
 		return $http({
 			method : 'PUT',
 			url : `rest/users/${id}/groups/${gid}/add/${mid}`,
@@ -119,6 +128,7 @@ angular.module('appModule').factory('groupService', function($http, authService,
 	};
 
 	service.removeUserFromGroup = function(gid, mid) {
+		var id = $cookies.get("userId");
 		return $http({
 			method : 'DELETE',
 			url: `rest/users/${id}/group/${gid}/remove/${mid}`,

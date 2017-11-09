@@ -5,7 +5,7 @@
     <h1>{{vm.event.name}}</h1>
 		<h2>Group: <a class="link link-active" href="{{'#/group/' + vm.event.group.id}}">{{vm.event.group.name}}</a></h2>
 
-	  <button class="btn" ng-hide="vm.editEvent" ng-click="vm.setEditEvent()">Edit Event</button>
+	  <button ng-show="vm.admin" class="btn" ng-hide="vm.editEvent" ng-click="vm.setEditEvent()">Edit Event</button>
     <div ng-show="vm.editEvent">
       <form class="form-group">
         <input type="text" placeholder="Event Name" ng-model="editEvent.name"/>
@@ -28,7 +28,7 @@
 			<h1><a class="badge badge-light" href="{{'#/route/' + vm.event.route.id}}">{{vm.event.route.name}}</a></h1>
 	</div>
 
-	<button class="btn" ng-click="vm.setNewRoute()">New Route</button>
+	<button ng-show="vm.admin" class="btn" ng-click="vm.setNewRoute()">New Route</button>
 	<div ng-show="vm.newRoute">
 		<form class="form-group">
 			<select ng-model="selected" ng-options="route.name for route in vm.routes">
