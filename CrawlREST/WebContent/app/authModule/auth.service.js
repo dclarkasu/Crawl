@@ -21,7 +21,6 @@ angular.module('authModule')
     }
 
     service.login = function(user) {
-    		console.log(user);
     		return $http({
 		      method : 'POST',
 		      url : 'rest/auth/login',
@@ -40,7 +39,6 @@ angular.module('authModule')
     }
 
     service.register = function(user) {
-    		console.log(user);
     		return $http({
 		      method : 'POST',
 		      url : 'rest/auth/register',

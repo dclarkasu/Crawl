@@ -2,7 +2,7 @@ angular.module('appModule')
 .component('venue',{
 	templateUrl: 'app/appModule/venue/venue.component.html',
 	controller: function(venueService, $routeParams, $location, geolocate, $rootScope){
-//		AIzaSyBEw2cCO_zGlAgAWJhO8uMTiqe95wBLlEE google map api key
+// AIzaSyBEw2cCO_zGlAgAWJhO8uMTiqe95wBLlEE google map api key
 		var vm = this;
 		vm.venue = null;
 		vm.copy = null;
@@ -73,12 +73,9 @@ angular.module('appModule')
 			vm.update = angular.copy(vm.venue);
 			vm.updateAddress = vm.update.address;
 			vm.updateHours = parseHour(vm.update.hours);
-			console.log(vm.update);
-			console.log(vm.updateAddress);
 		};
 		vm.updateVenue = function(){
 			vm.update.hours = createHoursString(vm.updateHours);
-			console.log(vm.update);
 			venueService.updateVenue(vm.update, $routeParams.vid)
 			.then(function(res){
 				vm.update = null;
@@ -103,7 +100,6 @@ angular.module('appModule')
 				})
 		};
 		vm.updateVenueContact = function(){
-			console.log(vm.update);
 			venueService.updateContact(vm.update.contact, vm.update.contact.id)
 			.then(function(res){
 				vm.update = null;
@@ -152,7 +148,6 @@ angular.module('appModule')
 			venueService.showVenue($routeParams.vid)
 			.then(function(res){
 				vm.venue = res.data;
-				console.log(vm.venue);
 				cord = {
 					lng : vm.venue.address.longitude,
 					lat : vm.venue.address.latitude,
