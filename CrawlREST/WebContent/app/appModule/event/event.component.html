@@ -34,30 +34,29 @@
 	<div ng-show="vm.event.route">
 		<h1>
 			<a class="badge badge-light"
-				href="{{'#/route/' + vm.event.route.id}}">{{vm.event.route.id}}
+				href="{{'#/route/' + vm.event.route.id}}">
 				{{vm.event.route.name}}</a>
 		</h1>
 	</div>
 
-	<button ng-show="vm.admin" class="btn" ng-click="vm.setNewRoute()">New
-		Route</button>
+	<button ng-show="vm.admin && vm.event.route==null" class="btn" ng-click="vm.setNewRoute()">CHOOSE ROUTE</button>
 	<div ng-show="vm.newRoute">
 		<form class="form-group">
 			<select ng-model="selected"
 				ng-options="route.name for route in vm.routes">
 			</select>
 			<button class="btn btn-success"
-				ng-click="vm.addRoute(selected); route = {}">Add</button>
-			<button class="btn btn-danger" ng-click="vm.cancel()">Cancel</button>
+				ng-click="vm.addRoute(selected); route = {}">ADD</button>
+			<button class="btn btn-danger" ng-click="vm.cancel()">CANCEL</button>
 		</form>
 
 
 	</div>
 	<div>
-		<form ng-show="vm.admin" class="form-group">
+		<form ng-show="vm.admin && vm.event.route==null" class="form-group">
 			<input type="text" placeholder="Route Name" ng-model="newRoute.name" />
 			<button class="btn"
-				ng-click="vm.createRoute(newRoute); newRoute = {}">Add</button>
+				ng-click="vm.createRoute(newRoute); newRoute = {}">ADD</button>
 		</form>
 	</div>
 </div>
