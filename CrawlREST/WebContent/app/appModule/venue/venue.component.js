@@ -52,15 +52,15 @@ angular.module('appModule')
 			var address = getGeocode(vm.copy.address);
 			vm.copy.address = address;
 			console.log(vm.copy);
-//			venueService.createVenue(vm.copy)
-//			.then(function(res){
-//				console.log(res.data);
-//				var id = res.data.id;
-//				$location.path("/venue/" + id);
-//			})
-//			.catch(function(err){
-//				console.log(err);
-//			});
+			venueService.createVenue(vm.copy)
+			.then(function(res){
+				console.log(res.data);
+				var id = res.data.id;
+				$location.path("/venue/" + id);
+			})
+			.catch(function(err){
+				console.log(err);
+			});
 		}
 		
 		vm.showUpdate = function(){
