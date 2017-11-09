@@ -32,7 +32,7 @@
 			 <td>{{v.spot}}</td>
         <td><a class="badge badge-light" href="{{'#/venue/' + v.venue.id}}">{{v.venue.name}}</a></br>
         {{v.venue.address.street}}</br>
-        {{v.venue.address.street2}}</br>
+        <p ng-show="{{v.venue.street2}}">{{v.venue.address.street2}}</br></p>
         {{v.venue.address.city}}, {{v.venue.address.state}} {{v.venue.address.zip}} 
         </td>
 				<td ng-show="vm.admin"><button class="btn" id="removeVenueBtn" ng-click="vm.removeVenue(vm.route.id, v.venue.id)">X</button></td>

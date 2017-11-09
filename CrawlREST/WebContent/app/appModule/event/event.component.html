@@ -40,28 +40,14 @@
 		 
 	</div>
 	<div>
-    <form class="form-group">
+    <form ng-show="vm.admin" class="form-group">
       <input type="text" placeholder="Route Name" ng-model="newRoute.name"/>
       <button class="btn" ng-click="vm.createRoute(newRoute); newRoute = {}">Add</button>
     </form>
   </div>
 </div>
 
-  <table class="table" ng-show="vm.event.route">
-		<thead class="thead-dark">
-			<th>Route</th>
-			<th>Delete</th>
-      <th></th>
-      <th></th>
-			<th><button class="btn" ng-hide="vm.newEvent" ng-click="vm.setNewEvent()">Create Event</button></th>
-		</thead>
-		<tbody>
-			<tr ng-repeat="route in vm.events | orderBy:'id'">
-        <td><a class="badge badge-light" href="{{'#/event/'+event.id}}">{{event.name}}</a></td>
-				<td><button class="btn" id="deleteEventBtn" ng-click="vm.deleteEvent(event.id)">X</button></td>
-			</tr>
-		</tbody>
-	</table>
+
 
 
   <!-- <div ng-show="vm.newEvent">
