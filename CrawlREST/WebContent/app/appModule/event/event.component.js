@@ -6,6 +6,8 @@ angular.module('appModule').component('event', {
     vm.admin = null;
     
     vm.event = null;
+    
+    vm.newRoute = null;
 
     vm.members = [];
 
@@ -30,20 +32,38 @@ angular.module('appModule').component('event', {
     };
 
     vm.loadEvent();
-    console.log ("is this here:" + $routeParams.eid);
-//    vm.adminCheck = function() {
-//		var promise = groupService.adminCheck($routeParams.gid, $cookies.get('userId'));
-//		
-//		promise.then(function(res){
-//			console.log(res);
-//			console.log('in admin promise');
-//			
-//			vm.admin = res.data;
-//		}).catch(function(err){
-//			console.log(err);
-//		});
-//		
-//	}
+
+
+    vm.addRoute = function(newRoute) {
+    	console.log("********************");
+		console.log(newRoute);
+		eventService.addRouteToEvent(newRoute.id, $routeParams.eid)
+		.then(function(res) {
+			vm.loadEvent();
+			vm.loadMembers();
+			vm.newRoute = null;
+			console.log("ID OF ROUTE: "+ vm.event.route.id)
+		})
+		.catch(function(err) {
+			console.log(err);
+		})
+	};
+	
+	vm.createRoute = function(newRoute) {
+		eventService.createRoute(newRoute)
+		.then(function(res) {
+			vm.loadEvent();
+			vm.loadMembers();
+			vm.newRoute = null;
+		})
+		.catch(function(err) {
+			console.log(err);
+		})
+	};
+
+	
+	
+	
     
     // vm.loadGroup = function() {
 		// 	groupService.showGroup()
@@ -73,6 +93,7 @@ angular.module('appModule').component('event', {
 				console.log(err);
 			})
 		};
+	
 
     vm.loadMembers = function() {
 			groupService.indexMembers(vm.event.group.id)
@@ -100,19 +121,8 @@ angular.module('appModule').component('event', {
     vm.setNewRoute = function() {
 			vm.newRoute = {};
 		};
-
-		vm.addRoute = function(eid, newRoute) {
-			console.log(newRoute);
-			eventService.addRouteToEvent(eid, newRoute.id)
-			.then(function(res) {
-				// vm.loadRoutes();
-				vm.loadEvent();
-				vm.newRoute = null;
-			})
-			.catch(function(err) {
-				console.log(err);
-			})
-		};
+		
+	
 
     vm.loadRoutes = function() {
 			console.log('in load routes');

@@ -1,7 +1,7 @@
 angular.module('appModule')
 .component('venue',{
 	templateUrl: 'app/appModule/venue/venue.component.html',
-	controller: function(venueService, $routeParams, $location, geolocate){
+	controller: function(venueService, $routeParams, $location, geolocate, $rootScope){
 //		AIzaSyBEw2cCO_zGlAgAWJhO8uMTiqe95wBLlEE google map api key
 		var vm = this;
 		vm.venue = null;
@@ -29,7 +29,6 @@ angular.module('appModule')
 			vm.showList = true;
 		}
 		
-		getGeocode()
 		vm.showCreate = function(){
 			vm.copy = {};
 			vm.copyHours = {};
@@ -50,15 +49,18 @@ angular.module('appModule')
 		vm.createVenue = function(){
 			vm.copy.hours = createHoursString(vm.copyHours);
 			console.log(vm.copy);
-			venueService.createVenue(vm.copy)
-			.then(function(res){
-				console.log(res.data);
-				var id = res.data.id;
-				$location.path("/venue/" + id);
-			})
-			.catch(function(err){
-				console.log(err);
-			});
+			var address = getGeocode(vm.copy.address);
+			vm.copy.address = address;
+			console.log(vm.copy);
+//			venueService.createVenue(vm.copy)
+//			.then(function(res){
+//				console.log(res.data);
+//				var id = res.data.id;
+//				$location.path("/venue/" + id);
+//			})
+//			.catch(function(err){
+//				console.log(err);
+//			});
 		}
 		
 		vm.showUpdate = function(){
@@ -83,6 +85,8 @@ angular.module('appModule')
 			})
 		};
 		vm.updateVenueAddress = function(venue){
+			console.log(venue.address);
+			var address = getGeocode(venue.address);
 			venueService.updateAddress(venue.address, $routeParams.vid)
 			.then(function(res){
 				vm.update = null;
@@ -109,15 +113,20 @@ angular.module('appModule')
 			vm.update = null;
 			vm.updateAddress = null;
 		}
-		function getGeocode(){
-			geolocate.geocodeAddress('2095 legacy ridge view colorado springs co 80910')
+		function getGeocode(address){
+			var textAddress = address.street + " " + address.city + " " + address.state + " " + address.zip;
+			console.log(textAddress);
+			geolocate.geocodeAddress(textAddress)
 			.then(function(res){
 				console.log(res.cord.lat());
 				console.log(res.cord.lng());
+				address.longitude = res.cord.lng();
+				address.latitude = res.cord.lat();
 			})
 			.catch(function(err){
 				console.log(err);
-			})
+			});
+			return address;
 		}
 		function createHoursString(hourObj){
 			return hourObj.openHour +':'+ hourObj.openMin + hourObj.openAP 
@@ -141,6 +150,16 @@ angular.module('appModule')
 			.then(function(res){
 				vm.venue = res.data;
 				console.log(vm.venue);
+				cord = {
+					lng : vm.venue.address.longitude,
+					lat : vm.venue.address.latitude,
+					title : vm.venue.name
+				};
+				$rootScope.$broadcast('map', {
+					center: cord,
+					markers : [cord],
+					zoom: 14
+				});
 			})
 			.catch(function(err){
 				console.log(err);

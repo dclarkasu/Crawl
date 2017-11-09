@@ -1,16 +1,16 @@
 angular.module('appModule').component('group', {
 	templateUrl : "app/appModule/group/group.component.html",
-	controller : function(groupService, $routeParams, $cookies) {
+	controller : function(groupService, $routeParams, $cookies, $location) {
 		// Variables
 		var vm = this;
 // vm.userId = $cookies.get("userId")
-				
+
 		vm.admin = null;
-		
+
 		vm.group = null;
 
 		vm.members = [];
-		
+
 		vm.activeUserId = null;
 
 		vm.events = [];
@@ -20,9 +20,9 @@ angular.module('appModule').component('group', {
 		vm.groupList = [];
 
 		vm.messageBoard = [];
-		
+
 		vm.newPost = null;
-		
+
 		// Behaviors
 		vm.groupsByUser = function() {
 			groupService.indexUserGroups()
@@ -31,11 +31,11 @@ angular.module('appModule').component('group', {
 				vm.groupList = res.data;
 			})
 		};
-		
+
 		vm.findActiveUserId = function(){
 			vm.activeUserId = $cookies.get('userId');
 		}
-		
+
 
 		vm.loadGroup = function() {
 			var promise = groupService.showGroup($routeParams.gid);
@@ -55,21 +55,21 @@ angular.module('appModule').component('group', {
 
 		vm.adminCheck = function() {
 			var promise = groupService.adminCheck($routeParams.gid, $cookies.get('userId'));
-			
+
 			promise.then(function(res){
 				console.log(res);
 				console.log('in admin promise');
-				
+
 				vm.admin = res.data;
 			}).catch(function(err){
 				console.log(err);
 			});
-			
+
 		}
-		
+
 		vm.adminCheck();
 		console.log('vm.check: ' + vm.admin);
-		
+
 		vm.loadMembers = function() {
 			console.log('in load members');
 			groupService.indexMembers($routeParams.gid)
@@ -87,7 +87,10 @@ angular.module('appModule').component('group', {
 		};
 
 		vm.updateGroup = function(group) {
-			groupService.updateGroup(group)
+			console.log("Group: ");
+			console.log(group);
+			console.log("group id in component: " + vm.group.id);
+			groupService.updateGroup(group, vm.group.id)
 			.then(function(res) {
 				vm.loadGroup();
 				vm.editGroup = null;
@@ -100,7 +103,7 @@ angular.module('appModule').component('group', {
 		vm.setNewEvent = function() {
 			vm.newEvent = {};
 		};
-		
+
 		vm.setNewPost = function() {
 			vm.newPost = null;
 		};
@@ -128,7 +131,7 @@ angular.module('appModule').component('group', {
 				console.log(err);
 			})
 		};
-		
+
 		vm.loadMessages = function() {
 			groupService.indexGroupMessages($routeParams.gid)
 			.then(function(res) {
@@ -140,7 +143,7 @@ angular.module('appModule').component('group', {
 				console.log(err);
 			})
 		};
-		
+
 		vm.addPost = function(gid, newPost) {
 			console.log(vm.activeUserId);
 			groupService.createPost(vm.activeUserId, gid, newPost)
@@ -149,9 +152,9 @@ angular.module('appModule').component('group', {
 				vm.setNewPost();
 			})
 		}
-		
+
 		vm.removePost = function(pid) {
-			
+
 			groupService.deletePost(vm.activeUserId, pid)
 			.then(function(res){
 				vm.loadMessages();
@@ -163,9 +166,9 @@ angular.module('appModule').component('group', {
 
 		vm.loadMessages();
 		console.log("vm.message board: ");
-	
-		
-		
+
+
+
 		vm.deleteEvent = function(id) {
 			groupService.deleteEvent($routeParams.gid, id )
 			.then(function(res){
@@ -208,7 +211,7 @@ angular.module('appModule').component('group', {
 		}
 
 		vm.rem
-		
+
 		vm.setRemoveMember = function() {
 			vm.memberToRemove = {};
 		};
@@ -216,7 +219,7 @@ angular.module('appModule').component('group', {
 		vm.removeMember = function(gid, user) {
 			console.log(user);
 			console.log(gid);
-			
+
 			groupService.removeUserFromGroup(gid, user.id)
 			.then(function(res){
 				vm.loadGroup();
@@ -224,6 +227,24 @@ angular.module('appModule').component('group', {
 				vm.loadMembers();
 				vm.memberToRemove = null;
 			})
+		};
+
+		vm.deleteGroup = function(id) {
+			var choice = window.confirm("Are you sure?");
+			if (choice) {
+				groupService.deleteGroup(id)
+				.then(function(res) {
+					vm.loadGroup();
+					vm.loadAllUsers();
+					vm.loadMembers();
+					$location.path('#/user/'+vm.admin.id);
+				})
+				.catch(function(err) {
+					console.log(err);
+				})
+			} else {
+				console.log("Not deleted");
+			}
 		}
 
 		console.log('ADMIN: ' + vm.admin);

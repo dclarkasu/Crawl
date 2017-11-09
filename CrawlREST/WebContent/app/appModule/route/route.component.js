@@ -1,6 +1,6 @@
 angular.module('appModule').component('route', {
 	templateUrl : "app/appModule/route/route.component.html",
-	controller : function(routeService, $routeParams, $cookies) {
+	controller : function(routeService, $routeParams, $cookies, $rootScope) {
 		//Variables
 		var vm = this;
 
@@ -11,46 +11,46 @@ angular.module('appModule').component('route', {
 
 		vm.loadRoute = function() {
 			var promise = routeService.showRoute();
-			
+
 			promise.then(function(res){
 				console.log(res);
 				console.log('in promise');
-				
+
 				vm.route = res.data;
-				vm.route.id
+				console.log("Route ID:"+ vm.route.id)
 				vm.loadAllVenuesExcept(vm.route.id);
 			}).catch(function(err){
 				console.log(err);
 			});
 		}
-		
+
 		vm.adminCheck = function() {
-			var promise = routeService.adminCheck($routeParams.eid, $cookies.get('userId'));
+			var promise = routeService.adminCheck($routeParams.rid, $cookies.get('userId'));
 			promise.then(function(res){
 				vm.admin = res.data;
 			}).catch(function(err){
 				console.log(err);
 			});
-			
+
 		}
-		
+
 		vm.adminCheck();
-	
+
 		vm.addVenue = function(rid, venue) {
 			routeService.addVenue(rid, venue.id)
 			.then(function(res){
 				vm.resetPage();
 			})
 		}
-		
+
 		vm.removeVenue = function(rid,vid) {
 			routeService.removeVenue(rid,vid)
 			.then(function(res){
 				vm.resetPage();
 			})
 		}
-		
-		
+
+
 		vm.venueUp = function(rid,vid) {
 			routeService.moveVenueUp(rid,vid)
 			.then(function(res){
@@ -63,18 +63,25 @@ angular.module('appModule').component('route', {
 				vm.resetPage();
 			})
 		}
-		
-	
+
+
 		vm.loadRouteVenues = function() {
 			console.log('in load venues');
 			routeService.indexRouteVenues()
 			.then(function(res) {
 				vm.routeVenues = res.data;
-				console.log(vm.routeVenues);
+//				console.log(vm.routeVenues);
+				var cords = CreateCordArray();
+				console.log(cords);
+				$rootScope.$broadcast('map', {
+					center: cords[0],
+					markers : cords,
+					zoom: 14
+				});
 			})
 		};
-		
-	
+
+
 		vm.loadAllVenuesExcept = function (rid){
 			console.log('in Load All Venues');
 			console.log(rid);
@@ -83,8 +90,8 @@ angular.module('appModule').component('route', {
 				console.log(vm.indexAllVenues);
 			})
 		};
-		
-		
+
+
 		vm.loadRoute();
 		console.log('vm.route: ' + vm.route);
 		vm.loadRouteVenues();
@@ -111,14 +118,26 @@ angular.module('appModule').component('route', {
 				console.log(err);
 			})
 		};
-		
+
 		vm.resetPage = function() {
 			vm.loadRoute();
 			vm.loadRouteVenues();
 			vm.loadAllVenuesExcept(vm.route.id);
 		}
+		function CreateCordArray(){
+			arr = [];
+			vm.routeVenues.forEach(function(val){
+				console.log(val.venue);
+				var cord = {
+					lng : val.venue.address.longitude,
+					lat : val.venue.address.latitude,
+					title : val.venue.name	
+				};
+				arr.push(cord);
+			})
+			return arr;
+		}
 
 	},
 	controllerAs: 'vm'
 });
-

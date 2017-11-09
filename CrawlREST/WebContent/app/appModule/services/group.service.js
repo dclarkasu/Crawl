@@ -1,7 +1,7 @@
-angular.module('appModule').factory('groupService', function($http, authService, $cookies){
+angular.module('appModule').factory('groupService', function($http, authService, $cookies, $rootScope){
 	var service = {};
-	
-	
+
+
 
 	service.indexUserGroups = function() {
 		var id = $cookies.get("userId");
@@ -28,7 +28,7 @@ angular.module('appModule').factory('groupService', function($http, authService,
 			url : `rest/users/${id}/group/` + gid
 		})
 	};
-	
+
 	service.indexGroupMessages = function(gid) {
 		console.log('messages');
 		var id = $cookies.get("userId");
@@ -51,7 +51,7 @@ angular.module('appModule').factory('groupService', function($http, authService,
 			data : newEvent
 		})
 	};
-	
+
 	service.createPost = function(uid, gid, newPost) {
 		return $http({
 			method : 'POST',
@@ -62,16 +62,17 @@ angular.module('appModule').factory('groupService', function($http, authService,
 			data : newPost
 		})
 	};
-	
+
 	service.deletePost = function(uid, pid) {
 		return $http({
 			method : 'DELETE',
 			url : 'rest/users/'+ uid + '/post/'+ pid
-			
+
 		})
 	};
 
 	service.updateGroup = function(group, gid) {
+		console.log("gid: " + gid);
 		var id = $cookies.get("userId");
 		return $http ({
 			method : 'PUT',
@@ -81,14 +82,23 @@ angular.module('appModule').factory('groupService', function($http, authService,
 		      },
 		      data : group
 		})
+		.then(function(res) {
+			console.log("res from update", res);
+			$rootScope.$broadcast('updatedGroup', {
+				message : "Group Updated",
+				group : res.data
+			})
+
+			return res;
+		})
 	};
-	
+
 	service.adminCheck = function(gid, uid) {
 
 		return $http ({
 			method : 'GET',
 			url : `rest/users/${uid}/group/${gid}/admin`,
-		      
+
 		})
 	};
 
@@ -132,6 +142,22 @@ angular.module('appModule').factory('groupService', function($http, authService,
 		return $http({
 			method : 'DELETE',
 			url: `rest/users/${id}/group/${gid}/remove/${mid}`,
+		})
+	};
+
+	service.deleteGroup = function(gid) {
+		var id = $cookies.get("userId");
+		return $http({
+			method : 'DELETE',
+			url : 'rest/users/'+ id + '/groups/'+ gid
+		})
+		.then(function(res) {
+			$rootScope.$broadcast('deleteGroup', {
+				message : "Group Deleted",
+				groupID : gid
+			})
+
+			return res;
 		})
 	};
 
