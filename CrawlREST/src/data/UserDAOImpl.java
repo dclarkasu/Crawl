@@ -106,7 +106,11 @@ public class UserDAOImpl implements UserDAO {
 	public Set<User> indexUserByGroup(int gid) {
 		String query = "SELECT g FROM Group g where g.id = :id"; // JPQL
 		List<Group> groups = em.createQuery(query, Group.class).setParameter("id", gid).getResultList();
-		return new HashSet<User>(groups.get(0).getUsers());
+		if (groups.size() < 1) {
+			return null;
+		} else {
+			return new HashSet<User>(groups.get(0).getUsers());
+		}
 	}
 
 	@Override //works

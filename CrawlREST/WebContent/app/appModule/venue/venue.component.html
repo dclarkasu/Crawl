@@ -89,14 +89,14 @@
 			<div class="col-sm">
 				<h5>Venue Address Information</h5>
 				<form class="form-group">
-					Street: <input class="form-control" type="text" name="street" ng-model="vm.update.street"><br>
-					Street2: <input class="form-control" type="text" name="street2" ng-model="vm.update.street2"><br>
-					City: <input class="form-control" type="text" name="city" ng-model="vm.update.city"><br>
+					Street: <input class="form-control" type="text" name="street" ng-model="vm.update.address.street"><br>
+					Street2: <input class="form-control" type="text" name="street2" ng-model="vm.update.address.street2"><br>
+					City: <input class="form-control" type="text" name="city" ng-model="vm.update.address.city"><br>
 						State: 
-						<select  ng-options="state as state for state in vm.states" ng-model="vm.update.state">	
+						<select  ng-options="state as state for state in vm.states" ng-model="vm.update.address.state">	
 						</select>
-						Zip: <input type="text" name="zip" ng-model="vm.update.zip"> <br>
-					<input class="btn" type="submit" value="Update Address" ng-click="vm.updateVenueAddress(update)">
+						Zip: <input type="text" name="zip" ng-model="vm.update.address.zip"> <br>
+					<input class="btn" type="submit" value="Update Address" ng-click="vm.updateVenueAddress(vm.update)">
 				</form>
 			</div>
 			<div class="col-sm">
