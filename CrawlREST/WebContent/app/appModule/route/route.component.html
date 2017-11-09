@@ -6,7 +6,7 @@
   	<map-view></map-view>
     <h3>Route</h3>
     <h1>{{vm.route.name}}</h1>
-    <button ng-show="vm.admin && !vm.editRoute" class="btn"  ng-click="vm.setEditRoute()">Edit Route</button>
+   
   </div>
   
   <form ng-show="vm.admin" class="form-group">
@@ -25,7 +25,6 @@
       <th></th>
       <th></th>
 			<th><button ng-show="vm.admin" class="btn" ng-hide="vm.newVenue"  onclick="window.location.href = '#/venue/showCreate/true';">Create Venue</button></th>
-
 		</thead>
 		<tbody>
 			<tr ng-repeat="v in vm.routeVenues | orderBy:'spot'">

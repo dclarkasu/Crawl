@@ -46,6 +46,14 @@ angular.module('appModule').factory('routeService', function($http, authService,
 		})
 	};
 	
+	service.newVenuePage = function() {
+		console.log("VENUE CLICK 2")
+		return $http ({
+			method : 'GET',
+			url : `users/` + $cookies.get('userId') + `/venues`
+		})
+	};
+	
 	service.moveVenueUp = function(rid,vid) {
 		console.log("moving Venue Up")
 		return $http ({
