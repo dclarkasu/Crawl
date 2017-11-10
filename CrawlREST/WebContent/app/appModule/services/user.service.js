@@ -2,7 +2,6 @@ angular.module('appModule').factory('userService',
 		function($http, authService, $cookies, $location, $rootScope) {
 			var service = {};
 
-			var BASE_URL = 'http://localhost:8080/CrawlREST/rest';
 
 			// user
 			// findUser
@@ -10,7 +9,7 @@ angular.module('appModule').factory('userService',
 				if (id) {
 					return $http({
 						method : 'GET',
-						url : `${BASE_URL}/users/${id}`
+						url : `rest/users/${id}`
 					})
 				}
 			};
@@ -19,7 +18,7 @@ angular.module('appModule').factory('userService',
 				if (id) {
 					return $http({
 						method : 'GET',
-						url : `${BASE_URL}/users/${id}/group/` + group.id
+						url : `rest/users/${id}/group/` + group.id
 					})
 				}
 			};
@@ -30,7 +29,7 @@ angular.module('appModule').factory('userService',
 				if (id) {
 					return $http({
 						method : 'PUT',
-						url : `${BASE_URL}/users/${id}`,
+						url : `rest/users/${id}`,
 						headers : {
 							'Content-Type' : 'application/json'
 						},
@@ -45,7 +44,7 @@ angular.module('appModule').factory('userService',
 				if (id) {
 					return $http({
 						method : 'POST',
-						url : `${BASE_URL}/users/${id}/contacts`,
+						url : `rest/users/${id}/contacts`,
 						headers : {
 							'Content-Type' : 'application/json'
 						},
@@ -61,7 +60,7 @@ angular.module('appModule').factory('userService',
 				if (id) {
 					return $http({
 						method : 'POST',
-						url : `${BASE_URL}/users/${id}/group/${gid}/post`,
+						url : `rest/users/${id}/group/${gid}/post`,
 						headers : {
 							'Content-Type' : 'application/json'
 						},
@@ -75,7 +74,7 @@ angular.module('appModule').factory('userService',
 				if (id) {
 					return $http({
 						method : 'PUT',
-						url : `${BASE_URL}/users/${id}/post/${pid}`,
+						url : `rest/users/${id}/post/${pid}`,
 						headers : {
 							'Content-Type' : 'application/json'
 						},
@@ -89,7 +88,7 @@ angular.module('appModule').factory('userService',
 				if (uid) {
 					return $http({
 						method : 'DELETE',
-						url : `${BASE_URL}/users/${id}/post/${pid}`
+						url : `rest/users/${id}/post/${pid}`
 					})
 				}
 
@@ -100,7 +99,7 @@ angular.module('appModule').factory('userService',
 				if (id) {
 					return $http({
 						method : 'GET',
-						url : `${BASE_URL}/users/${id}/post`
+						url : `rest/users/${id}/post`
 					})
 				}
 			};
@@ -110,7 +109,7 @@ angular.module('appModule').factory('userService',
 				if (id) {
 					return $http({
 						method : 'GET',
-						url : `${BASE_URL}/users/${id}/post/group/${gid}`
+						url : `rest/users/${id}/post/group/${gid}`
 					})
 				}
 			};
@@ -121,7 +120,7 @@ angular.module('appModule').factory('userService',
 				if (id) {
 					return $http({
 						method : 'GET',
-						url : `${BASE_URL}/users/${id}/groups`
+						url : `rest/users/${id}/groups`
 					})
 				}
 			};
@@ -132,7 +131,7 @@ angular.module('appModule').factory('userService',
 				if (id) {
 					return $http({
 						method : 'POST',
-						url : `${BASE_URL}/users/${id}/groups`,
+						url : `rest/users/${id}/groups`,
 						headers : {
 							'Content-Type' : 'application/json'
 						},
@@ -153,7 +152,7 @@ angular.module('appModule').factory('userService',
 				if (id) {
 					return $http({
 						method : 'PUT',
-						url : `${BASE_URL}/users/${id}/contact/` + contact.id,
+						url : `rest/users/${id}/contact/` + contact.id,
 						headers : {
 							'Content-Type' : 'application/json'
 						},
