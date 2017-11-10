@@ -64,7 +64,7 @@
 		<div class="row">
 			<div class="col-sm">
 
-				<h3>{{vm.venue.name}}</h3>
+			<!-- 	<h3>{{vm.venue.name}}</h3>
 				phone number: <br> {{vm.venue.contact.phoneNumber}} <br>
 				email: {{vm.venue.contact.email}} <br>
 				<br> {{vm.venue.address.street}} {{vm.venue.address.street2}}<br>
@@ -74,7 +74,7 @@
 				<p>{{vm.venue.description}}</p>
 				<p>{{vm.venue.hours}}</p>
 				<button class="btn" ng-click="vm.showUpdate()">Update Venue
-					Information</button>
+					Information</button> -->
 
 				<h2>{{vm.venue.name}}</h2>
 				phone number: <br>
@@ -102,7 +102,7 @@
 				<h4>Venue Information</h4>
 				<form class="form-group">
 
-					name: <input class="form-control" type="text" name="name"
+				<!-- 	name: <input class="form-control" type="text" name="name"
 						ng-model="vm.update.name"><br> description: <input
 						class="form-control" type="text" name="description"
 						ng-model="vm.update.description"><br> hours: <br>
@@ -121,7 +121,7 @@
 						ng-model="vm.updateHours.closeAP"></select><br> Image: <input
 						class="form-control" type="text" name="imgUrl"
 						ng-model="vm.update.imgUrl"><br> <input class="btn"
-						type="submit" value="Update" ng-click="vm.updateVenue()"><br>
+						type="submit" value="Update" ng-click="vm.updateVenue()"><br> -->
 
 					name: <input class="form-control" type="text" name="name" ng-model="vm.update.name"><br>
 					description: <input class="form-control" type="text" name="description" ng-model="vm.update.description"><br>
@@ -143,7 +143,7 @@
 				<h4>Venue Address Information</h4>
 				<form class="form-group">
 
-					Street: <input class="form-control" type="text" name="street"
+					<!-- Street: <input class="form-control" type="text" name="street"
 						ng-model="vm.update.address.street"><br> Street2: <input
 						class="form-control" type="text" name="street2"
 						ng-model="vm.update.address.street2"><br> City: <input
@@ -155,7 +155,7 @@
 						ng-model="vm.update.address.zip"> <br> <input
 						class="btn" type="submit" value="Update Address"
 						ng-click="vm.updateVenueAddress(vm.update)">
-
+ -->
 					Street: <input class="form-control" type="text" name="street" ng-model="vm.update.address.street"><br>
 					Street2: <input class="form-control" type="text" name="street2" ng-model="vm.update.address.street2"><br>
 					City: <input class="form-control" type="text" name="city" ng-model="vm.update.address.city"><br>
@@ -171,12 +171,12 @@
 				<h4>Contact Info</h4>
 				<form class="form-group">
 
-					Phone Number: <input class="form-control" type="text" name="phone"
+					<!-- Phone Number: <input class="form-control" type="text" name="phone"
 						ng-model="vm.update.contact.phoneNumber"> Email : <input
 						class="form-control" type="email" name="email"
 						ng-model="vm.update.contact.email"> <input class="btn"
 						type="submit" value="Update Contact"
-						ng-click="vm.updateVenueContact()">
+						ng-click="vm.updateVenueContact()"> -->
 
 					Phone Number: <input class="form-control" type="text" name="phone" ng-model="vm.update.contact.phoneNumber">
 					Email : <input class="form-control" type="email" name="email" ng-model="vm.update.contact.email">

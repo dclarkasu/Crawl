@@ -304,23 +304,30 @@ CREATE TABLE IF NOT EXISTS `post` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-INSERT INTO contact (phone_number, email) VALUES ('555-555-5555', 'bill@gmail.com');
-INSERT INTO contact (phone_number, email) VALUES ('555-555-5556', 'lisa@gmail.com');
-INSERT INTO contact (phone_number, email) VALUES ('555-555-5557', 'david@gmail.com');
-INSERT INTO contact (phone_number, email) VALUES ('555-555-5558', 'pam@gmail.com');
+INSERT INTO `contact` VALUES
+(1,'555-555-5555','bill@gmail.com'),
+(2,'555-555-5556','lisa@gmail.com'),
+(3,'555-555-5557','david@gmail.com'),
+(4,'555-555-5558','pam@gmail.com'),
+(5,'555-555-5559','sputnik@gmail.com'),
+(6,'555-555-5510','true@gmail.com'),
+(7,'555-555-5511','skylark@gmail.com'),
+(8,'555-555-5512','mcman@gmail.com'),
+(9,'720-228-7080','gmt@gmail.com'),
+(10,'303-221-4660','tavertech@gmail.com'),
+(11,'(303) 770-3100','stuff@gmail.com'),
+(12,'(303) 770-4741','stuff@gmail.com'),
+(13,'(303) 779-0805','true@gmail.com');
 
-INSERT INTO contact (phone_number, email) VALUES ('555-555-5559', 'sputnik@gmail.com');
-INSERT INTO contact (phone_number, email) VALUES ('555-555-5510', 'true@gmail.com');
-INSERT INTO contact (phone_number, email) VALUES ('555-555-5511', 'skylark@gmail.com');
-INSERT INTO contact (phone_number, email) VALUES ('555-555-5512', 'mcman@gmail.com');
+INSERT INTO user (first_name,last_name,contact_id) VALUES
+('Bill','James',1),
+('Lisa','Burns',2),
+('David','Brown',3),
+('Pam','Grey',4);
 
-INSERT INTO user (first_name,last_name,contact_id) VALUES ('Bill','James',1);
-INSERT INTO user (first_name,last_name,contact_id) VALUES ('Lisa','Burns',2);
-INSERT INTO user (first_name,last_name,contact_id) VALUES ('David','Brown',3);
-INSERT INTO user (first_name,last_name,contact_id) VALUES ('Pam','Grey',4);
-
-INSERT INTO crawl_group (name, admin_id) VALUES ('Pub Day',3);
-INSERT INTO crawl_group (name, admin_id) VALUES ('Skywalker', 1);
+INSERT INTO `crawl_group` VALUES
+(1,'Pub Day',3),
+(2,'Skywalker',1);
 
 INSERT INTO user_group (user_id, group_id) VALUES (2,1);
 INSERT INTO user_group (user_id, group_id) VALUES (3,1);
@@ -337,17 +344,27 @@ INSERT INTO login (user_name,password,user_id) VALUES ('red','$2a$10$Gs0mtbWIXqy
 
 INSERT INTO post (group_id,user_id,message) VALUES (1,3,'lets go dude');
 
-INSERT INTO address (longitude,lat,street,city,state,zip)
-VALUES  (-104.976338,39.769913,'3563 Wazee St','Denver','CO','80216'),
-        (-104.973633,39.767854,'3559 Larimer St','Denver','CO','80205'),
-        (-104.977484,39.764170,'3200 Larimer St','Denver','CO','80205'),
-        (-104.992788,39.747092,'1660 Champa St','Denver','CO','80205');
+INSERT INTO `address` VALUES
+(1,-104.9763,39.7699,'3563 Wazee St',NULL,'Denver','CO','80216'),
+(2,-104.9736,39.7679,'3559 Larimer St',NULL,'Denver','CO','80205'),
+(3,-104.9775,39.7642,'3200 Larimer St',NULL,'Denver','CO','80205'),
+(4,-104.9928,39.7471,'1660 Champa St',NULL,'Denver','CO','80205'),
+(5,-104.8962,39.6231,'8000 E Belleview Ave',NULL,'Greenwood Village','CO','80111'),
+(6,-104.8884,39.6183,'5336 DTC Blvd','','Greenwood Village','CO','80111'),
+(7,-104.8932,39.6253,'8101 E Belleview Ave',NULL,'Denver','CO','80237'),
+(8,-104.8932,39.6253,'8101 E Belleview Ave',NULL,'Denver','CO','80237'),
+(9,-104.8969,39.6384,'8000 E Quincy Ave','#1500','Denver','CO','80237');
 
-INSERT INTO venue (name,description,hours,address_id,contact_id)
-VALUES ("Bigsby's Folly Craft Winery & Restaurant",'Fun place here','11:00AM-2:00PM',1,5),
-      ('Wine & Whey','Fun place here','11:00AM-3:00PM',2,6),
-      ('The Infinite Monkey Theorem','Fun place here','10:00AM-12:00PM',3,7),
-      ('Mile High Wine Tours','Fun place here','11:00AM-1:00PM',4,8);
+INSERT INTO `venue` VALUES
+(1,'Bigsby\'s Folly Craft Winery & Restaurant','Fun place here','11:00AM-2:00PM','http://theknow.denverpost.com/wp-content/uploads/2017/06/Bigsbys-Folly.1-Teri-Fotheringham-Photography.jpg',NULL,1,5,1),
+(2,'Wine & Whey','Fun place here','11:00AM-3:00PM','https://s3-media2.fl.yelpcdn.com/bphoto/rNEYh29sphX-yUJQaRcJRg/348s.jpg',NULL,2,6,1),
+(3,'The Infinite Monkey Theorem','Fun place here','10:00AM-12:00PM','http://www.denverpost.com/wp-content/uploads/2016/04/20141107__BZXXINFINITE_1_HC1_6528p1.jpg?w=620',NULL,3,7,1),
+(4,'Mile High Wine Tours','Fun place here','11:00AM-1:00PM','https://media-cdn.tripadvisor.com/media/photo-s/05/dd/8d/58/mile-high-wine-tours.jpg',NULL,4,8,1),
+(5,'Bar Louie','Upbeat grill chain with American grub, martinis & microbrews, plus happy-hour deals.','11:00AM-2:00AM','https://s3-media2.fl.yelpcdn.com/bphoto/vZTkAvjVl3Xbmk6Al_MEsQ/348s.jpg',NULL,5,9,1),
+(6,'Tavern Tech Center','Outpost for pub grub, tons of HDTVs & amusements such as pool & shuffleboard plus weekend DJs.','11:00AM-2:00AM','https://s3-media3.fl.yelpcdn.com/bphoto/oWMsuSaxVF5g9px9Bi7gJw/ls.jpg',NULL,6,10,1),
+(7,'Zane\'s Italian Bistro','Down-to-earth spot for pizza, pasta, wings & other Italian & American staples, plus a full bar.','11:00AM-2:00AM','https://s3-media2.fl.yelpcdn.com/bphoto/KjO1CB75yMkBj2kkQGEzew/o.jpg',NULL,7,11,1),
+(8,'Great Northern','Comfort food & a big beer selection in a bright tavernlike setting with a crowded happy hour.','11:00AM-10:00PM','https://igx.4sqi.net/img/general/720x540/MBDUUIWDJW54AVGLDJ31FKRKJ1G44YFCOBNX4ZS4HIKSOKDH.jpg',NULL,8,12,1),
+(9,'The Dam Grille','Industrial-style hangout with pool tables & a patio offering pub fare & local craft beers on tap.','11:00AM-2:00AM','https://media-cdn.tripadvisor.com/media/photo-s/03/fe/f4/d7/dam-grille.jpg',NULL,9,13,1);
 
 INSERT INTO route (name,admin_id) VALUES ('Party Route',1),('Fun Route',2);
 
