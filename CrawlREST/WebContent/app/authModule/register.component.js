@@ -8,7 +8,7 @@ angular.module('authModule')
 		vm.register = function(user){
 			authService.register(user)
 			.then(function(res){
-				$location.path('/user/' + $cookies.get('userId'));
+				$location.path('user/' + $cookies.get('userId'));
 			})
 			.catch(function(err){
 				console.log(err);

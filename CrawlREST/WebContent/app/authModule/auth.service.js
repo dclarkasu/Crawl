@@ -13,7 +13,6 @@ angular.module('authModule')
     			username: $cookies.get('username'),
     		}
     }
-   
 
     function removeUserCookie() {
     		$cookies.remove('userId');
@@ -31,6 +30,7 @@ angular.module('authModule')
 		    })
 		    .then(function(res){
 		    		saveUserCookie(res.data);
+		    		console.log(res);
 		    		return res;
 		    }).
 		    catch(function(err){

@@ -373,7 +373,7 @@ INSERT INTO route_venue (route_id,venue_id,spot) VALUES (1,1,1),(1,2,2),(1,3,3),
 INSERT INTO event (name,route_id,group_id,date,admin_id)
 VALUES ('Pams Birthday',1,1,now(),1),('Friday Night',2,1,now(),2);
 
-DROP USER 'crawluser'@'localhost';
+DROP USER IF EXISTS 'crawluser'@'localhost';
 CREATE USER 'crawluser'@'localhost' IDENTIFIED BY 'crawl';GRANT SELECT, INSERT, TRIGGER ON TABLE * TO 'crawluser'@'localhost';
 GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE * TO 'crawluser'@'localhost';
 
